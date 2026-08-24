@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { headers } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 import type { Gender, BloodType } from '@/lib/generated/prisma/enums';
 
 export interface UpdateUserDetailInput {
@@ -81,6 +82,8 @@ export async function updateUserDetail(input: UpdateUserDetailInput) {
       });
     }
   });
+
+  revalidatePath('/dashboard/users');
 
   return { success: true };
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -21,7 +20,12 @@ import type { UserDetail as UserDetailData } from '../actions/get-user-detail';
 import { updateUserDetail } from '../actions/update-user-detail';
 import { NONE, GENDER_OPTIONS, BLOOD_TYPE_OPTIONS } from '../user-options';
 
-export function UserDetail({ user }: { user: UserDetailData }) {
+interface UserDetailProps {
+  user: UserDetailData;
+  onSuccess?: () => void;
+}
+
+export function UserDetail({ user, onSuccess }: UserDetailProps) {
   const role = user.role.toLowerCase();
   const isStudent = role === 'student';
   const isTeacherOrCoordinator = role === 'teacher' || role === 'coordinator';
@@ -63,6 +67,7 @@ export function UserDetail({ user }: { user: UserDetailData }) {
         ...(isTeacherOrCoordinator ? { nip } : {}),
       });
       toast.success('Data berhasil diperbarui');
+      onSuccess?.();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Gagal memperbarui data');
     } finally {
@@ -71,13 +76,8 @@ export function UserDetail({ user }: { user: UserDetailData }) {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-xl">Detail Pengguna</CardTitle>
-      </CardHeader>
-
-      <CardContent>
-        <FieldSet>
+    <div className="space-y-4">
+      <FieldSet>
           <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-4">
               <Field>
@@ -123,7 +123,9 @@ export function UserDetail({ user }: { user: UserDetailData }) {
                 <FieldLabel>Jenis Kelamin</FieldLabel>
                 <Select value={gender} onValueChange={(val) => setGender(val ?? NONE)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="-- Pilih --" />
+                    <SelectValue>
+                      {GENDER_OPTIONS.find((opt) => opt.value === gender)?.label ?? '-- Pilih --'}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {GENDER_OPTIONS.map((opt) => (
@@ -139,7 +141,10 @@ export function UserDetail({ user }: { user: UserDetailData }) {
                 <FieldLabel>Golongan Darah</FieldLabel>
                 <Select value={bloodType} onValueChange={(val) => setBloodType(val ?? NONE)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="-- Pilih --" />
+                    <SelectValue>
+                      {BLOOD_TYPE_OPTIONS.find((opt) => opt.value === bloodType)?.label ??
+                        '-- Pilih --'}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {BLOOD_TYPE_OPTIONS.map((opt) => (
@@ -166,10 +171,9 @@ export function UserDetail({ user }: { user: UserDetailData }) {
               </Field>
             </div>
           </FieldGroup>
-        </FieldSet>
-      </CardContent>
+      </FieldSet>
 
-      <CardFooter className="flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <Button onClick={handleSubmit} disabled={saving} className="w-48">
           {saving ? (
             <>
@@ -180,7 +184,7 @@ export function UserDetail({ user }: { user: UserDetailData }) {
             'Simpan Perubahan'
           )}
         </Button>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }

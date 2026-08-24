@@ -6,18 +6,19 @@ import { toast } from 'sonner';
 import { UserPlus } from 'lucide-react';
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Spinner } from '@/components/ui/spinner';
 import { assignStudentsToClassroom } from '../actions/assign-students-to-classroom';
-import type { StudentOption } from '../actions/list-classroom-students';
+import type { StudentOption } from '../queries/list-classroom-students';
 
 interface Props {
   classroomId: string;
@@ -26,6 +27,7 @@ interface Props {
 
 export function AddStudentToClassroomForm({ classroomId, students }: Props) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -48,6 +50,7 @@ export function AddStudentToClassroomForm({ classroomId, students }: Props) {
 
       toast.success(result.message);
       setSelectedIds([]);
+      setOpen(false);
       router.refresh();
     } finally {
       setIsSubmitting(false);
@@ -55,16 +58,31 @@ export function AddStudentToClassroomForm({ classroomId, students }: Props) {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <UserPlus className="size-5" />
-          Tambah Siswa
-        </CardTitle>
-        <CardDescription>Pilih siswa yang belum memiliki kelas untuk ditambahkan.</CardDescription>
-      </CardHeader>
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) setSelectedIds([]);
+      }}
+    >
+      <DialogTrigger
+        render={
+          <Button>
+            <UserPlus />
+            Tambah Siswa
+          </Button>
+        }
+      />
 
-      <CardContent>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <UserPlus className="size-5" />
+            Tambah Siswa
+          </DialogTitle>
+          <DialogDescription>Pilih siswa yang belum memiliki kelas untuk ditambahkan.</DialogDescription>
+        </DialogHeader>
+
         {students.length === 0 ? (
           <p className="text-sm text-muted-foreground">Tidak ada siswa tanpa kelas.</p>
         ) : (
@@ -88,25 +106,25 @@ export function AddStudentToClassroomForm({ classroomId, students }: Props) {
             ))}
           </div>
         )}
-      </CardContent>
 
-      <CardFooter>
-        <Button
-          type="button"
-          className="w-full"
-          disabled={selectedIds.length === 0 || isSubmitting}
-          onClick={handleSubmit}
-        >
-          {isSubmitting ? (
-            <>
-              <Spinner />
-              Menyimpan...
-            </>
-          ) : (
-            'Tambahkan Siswa ke Kelas'
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
+        <DialogFooter>
+          <Button
+            type="button"
+            className="w-full sm:w-auto"
+            disabled={selectedIds.length === 0 || isSubmitting}
+            onClick={handleSubmit}
+          >
+            {isSubmitting ? (
+              <>
+                <Spinner />
+                Menyimpan...
+              </>
+            ) : (
+              'Tambahkan Siswa ke Kelas'
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

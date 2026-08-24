@@ -91,3 +91,68 @@ export type Classroom = Prisma.ClassroomModel
  * 
  */
 export type ClassroomHistory = Prisma.ClassroomHistoryModel
+/**
+ * Model Group
+ * 
+ */
+export type Group = Prisma.GroupModel
+/**
+ * Model GroupHistory
+ * 
+ */
+export type GroupHistory = Prisma.GroupHistoryModel
+/**
+ * Model Surah
+ * 
+ */
+export type Surah = Prisma.SurahModel
+/**
+ * Model Juz
+ * 
+ */
+export type Juz = Prisma.JuzModel
+/**
+ * Model SurahJuz
+ * 
+ */
+export type SurahJuz = Prisma.SurahJuzModel
+/**
+ * Model Wafa
+ * 
+ */
+export type Wafa = Prisma.WafaModel
+/**
+ * Model Submission
+ * 
+ */
+export type Submission = Prisma.SubmissionModel
+/**
+ * Model HomeActivity
+ * 
+ */
+export type HomeActivity = Prisma.HomeActivityModel
+/**
+ * Model WeeklyTarget
+ * 
+ */
+export type WeeklyTarget = Prisma.WeeklyTargetModel
+/**
+ * Model TashihRequest
+ * 
+ */
+export type TashihRequest = Prisma.TashihRequestModel
+/**
+ * Model TashihSchedule
+ * 
+ */
+export type TashihSchedule = Prisma.TashihScheduleModel
+/**
+ * Model TashihScheduleRequest
+ * 
+ */
+export type TashihScheduleRequest = Prisma.TashihScheduleRequestModel
+/**
+ * Model TashihResult
+ * 
+ */
+export type TashihResult = Prisma.TashihResultModel

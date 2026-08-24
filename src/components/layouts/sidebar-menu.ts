@@ -10,6 +10,7 @@ import {
   FileCheck,
   Target,
   GraduationCap,
+  BookMarked,
 } from 'lucide-react';
 import { FaChalkboard, FaUsers } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
@@ -43,6 +44,26 @@ export const menuData: Record<RoleKey, NavItem[]> = {
       url: '/dashboard/users',
       icon: UserCog,
     },
+    {
+      title: 'Manajemen Kelas',
+      url: '/dashboard/classrooms',
+      icon: FaChalkboard,
+    },
+    {
+      title: 'Kelompok',
+      url: '/dashboard/group',
+      icon: FaUsers,
+    },
+    {
+      title: 'Akademik',
+      url: '/dashboard/academic-settings',
+      icon: GraduationCap,
+    },
+    {
+      title: "Data Referensi Qur'an",
+      url: '/dashboard/quran-reference',
+      icon: BookMarked,
+    },
   ],
   admin: [
     {
@@ -63,7 +84,7 @@ export const menuData: Record<RoleKey, NavItem[]> = {
     },
     {
       title: 'Akademik',
-      url: '/dashboard/academic',
+      url: '/dashboard/academic-settings',
       icon: GraduationCap,
     },
   ],

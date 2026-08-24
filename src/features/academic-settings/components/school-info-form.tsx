@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useForm } from '@tanstack/react-form';
 import { toast } from 'sonner';
 import { School } from 'lucide-react';
@@ -18,13 +19,14 @@ import { Spinner } from '@/components/ui/spinner';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { schoolInfoSchema } from '../academic-settings.schema';
 import { updateSchoolInfo } from '../actions/update-school-info';
-import type { AcademicSettingData } from '../actions/get-academic-setting';
+import type { AcademicSettingData } from '../queries/get-academic-setting';
 
 interface Props {
   setting: AcademicSettingData;
 }
 
 export function SchoolInfoForm({ setting }: Props) {
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
       schoolName: setting?.schoolName ?? '',
@@ -36,6 +38,7 @@ export function SchoolInfoForm({ setting }: Props) {
       try {
         await updateSchoolInfo(value);
         toast.success('Informasi sekolah berhasil diperbarui');
+        router.refresh();
       } catch (error) {
         toast.error(error instanceof Error ? error.message : 'Gagal memperbarui informasi sekolah');
       }

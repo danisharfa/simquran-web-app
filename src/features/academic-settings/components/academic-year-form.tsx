@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useForm } from '@tanstack/react-form';
 import { toast } from 'sonner';
 import { GraduationCap } from 'lucide-react';
@@ -24,7 +25,7 @@ import {
 } from '@/components/ui/select';
 import { academicYearSchema } from '../academic-settings.schema';
 import { updateAcademicYear } from '../actions/update-academic-year';
-import type { AcademicSettingData } from '../actions/get-academic-setting';
+import type { AcademicSettingData } from '../queries/get-academic-setting';
 
 const SEMESTER_OPTIONS = [
   { value: 'GANJIL', label: 'Ganjil' },
@@ -36,6 +37,7 @@ interface Props {
 }
 
 export function AcademicYearForm({ setting }: Props) {
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
       currentYear: setting?.currentYear ?? '',
@@ -46,6 +48,7 @@ export function AcademicYearForm({ setting }: Props) {
       try {
         await updateAcademicYear(value);
         toast.success('Tahun akademik berhasil diperbarui');
+        router.refresh();
       } catch (error) {
         toast.error(error instanceof Error ? error.message : 'Gagal memperbarui tahun akademik');
       }

@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import type { AcademicYearSchema } from '../academic-settings.schema';
@@ -25,6 +27,8 @@ export async function updateAcademicYear(data: AcademicYearSchema) {
       updatedBy: session.user.id,
     },
   });
+
+  revalidatePath('/dashboard/academic-settings');
 
   return { success: true };
 }

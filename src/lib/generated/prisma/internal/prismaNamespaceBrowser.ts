@@ -60,7 +60,20 @@ export const ModelName = {
   TeacherProfile: 'TeacherProfile',
   StudentProfile: 'StudentProfile',
   Classroom: 'Classroom',
-  ClassroomHistory: 'ClassroomHistory'
+  ClassroomHistory: 'ClassroomHistory',
+  Group: 'Group',
+  GroupHistory: 'GroupHistory',
+  Surah: 'Surah',
+  Juz: 'Juz',
+  SurahJuz: 'SurahJuz',
+  Wafa: 'Wafa',
+  Submission: 'Submission',
+  HomeActivity: 'HomeActivity',
+  WeeklyTarget: 'WeeklyTarget',
+  TashihRequest: 'TashihRequest',
+  TashihSchedule: 'TashihSchedule',
+  TashihScheduleRequest: 'TashihScheduleRequest',
+  TashihResult: 'TashihResult'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -188,6 +201,7 @@ export const StudentProfileScalarFieldEnum = {
   nis: 'nis',
   nisn: 'nisn',
   classroomId: 'classroomId',
+  groupId: 'groupId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   status: 'status',
@@ -222,6 +236,194 @@ export const ClassroomHistoryScalarFieldEnum = {
 } as const
 
 export type ClassroomHistoryScalarFieldEnum = (typeof ClassroomHistoryScalarFieldEnum)[keyof typeof ClassroomHistoryScalarFieldEnum]
+
+
+export const GroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  classroomId: 'classroomId',
+  teacherId: 'teacherId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GroupScalarFieldEnum = (typeof GroupScalarFieldEnum)[keyof typeof GroupScalarFieldEnum]
+
+
+export const GroupHistoryScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  academicYear: 'academicYear',
+  semester: 'semester',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GroupHistoryScalarFieldEnum = (typeof GroupHistoryScalarFieldEnum)[keyof typeof GroupHistoryScalarFieldEnum]
+
+
+export const SurahScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  verseCount: 'verseCount'
+} as const
+
+export type SurahScalarFieldEnum = (typeof SurahScalarFieldEnum)[keyof typeof SurahScalarFieldEnum]
+
+
+export const JuzScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type JuzScalarFieldEnum = (typeof JuzScalarFieldEnum)[keyof typeof JuzScalarFieldEnum]
+
+
+export const SurahJuzScalarFieldEnum = {
+  id: 'id',
+  surahId: 'surahId',
+  juzId: 'juzId',
+  startVerse: 'startVerse',
+  endVerse: 'endVerse'
+} as const
+
+export type SurahJuzScalarFieldEnum = (typeof SurahJuzScalarFieldEnum)[keyof typeof SurahJuzScalarFieldEnum]
+
+
+export const WafaScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  pageCount: 'pageCount'
+} as const
+
+export type WafaScalarFieldEnum = (typeof WafaScalarFieldEnum)[keyof typeof WafaScalarFieldEnum]
+
+
+export const SubmissionScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  date: 'date',
+  submissionType: 'submissionType',
+  juzId: 'juzId',
+  surahId: 'surahId',
+  startVerse: 'startVerse',
+  endVerse: 'endVerse',
+  wafaId: 'wafaId',
+  startPage: 'startPage',
+  endPage: 'endPage',
+  adab: 'adab',
+  submissionStatus: 'submissionStatus',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
+
+
+export const HomeActivityScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  date: 'date',
+  activityType: 'activityType',
+  juzId: 'juzId',
+  surahId: 'surahId',
+  startVerse: 'startVerse',
+  endVerse: 'endVerse',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HomeActivityScalarFieldEnum = (typeof HomeActivityScalarFieldEnum)[keyof typeof HomeActivityScalarFieldEnum]
+
+
+export const WeeklyTargetScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  type: 'type',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  description: 'description',
+  status: 'status',
+  progressPercent: 'progressPercent',
+  surahStartId: 'surahStartId',
+  surahEndId: 'surahEndId',
+  startAyat: 'startAyat',
+  endAyat: 'endAyat',
+  wafaId: 'wafaId',
+  startPage: 'startPage',
+  endPage: 'endPage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WeeklyTargetScalarFieldEnum = (typeof WeeklyTargetScalarFieldEnum)[keyof typeof WeeklyTargetScalarFieldEnum]
+
+
+export const TashihRequestScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  coordinatorId: 'coordinatorId',
+  tashihType: 'tashihType',
+  juzId: 'juzId',
+  surahId: 'surahId',
+  wafaId: 'wafaId',
+  startPage: 'startPage',
+  endPage: 'endPage',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TashihRequestScalarFieldEnum = (typeof TashihRequestScalarFieldEnum)[keyof typeof TashihRequestScalarFieldEnum]
+
+
+export const TashihScheduleScalarFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  date: 'date',
+  sessionName: 'sessionName',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TashihScheduleScalarFieldEnum = (typeof TashihScheduleScalarFieldEnum)[keyof typeof TashihScheduleScalarFieldEnum]
+
+
+export const TashihScheduleRequestScalarFieldEnum = {
+  scheduleId: 'scheduleId',
+  requestId: 'requestId'
+} as const
+
+export type TashihScheduleRequestScalarFieldEnum = (typeof TashihScheduleRequestScalarFieldEnum)[keyof typeof TashihScheduleRequestScalarFieldEnum]
+
+
+export const TashihResultScalarFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  scheduleId: 'scheduleId',
+  requestId: 'requestId',
+  passed: 'passed',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TashihResultScalarFieldEnum = (typeof TashihResultScalarFieldEnum)[keyof typeof TashihResultScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -323,7 +525,8 @@ export const StudentProfileOrderByRelevanceFieldEnum = {
   userId: 'userId',
   nis: 'nis',
   nisn: 'nisn',
-  classroomId: 'classroomId'
+  classroomId: 'classroomId',
+  groupId: 'groupId'
 } as const
 
 export type StudentProfileOrderByRelevanceFieldEnum = (typeof StudentProfileOrderByRelevanceFieldEnum)[keyof typeof StudentProfileOrderByRelevanceFieldEnum]
@@ -346,4 +549,120 @@ export const ClassroomHistoryOrderByRelevanceFieldEnum = {
 } as const
 
 export type ClassroomHistoryOrderByRelevanceFieldEnum = (typeof ClassroomHistoryOrderByRelevanceFieldEnum)[keyof typeof ClassroomHistoryOrderByRelevanceFieldEnum]
+
+
+export const GroupOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  classroomId: 'classroomId',
+  teacherId: 'teacherId'
+} as const
+
+export type GroupOrderByRelevanceFieldEnum = (typeof GroupOrderByRelevanceFieldEnum)[keyof typeof GroupOrderByRelevanceFieldEnum]
+
+
+export const GroupHistoryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  academicYear: 'academicYear'
+} as const
+
+export type GroupHistoryOrderByRelevanceFieldEnum = (typeof GroupHistoryOrderByRelevanceFieldEnum)[keyof typeof GroupHistoryOrderByRelevanceFieldEnum]
+
+
+export const SurahOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type SurahOrderByRelevanceFieldEnum = (typeof SurahOrderByRelevanceFieldEnum)[keyof typeof SurahOrderByRelevanceFieldEnum]
+
+
+export const JuzOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type JuzOrderByRelevanceFieldEnum = (typeof JuzOrderByRelevanceFieldEnum)[keyof typeof JuzOrderByRelevanceFieldEnum]
+
+
+export const WafaOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type WafaOrderByRelevanceFieldEnum = (typeof WafaOrderByRelevanceFieldEnum)[keyof typeof WafaOrderByRelevanceFieldEnum]
+
+
+export const SubmissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  note: 'note'
+} as const
+
+export type SubmissionOrderByRelevanceFieldEnum = (typeof SubmissionOrderByRelevanceFieldEnum)[keyof typeof SubmissionOrderByRelevanceFieldEnum]
+
+
+export const HomeActivityOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  note: 'note'
+} as const
+
+export type HomeActivityOrderByRelevanceFieldEnum = (typeof HomeActivityOrderByRelevanceFieldEnum)[keyof typeof HomeActivityOrderByRelevanceFieldEnum]
+
+
+export const WeeklyTargetOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  description: 'description'
+} as const
+
+export type WeeklyTargetOrderByRelevanceFieldEnum = (typeof WeeklyTargetOrderByRelevanceFieldEnum)[keyof typeof WeeklyTargetOrderByRelevanceFieldEnum]
+
+
+export const TashihRequestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  coordinatorId: 'coordinatorId',
+  notes: 'notes'
+} as const
+
+export type TashihRequestOrderByRelevanceFieldEnum = (typeof TashihRequestOrderByRelevanceFieldEnum)[keyof typeof TashihRequestOrderByRelevanceFieldEnum]
+
+
+export const TashihScheduleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  sessionName: 'sessionName',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location'
+} as const
+
+export type TashihScheduleOrderByRelevanceFieldEnum = (typeof TashihScheduleOrderByRelevanceFieldEnum)[keyof typeof TashihScheduleOrderByRelevanceFieldEnum]
+
+
+export const TashihScheduleRequestOrderByRelevanceFieldEnum = {
+  scheduleId: 'scheduleId',
+  requestId: 'requestId'
+} as const
+
+export type TashihScheduleRequestOrderByRelevanceFieldEnum = (typeof TashihScheduleRequestOrderByRelevanceFieldEnum)[keyof typeof TashihScheduleRequestOrderByRelevanceFieldEnum]
+
+
+export const TashihResultOrderByRelevanceFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  scheduleId: 'scheduleId',
+  requestId: 'requestId',
+  notes: 'notes'
+} as const
+
+export type TashihResultOrderByRelevanceFieldEnum = (typeof TashihResultOrderByRelevanceFieldEnum)[keyof typeof TashihResultOrderByRelevanceFieldEnum]
 

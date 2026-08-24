@@ -393,7 +393,20 @@ export const ModelName = {
   TeacherProfile: 'TeacherProfile',
   StudentProfile: 'StudentProfile',
   Classroom: 'Classroom',
-  ClassroomHistory: 'ClassroomHistory'
+  ClassroomHistory: 'ClassroomHistory',
+  Group: 'Group',
+  GroupHistory: 'GroupHistory',
+  Surah: 'Surah',
+  Juz: 'Juz',
+  SurahJuz: 'SurahJuz',
+  Wafa: 'Wafa',
+  Submission: 'Submission',
+  HomeActivity: 'HomeActivity',
+  WeeklyTarget: 'WeeklyTarget',
+  TashihRequest: 'TashihRequest',
+  TashihSchedule: 'TashihSchedule',
+  TashihScheduleRequest: 'TashihScheduleRequest',
+  TashihResult: 'TashihResult'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory"
+    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory" | "group" | "groupHistory" | "surah" | "juz" | "surahJuz" | "wafa" | "submission" | "homeActivity" | "weeklyTarget" | "tashihRequest" | "tashihSchedule" | "tashihScheduleRequest" | "tashihResult"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1073,6 +1086,864 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Group: {
+      payload: Prisma.$GroupPayload<ExtArgs>
+      fields: Prisma.GroupFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GroupFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GroupFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        findFirst: {
+          args: Prisma.GroupFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GroupFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        findMany: {
+          args: Prisma.GroupFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>[]
+        }
+        create: {
+          args: Prisma.GroupCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        createMany: {
+          args: Prisma.GroupCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.GroupDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        update: {
+          args: Prisma.GroupUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        deleteMany: {
+          args: Prisma.GroupDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GroupUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.GroupUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        aggregate: {
+          args: Prisma.GroupAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGroup>
+        }
+        groupBy: {
+          args: Prisma.GroupGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GroupGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GroupCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GroupCountAggregateOutputType> | number
+        }
+      }
+    }
+    GroupHistory: {
+      payload: Prisma.$GroupHistoryPayload<ExtArgs>
+      fields: Prisma.GroupHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GroupHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GroupHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.GroupHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GroupHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.GroupHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.GroupHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.GroupHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.GroupHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupHistoryPayload>
+        }
+        update: {
+          args: Prisma.GroupHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.GroupHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GroupHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.GroupHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.GroupHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGroupHistory>
+        }
+        groupBy: {
+          args: Prisma.GroupHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GroupHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GroupHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GroupHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    Surah: {
+      payload: Prisma.$SurahPayload<ExtArgs>
+      fields: Prisma.SurahFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SurahFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SurahFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahPayload>
+        }
+        findFirst: {
+          args: Prisma.SurahFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SurahFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahPayload>
+        }
+        findMany: {
+          args: Prisma.SurahFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahPayload>[]
+        }
+        create: {
+          args: Prisma.SurahCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahPayload>
+        }
+        createMany: {
+          args: Prisma.SurahCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SurahDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahPayload>
+        }
+        update: {
+          args: Prisma.SurahUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahPayload>
+        }
+        deleteMany: {
+          args: Prisma.SurahDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SurahUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SurahUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahPayload>
+        }
+        aggregate: {
+          args: Prisma.SurahAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSurah>
+        }
+        groupBy: {
+          args: Prisma.SurahGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SurahGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SurahCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SurahCountAggregateOutputType> | number
+        }
+      }
+    }
+    Juz: {
+      payload: Prisma.$JuzPayload<ExtArgs>
+      fields: Prisma.JuzFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JuzFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuzPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JuzFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuzPayload>
+        }
+        findFirst: {
+          args: Prisma.JuzFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuzPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JuzFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuzPayload>
+        }
+        findMany: {
+          args: Prisma.JuzFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuzPayload>[]
+        }
+        create: {
+          args: Prisma.JuzCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuzPayload>
+        }
+        createMany: {
+          args: Prisma.JuzCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.JuzDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuzPayload>
+        }
+        update: {
+          args: Prisma.JuzUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuzPayload>
+        }
+        deleteMany: {
+          args: Prisma.JuzDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JuzUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.JuzUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuzPayload>
+        }
+        aggregate: {
+          args: Prisma.JuzAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJuz>
+        }
+        groupBy: {
+          args: Prisma.JuzGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuzGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JuzCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuzCountAggregateOutputType> | number
+        }
+      }
+    }
+    SurahJuz: {
+      payload: Prisma.$SurahJuzPayload<ExtArgs>
+      fields: Prisma.SurahJuzFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SurahJuzFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahJuzPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SurahJuzFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahJuzPayload>
+        }
+        findFirst: {
+          args: Prisma.SurahJuzFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahJuzPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SurahJuzFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahJuzPayload>
+        }
+        findMany: {
+          args: Prisma.SurahJuzFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahJuzPayload>[]
+        }
+        create: {
+          args: Prisma.SurahJuzCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahJuzPayload>
+        }
+        createMany: {
+          args: Prisma.SurahJuzCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SurahJuzDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahJuzPayload>
+        }
+        update: {
+          args: Prisma.SurahJuzUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahJuzPayload>
+        }
+        deleteMany: {
+          args: Prisma.SurahJuzDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SurahJuzUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SurahJuzUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SurahJuzPayload>
+        }
+        aggregate: {
+          args: Prisma.SurahJuzAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSurahJuz>
+        }
+        groupBy: {
+          args: Prisma.SurahJuzGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SurahJuzGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SurahJuzCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SurahJuzCountAggregateOutputType> | number
+        }
+      }
+    }
+    Wafa: {
+      payload: Prisma.$WafaPayload<ExtArgs>
+      fields: Prisma.WafaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WafaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WafaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WafaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WafaPayload>
+        }
+        findFirst: {
+          args: Prisma.WafaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WafaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WafaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WafaPayload>
+        }
+        findMany: {
+          args: Prisma.WafaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WafaPayload>[]
+        }
+        create: {
+          args: Prisma.WafaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WafaPayload>
+        }
+        createMany: {
+          args: Prisma.WafaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.WafaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WafaPayload>
+        }
+        update: {
+          args: Prisma.WafaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WafaPayload>
+        }
+        deleteMany: {
+          args: Prisma.WafaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WafaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.WafaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WafaPayload>
+        }
+        aggregate: {
+          args: Prisma.WafaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWafa>
+        }
+        groupBy: {
+          args: Prisma.WafaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WafaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WafaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WafaCountAggregateOutputType> | number
+        }
+      }
+    }
+    Submission: {
+      payload: Prisma.$SubmissionPayload<ExtArgs>
+      fields: Prisma.SubmissionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SubmissionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SubmissionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionPayload>
+        }
+        findFirst: {
+          args: Prisma.SubmissionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SubmissionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionPayload>
+        }
+        findMany: {
+          args: Prisma.SubmissionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionPayload>[]
+        }
+        create: {
+          args: Prisma.SubmissionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionPayload>
+        }
+        createMany: {
+          args: Prisma.SubmissionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SubmissionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionPayload>
+        }
+        update: {
+          args: Prisma.SubmissionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SubmissionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SubmissionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SubmissionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionPayload>
+        }
+        aggregate: {
+          args: Prisma.SubmissionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSubmission>
+        }
+        groupBy: {
+          args: Prisma.SubmissionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubmissionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SubmissionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubmissionCountAggregateOutputType> | number
+        }
+      }
+    }
+    HomeActivity: {
+      payload: Prisma.$HomeActivityPayload<ExtArgs>
+      fields: Prisma.HomeActivityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HomeActivityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomeActivityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HomeActivityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomeActivityPayload>
+        }
+        findFirst: {
+          args: Prisma.HomeActivityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomeActivityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HomeActivityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomeActivityPayload>
+        }
+        findMany: {
+          args: Prisma.HomeActivityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomeActivityPayload>[]
+        }
+        create: {
+          args: Prisma.HomeActivityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomeActivityPayload>
+        }
+        createMany: {
+          args: Prisma.HomeActivityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.HomeActivityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomeActivityPayload>
+        }
+        update: {
+          args: Prisma.HomeActivityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomeActivityPayload>
+        }
+        deleteMany: {
+          args: Prisma.HomeActivityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HomeActivityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.HomeActivityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HomeActivityPayload>
+        }
+        aggregate: {
+          args: Prisma.HomeActivityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHomeActivity>
+        }
+        groupBy: {
+          args: Prisma.HomeActivityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HomeActivityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HomeActivityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HomeActivityCountAggregateOutputType> | number
+        }
+      }
+    }
+    WeeklyTarget: {
+      payload: Prisma.$WeeklyTargetPayload<ExtArgs>
+      fields: Prisma.WeeklyTargetFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WeeklyTargetFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeeklyTargetPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WeeklyTargetFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeeklyTargetPayload>
+        }
+        findFirst: {
+          args: Prisma.WeeklyTargetFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeeklyTargetPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WeeklyTargetFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeeklyTargetPayload>
+        }
+        findMany: {
+          args: Prisma.WeeklyTargetFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeeklyTargetPayload>[]
+        }
+        create: {
+          args: Prisma.WeeklyTargetCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeeklyTargetPayload>
+        }
+        createMany: {
+          args: Prisma.WeeklyTargetCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.WeeklyTargetDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeeklyTargetPayload>
+        }
+        update: {
+          args: Prisma.WeeklyTargetUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeeklyTargetPayload>
+        }
+        deleteMany: {
+          args: Prisma.WeeklyTargetDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WeeklyTargetUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.WeeklyTargetUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeeklyTargetPayload>
+        }
+        aggregate: {
+          args: Prisma.WeeklyTargetAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWeeklyTarget>
+        }
+        groupBy: {
+          args: Prisma.WeeklyTargetGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WeeklyTargetGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WeeklyTargetCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WeeklyTargetCountAggregateOutputType> | number
+        }
+      }
+    }
+    TashihRequest: {
+      payload: Prisma.$TashihRequestPayload<ExtArgs>
+      fields: Prisma.TashihRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TashihRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TashihRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.TashihRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TashihRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihRequestPayload>
+        }
+        findMany: {
+          args: Prisma.TashihRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihRequestPayload>[]
+        }
+        create: {
+          args: Prisma.TashihRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihRequestPayload>
+        }
+        createMany: {
+          args: Prisma.TashihRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TashihRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihRequestPayload>
+        }
+        update: {
+          args: Prisma.TashihRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.TashihRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TashihRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TashihRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.TashihRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTashihRequest>
+        }
+        groupBy: {
+          args: Prisma.TashihRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TashihRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TashihRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TashihRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    TashihSchedule: {
+      payload: Prisma.$TashihSchedulePayload<ExtArgs>
+      fields: Prisma.TashihScheduleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TashihScheduleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihSchedulePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TashihScheduleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihSchedulePayload>
+        }
+        findFirst: {
+          args: Prisma.TashihScheduleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihSchedulePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TashihScheduleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihSchedulePayload>
+        }
+        findMany: {
+          args: Prisma.TashihScheduleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihSchedulePayload>[]
+        }
+        create: {
+          args: Prisma.TashihScheduleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihSchedulePayload>
+        }
+        createMany: {
+          args: Prisma.TashihScheduleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TashihScheduleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihSchedulePayload>
+        }
+        update: {
+          args: Prisma.TashihScheduleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihSchedulePayload>
+        }
+        deleteMany: {
+          args: Prisma.TashihScheduleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TashihScheduleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TashihScheduleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihSchedulePayload>
+        }
+        aggregate: {
+          args: Prisma.TashihScheduleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTashihSchedule>
+        }
+        groupBy: {
+          args: Prisma.TashihScheduleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TashihScheduleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TashihScheduleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TashihScheduleCountAggregateOutputType> | number
+        }
+      }
+    }
+    TashihScheduleRequest: {
+      payload: Prisma.$TashihScheduleRequestPayload<ExtArgs>
+      fields: Prisma.TashihScheduleRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TashihScheduleRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihScheduleRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TashihScheduleRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihScheduleRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.TashihScheduleRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihScheduleRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TashihScheduleRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihScheduleRequestPayload>
+        }
+        findMany: {
+          args: Prisma.TashihScheduleRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihScheduleRequestPayload>[]
+        }
+        create: {
+          args: Prisma.TashihScheduleRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihScheduleRequestPayload>
+        }
+        createMany: {
+          args: Prisma.TashihScheduleRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TashihScheduleRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihScheduleRequestPayload>
+        }
+        update: {
+          args: Prisma.TashihScheduleRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihScheduleRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.TashihScheduleRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TashihScheduleRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TashihScheduleRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihScheduleRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.TashihScheduleRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTashihScheduleRequest>
+        }
+        groupBy: {
+          args: Prisma.TashihScheduleRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TashihScheduleRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TashihScheduleRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TashihScheduleRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    TashihResult: {
+      payload: Prisma.$TashihResultPayload<ExtArgs>
+      fields: Prisma.TashihResultFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TashihResultFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihResultPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TashihResultFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihResultPayload>
+        }
+        findFirst: {
+          args: Prisma.TashihResultFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihResultPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TashihResultFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihResultPayload>
+        }
+        findMany: {
+          args: Prisma.TashihResultFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihResultPayload>[]
+        }
+        create: {
+          args: Prisma.TashihResultCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihResultPayload>
+        }
+        createMany: {
+          args: Prisma.TashihResultCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TashihResultDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihResultPayload>
+        }
+        update: {
+          args: Prisma.TashihResultUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihResultPayload>
+        }
+        deleteMany: {
+          args: Prisma.TashihResultDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TashihResultUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TashihResultUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TashihResultPayload>
+        }
+        aggregate: {
+          args: Prisma.TashihResultAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTashihResult>
+        }
+        groupBy: {
+          args: Prisma.TashihResultGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TashihResultGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TashihResultCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TashihResultCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1221,6 +2092,7 @@ export const StudentProfileScalarFieldEnum = {
   nis: 'nis',
   nisn: 'nisn',
   classroomId: 'classroomId',
+  groupId: 'groupId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   status: 'status',
@@ -1255,6 +2127,194 @@ export const ClassroomHistoryScalarFieldEnum = {
 } as const
 
 export type ClassroomHistoryScalarFieldEnum = (typeof ClassroomHistoryScalarFieldEnum)[keyof typeof ClassroomHistoryScalarFieldEnum]
+
+
+export const GroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  classroomId: 'classroomId',
+  teacherId: 'teacherId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GroupScalarFieldEnum = (typeof GroupScalarFieldEnum)[keyof typeof GroupScalarFieldEnum]
+
+
+export const GroupHistoryScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  academicYear: 'academicYear',
+  semester: 'semester',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GroupHistoryScalarFieldEnum = (typeof GroupHistoryScalarFieldEnum)[keyof typeof GroupHistoryScalarFieldEnum]
+
+
+export const SurahScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  verseCount: 'verseCount'
+} as const
+
+export type SurahScalarFieldEnum = (typeof SurahScalarFieldEnum)[keyof typeof SurahScalarFieldEnum]
+
+
+export const JuzScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type JuzScalarFieldEnum = (typeof JuzScalarFieldEnum)[keyof typeof JuzScalarFieldEnum]
+
+
+export const SurahJuzScalarFieldEnum = {
+  id: 'id',
+  surahId: 'surahId',
+  juzId: 'juzId',
+  startVerse: 'startVerse',
+  endVerse: 'endVerse'
+} as const
+
+export type SurahJuzScalarFieldEnum = (typeof SurahJuzScalarFieldEnum)[keyof typeof SurahJuzScalarFieldEnum]
+
+
+export const WafaScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  pageCount: 'pageCount'
+} as const
+
+export type WafaScalarFieldEnum = (typeof WafaScalarFieldEnum)[keyof typeof WafaScalarFieldEnum]
+
+
+export const SubmissionScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  date: 'date',
+  submissionType: 'submissionType',
+  juzId: 'juzId',
+  surahId: 'surahId',
+  startVerse: 'startVerse',
+  endVerse: 'endVerse',
+  wafaId: 'wafaId',
+  startPage: 'startPage',
+  endPage: 'endPage',
+  adab: 'adab',
+  submissionStatus: 'submissionStatus',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
+
+
+export const HomeActivityScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  date: 'date',
+  activityType: 'activityType',
+  juzId: 'juzId',
+  surahId: 'surahId',
+  startVerse: 'startVerse',
+  endVerse: 'endVerse',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HomeActivityScalarFieldEnum = (typeof HomeActivityScalarFieldEnum)[keyof typeof HomeActivityScalarFieldEnum]
+
+
+export const WeeklyTargetScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  type: 'type',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  description: 'description',
+  status: 'status',
+  progressPercent: 'progressPercent',
+  surahStartId: 'surahStartId',
+  surahEndId: 'surahEndId',
+  startAyat: 'startAyat',
+  endAyat: 'endAyat',
+  wafaId: 'wafaId',
+  startPage: 'startPage',
+  endPage: 'endPage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WeeklyTargetScalarFieldEnum = (typeof WeeklyTargetScalarFieldEnum)[keyof typeof WeeklyTargetScalarFieldEnum]
+
+
+export const TashihRequestScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  coordinatorId: 'coordinatorId',
+  tashihType: 'tashihType',
+  juzId: 'juzId',
+  surahId: 'surahId',
+  wafaId: 'wafaId',
+  startPage: 'startPage',
+  endPage: 'endPage',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TashihRequestScalarFieldEnum = (typeof TashihRequestScalarFieldEnum)[keyof typeof TashihRequestScalarFieldEnum]
+
+
+export const TashihScheduleScalarFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  date: 'date',
+  sessionName: 'sessionName',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TashihScheduleScalarFieldEnum = (typeof TashihScheduleScalarFieldEnum)[keyof typeof TashihScheduleScalarFieldEnum]
+
+
+export const TashihScheduleRequestScalarFieldEnum = {
+  scheduleId: 'scheduleId',
+  requestId: 'requestId'
+} as const
+
+export type TashihScheduleRequestScalarFieldEnum = (typeof TashihScheduleRequestScalarFieldEnum)[keyof typeof TashihScheduleRequestScalarFieldEnum]
+
+
+export const TashihResultScalarFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  scheduleId: 'scheduleId',
+  requestId: 'requestId',
+  passed: 'passed',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TashihResultScalarFieldEnum = (typeof TashihResultScalarFieldEnum)[keyof typeof TashihResultScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1356,7 +2416,8 @@ export const StudentProfileOrderByRelevanceFieldEnum = {
   userId: 'userId',
   nis: 'nis',
   nisn: 'nisn',
-  classroomId: 'classroomId'
+  classroomId: 'classroomId',
+  groupId: 'groupId'
 } as const
 
 export type StudentProfileOrderByRelevanceFieldEnum = (typeof StudentProfileOrderByRelevanceFieldEnum)[keyof typeof StudentProfileOrderByRelevanceFieldEnum]
@@ -1379,6 +2440,122 @@ export const ClassroomHistoryOrderByRelevanceFieldEnum = {
 } as const
 
 export type ClassroomHistoryOrderByRelevanceFieldEnum = (typeof ClassroomHistoryOrderByRelevanceFieldEnum)[keyof typeof ClassroomHistoryOrderByRelevanceFieldEnum]
+
+
+export const GroupOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  classroomId: 'classroomId',
+  teacherId: 'teacherId'
+} as const
+
+export type GroupOrderByRelevanceFieldEnum = (typeof GroupOrderByRelevanceFieldEnum)[keyof typeof GroupOrderByRelevanceFieldEnum]
+
+
+export const GroupHistoryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  academicYear: 'academicYear'
+} as const
+
+export type GroupHistoryOrderByRelevanceFieldEnum = (typeof GroupHistoryOrderByRelevanceFieldEnum)[keyof typeof GroupHistoryOrderByRelevanceFieldEnum]
+
+
+export const SurahOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type SurahOrderByRelevanceFieldEnum = (typeof SurahOrderByRelevanceFieldEnum)[keyof typeof SurahOrderByRelevanceFieldEnum]
+
+
+export const JuzOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type JuzOrderByRelevanceFieldEnum = (typeof JuzOrderByRelevanceFieldEnum)[keyof typeof JuzOrderByRelevanceFieldEnum]
+
+
+export const WafaOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type WafaOrderByRelevanceFieldEnum = (typeof WafaOrderByRelevanceFieldEnum)[keyof typeof WafaOrderByRelevanceFieldEnum]
+
+
+export const SubmissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  note: 'note'
+} as const
+
+export type SubmissionOrderByRelevanceFieldEnum = (typeof SubmissionOrderByRelevanceFieldEnum)[keyof typeof SubmissionOrderByRelevanceFieldEnum]
+
+
+export const HomeActivityOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  note: 'note'
+} as const
+
+export type HomeActivityOrderByRelevanceFieldEnum = (typeof HomeActivityOrderByRelevanceFieldEnum)[keyof typeof HomeActivityOrderByRelevanceFieldEnum]
+
+
+export const WeeklyTargetOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  description: 'description'
+} as const
+
+export type WeeklyTargetOrderByRelevanceFieldEnum = (typeof WeeklyTargetOrderByRelevanceFieldEnum)[keyof typeof WeeklyTargetOrderByRelevanceFieldEnum]
+
+
+export const TashihRequestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  teacherId: 'teacherId',
+  groupId: 'groupId',
+  coordinatorId: 'coordinatorId',
+  notes: 'notes'
+} as const
+
+export type TashihRequestOrderByRelevanceFieldEnum = (typeof TashihRequestOrderByRelevanceFieldEnum)[keyof typeof TashihRequestOrderByRelevanceFieldEnum]
+
+
+export const TashihScheduleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  sessionName: 'sessionName',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location'
+} as const
+
+export type TashihScheduleOrderByRelevanceFieldEnum = (typeof TashihScheduleOrderByRelevanceFieldEnum)[keyof typeof TashihScheduleOrderByRelevanceFieldEnum]
+
+
+export const TashihScheduleRequestOrderByRelevanceFieldEnum = {
+  scheduleId: 'scheduleId',
+  requestId: 'requestId'
+} as const
+
+export type TashihScheduleRequestOrderByRelevanceFieldEnum = (typeof TashihScheduleRequestOrderByRelevanceFieldEnum)[keyof typeof TashihScheduleRequestOrderByRelevanceFieldEnum]
+
+
+export const TashihResultOrderByRelevanceFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  scheduleId: 'scheduleId',
+  requestId: 'requestId',
+  notes: 'notes'
+} as const
+
+export type TashihResultOrderByRelevanceFieldEnum = (typeof TashihResultOrderByRelevanceFieldEnum)[keyof typeof TashihResultOrderByRelevanceFieldEnum]
 
 
 
@@ -1447,6 +2624,55 @@ export type EnumStudentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'SubmissionType'
+ */
+export type EnumSubmissionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubmissionType'>
+    
+
+
+/**
+ * Reference to a field of type 'Adab'
+ */
+export type EnumAdabFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Adab'>
+    
+
+
+/**
+ * Reference to a field of type 'SubmissionStatus'
+ */
+export type EnumSubmissionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubmissionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'HomeActivityType'
+ */
+export type EnumHomeActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HomeActivityType'>
+    
+
+
+/**
+ * Reference to a field of type 'TargetStatus'
+ */
+export type EnumTargetStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TargetStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'TashihType'
+ */
+export type EnumTashihTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TashihType'>
+    
+
+
+/**
+ * Reference to a field of type 'TashihRequestStatus'
+ */
+export type EnumTashihRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TashihRequestStatus'>
     
 
 
@@ -1576,6 +2802,19 @@ export type GlobalOmitConfig = {
   studentProfile?: Prisma.StudentProfileOmit
   classroom?: Prisma.ClassroomOmit
   classroomHistory?: Prisma.ClassroomHistoryOmit
+  group?: Prisma.GroupOmit
+  groupHistory?: Prisma.GroupHistoryOmit
+  surah?: Prisma.SurahOmit
+  juz?: Prisma.JuzOmit
+  surahJuz?: Prisma.SurahJuzOmit
+  wafa?: Prisma.WafaOmit
+  submission?: Prisma.SubmissionOmit
+  homeActivity?: Prisma.HomeActivityOmit
+  weeklyTarget?: Prisma.WeeklyTargetOmit
+  tashihRequest?: Prisma.TashihRequestOmit
+  tashihSchedule?: Prisma.TashihScheduleOmit
+  tashihScheduleRequest?: Prisma.TashihScheduleRequestOmit
+  tashihResult?: Prisma.TashihResultOmit
 }
 
 /* Types for Logging */

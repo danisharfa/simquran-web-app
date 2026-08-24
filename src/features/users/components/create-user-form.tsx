@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from '@tanstack/react-form';
 
@@ -7,13 +8,14 @@ import { createUser } from '../actions/create-user';
 import { createUserSchema } from '../create-user.schema';
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { Input } from '@/components/ui/input';
@@ -43,6 +45,7 @@ interface AddUserFormProps {
 
 export function AddUserForm({ allowedRoles }: AddUserFormProps) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   const roleOptions = allowedRoles
     ? ALL_ROLE_OPTIONS.filter((opt) => allowedRoles.includes(opt.value))
@@ -78,33 +81,49 @@ export function AddUserForm({ allowedRoles }: AddUserFormProps) {
 
       toast.success('Pengguna berhasil ditambahkan');
       formApi.reset();
+      setOpen(false);
       router.refresh();
     },
   });
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <UserPlus className="size-5" />
-          Tambah Pengguna
-        </CardTitle>
-        <CardDescription>
-          Email, password, dan NIP/NIS akan dibuat otomatis dari username. Ingatkan pengguna baru
-          untuk mengganti password setelah login pertama kali.
-        </CardDescription>
-      </CardHeader>
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) form.reset();
+      }}
+    >
+      <DialogTrigger
+        render={
+          <Button>
+            <UserPlus />
+            Tambah Pengguna
+          </Button>
+        }
+      />
 
-      <form
-        id="add-user-form"
-        className="flex flex-col gap-4"
-        onSubmit={(e) => {
-          e.preventDefault();
-          form.handleSubmit();
-        }}
-        noValidate
-      >
-        <CardContent>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <UserPlus className="size-5" />
+            Tambah Pengguna
+          </DialogTitle>
+          <DialogDescription>
+            Email, password, dan NIP/NIS akan dibuat otomatis dari username. Ingatkan pengguna baru
+            untuk mengganti password setelah login pertama kali.
+          </DialogDescription>
+        </DialogHeader>
+
+        <form
+          id="add-user-form"
+          className="flex flex-col gap-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            form.handleSubmit();
+          }}
+          noValidate
+        >
           <FieldGroup>
             <form.Field name="name">
               {(field) => {
@@ -187,13 +206,13 @@ export function AddUserForm({ allowedRoles }: AddUserFormProps) {
               }}
             </form.Field>
           </FieldGroup>
-        </CardContent>
+        </form>
 
-        <CardFooter>
+        <DialogFooter>
           <Button
             type="submit"
             form="add-user-form"
-            className="w-full"
+            className="w-full sm:w-auto"
             disabled={form.state.isSubmitting}
           >
             {form.state.isSubmitting ? (
@@ -208,8 +227,8 @@ export function AddUserForm({ allowedRoles }: AddUserFormProps) {
               </>
             )}
           </Button>
-        </CardFooter>
-      </form>
-    </Card>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

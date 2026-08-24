@@ -17,12 +17,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { KeyRound, MoreVertical, SquareArrowOutUpRight, Trash2 } from 'lucide-react';
-import { UserTableData } from '../actions/list-users';
+import { Eye, KeyRound, MoreVertical, Trash2 } from 'lucide-react';
+import { UserTableData } from '../queries/list-users';
 import { useDataTableState } from '@/hooks/use-data-table';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { UserAlertDialog } from './user-alert-dialog';
+import { UserDetailDialog } from './user-detail-dialog';
 
 interface Props {
   data: UserTableData[];
@@ -43,7 +44,15 @@ export function UserTable({ data, title }: Props) {
     setSelectedItem: setSelectedUser,
     dialogType,
     setDialogType,
-  } = useDataTableState<UserTableData, 'reset' | 'delete'>();
+  } = useDataTableState<UserTableData, 'detail' | 'reset' | 'delete'>();
+
+  const handleOpenDetailDialog = useCallback(
+    (user: UserTableData) => {
+      setSelectedUser(user);
+      setDialogType('detail');
+    },
+    [setSelectedUser, setDialogType],
+  );
 
   const handleOpenResetDialog = useCallback(
     (user: UserTableData) => {
@@ -106,10 +115,10 @@ export function UserTable({ data, title }: Props) {
               />
               <DropdownMenuContent align="end" className="w-50 z-50">
                 <DropdownMenuItem
-                  onClick={() => router.push(`/dashboard/users/${user.id}`)}
+                  onClick={() => handleOpenDetailDialog(user)}
                   className="flex items-center gap-2"
                 >
-                  <SquareArrowOutUpRight />
+                  <Eye />
                   Detail
                 </DropdownMenuItem>
                 <DropdownMenuItem
@@ -133,7 +142,7 @@ export function UserTable({ data, title }: Props) {
         },
       },
     ],
-    [router, handleOpenResetDialog, handleOpenDeleteDialog],
+    [handleOpenDetailDialog, handleOpenResetDialog, handleOpenDeleteDialog],
   );
 
   const table = useReactTable({
@@ -156,6 +165,20 @@ export function UserTable({ data, title }: Props) {
   return (
     <>
       <DataTable title={title} table={table} filterColumn="Nama Lengkap" showColumnFilter={false} />
+
+      {dialogType === 'detail' && selectedUser && (
+        <UserDetailDialog
+          userId={selectedUser.id}
+          open={true}
+          onOpenChange={(open) => {
+            if (!open) {
+              setSelectedUser(null);
+              setDialogType(null);
+            }
+          }}
+          onSuccess={() => router.refresh()}
+        />
+      )}
 
       {dialogType === 'reset' && selectedUser && (
         <UserAlertDialog

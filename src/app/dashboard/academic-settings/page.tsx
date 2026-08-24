@@ -1,7 +1,8 @@
 import { requireRole } from '@/lib/require-role';
-import { getAcademicSetting } from '@/features/academic-settings/actions/get-academic-setting';
+import { getAcademicSetting } from '@/features/academic-settings/queries/get-academic-setting';
 import { AcademicYearForm } from '@/features/academic-settings/components/academic-year-form';
 import { SchoolInfoForm } from '@/features/academic-settings/components/school-info-form';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default async function AcademicSettingPage() {
   await requireRole(['superadmin', 'admin']);
@@ -14,10 +15,18 @@ export default async function AcademicSettingPage() {
         <p className="text-muted-foreground text-sm">Kelola tahun akademik dan informasi sekolah</p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <AcademicYearForm setting={setting} />
-        <SchoolInfoForm setting={setting} />
-      </div>
+      <Tabs defaultValue="academic-year" className="mx-auto w-full max-w-3xl">
+        <TabsList className="mx-auto">
+          <TabsTrigger value="academic-year">Tahun Akademik</TabsTrigger>
+          <TabsTrigger value="school-info">Informasi Sekolah</TabsTrigger>
+        </TabsList>
+        <TabsContent value="academic-year">
+          <AcademicYearForm setting={setting} />
+        </TabsContent>
+        <TabsContent value="school-info">
+          <SchoolInfoForm setting={setting} />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

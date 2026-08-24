@@ -175,6 +175,10 @@ export type TeacherProfileWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"TeacherProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TeacherProfile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  groups?: Prisma.GroupListRelationFilter
+  submissions?: Prisma.SubmissionListRelationFilter
+  weeklyTargets?: Prisma.WeeklyTargetListRelationFilter
+  tashihRequests?: Prisma.TashihRequestListRelationFilter
 }
 
 export type TeacherProfileOrderByWithRelationInput = {
@@ -183,6 +187,10 @@ export type TeacherProfileOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  groups?: Prisma.GroupOrderByRelationAggregateInput
+  submissions?: Prisma.SubmissionOrderByRelationAggregateInput
+  weeklyTargets?: Prisma.WeeklyTargetOrderByRelationAggregateInput
+  tashihRequests?: Prisma.TashihRequestOrderByRelationAggregateInput
   _relevance?: Prisma.TeacherProfileOrderByRelevanceInput
 }
 
@@ -195,6 +203,10 @@ export type TeacherProfileWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"TeacherProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TeacherProfile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  groups?: Prisma.GroupListRelationFilter
+  submissions?: Prisma.SubmissionListRelationFilter
+  weeklyTargets?: Prisma.WeeklyTargetListRelationFilter
+  tashihRequests?: Prisma.TashihRequestListRelationFilter
 }, "userId" | "nip">
 
 export type TeacherProfileOrderByWithAggregationInput = {
@@ -222,6 +234,10 @@ export type TeacherProfileCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutTeacherProfilesInput
+  groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
 }
 
 export type TeacherProfileUncheckedCreateInput = {
@@ -229,6 +245,10 @@ export type TeacherProfileUncheckedCreateInput = {
   nip: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
 }
 
 export type TeacherProfileUpdateInput = {
@@ -236,6 +256,10 @@ export type TeacherProfileUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutTeacherProfilesNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateInput = {
@@ -243,6 +267,10 @@ export type TeacherProfileUncheckedUpdateInput = {
   nip?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
 }
 
 export type TeacherProfileCreateManyInput = {
@@ -302,6 +330,11 @@ export type TeacherProfileMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type TeacherProfileScalarRelationFilter = {
+  is?: Prisma.TeacherProfileWhereInput
+  isNot?: Prisma.TeacherProfileWhereInput
+}
+
 export type TeacherProfileCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutUserInput, Prisma.TeacherProfileUncheckedCreateWithoutUserInput> | Prisma.TeacherProfileCreateWithoutUserInput[] | Prisma.TeacherProfileUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutUserInput | Prisma.TeacherProfileCreateOrConnectWithoutUserInput[]
@@ -344,16 +377,80 @@ export type TeacherProfileUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.TeacherProfileScalarWhereInput | Prisma.TeacherProfileScalarWhereInput[]
 }
 
+export type TeacherProfileCreateNestedOneWithoutGroupsInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutGroupsInput, Prisma.TeacherProfileUncheckedCreateWithoutGroupsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutGroupsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+}
+
+export type TeacherProfileUpdateOneRequiredWithoutGroupsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutGroupsInput, Prisma.TeacherProfileUncheckedCreateWithoutGroupsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutGroupsInput
+  upsert?: Prisma.TeacherProfileUpsertWithoutGroupsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeacherProfileUpdateToOneWithWhereWithoutGroupsInput, Prisma.TeacherProfileUpdateWithoutGroupsInput>, Prisma.TeacherProfileUncheckedUpdateWithoutGroupsInput>
+}
+
+export type TeacherProfileCreateNestedOneWithoutSubmissionsInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutSubmissionsInput, Prisma.TeacherProfileUncheckedCreateWithoutSubmissionsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutSubmissionsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+}
+
+export type TeacherProfileUpdateOneRequiredWithoutSubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutSubmissionsInput, Prisma.TeacherProfileUncheckedCreateWithoutSubmissionsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutSubmissionsInput
+  upsert?: Prisma.TeacherProfileUpsertWithoutSubmissionsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeacherProfileUpdateToOneWithWhereWithoutSubmissionsInput, Prisma.TeacherProfileUpdateWithoutSubmissionsInput>, Prisma.TeacherProfileUncheckedUpdateWithoutSubmissionsInput>
+}
+
+export type TeacherProfileCreateNestedOneWithoutWeeklyTargetsInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutWeeklyTargetsInput, Prisma.TeacherProfileUncheckedCreateWithoutWeeklyTargetsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutWeeklyTargetsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+}
+
+export type TeacherProfileUpdateOneRequiredWithoutWeeklyTargetsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutWeeklyTargetsInput, Prisma.TeacherProfileUncheckedCreateWithoutWeeklyTargetsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutWeeklyTargetsInput
+  upsert?: Prisma.TeacherProfileUpsertWithoutWeeklyTargetsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeacherProfileUpdateToOneWithWhereWithoutWeeklyTargetsInput, Prisma.TeacherProfileUpdateWithoutWeeklyTargetsInput>, Prisma.TeacherProfileUncheckedUpdateWithoutWeeklyTargetsInput>
+}
+
+export type TeacherProfileCreateNestedOneWithoutTashihRequestsInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutTashihRequestsInput, Prisma.TeacherProfileUncheckedCreateWithoutTashihRequestsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutTashihRequestsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+}
+
+export type TeacherProfileUpdateOneRequiredWithoutTashihRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutTashihRequestsInput, Prisma.TeacherProfileUncheckedCreateWithoutTashihRequestsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutTashihRequestsInput
+  upsert?: Prisma.TeacherProfileUpsertWithoutTashihRequestsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeacherProfileUpdateToOneWithWhereWithoutTashihRequestsInput, Prisma.TeacherProfileUpdateWithoutTashihRequestsInput>, Prisma.TeacherProfileUncheckedUpdateWithoutTashihRequestsInput>
+}
+
 export type TeacherProfileCreateWithoutUserInput = {
   nip: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
 }
 
 export type TeacherProfileUncheckedCreateWithoutUserInput = {
   nip: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
 }
 
 export type TeacherProfileCreateOrConnectWithoutUserInput = {
@@ -392,6 +489,230 @@ export type TeacherProfileScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"TeacherProfile"> | Date | string
 }
 
+export type TeacherProfileCreateWithoutGroupsInput = {
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTeacherProfilesInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileUncheckedCreateWithoutGroupsInput = {
+  userId: string
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileCreateOrConnectWithoutGroupsInput = {
+  where: Prisma.TeacherProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutGroupsInput, Prisma.TeacherProfileUncheckedCreateWithoutGroupsInput>
+}
+
+export type TeacherProfileUpsertWithoutGroupsInput = {
+  update: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutGroupsInput, Prisma.TeacherProfileUncheckedUpdateWithoutGroupsInput>
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutGroupsInput, Prisma.TeacherProfileUncheckedCreateWithoutGroupsInput>
+  where?: Prisma.TeacherProfileWhereInput
+}
+
+export type TeacherProfileUpdateToOneWithWhereWithoutGroupsInput = {
+  where?: Prisma.TeacherProfileWhereInput
+  data: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutGroupsInput, Prisma.TeacherProfileUncheckedUpdateWithoutGroupsInput>
+}
+
+export type TeacherProfileUpdateWithoutGroupsInput = {
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTeacherProfilesNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+}
+
+export type TeacherProfileUncheckedUpdateWithoutGroupsInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+}
+
+export type TeacherProfileCreateWithoutSubmissionsInput = {
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTeacherProfilesInput
+  groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileUncheckedCreateWithoutSubmissionsInput = {
+  userId: string
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileCreateOrConnectWithoutSubmissionsInput = {
+  where: Prisma.TeacherProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutSubmissionsInput, Prisma.TeacherProfileUncheckedCreateWithoutSubmissionsInput>
+}
+
+export type TeacherProfileUpsertWithoutSubmissionsInput = {
+  update: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutSubmissionsInput, Prisma.TeacherProfileUncheckedUpdateWithoutSubmissionsInput>
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutSubmissionsInput, Prisma.TeacherProfileUncheckedCreateWithoutSubmissionsInput>
+  where?: Prisma.TeacherProfileWhereInput
+}
+
+export type TeacherProfileUpdateToOneWithWhereWithoutSubmissionsInput = {
+  where?: Prisma.TeacherProfileWhereInput
+  data: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutSubmissionsInput, Prisma.TeacherProfileUncheckedUpdateWithoutSubmissionsInput>
+}
+
+export type TeacherProfileUpdateWithoutSubmissionsInput = {
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTeacherProfilesNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+}
+
+export type TeacherProfileUncheckedUpdateWithoutSubmissionsInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+}
+
+export type TeacherProfileCreateWithoutWeeklyTargetsInput = {
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTeacherProfilesInput
+  groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileUncheckedCreateWithoutWeeklyTargetsInput = {
+  userId: string
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileCreateOrConnectWithoutWeeklyTargetsInput = {
+  where: Prisma.TeacherProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutWeeklyTargetsInput, Prisma.TeacherProfileUncheckedCreateWithoutWeeklyTargetsInput>
+}
+
+export type TeacherProfileUpsertWithoutWeeklyTargetsInput = {
+  update: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutWeeklyTargetsInput, Prisma.TeacherProfileUncheckedUpdateWithoutWeeklyTargetsInput>
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutWeeklyTargetsInput, Prisma.TeacherProfileUncheckedCreateWithoutWeeklyTargetsInput>
+  where?: Prisma.TeacherProfileWhereInput
+}
+
+export type TeacherProfileUpdateToOneWithWhereWithoutWeeklyTargetsInput = {
+  where?: Prisma.TeacherProfileWhereInput
+  data: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutWeeklyTargetsInput, Prisma.TeacherProfileUncheckedUpdateWithoutWeeklyTargetsInput>
+}
+
+export type TeacherProfileUpdateWithoutWeeklyTargetsInput = {
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTeacherProfilesNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+}
+
+export type TeacherProfileUncheckedUpdateWithoutWeeklyTargetsInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+}
+
+export type TeacherProfileCreateWithoutTashihRequestsInput = {
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTeacherProfilesInput
+  groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileUncheckedCreateWithoutTashihRequestsInput = {
+  userId: string
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileCreateOrConnectWithoutTashihRequestsInput = {
+  where: Prisma.TeacherProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutTashihRequestsInput, Prisma.TeacherProfileUncheckedCreateWithoutTashihRequestsInput>
+}
+
+export type TeacherProfileUpsertWithoutTashihRequestsInput = {
+  update: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutTashihRequestsInput, Prisma.TeacherProfileUncheckedUpdateWithoutTashihRequestsInput>
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutTashihRequestsInput, Prisma.TeacherProfileUncheckedCreateWithoutTashihRequestsInput>
+  where?: Prisma.TeacherProfileWhereInput
+}
+
+export type TeacherProfileUpdateToOneWithWhereWithoutTashihRequestsInput = {
+  where?: Prisma.TeacherProfileWhereInput
+  data: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutTashihRequestsInput, Prisma.TeacherProfileUncheckedUpdateWithoutTashihRequestsInput>
+}
+
+export type TeacherProfileUpdateWithoutTashihRequestsInput = {
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTeacherProfilesNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
+}
+
+export type TeacherProfileUncheckedUpdateWithoutTashihRequestsInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
+}
+
 export type TeacherProfileCreateManyUserInput = {
   nip: string
   createdAt?: Date | string
@@ -402,12 +723,20 @@ export type TeacherProfileUpdateWithoutUserInput = {
   nip?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateWithoutUserInput = {
   nip?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateManyWithoutUserInput = {
@@ -417,6 +746,62 @@ export type TeacherProfileUncheckedUpdateManyWithoutUserInput = {
 }
 
 
+/**
+ * Count Type TeacherProfileCountOutputType
+ */
+
+export type TeacherProfileCountOutputType = {
+  groups: number
+  submissions: number
+  weeklyTargets: number
+  tashihRequests: number
+}
+
+export type TeacherProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  groups?: boolean | TeacherProfileCountOutputTypeCountGroupsArgs
+  submissions?: boolean | TeacherProfileCountOutputTypeCountSubmissionsArgs
+  weeklyTargets?: boolean | TeacherProfileCountOutputTypeCountWeeklyTargetsArgs
+  tashihRequests?: boolean | TeacherProfileCountOutputTypeCountTashihRequestsArgs
+}
+
+/**
+ * TeacherProfileCountOutputType without action
+ */
+export type TeacherProfileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TeacherProfileCountOutputType
+   */
+  select?: Prisma.TeacherProfileCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TeacherProfileCountOutputType without action
+ */
+export type TeacherProfileCountOutputTypeCountGroupsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GroupWhereInput
+}
+
+/**
+ * TeacherProfileCountOutputType without action
+ */
+export type TeacherProfileCountOutputTypeCountSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubmissionWhereInput
+}
+
+/**
+ * TeacherProfileCountOutputType without action
+ */
+export type TeacherProfileCountOutputTypeCountWeeklyTargetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WeeklyTargetWhereInput
+}
+
+/**
+ * TeacherProfileCountOutputType without action
+ */
+export type TeacherProfileCountOutputTypeCountTashihRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TashihRequestWhereInput
+}
+
 
 export type TeacherProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   userId?: boolean
@@ -424,6 +809,11 @@ export type TeacherProfileSelect<ExtArgs extends runtime.Types.Extensions.Intern
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  groups?: boolean | Prisma.TeacherProfile$groupsArgs<ExtArgs>
+  submissions?: boolean | Prisma.TeacherProfile$submissionsArgs<ExtArgs>
+  weeklyTargets?: boolean | Prisma.TeacherProfile$weeklyTargetsArgs<ExtArgs>
+  tashihRequests?: boolean | Prisma.TeacherProfile$tashihRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.TeacherProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["teacherProfile"]>
 
 
@@ -438,12 +828,21 @@ export type TeacherProfileSelectScalar = {
 export type TeacherProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "nip" | "createdAt" | "updatedAt", ExtArgs["result"]["teacherProfile"]>
 export type TeacherProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  groups?: boolean | Prisma.TeacherProfile$groupsArgs<ExtArgs>
+  submissions?: boolean | Prisma.TeacherProfile$submissionsArgs<ExtArgs>
+  weeklyTargets?: boolean | Prisma.TeacherProfile$weeklyTargetsArgs<ExtArgs>
+  tashihRequests?: boolean | Prisma.TeacherProfile$tashihRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.TeacherProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $TeacherProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TeacherProfile"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    groups: Prisma.$GroupPayload<ExtArgs>[]
+    submissions: Prisma.$SubmissionPayload<ExtArgs>[]
+    weeklyTargets: Prisma.$WeeklyTargetPayload<ExtArgs>[]
+    tashihRequests: Prisma.$TashihRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     userId: string
@@ -791,6 +1190,10 @@ readonly fields: TeacherProfileFieldRefs;
 export interface Prisma__TeacherProfileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  groups<T extends Prisma.TeacherProfile$groupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeacherProfile$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  submissions<T extends Prisma.TeacherProfile$submissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeacherProfile$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  weeklyTargets<T extends Prisma.TeacherProfile$weeklyTargetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeacherProfile$weeklyTargetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tashihRequests<T extends Prisma.TeacherProfile$tashihRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeacherProfile$tashihRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1169,6 +1572,102 @@ export type TeacherProfileDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many TeacherProfiles to delete.
    */
   limit?: number
+}
+
+/**
+ * TeacherProfile.groups
+ */
+export type TeacherProfile$groupsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Group
+   */
+  select?: Prisma.GroupSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Group
+   */
+  omit?: Prisma.GroupOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GroupInclude<ExtArgs> | null
+  where?: Prisma.GroupWhereInput
+  orderBy?: Prisma.GroupOrderByWithRelationInput | Prisma.GroupOrderByWithRelationInput[]
+  cursor?: Prisma.GroupWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GroupScalarFieldEnum | Prisma.GroupScalarFieldEnum[]
+}
+
+/**
+ * TeacherProfile.submissions
+ */
+export type TeacherProfile$submissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Submission
+   */
+  select?: Prisma.SubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Submission
+   */
+  omit?: Prisma.SubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubmissionInclude<ExtArgs> | null
+  where?: Prisma.SubmissionWhereInput
+  orderBy?: Prisma.SubmissionOrderByWithRelationInput | Prisma.SubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.SubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubmissionScalarFieldEnum | Prisma.SubmissionScalarFieldEnum[]
+}
+
+/**
+ * TeacherProfile.weeklyTargets
+ */
+export type TeacherProfile$weeklyTargetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeeklyTarget
+   */
+  select?: Prisma.WeeklyTargetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WeeklyTarget
+   */
+  omit?: Prisma.WeeklyTargetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeeklyTargetInclude<ExtArgs> | null
+  where?: Prisma.WeeklyTargetWhereInput
+  orderBy?: Prisma.WeeklyTargetOrderByWithRelationInput | Prisma.WeeklyTargetOrderByWithRelationInput[]
+  cursor?: Prisma.WeeklyTargetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WeeklyTargetScalarFieldEnum | Prisma.WeeklyTargetScalarFieldEnum[]
+}
+
+/**
+ * TeacherProfile.tashihRequests
+ */
+export type TeacherProfile$tashihRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TashihRequest
+   */
+  select?: Prisma.TashihRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TashihRequest
+   */
+  omit?: Prisma.TashihRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TashihRequestInclude<ExtArgs> | null
+  where?: Prisma.TashihRequestWhereInput
+  orderBy?: Prisma.TashihRequestOrderByWithRelationInput | Prisma.TashihRequestOrderByWithRelationInput[]
+  cursor?: Prisma.TashihRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TashihRequestScalarFieldEnum | Prisma.TashihRequestScalarFieldEnum[]
 }
 
 /**

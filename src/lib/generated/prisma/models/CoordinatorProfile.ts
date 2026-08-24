@@ -175,6 +175,9 @@ export type CoordinatorProfileWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CoordinatorProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CoordinatorProfile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  tashihRequests?: Prisma.TashihRequestListRelationFilter
+  tashihSchedules?: Prisma.TashihScheduleListRelationFilter
+  tashihResults?: Prisma.TashihResultListRelationFilter
 }
 
 export type CoordinatorProfileOrderByWithRelationInput = {
@@ -183,6 +186,9 @@ export type CoordinatorProfileOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  tashihRequests?: Prisma.TashihRequestOrderByRelationAggregateInput
+  tashihSchedules?: Prisma.TashihScheduleOrderByRelationAggregateInput
+  tashihResults?: Prisma.TashihResultOrderByRelationAggregateInput
   _relevance?: Prisma.CoordinatorProfileOrderByRelevanceInput
 }
 
@@ -195,6 +201,9 @@ export type CoordinatorProfileWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CoordinatorProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CoordinatorProfile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  tashihRequests?: Prisma.TashihRequestListRelationFilter
+  tashihSchedules?: Prisma.TashihScheduleListRelationFilter
+  tashihResults?: Prisma.TashihResultListRelationFilter
 }, "userId" | "nip">
 
 export type CoordinatorProfileOrderByWithAggregationInput = {
@@ -222,6 +231,9 @@ export type CoordinatorProfileCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCoordinatorProfilesInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutCoordinatorInput
+  tashihSchedules?: Prisma.TashihScheduleCreateNestedManyWithoutCoordinatorInput
+  tashihResults?: Prisma.TashihResultCreateNestedManyWithoutCoordinatorInput
 }
 
 export type CoordinatorProfileUncheckedCreateInput = {
@@ -229,6 +241,9 @@ export type CoordinatorProfileUncheckedCreateInput = {
   nip: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutCoordinatorInput
+  tashihSchedules?: Prisma.TashihScheduleUncheckedCreateNestedManyWithoutCoordinatorInput
+  tashihResults?: Prisma.TashihResultUncheckedCreateNestedManyWithoutCoordinatorInput
 }
 
 export type CoordinatorProfileUpdateInput = {
@@ -236,6 +251,9 @@ export type CoordinatorProfileUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCoordinatorProfilesNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutCoordinatorNestedInput
+  tashihSchedules?: Prisma.TashihScheduleUpdateManyWithoutCoordinatorNestedInput
+  tashihResults?: Prisma.TashihResultUpdateManyWithoutCoordinatorNestedInput
 }
 
 export type CoordinatorProfileUncheckedUpdateInput = {
@@ -243,6 +261,9 @@ export type CoordinatorProfileUncheckedUpdateInput = {
   nip?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutCoordinatorNestedInput
+  tashihSchedules?: Prisma.TashihScheduleUncheckedUpdateManyWithoutCoordinatorNestedInput
+  tashihResults?: Prisma.TashihResultUncheckedUpdateManyWithoutCoordinatorNestedInput
 }
 
 export type CoordinatorProfileCreateManyInput = {
@@ -302,6 +323,16 @@ export type CoordinatorProfileMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type CoordinatorProfileNullableScalarRelationFilter = {
+  is?: Prisma.CoordinatorProfileWhereInput | null
+  isNot?: Prisma.CoordinatorProfileWhereInput | null
+}
+
+export type CoordinatorProfileScalarRelationFilter = {
+  is?: Prisma.CoordinatorProfileWhereInput
+  isNot?: Prisma.CoordinatorProfileWhereInput
+}
+
 export type CoordinatorProfileCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutUserInput, Prisma.CoordinatorProfileUncheckedCreateWithoutUserInput> | Prisma.CoordinatorProfileCreateWithoutUserInput[] | Prisma.CoordinatorProfileUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.CoordinatorProfileCreateOrConnectWithoutUserInput | Prisma.CoordinatorProfileCreateOrConnectWithoutUserInput[]
@@ -344,16 +375,66 @@ export type CoordinatorProfileUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.CoordinatorProfileScalarWhereInput | Prisma.CoordinatorProfileScalarWhereInput[]
 }
 
+export type CoordinatorProfileCreateNestedOneWithoutTashihRequestsInput = {
+  create?: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihRequestsInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihRequestsInput>
+  connectOrCreate?: Prisma.CoordinatorProfileCreateOrConnectWithoutTashihRequestsInput
+  connect?: Prisma.CoordinatorProfileWhereUniqueInput
+}
+
+export type CoordinatorProfileUpdateOneWithoutTashihRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihRequestsInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihRequestsInput>
+  connectOrCreate?: Prisma.CoordinatorProfileCreateOrConnectWithoutTashihRequestsInput
+  upsert?: Prisma.CoordinatorProfileUpsertWithoutTashihRequestsInput
+  disconnect?: Prisma.CoordinatorProfileWhereInput | boolean
+  delete?: Prisma.CoordinatorProfileWhereInput | boolean
+  connect?: Prisma.CoordinatorProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CoordinatorProfileUpdateToOneWithWhereWithoutTashihRequestsInput, Prisma.CoordinatorProfileUpdateWithoutTashihRequestsInput>, Prisma.CoordinatorProfileUncheckedUpdateWithoutTashihRequestsInput>
+}
+
+export type CoordinatorProfileCreateNestedOneWithoutTashihSchedulesInput = {
+  create?: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihSchedulesInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihSchedulesInput>
+  connectOrCreate?: Prisma.CoordinatorProfileCreateOrConnectWithoutTashihSchedulesInput
+  connect?: Prisma.CoordinatorProfileWhereUniqueInput
+}
+
+export type CoordinatorProfileUpdateOneRequiredWithoutTashihSchedulesNestedInput = {
+  create?: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihSchedulesInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihSchedulesInput>
+  connectOrCreate?: Prisma.CoordinatorProfileCreateOrConnectWithoutTashihSchedulesInput
+  upsert?: Prisma.CoordinatorProfileUpsertWithoutTashihSchedulesInput
+  connect?: Prisma.CoordinatorProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CoordinatorProfileUpdateToOneWithWhereWithoutTashihSchedulesInput, Prisma.CoordinatorProfileUpdateWithoutTashihSchedulesInput>, Prisma.CoordinatorProfileUncheckedUpdateWithoutTashihSchedulesInput>
+}
+
+export type CoordinatorProfileCreateNestedOneWithoutTashihResultsInput = {
+  create?: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihResultsInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihResultsInput>
+  connectOrCreate?: Prisma.CoordinatorProfileCreateOrConnectWithoutTashihResultsInput
+  connect?: Prisma.CoordinatorProfileWhereUniqueInput
+}
+
+export type CoordinatorProfileUpdateOneRequiredWithoutTashihResultsNestedInput = {
+  create?: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihResultsInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihResultsInput>
+  connectOrCreate?: Prisma.CoordinatorProfileCreateOrConnectWithoutTashihResultsInput
+  upsert?: Prisma.CoordinatorProfileUpsertWithoutTashihResultsInput
+  connect?: Prisma.CoordinatorProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CoordinatorProfileUpdateToOneWithWhereWithoutTashihResultsInput, Prisma.CoordinatorProfileUpdateWithoutTashihResultsInput>, Prisma.CoordinatorProfileUncheckedUpdateWithoutTashihResultsInput>
+}
+
 export type CoordinatorProfileCreateWithoutUserInput = {
   nip: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutCoordinatorInput
+  tashihSchedules?: Prisma.TashihScheduleCreateNestedManyWithoutCoordinatorInput
+  tashihResults?: Prisma.TashihResultCreateNestedManyWithoutCoordinatorInput
 }
 
 export type CoordinatorProfileUncheckedCreateWithoutUserInput = {
   nip: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutCoordinatorInput
+  tashihSchedules?: Prisma.TashihScheduleUncheckedCreateNestedManyWithoutCoordinatorInput
+  tashihResults?: Prisma.TashihResultUncheckedCreateNestedManyWithoutCoordinatorInput
 }
 
 export type CoordinatorProfileCreateOrConnectWithoutUserInput = {
@@ -392,6 +473,162 @@ export type CoordinatorProfileScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"CoordinatorProfile"> | Date | string
 }
 
+export type CoordinatorProfileCreateWithoutTashihRequestsInput = {
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCoordinatorProfilesInput
+  tashihSchedules?: Prisma.TashihScheduleCreateNestedManyWithoutCoordinatorInput
+  tashihResults?: Prisma.TashihResultCreateNestedManyWithoutCoordinatorInput
+}
+
+export type CoordinatorProfileUncheckedCreateWithoutTashihRequestsInput = {
+  userId: string
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tashihSchedules?: Prisma.TashihScheduleUncheckedCreateNestedManyWithoutCoordinatorInput
+  tashihResults?: Prisma.TashihResultUncheckedCreateNestedManyWithoutCoordinatorInput
+}
+
+export type CoordinatorProfileCreateOrConnectWithoutTashihRequestsInput = {
+  where: Prisma.CoordinatorProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihRequestsInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihRequestsInput>
+}
+
+export type CoordinatorProfileUpsertWithoutTashihRequestsInput = {
+  update: Prisma.XOR<Prisma.CoordinatorProfileUpdateWithoutTashihRequestsInput, Prisma.CoordinatorProfileUncheckedUpdateWithoutTashihRequestsInput>
+  create: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihRequestsInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihRequestsInput>
+  where?: Prisma.CoordinatorProfileWhereInput
+}
+
+export type CoordinatorProfileUpdateToOneWithWhereWithoutTashihRequestsInput = {
+  where?: Prisma.CoordinatorProfileWhereInput
+  data: Prisma.XOR<Prisma.CoordinatorProfileUpdateWithoutTashihRequestsInput, Prisma.CoordinatorProfileUncheckedUpdateWithoutTashihRequestsInput>
+}
+
+export type CoordinatorProfileUpdateWithoutTashihRequestsInput = {
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCoordinatorProfilesNestedInput
+  tashihSchedules?: Prisma.TashihScheduleUpdateManyWithoutCoordinatorNestedInput
+  tashihResults?: Prisma.TashihResultUpdateManyWithoutCoordinatorNestedInput
+}
+
+export type CoordinatorProfileUncheckedUpdateWithoutTashihRequestsInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tashihSchedules?: Prisma.TashihScheduleUncheckedUpdateManyWithoutCoordinatorNestedInput
+  tashihResults?: Prisma.TashihResultUncheckedUpdateManyWithoutCoordinatorNestedInput
+}
+
+export type CoordinatorProfileCreateWithoutTashihSchedulesInput = {
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCoordinatorProfilesInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutCoordinatorInput
+  tashihResults?: Prisma.TashihResultCreateNestedManyWithoutCoordinatorInput
+}
+
+export type CoordinatorProfileUncheckedCreateWithoutTashihSchedulesInput = {
+  userId: string
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutCoordinatorInput
+  tashihResults?: Prisma.TashihResultUncheckedCreateNestedManyWithoutCoordinatorInput
+}
+
+export type CoordinatorProfileCreateOrConnectWithoutTashihSchedulesInput = {
+  where: Prisma.CoordinatorProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihSchedulesInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihSchedulesInput>
+}
+
+export type CoordinatorProfileUpsertWithoutTashihSchedulesInput = {
+  update: Prisma.XOR<Prisma.CoordinatorProfileUpdateWithoutTashihSchedulesInput, Prisma.CoordinatorProfileUncheckedUpdateWithoutTashihSchedulesInput>
+  create: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihSchedulesInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihSchedulesInput>
+  where?: Prisma.CoordinatorProfileWhereInput
+}
+
+export type CoordinatorProfileUpdateToOneWithWhereWithoutTashihSchedulesInput = {
+  where?: Prisma.CoordinatorProfileWhereInput
+  data: Prisma.XOR<Prisma.CoordinatorProfileUpdateWithoutTashihSchedulesInput, Prisma.CoordinatorProfileUncheckedUpdateWithoutTashihSchedulesInput>
+}
+
+export type CoordinatorProfileUpdateWithoutTashihSchedulesInput = {
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCoordinatorProfilesNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutCoordinatorNestedInput
+  tashihResults?: Prisma.TashihResultUpdateManyWithoutCoordinatorNestedInput
+}
+
+export type CoordinatorProfileUncheckedUpdateWithoutTashihSchedulesInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutCoordinatorNestedInput
+  tashihResults?: Prisma.TashihResultUncheckedUpdateManyWithoutCoordinatorNestedInput
+}
+
+export type CoordinatorProfileCreateWithoutTashihResultsInput = {
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCoordinatorProfilesInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutCoordinatorInput
+  tashihSchedules?: Prisma.TashihScheduleCreateNestedManyWithoutCoordinatorInput
+}
+
+export type CoordinatorProfileUncheckedCreateWithoutTashihResultsInput = {
+  userId: string
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutCoordinatorInput
+  tashihSchedules?: Prisma.TashihScheduleUncheckedCreateNestedManyWithoutCoordinatorInput
+}
+
+export type CoordinatorProfileCreateOrConnectWithoutTashihResultsInput = {
+  where: Prisma.CoordinatorProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihResultsInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihResultsInput>
+}
+
+export type CoordinatorProfileUpsertWithoutTashihResultsInput = {
+  update: Prisma.XOR<Prisma.CoordinatorProfileUpdateWithoutTashihResultsInput, Prisma.CoordinatorProfileUncheckedUpdateWithoutTashihResultsInput>
+  create: Prisma.XOR<Prisma.CoordinatorProfileCreateWithoutTashihResultsInput, Prisma.CoordinatorProfileUncheckedCreateWithoutTashihResultsInput>
+  where?: Prisma.CoordinatorProfileWhereInput
+}
+
+export type CoordinatorProfileUpdateToOneWithWhereWithoutTashihResultsInput = {
+  where?: Prisma.CoordinatorProfileWhereInput
+  data: Prisma.XOR<Prisma.CoordinatorProfileUpdateWithoutTashihResultsInput, Prisma.CoordinatorProfileUncheckedUpdateWithoutTashihResultsInput>
+}
+
+export type CoordinatorProfileUpdateWithoutTashihResultsInput = {
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCoordinatorProfilesNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutCoordinatorNestedInput
+  tashihSchedules?: Prisma.TashihScheduleUpdateManyWithoutCoordinatorNestedInput
+}
+
+export type CoordinatorProfileUncheckedUpdateWithoutTashihResultsInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutCoordinatorNestedInput
+  tashihSchedules?: Prisma.TashihScheduleUncheckedUpdateManyWithoutCoordinatorNestedInput
+}
+
 export type CoordinatorProfileCreateManyUserInput = {
   nip: string
   createdAt?: Date | string
@@ -402,12 +639,18 @@ export type CoordinatorProfileUpdateWithoutUserInput = {
   nip?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutCoordinatorNestedInput
+  tashihSchedules?: Prisma.TashihScheduleUpdateManyWithoutCoordinatorNestedInput
+  tashihResults?: Prisma.TashihResultUpdateManyWithoutCoordinatorNestedInput
 }
 
 export type CoordinatorProfileUncheckedUpdateWithoutUserInput = {
   nip?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutCoordinatorNestedInput
+  tashihSchedules?: Prisma.TashihScheduleUncheckedUpdateManyWithoutCoordinatorNestedInput
+  tashihResults?: Prisma.TashihResultUncheckedUpdateManyWithoutCoordinatorNestedInput
 }
 
 export type CoordinatorProfileUncheckedUpdateManyWithoutUserInput = {
@@ -417,6 +660,53 @@ export type CoordinatorProfileUncheckedUpdateManyWithoutUserInput = {
 }
 
 
+/**
+ * Count Type CoordinatorProfileCountOutputType
+ */
+
+export type CoordinatorProfileCountOutputType = {
+  tashihRequests: number
+  tashihSchedules: number
+  tashihResults: number
+}
+
+export type CoordinatorProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tashihRequests?: boolean | CoordinatorProfileCountOutputTypeCountTashihRequestsArgs
+  tashihSchedules?: boolean | CoordinatorProfileCountOutputTypeCountTashihSchedulesArgs
+  tashihResults?: boolean | CoordinatorProfileCountOutputTypeCountTashihResultsArgs
+}
+
+/**
+ * CoordinatorProfileCountOutputType without action
+ */
+export type CoordinatorProfileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CoordinatorProfileCountOutputType
+   */
+  select?: Prisma.CoordinatorProfileCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CoordinatorProfileCountOutputType without action
+ */
+export type CoordinatorProfileCountOutputTypeCountTashihRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TashihRequestWhereInput
+}
+
+/**
+ * CoordinatorProfileCountOutputType without action
+ */
+export type CoordinatorProfileCountOutputTypeCountTashihSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TashihScheduleWhereInput
+}
+
+/**
+ * CoordinatorProfileCountOutputType without action
+ */
+export type CoordinatorProfileCountOutputTypeCountTashihResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TashihResultWhereInput
+}
+
 
 export type CoordinatorProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   userId?: boolean
@@ -424,6 +714,10 @@ export type CoordinatorProfileSelect<ExtArgs extends runtime.Types.Extensions.In
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  tashihRequests?: boolean | Prisma.CoordinatorProfile$tashihRequestsArgs<ExtArgs>
+  tashihSchedules?: boolean | Prisma.CoordinatorProfile$tashihSchedulesArgs<ExtArgs>
+  tashihResults?: boolean | Prisma.CoordinatorProfile$tashihResultsArgs<ExtArgs>
+  _count?: boolean | Prisma.CoordinatorProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["coordinatorProfile"]>
 
 
@@ -438,12 +732,19 @@ export type CoordinatorProfileSelectScalar = {
 export type CoordinatorProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "nip" | "createdAt" | "updatedAt", ExtArgs["result"]["coordinatorProfile"]>
 export type CoordinatorProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  tashihRequests?: boolean | Prisma.CoordinatorProfile$tashihRequestsArgs<ExtArgs>
+  tashihSchedules?: boolean | Prisma.CoordinatorProfile$tashihSchedulesArgs<ExtArgs>
+  tashihResults?: boolean | Prisma.CoordinatorProfile$tashihResultsArgs<ExtArgs>
+  _count?: boolean | Prisma.CoordinatorProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $CoordinatorProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CoordinatorProfile"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    tashihRequests: Prisma.$TashihRequestPayload<ExtArgs>[]
+    tashihSchedules: Prisma.$TashihSchedulePayload<ExtArgs>[]
+    tashihResults: Prisma.$TashihResultPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     userId: string
@@ -791,6 +1092,9 @@ readonly fields: CoordinatorProfileFieldRefs;
 export interface Prisma__CoordinatorProfileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  tashihRequests<T extends Prisma.CoordinatorProfile$tashihRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CoordinatorProfile$tashihRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tashihSchedules<T extends Prisma.CoordinatorProfile$tashihSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CoordinatorProfile$tashihSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tashihResults<T extends Prisma.CoordinatorProfile$tashihResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CoordinatorProfile$tashihResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1169,6 +1473,78 @@ export type CoordinatorProfileDeleteManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many CoordinatorProfiles to delete.
    */
   limit?: number
+}
+
+/**
+ * CoordinatorProfile.tashihRequests
+ */
+export type CoordinatorProfile$tashihRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TashihRequest
+   */
+  select?: Prisma.TashihRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TashihRequest
+   */
+  omit?: Prisma.TashihRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TashihRequestInclude<ExtArgs> | null
+  where?: Prisma.TashihRequestWhereInput
+  orderBy?: Prisma.TashihRequestOrderByWithRelationInput | Prisma.TashihRequestOrderByWithRelationInput[]
+  cursor?: Prisma.TashihRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TashihRequestScalarFieldEnum | Prisma.TashihRequestScalarFieldEnum[]
+}
+
+/**
+ * CoordinatorProfile.tashihSchedules
+ */
+export type CoordinatorProfile$tashihSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TashihSchedule
+   */
+  select?: Prisma.TashihScheduleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TashihSchedule
+   */
+  omit?: Prisma.TashihScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TashihScheduleInclude<ExtArgs> | null
+  where?: Prisma.TashihScheduleWhereInput
+  orderBy?: Prisma.TashihScheduleOrderByWithRelationInput | Prisma.TashihScheduleOrderByWithRelationInput[]
+  cursor?: Prisma.TashihScheduleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TashihScheduleScalarFieldEnum | Prisma.TashihScheduleScalarFieldEnum[]
+}
+
+/**
+ * CoordinatorProfile.tashihResults
+ */
+export type CoordinatorProfile$tashihResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TashihResult
+   */
+  select?: Prisma.TashihResultSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TashihResult
+   */
+  omit?: Prisma.TashihResultOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TashihResultInclude<ExtArgs> | null
+  where?: Prisma.TashihResultWhereInput
+  orderBy?: Prisma.TashihResultOrderByWithRelationInput | Prisma.TashihResultOrderByWithRelationInput[]
+  cursor?: Prisma.TashihResultWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TashihResultScalarFieldEnum | Prisma.TashihResultScalarFieldEnum[]
 }
 
 /**

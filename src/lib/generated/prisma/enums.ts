@@ -9,6 +9,68 @@
 * 🟢 You can import this file directly.
 */
 
+export const SubmissionType = {
+  TAHFIDZ: 'TAHFIDZ',
+  TAHSIN_WAFA: 'TAHSIN_WAFA',
+  TAHSIN_ALQURAN: 'TAHSIN_ALQURAN'
+} as const
+
+export type SubmissionType = (typeof SubmissionType)[keyof typeof SubmissionType]
+
+
+export const SubmissionStatus = {
+  LULUS: 'LULUS',
+  TIDAK_LULUS: 'TIDAK_LULUS',
+  MENGULANG: 'MENGULANG'
+} as const
+
+export type SubmissionStatus = (typeof SubmissionStatus)[keyof typeof SubmissionStatus]
+
+
+export const Adab = {
+  BAIK: 'BAIK',
+  KURANG_BAIK: 'KURANG_BAIK',
+  TIDAK_BAIK: 'TIDAK_BAIK'
+} as const
+
+export type Adab = (typeof Adab)[keyof typeof Adab]
+
+
+export const HomeActivityType = {
+  MURAJAAH: 'MURAJAAH',
+  TILAWAH: 'TILAWAH',
+  TARJAMAH: 'TARJAMAH'
+} as const
+
+export type HomeActivityType = (typeof HomeActivityType)[keyof typeof HomeActivityType]
+
+
+export const TargetStatus = {
+  TIDAK_TERCAPAI: 'TIDAK_TERCAPAI',
+  TERCAPAI: 'TERCAPAI'
+} as const
+
+export type TargetStatus = (typeof TargetStatus)[keyof typeof TargetStatus]
+
+
+export const TashihType = {
+  ALQURAN: 'ALQURAN',
+  WAFA: 'WAFA'
+} as const
+
+export type TashihType = (typeof TashihType)[keyof typeof TashihType]
+
+
+export const TashihRequestStatus = {
+  MENUNGGU: 'MENUNGGU',
+  DITERIMA: 'DITERIMA',
+  DITOLAK: 'DITOLAK',
+  SELESAI: 'SELESAI'
+} as const
+
+export type TashihRequestStatus = (typeof TashihRequestStatus)[keyof typeof TashihRequestStatus]
+
+
 export const Semester = {
   GANJIL: 'GANJIL',
   GENAP: 'GENAP'

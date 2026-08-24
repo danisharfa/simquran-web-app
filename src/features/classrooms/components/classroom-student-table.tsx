@@ -20,7 +20,7 @@ import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { removeStudentFromClassroom } from '../actions/remove-student-from-classroom';
-import type { StudentOption } from '../actions/list-classroom-students';
+import type { StudentOption } from '../queries/list-classroom-students';
 
 interface Props {
   classroomId: string;

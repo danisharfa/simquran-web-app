@@ -38,6 +38,10 @@ Authentication uses **better-auth** with the `username` and `admin` plugins — 
 - `requireRole(['superadmin', 'admin'])` — redirects to `/dashboard` if wrong role (roles passed lowercase)
 - `requireRoleOrThrow(roles)` — throws instead of redirecting; use in Server Actions
 
+**`superadmin` always bypasses the role check** in both helpers, regardless of the `allowedRoles` list passed — it has full access to every management page/action (users, classrooms, academic settings, quran-reference, etc.), so you never need to add `'superadmin'` explicitly to a list. Write role checks as just `['admin']`, `['admin', 'coordinator']`, etc. for the intended roles — `superadmin` is implied.
+
+Caveat for future **personal/profile-bound pages** (a teacher's own group, a student's own report — anything reading `session.user`'s own `TeacherProfile`/`CoordinatorProfile`/`StudentProfile`): the bypass means `requireRole(['teacher'])` will *not* stop a superadmin from reaching that page, but superadmin has no such profile row, so the page will have no data to show. Guard those by checking the profile record exists (not just the role) before rendering, rather than assuming the role check alone is sufficient.
+
 ### User Creation Pattern
 
 Users are created in two phases (see [src/features/users/actions/create-user.ts](src/features/users/actions/create-user.ts)):
@@ -49,9 +53,20 @@ If phase 2 fails, phase 1 is rolled back manually via `auth.api.removeUser()`. D
 ### Feature Structure
 
 Each feature lives in `src/features/<name>/` with:
-- `actions/` — Next.js Server Actions (`'use server'`)
+- `queries/` — read-only data fetching (`list-*`, `get-*`), **no** `'use server'` directive. Plain async functions called directly from Server Components (`page.tsx`). Still enforce access control via `requireRoleOrThrow`/`requireSession` inside the function.
+- `actions/` — Next.js Server Actions (`'use server'`) for mutations (`create-*`, `update-*`, `delete-*`, etc.), plus any read (`get-*`) that is called at runtime from a Client Component (e.g. inside `useEffect`/event handler) — those must stay Server Actions since that's the only client→server RPC mechanism in the App Router.
 - `components/` — React components specific to that feature
 - `*.schema.ts` — Zod validation schemas
+
+**Why the split**: Server Actions are designed for mutations and always go through a POST-based RPC boundary, which bypasses Next.js's data cache. Plain query functions called from Server Components run as a normal in-process call and can use `unstable_cache`/React `cache()` where useful. Only reach for `'use server'` on a read when a Client Component needs to call it directly.
+
+### Refreshing Data After a Mutation
+
+Calling a Server Action does **not** automatically refresh the page — every mutating action must pair two things or the UI keeps showing stale data after a successful save:
+1. **Server side** — call `revalidatePath(path)` at the end of the action (after the mutation succeeds), pointing at the page(s) that read the mutated data. Use the `'layout'` type (`revalidatePath('/dashboard', 'layout')`) when the change affects data rendered in a layout, e.g. the sidebar footer showing the logged-in user's name/username.
+2. **Client side** — call `router.refresh()` (from `next/navigation`) after the action resolves successfully, so the Router Cache is told to refetch. `revalidatePath` alone only invalidates the cache; without `router.refresh()` on the client the currently-mounted page won't refetch until the user navigates away and back.
+
+See [assign-students-to-classroom.ts](src/features/classrooms/actions/assign-students-to-classroom.ts) + [add-student-to-classroom-form.tsx](src/features/classrooms/components/add-student-to-classroom-form.tsx) for the reference pattern.
 
 ### Form Pattern
 
@@ -65,6 +80,10 @@ const form = useForm({
 ```
 
 Custom field components: `Field`, `FieldLabel`, `FieldError`, `FieldGroup` from `@/components/ui/field`; `InputGroup`, `InputGroupAddon`, `InputGroupInput`, `InputGroupButton` from `@/components/ui/input-group`.
+
+### Code Comments
+
+Only comment where the code itself can't explain the "why" (a non-obvious constraint, a workaround, a business rule). Keep it to one short line — no paragraphs, no restating what the code already says.
 
 ### UI Conventions
 

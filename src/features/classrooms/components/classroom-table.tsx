@@ -18,7 +18,7 @@ import { SquareArrowOutUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
-import type { ClassroomTableData } from '../actions/list-classrooms';
+import type { ClassroomTableData } from '../queries/list-classrooms';
 
 const SEMESTER_LABEL: Record<'GANJIL' | 'GENAP', string> = {
   GANJIL: 'Ganjil',

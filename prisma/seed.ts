@@ -1,8 +1,23 @@
 import { prisma } from '../src/lib/prisma';
 import { auth } from '../src/lib/auth';
 import { Role } from '@/lib/generated/prisma/enums';
+import surahData from './data/surah.json';
+import juzData from './data/juz.json';
+import surahJuzData from './data/surah_juz.json';
+import wafaData from './data/wafa.json';
+
+async function seedQuranReferenceData() {
+  await prisma.surah.createMany({ data: surahData, skipDuplicates: true });
+  await prisma.juz.createMany({ data: juzData, skipDuplicates: true });
+  await prisma.surahJuz.createMany({ data: surahJuzData, skipDuplicates: true });
+  await prisma.wafa.createMany({ data: wafaData, skipDuplicates: true });
+
+  console.log('Quran reference data seeded');
+}
 
 async function main() {
+  await seedQuranReferenceData();
+
   const username = 'superadmin';
 
   const existing = await prisma.user.findUnique({

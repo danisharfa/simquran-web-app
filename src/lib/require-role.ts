@@ -32,7 +32,8 @@ export async function requireRole(allowedRoles: RoleKey[]) {
 
   const role = session.user.role.toLowerCase() as RoleKey;
 
-  if (!allowedRoles.includes(role)) {
+  // superadmin has full access to every management page/action
+  if (role !== 'superadmin' && !allowedRoles.includes(role)) {
     redirect('/dashboard'); // atau redirect ke halaman /403 kalau sudah ada
   }
 
@@ -44,7 +45,7 @@ export async function requireRoleOrThrow(allowedRoles: RoleKey[]) {
 
   const role = session.user.role.toLowerCase() as RoleKey;
 
-  if (!allowedRoles.includes(role)) {
+  if (role !== 'superadmin' && !allowedRoles.includes(role)) {
     throw new Error('Unauthorized: user role not allowed');
   }
 

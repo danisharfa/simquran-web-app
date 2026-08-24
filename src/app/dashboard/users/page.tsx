@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/require-role';
 import { AddUserForm } from '@/features/users/components/create-user-form';
 import { UserTable } from '@/features/users/components/user-table';
-import { listUsersByRole } from '@/features/users/actions/list-users';
+import { listUsersByRole } from '@/features/users/queries/list-users';
 
 export default async function UsersPage() {
   const session = await requireRole(['superadmin', 'admin']);
@@ -17,12 +17,12 @@ export default async function UsersPage() {
 
     return (
       <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold">Manajemen Pengguna</h1>
-          <p className="text-muted-foreground text-sm">Kelola akun semua pengguna</p>
-        </div>
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold">Manajemen Pengguna</h1>
+            <p className="text-muted-foreground text-sm">Kelola akun semua pengguna</p>
+          </div>
 
-        <div className="w-full max-w-xl mx-auto">
           <AddUserForm />
         </div>
 
@@ -43,12 +43,12 @@ export default async function UsersPage() {
 
     return (
       <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold">Manajemen Pengguna</h1>
-          <p className="text-muted-foreground text-sm">Kelola akun staf dan siswa</p>
-        </div>
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold">Manajemen Pengguna</h1>
+            <p className="text-muted-foreground text-sm">Kelola akun staf dan siswa</p>
+          </div>
 
-        <div className="w-full max-w-xl mx-auto">
           <AddUserForm allowedRoles={['COORDINATOR', 'TEACHER', 'STUDENT']} />
         </div>
 

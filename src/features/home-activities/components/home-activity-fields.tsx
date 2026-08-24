@@ -1,0 +1,125 @@
+'use client';
+
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Field, FieldLabel } from '@/components/ui/field';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Calendar22 } from '@/components/layouts/calendars/calendar-22';
+import { HOME_ACTIVITY_TYPE_OPTIONS } from '../home-activity.schema';
+import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+
+export interface HomeActivityFieldValues {
+  date: Date | undefined;
+  activityType: 'MURAJAAH' | 'TILAWAH' | 'TARJAMAH';
+  juzId: number | null;
+  surahId: number | null;
+  startVerse: number | null;
+  endVerse: number | null;
+  note: string;
+}
+
+interface Props {
+  surahOptions: ReferenceOption[];
+  juzOptions: ReferenceOption[];
+  values: HomeActivityFieldValues;
+  onChange: <K extends keyof HomeActivityFieldValues>(key: K, value: HomeActivityFieldValues[K]) => void;
+}
+
+export function HomeActivityFields({ surahOptions, juzOptions, values, onChange }: Props) {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <Calendar22 value={values.date} onChange={(d) => onChange('date', d)} label="Tanggal" />
+
+      <Field>
+        <FieldLabel>Jenis Aktivitas</FieldLabel>
+        <Select
+          value={values.activityType}
+          onValueChange={(v) => onChange('activityType', v as HomeActivityFieldValues['activityType'])}
+        >
+          <SelectTrigger>
+            <SelectValue>
+              {HOME_ACTIVITY_TYPE_OPTIONS.find((o) => o.value === values.activityType)?.label}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            {HOME_ACTIVITY_TYPE_OPTIONS.map((opt) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </Field>
+
+      <Field>
+        <FieldLabel>Juz</FieldLabel>
+        <Select
+          value={values.juzId ? String(values.juzId) : ''}
+          onValueChange={(v) => onChange('juzId', v ? Number(v) : null)}
+        >
+          <SelectTrigger>
+            <SelectValue>{juzOptions.find((o) => o.id === values.juzId)?.name ?? 'Pilih juz'}</SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            {juzOptions.map((opt) => (
+              <SelectItem key={opt.id} value={String(opt.id)}>
+                {opt.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </Field>
+
+      <Field>
+        <FieldLabel>Surah</FieldLabel>
+        <Select
+          value={values.surahId ? String(values.surahId) : ''}
+          onValueChange={(v) => onChange('surahId', v ? Number(v) : null)}
+        >
+          <SelectTrigger>
+            <SelectValue>
+              {surahOptions.find((o) => o.id === values.surahId)?.name ?? 'Pilih surah'}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            {surahOptions.map((opt) => (
+              <SelectItem key={opt.id} value={String(opt.id)}>
+                {opt.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </Field>
+
+      <div className="grid grid-cols-2 gap-4">
+        <Field>
+          <FieldLabel>Ayat Mulai</FieldLabel>
+          <Input
+            type="number"
+            value={values.startVerse ?? ''}
+            onChange={(e) => onChange('startVerse', e.target.value ? Number(e.target.value) : null)}
+          />
+        </Field>
+        <Field>
+          <FieldLabel>Ayat Akhir</FieldLabel>
+          <Input
+            type="number"
+            value={values.endVerse ?? ''}
+            onChange={(e) => onChange('endVerse', e.target.value ? Number(e.target.value) : null)}
+          />
+        </Field>
+      </div>
+
+      <Field className="sm:col-span-2">
+        <FieldLabel>Catatan</FieldLabel>
+        <Textarea value={values.note} onChange={(e) => onChange('note', e.target.value)} rows={2} />
+      </Field>
+    </div>
+  );
+}

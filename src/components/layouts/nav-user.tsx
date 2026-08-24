@@ -24,7 +24,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 
-import { ChevronsUpDown, KeyRound, LogOut, Monitor, Moon, Sun, SunMoon, User } from 'lucide-react';
+import { ChevronsUpDown, LogOut, Monitor, Moon, Sun, SunMoon, User } from 'lucide-react';
 
 export function NavUser({
   user,
@@ -83,13 +83,9 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => router.push('/dashboard/account/profile')}>
+              <DropdownMenuItem onClick={() => router.push('/dashboard/account')}>
                 <User />
-                Profil
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push('/dashboard/account/change-password')}>
-                <KeyRound />
-                Ganti Password
+                Akun
               </DropdownMenuItem>
 
               <DropdownMenuSub>
@@ -117,7 +113,7 @@ export function NavUser({
             <DropdownMenuGroup>
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut />
-                Logout
+                Keluar
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>

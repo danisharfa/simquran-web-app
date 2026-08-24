@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, CardHeader, CardContent, CardFooter, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,6 +23,7 @@ import { updateOwnProfile } from '../actions/update-own-profile';
 import { NONE, GENDER_OPTIONS, BLOOD_TYPE_OPTIONS } from '../user-options';
 
 export function ProfileDetail({ user }: { user: UserDetail }) {
+  const router = useRouter();
   const role = user.role.toLowerCase();
   const isAdminOrSuperadmin = role === 'admin' || role === 'superadmin';
   const isStudent = role === 'student';
@@ -61,6 +63,7 @@ export function ProfileDetail({ user }: { user: UserDetail }) {
         bloodType: toNullable(bloodType) as BloodType | null,
       });
       toast.success('Profil berhasil diperbarui');
+      router.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Gagal memperbarui profil');
     } finally {
@@ -135,7 +138,9 @@ export function ProfileDetail({ user }: { user: UserDetail }) {
                 <FieldLabel>Jenis Kelamin</FieldLabel>
                 <Select value={gender} onValueChange={(val) => setGender(val ?? NONE)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="-- Pilih --" />
+                    <SelectValue>
+                      {GENDER_OPTIONS.find((opt) => opt.value === gender)?.label ?? '-- Pilih --'}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {GENDER_OPTIONS.map((opt) => (
@@ -151,7 +156,10 @@ export function ProfileDetail({ user }: { user: UserDetail }) {
                 <FieldLabel>Golongan Darah</FieldLabel>
                 <Select value={bloodType} onValueChange={(val) => setBloodType(val ?? NONE)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="-- Pilih --" />
+                    <SelectValue>
+                      {BLOOD_TYPE_OPTIONS.find((opt) => opt.value === bloodType)?.label ??
+                        '-- Pilih --'}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {BLOOD_TYPE_OPTIONS.map((opt) => (

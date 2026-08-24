@@ -1,18 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from '@tanstack/react-form';
 import { toast } from 'sonner';
 import { School } from 'lucide-react';
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
@@ -45,6 +47,7 @@ interface Props {
 
 export function AddClassroomForm({ defaultAcademicYear = '', defaultSemester = 'GANJIL' }: Props) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   const form = useForm({
     defaultValues: {
@@ -74,32 +77,48 @@ export function AddClassroomForm({ defaultAcademicYear = '', defaultSemester = '
 
       toast.success('Kelas berhasil ditambahkan');
       formApi.reset();
+      setOpen(false);
       router.refresh();
     },
   });
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <School className="size-5" />
-          Tambah Kelas
-        </CardTitle>
-        <CardDescription>
-          Buat data kelas baru untuk tahun ajaran dan semester tertentu.
-        </CardDescription>
-      </CardHeader>
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) form.reset();
+      }}
+    >
+      <DialogTrigger
+        render={
+          <Button>
+            <School />
+            Tambah Kelas
+          </Button>
+        }
+      />
 
-      <form
-        id="add-classroom-form"
-        className="flex flex-col gap-4"
-        onSubmit={(e) => {
-          e.preventDefault();
-          form.handleSubmit();
-        }}
-        noValidate
-      >
-        <CardContent>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <School className="size-5" />
+            Tambah Kelas
+          </DialogTitle>
+          <DialogDescription>
+            Buat data kelas baru untuk tahun ajaran dan semester tertentu.
+          </DialogDescription>
+        </DialogHeader>
+
+        <form
+          id="add-classroom-form"
+          className="flex flex-col gap-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            form.handleSubmit();
+          }}
+          noValidate
+        >
           <FieldGroup>
             <form.Field name="level">
               {(field) => {
@@ -203,13 +222,13 @@ export function AddClassroomForm({ defaultAcademicYear = '', defaultSemester = '
               }}
             </form.Field>
           </FieldGroup>
-        </CardContent>
+        </form>
 
-        <CardFooter>
+        <DialogFooter>
           <Button
             type="submit"
             form="add-classroom-form"
-            className="w-full"
+            className="w-full sm:w-auto"
             disabled={form.state.isSubmitting}
           >
             {form.state.isSubmitting ? (
@@ -221,8 +240,8 @@ export function AddClassroomForm({ defaultAcademicYear = '', defaultSemester = '
               'Tambah Kelas'
             )}
           </Button>
-        </CardFooter>
-      </form>
-    </Card>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

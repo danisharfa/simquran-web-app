@@ -242,6 +242,7 @@ export type ClassroomWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
   classroomHistories?: Prisma.ClassroomHistoryListRelationFilter
   students?: Prisma.StudentProfileListRelationFilter
+  groups?: Prisma.GroupListRelationFilter
 }
 
 export type ClassroomOrderByWithRelationInput = {
@@ -255,6 +256,7 @@ export type ClassroomOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   classroomHistories?: Prisma.ClassroomHistoryOrderByRelationAggregateInput
   students?: Prisma.StudentProfileOrderByRelationAggregateInput
+  groups?: Prisma.GroupOrderByRelationAggregateInput
   _relevance?: Prisma.ClassroomOrderByRelevanceInput
 }
 
@@ -273,6 +275,7 @@ export type ClassroomWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
   classroomHistories?: Prisma.ClassroomHistoryListRelationFilter
   students?: Prisma.StudentProfileListRelationFilter
+  groups?: Prisma.GroupListRelationFilter
 }, "id" | "id" | "name_academicYear_semester">
 
 export type ClassroomOrderByWithAggregationInput = {
@@ -316,6 +319,7 @@ export type ClassroomCreateInput = {
   updatedAt?: Date | string
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutClassroomInput
   students?: Prisma.StudentProfileCreateNestedManyWithoutClassroomInput
+  groups?: Prisma.GroupCreateNestedManyWithoutClassroomInput
 }
 
 export type ClassroomUncheckedCreateInput = {
@@ -329,6 +333,7 @@ export type ClassroomUncheckedCreateInput = {
   updatedAt?: Date | string
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutClassroomInput
   students?: Prisma.StudentProfileUncheckedCreateNestedManyWithoutClassroomInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutClassroomInput
 }
 
 export type ClassroomUpdateInput = {
@@ -342,6 +347,7 @@ export type ClassroomUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutClassroomNestedInput
   students?: Prisma.StudentProfileUpdateManyWithoutClassroomNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutClassroomNestedInput
 }
 
 export type ClassroomUncheckedUpdateInput = {
@@ -355,6 +361,7 @@ export type ClassroomUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutClassroomNestedInput
   students?: Prisma.StudentProfileUncheckedUpdateManyWithoutClassroomNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutClassroomNestedInput
 }
 
 export type ClassroomCreateManyInput = {
@@ -491,6 +498,20 @@ export type ClassroomUpdateOneRequiredWithoutClassroomHistoriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClassroomUpdateToOneWithWhereWithoutClassroomHistoriesInput, Prisma.ClassroomUpdateWithoutClassroomHistoriesInput>, Prisma.ClassroomUncheckedUpdateWithoutClassroomHistoriesInput>
 }
 
+export type ClassroomCreateNestedOneWithoutGroupsInput = {
+  create?: Prisma.XOR<Prisma.ClassroomCreateWithoutGroupsInput, Prisma.ClassroomUncheckedCreateWithoutGroupsInput>
+  connectOrCreate?: Prisma.ClassroomCreateOrConnectWithoutGroupsInput
+  connect?: Prisma.ClassroomWhereUniqueInput
+}
+
+export type ClassroomUpdateOneRequiredWithoutGroupsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClassroomCreateWithoutGroupsInput, Prisma.ClassroomUncheckedCreateWithoutGroupsInput>
+  connectOrCreate?: Prisma.ClassroomCreateOrConnectWithoutGroupsInput
+  upsert?: Prisma.ClassroomUpsertWithoutGroupsInput
+  connect?: Prisma.ClassroomWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClassroomUpdateToOneWithWhereWithoutGroupsInput, Prisma.ClassroomUpdateWithoutGroupsInput>, Prisma.ClassroomUncheckedUpdateWithoutGroupsInput>
+}
+
 export type ClassroomCreateWithoutStudentsInput = {
   id: string
   level: number
@@ -501,6 +522,7 @@ export type ClassroomCreateWithoutStudentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutClassroomInput
+  groups?: Prisma.GroupCreateNestedManyWithoutClassroomInput
 }
 
 export type ClassroomUncheckedCreateWithoutStudentsInput = {
@@ -513,6 +535,7 @@ export type ClassroomUncheckedCreateWithoutStudentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutClassroomInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutClassroomInput
 }
 
 export type ClassroomCreateOrConnectWithoutStudentsInput = {
@@ -541,6 +564,7 @@ export type ClassroomUpdateWithoutStudentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutClassroomNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutClassroomNestedInput
 }
 
 export type ClassroomUncheckedUpdateWithoutStudentsInput = {
@@ -553,6 +577,7 @@ export type ClassroomUncheckedUpdateWithoutStudentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutClassroomNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutClassroomNestedInput
 }
 
 export type ClassroomCreateWithoutClassroomHistoriesInput = {
@@ -565,6 +590,7 @@ export type ClassroomCreateWithoutClassroomHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   students?: Prisma.StudentProfileCreateNestedManyWithoutClassroomInput
+  groups?: Prisma.GroupCreateNestedManyWithoutClassroomInput
 }
 
 export type ClassroomUncheckedCreateWithoutClassroomHistoriesInput = {
@@ -577,6 +603,7 @@ export type ClassroomUncheckedCreateWithoutClassroomHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   students?: Prisma.StudentProfileUncheckedCreateNestedManyWithoutClassroomInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutClassroomInput
 }
 
 export type ClassroomCreateOrConnectWithoutClassroomHistoriesInput = {
@@ -605,6 +632,7 @@ export type ClassroomUpdateWithoutClassroomHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.StudentProfileUpdateManyWithoutClassroomNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutClassroomNestedInput
 }
 
 export type ClassroomUncheckedUpdateWithoutClassroomHistoriesInput = {
@@ -617,6 +645,75 @@ export type ClassroomUncheckedUpdateWithoutClassroomHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.StudentProfileUncheckedUpdateManyWithoutClassroomNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutClassroomNestedInput
+}
+
+export type ClassroomCreateWithoutGroupsInput = {
+  id: string
+  level: number
+  name: string
+  academicYear: string
+  semester: $Enums.Semester
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutClassroomInput
+  students?: Prisma.StudentProfileCreateNestedManyWithoutClassroomInput
+}
+
+export type ClassroomUncheckedCreateWithoutGroupsInput = {
+  id: string
+  level: number
+  name: string
+  academicYear: string
+  semester: $Enums.Semester
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutClassroomInput
+  students?: Prisma.StudentProfileUncheckedCreateNestedManyWithoutClassroomInput
+}
+
+export type ClassroomCreateOrConnectWithoutGroupsInput = {
+  where: Prisma.ClassroomWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClassroomCreateWithoutGroupsInput, Prisma.ClassroomUncheckedCreateWithoutGroupsInput>
+}
+
+export type ClassroomUpsertWithoutGroupsInput = {
+  update: Prisma.XOR<Prisma.ClassroomUpdateWithoutGroupsInput, Prisma.ClassroomUncheckedUpdateWithoutGroupsInput>
+  create: Prisma.XOR<Prisma.ClassroomCreateWithoutGroupsInput, Prisma.ClassroomUncheckedCreateWithoutGroupsInput>
+  where?: Prisma.ClassroomWhereInput
+}
+
+export type ClassroomUpdateToOneWithWhereWithoutGroupsInput = {
+  where?: Prisma.ClassroomWhereInput
+  data: Prisma.XOR<Prisma.ClassroomUpdateWithoutGroupsInput, Prisma.ClassroomUncheckedUpdateWithoutGroupsInput>
+}
+
+export type ClassroomUpdateWithoutGroupsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutClassroomNestedInput
+  students?: Prisma.StudentProfileUpdateManyWithoutClassroomNestedInput
+}
+
+export type ClassroomUncheckedUpdateWithoutGroupsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutClassroomNestedInput
+  students?: Prisma.StudentProfileUncheckedUpdateManyWithoutClassroomNestedInput
 }
 
 
@@ -627,11 +724,13 @@ export type ClassroomUncheckedUpdateWithoutClassroomHistoriesInput = {
 export type ClassroomCountOutputType = {
   classroomHistories: number
   students: number
+  groups: number
 }
 
 export type ClassroomCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classroomHistories?: boolean | ClassroomCountOutputTypeCountClassroomHistoriesArgs
   students?: boolean | ClassroomCountOutputTypeCountStudentsArgs
+  groups?: boolean | ClassroomCountOutputTypeCountGroupsArgs
 }
 
 /**
@@ -658,6 +757,13 @@ export type ClassroomCountOutputTypeCountStudentsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.StudentProfileWhereInput
 }
 
+/**
+ * ClassroomCountOutputType without action
+ */
+export type ClassroomCountOutputTypeCountGroupsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GroupWhereInput
+}
+
 
 export type ClassroomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -670,6 +776,7 @@ export type ClassroomSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   updatedAt?: boolean
   classroomHistories?: boolean | Prisma.Classroom$classroomHistoriesArgs<ExtArgs>
   students?: boolean | Prisma.Classroom$studentsArgs<ExtArgs>
+  groups?: boolean | Prisma.Classroom$groupsArgs<ExtArgs>
   _count?: boolean | Prisma.ClassroomCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["classroom"]>
 
@@ -690,6 +797,7 @@ export type ClassroomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type ClassroomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classroomHistories?: boolean | Prisma.Classroom$classroomHistoriesArgs<ExtArgs>
   students?: boolean | Prisma.Classroom$studentsArgs<ExtArgs>
+  groups?: boolean | Prisma.Classroom$groupsArgs<ExtArgs>
   _count?: boolean | Prisma.ClassroomCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -698,6 +806,7 @@ export type $ClassroomPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     classroomHistories: Prisma.$ClassroomHistoryPayload<ExtArgs>[]
     students: Prisma.$StudentProfilePayload<ExtArgs>[]
+    groups: Prisma.$GroupPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1050,6 +1159,7 @@ export interface Prisma__ClassroomClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   classroomHistories<T extends Prisma.Classroom$classroomHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classroom$classroomHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassroomHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   students<T extends Prisma.Classroom$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classroom$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  groups<T extends Prisma.Classroom$groupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Classroom$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1480,6 +1590,30 @@ export type Classroom$studentsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.StudentProfileScalarFieldEnum | Prisma.StudentProfileScalarFieldEnum[]
+}
+
+/**
+ * Classroom.groups
+ */
+export type Classroom$groupsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Group
+   */
+  select?: Prisma.GroupSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Group
+   */
+  omit?: Prisma.GroupOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GroupInclude<ExtArgs> | null
+  where?: Prisma.GroupWhereInput
+  orderBy?: Prisma.GroupOrderByWithRelationInput | Prisma.GroupOrderByWithRelationInput[]
+  cursor?: Prisma.GroupWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GroupScalarFieldEnum | Prisma.GroupScalarFieldEnum[]
 }
 
 /**
