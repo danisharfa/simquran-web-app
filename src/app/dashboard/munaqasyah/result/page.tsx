@@ -1,0 +1,26 @@
+import { requireRole } from '@/lib/require-role';
+import { MunaqasyahResultTable } from '@/features/munaqasyah/components/munaqasyah-result-table';
+import { MunaqasyahFinalResultTable } from '@/features/munaqasyah/components/munaqasyah-final-result-table';
+import { listOwnMunaqasyahResults } from '@/features/munaqasyah/queries/list-own-munaqasyah-results';
+import { listOwnMunaqasyahFinalResults } from '@/features/munaqasyah/queries/list-own-munaqasyah-final-results';
+
+export default async function MunaqasyahResultPage() {
+  await requireRole(['student']);
+
+  const [results, finalResults] = await Promise.all([
+    listOwnMunaqasyahResults(),
+    listOwnMunaqasyahFinalResults(),
+  ]);
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold">Hasil Munaqasyah</h1>
+        <p className="text-muted-foreground text-sm">Hasil Tasmi, Munaqasyah, dan nilai akhir Anda</p>
+      </div>
+
+      <MunaqasyahFinalResultTable data={finalResults} />
+      <MunaqasyahResultTable data={results} />
+    </div>
+  );
+}

@@ -119,10 +119,12 @@ model CoordinatorProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  tashihRequests  TashihRequest[]
-  tashihSchedules TashihSchedule[]
-  tashihResults   TashihResult[]
+  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tashihRequests      TashihRequest[]
+  tashihSchedules     TashihSchedule[]
+  tashihResults       TashihResult[]
+  munaqasyahRequests  MunaqasyahRequest[]
+  munaqasyahSchedules MunaqasyahSchedule[]
 
   @@index([nip])
   @@map("coordinator_profile")
@@ -135,11 +137,13 @@ model TeacherProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  groups         Group[]
-  submissions    Submission[]
-  weeklyTargets  WeeklyTarget[]
-  tashihRequests TashihRequest[]
+  user                          User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groups                        Group[]
+  submissions                   Submission[]
+  weeklyTargets                 WeeklyTarget[]
+  tashihRequests                TashihRequest[]
+  munaqasyahRequests            MunaqasyahRequest[]
+  munaqasyahSchedulesAsExaminer MunaqasyahSchedule[]
 
   @@index([nip])
   @@map("teacher_profile")
@@ -158,18 +162,20 @@ model StudentProfile {
   status      StudentStatus @default(AKTIF)
   graduatedAt DateTime?
 
-  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  classroom          Classroom?         @relation(fields: [classroomId], references: [id])
-  classroomHistories ClassroomHistory[]
-  group              Group?             @relation(fields: [groupId], references: [id])
-  groupHistories     GroupHistory[]
-  submissions        Submission[]
-  homeActivities     HomeActivity[]
-  weeklyTargets      WeeklyTarget[]
-  tashihRequests     TashihRequest[]
-  tahfidzScores      TahfidzScore[]
-  tahsinScores       TahsinScore[]
-  reports            Report[]
+  user                   User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classroom              Classroom?              @relation(fields: [classroomId], references: [id])
+  classroomHistories     ClassroomHistory[]
+  group                  Group?                  @relation(fields: [groupId], references: [id])
+  groupHistories         GroupHistory[]
+  submissions            Submission[]
+  homeActivities         HomeActivity[]
+  weeklyTargets          WeeklyTarget[]
+  tashihRequests         TashihRequest[]
+  tahfidzScores          TahfidzScore[]
+  tahsinScores           TahsinScore[]
+  reports                Report[]
+  munaqasyahRequests     MunaqasyahRequest[]
+  munaqasyahFinalResults MunaqasyahFinalResult[]
 
   @@index([nis])
   @@map("student_profile")
@@ -221,17 +227,19 @@ model Group {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  classroom      Classroom        @relation(fields: [classroomId], references: [id])
-  teacher        TeacherProfile   @relation(fields: [teacherId], references: [userId])
-  students       StudentProfile[]
-  groupHistories GroupHistory[]
-  submissions    Submission[]
-  homeActivities HomeActivity[]
-  weeklyTargets  WeeklyTarget[]
-  tashihRequests TashihRequest[]
-  tahfidzScores  TahfidzScore[]
-  tahsinScores   TahsinScore[]
-  reports        Report[]
+  classroom              Classroom               @relation(fields: [classroomId], references: [id])
+  teacher                TeacherProfile          @relation(fields: [teacherId], references: [userId])
+  students               StudentProfile[]
+  groupHistories         GroupHistory[]
+  submissions            Submission[]
+  homeActivities         HomeActivity[]
+  weeklyTargets          WeeklyTarget[]
+  tashihRequests         TashihRequest[]
+  tahfidzScores          TahfidzScore[]
+  tahsinScores           TahsinScore[]
+  reports                Report[]
+  munaqasyahRequests     MunaqasyahRequest[]
+  munaqasyahFinalResults MunaqasyahFinalResult[]
 
   @@unique([name, classroomId])
   @@map("group")
@@ -266,6 +274,7 @@ model Surah {
   weeklyTargetsAsEnd   WeeklyTarget[]  @relation("EndSurah")
   tashihRequests       TashihRequest[]
   tahfidzScores        TahfidzScore[]
+  tasmiDetails         TasmiDetail[]
 
   @@map("surah")
 }
@@ -274,10 +283,12 @@ model Juz {
   id   Int    @id
   name String
 
-  surahJuz       SurahJuz[]
-  submissions    Submission[]
-  homeActivities HomeActivity[]
-  tashihRequests TashihRequest[]
+  surahJuz               SurahJuz[]
+  submissions            Submission[]
+  homeActivities         HomeActivity[]
+  tashihRequests         TashihRequest[]
+  munaqasyahRequests     MunaqasyahRequest[]
+  munaqasyahFinalResults MunaqasyahFinalResult[]
 
   @@map("juz")
 }
@@ -602,6 +613,189 @@ enum GradeLetter {
 enum TahsinType {
   WAFA
   ALQURAN
+}
+
+model MunaqasyahRequest {
+  id            String  @id @default(uuid())
+  coordinatorId String?
+  teacherId     String
+  studentId     String
+  groupId       String
+
+  batch  MunaqasyahBatch
+  stage  MunaqasyahStage
+  juzId  Int
+  status MunaqasyahRequestStatus @default(MENUNGGU)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  coordinator      CoordinatorProfile?         @relation(fields: [coordinatorId], references: [userId])
+  teacher          TeacherProfile              @relation(fields: [teacherId], references: [userId])
+  student          StudentProfile              @relation(fields: [studentId], references: [userId])
+  group            Group                       @relation(fields: [groupId], references: [id])
+  juz              Juz                         @relation(fields: [juzId], references: [id])
+  scheduleRequests MunaqasyahScheduleRequest[]
+  result           MunaqasyahResult?
+
+  @@map("munaqasyah_request")
+}
+
+model MunaqasyahSchedule {
+  id            String @id @default(uuid())
+  coordinatorId String
+
+  date        DateTime
+  sessionName String
+  startTime   String
+  endTime     String
+  location    String
+  examinerId  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  coordinator      CoordinatorProfile          @relation(fields: [coordinatorId], references: [userId])
+  examiner         TeacherProfile?             @relation(fields: [examinerId], references: [userId])
+  scheduleRequests MunaqasyahScheduleRequest[]
+  results          MunaqasyahResult[]
+
+  @@unique([date, sessionName, startTime, endTime, location])
+  @@map("munaqasyah_schedule")
+}
+
+model MunaqasyahScheduleRequest {
+  scheduleId String
+  requestId  String
+
+  schedule MunaqasyahSchedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  request  MunaqasyahRequest  @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  @@id([scheduleId, requestId])
+  @@map("munaqasyah_schedule_request")
+}
+
+model MunaqasyahResult {
+  id         String @id @default(uuid())
+  requestId  String @unique
+  scheduleId String
+
+  totalScore Float
+  grade      MunaqasyahGrade
+  passed     Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  request            MunaqasyahRequest      @relation(fields: [requestId], references: [id])
+  schedule           MunaqasyahSchedule     @relation(fields: [scheduleId], references: [id])
+  tasmiDetails       TasmiDetail[]
+  munaqasyahDetails  MunaqasyahDetail[]
+  tasmiForFinal      MunaqasyahFinalResult? @relation("TasmiResult")
+  munaqasyahForFinal MunaqasyahFinalResult? @relation("MunaqasyahResult")
+
+  @@unique([requestId, scheduleId])
+  @@map("munaqasyah_result")
+}
+
+model TasmiDetail {
+  id       String @id @default(uuid())
+  resultId String
+
+  surahId              Int
+  initialScore         Int
+  khofiAwalAyat        Int
+  khofiMakhroj         Int
+  khofiTajwidMad       Int
+  jaliBaris            Int
+  jaliLebihSatuKalimat Int
+  totalScore           Float
+  note                 String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  result MunaqasyahResult @relation(fields: [resultId], references: [id], onDelete: Cascade)
+  surah  Surah            @relation(fields: [surahId], references: [id])
+
+  @@unique([resultId, surahId])
+  @@map("tasmi_detail")
+}
+
+model MunaqasyahDetail {
+  id       String @id @default(uuid())
+  resultId String
+
+  questionNo           Int
+  initialScore         Int     @default(50)
+  khofiAwalAyat        Int
+  khofiMakhroj         Int
+  khofiTajwidMad       Int
+  jaliBaris            Int
+  jaliLebihSatuKalimat Int
+  totalScore           Float
+  note                 String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  result MunaqasyahResult @relation(fields: [resultId], references: [id], onDelete: Cascade)
+
+  @@unique([resultId, questionNo])
+  @@map("munaqasyah_detail")
+}
+
+model MunaqasyahFinalResult {
+  id        String          @id @default(uuid())
+  studentId String
+  groupId   String
+  juzId     Int
+  batch     MunaqasyahBatch
+
+  tasmiResultId      String @unique
+  munaqasyahResultId String @unique
+
+  finalScore Float
+  finalGrade MunaqasyahGrade
+  passed     Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student          StudentProfile   @relation(fields: [studentId], references: [userId])
+  group            Group            @relation(fields: [groupId], references: [id])
+  juz              Juz              @relation(fields: [juzId], references: [id])
+  tasmiResult      MunaqasyahResult @relation("TasmiResult", fields: [tasmiResultId], references: [id])
+  munaqasyahResult MunaqasyahResult @relation("MunaqasyahResult", fields: [munaqasyahResultId], references: [id])
+
+  @@unique([studentId, juzId, batch])
+  @@map("munaqasyah_final_result")
+}
+
+enum MunaqasyahBatch {
+  TAHAP_1
+  TAHAP_2
+  TAHAP_3
+  TAHAP_4
+}
+
+enum MunaqasyahStage {
+  TASMI
+  MUNAQASYAH
+}
+
+enum MunaqasyahRequestStatus {
+  MENUNGGU
+  DITERIMA
+  DITOLAK
+  SELESAI
+}
+
+enum MunaqasyahGrade {
+  MUMTAZ
+  JAYYID_JIDDAN
+  JAYYID
+  TIDAK_LULUS
 }
 
 enum Semester {

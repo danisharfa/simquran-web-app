@@ -179,6 +179,8 @@ export type TeacherProfileWhereInput = {
   submissions?: Prisma.SubmissionListRelationFilter
   weeklyTargets?: Prisma.WeeklyTargetListRelationFilter
   tashihRequests?: Prisma.TashihRequestListRelationFilter
+  munaqasyahRequests?: Prisma.MunaqasyahRequestListRelationFilter
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleListRelationFilter
 }
 
 export type TeacherProfileOrderByWithRelationInput = {
@@ -191,6 +193,8 @@ export type TeacherProfileOrderByWithRelationInput = {
   submissions?: Prisma.SubmissionOrderByRelationAggregateInput
   weeklyTargets?: Prisma.WeeklyTargetOrderByRelationAggregateInput
   tashihRequests?: Prisma.TashihRequestOrderByRelationAggregateInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestOrderByRelationAggregateInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleOrderByRelationAggregateInput
   _relevance?: Prisma.TeacherProfileOrderByRelevanceInput
 }
 
@@ -207,6 +211,8 @@ export type TeacherProfileWhereUniqueInput = Prisma.AtLeast<{
   submissions?: Prisma.SubmissionListRelationFilter
   weeklyTargets?: Prisma.WeeklyTargetListRelationFilter
   tashihRequests?: Prisma.TashihRequestListRelationFilter
+  munaqasyahRequests?: Prisma.MunaqasyahRequestListRelationFilter
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleListRelationFilter
 }, "userId" | "nip">
 
 export type TeacherProfileOrderByWithAggregationInput = {
@@ -238,6 +244,8 @@ export type TeacherProfileCreateInput = {
   submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileUncheckedCreateInput = {
@@ -249,6 +257,8 @@ export type TeacherProfileUncheckedCreateInput = {
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileUpdateInput = {
@@ -260,6 +270,8 @@ export type TeacherProfileUpdateInput = {
   submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateInput = {
@@ -271,6 +283,8 @@ export type TeacherProfileUncheckedUpdateInput = {
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileCreateManyInput = {
@@ -333,6 +347,11 @@ export type TeacherProfileMinOrderByAggregateInput = {
 export type TeacherProfileScalarRelationFilter = {
   is?: Prisma.TeacherProfileWhereInput
   isNot?: Prisma.TeacherProfileWhereInput
+}
+
+export type TeacherProfileNullableScalarRelationFilter = {
+  is?: Prisma.TeacherProfileWhereInput | null
+  isNot?: Prisma.TeacherProfileWhereInput | null
 }
 
 export type TeacherProfileCreateNestedManyWithoutUserInput = {
@@ -433,6 +452,36 @@ export type TeacherProfileUpdateOneRequiredWithoutTashihRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TeacherProfileUpdateToOneWithWhereWithoutTashihRequestsInput, Prisma.TeacherProfileUpdateWithoutTashihRequestsInput>, Prisma.TeacherProfileUncheckedUpdateWithoutTashihRequestsInput>
 }
 
+export type TeacherProfileCreateNestedOneWithoutMunaqasyahRequestsInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutMunaqasyahRequestsInput, Prisma.TeacherProfileUncheckedCreateWithoutMunaqasyahRequestsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutMunaqasyahRequestsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+}
+
+export type TeacherProfileUpdateOneRequiredWithoutMunaqasyahRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutMunaqasyahRequestsInput, Prisma.TeacherProfileUncheckedCreateWithoutMunaqasyahRequestsInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutMunaqasyahRequestsInput
+  upsert?: Prisma.TeacherProfileUpsertWithoutMunaqasyahRequestsInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeacherProfileUpdateToOneWithWhereWithoutMunaqasyahRequestsInput, Prisma.TeacherProfileUpdateWithoutMunaqasyahRequestsInput>, Prisma.TeacherProfileUncheckedUpdateWithoutMunaqasyahRequestsInput>
+}
+
+export type TeacherProfileCreateNestedOneWithoutMunaqasyahSchedulesAsExaminerInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutMunaqasyahSchedulesAsExaminerInput, Prisma.TeacherProfileUncheckedCreateWithoutMunaqasyahSchedulesAsExaminerInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutMunaqasyahSchedulesAsExaminerInput
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+}
+
+export type TeacherProfileUpdateOneWithoutMunaqasyahSchedulesAsExaminerNestedInput = {
+  create?: Prisma.XOR<Prisma.TeacherProfileCreateWithoutMunaqasyahSchedulesAsExaminerInput, Prisma.TeacherProfileUncheckedCreateWithoutMunaqasyahSchedulesAsExaminerInput>
+  connectOrCreate?: Prisma.TeacherProfileCreateOrConnectWithoutMunaqasyahSchedulesAsExaminerInput
+  upsert?: Prisma.TeacherProfileUpsertWithoutMunaqasyahSchedulesAsExaminerInput
+  disconnect?: Prisma.TeacherProfileWhereInput | boolean
+  delete?: Prisma.TeacherProfileWhereInput | boolean
+  connect?: Prisma.TeacherProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeacherProfileUpdateToOneWithWhereWithoutMunaqasyahSchedulesAsExaminerInput, Prisma.TeacherProfileUpdateWithoutMunaqasyahSchedulesAsExaminerInput>, Prisma.TeacherProfileUncheckedUpdateWithoutMunaqasyahSchedulesAsExaminerInput>
+}
+
 export type TeacherProfileCreateWithoutUserInput = {
   nip: string
   createdAt?: Date | string
@@ -441,6 +490,8 @@ export type TeacherProfileCreateWithoutUserInput = {
   submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileUncheckedCreateWithoutUserInput = {
@@ -451,6 +502,8 @@ export type TeacherProfileUncheckedCreateWithoutUserInput = {
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileCreateOrConnectWithoutUserInput = {
@@ -497,6 +550,8 @@ export type TeacherProfileCreateWithoutGroupsInput = {
   submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileUncheckedCreateWithoutGroupsInput = {
@@ -507,6 +562,8 @@ export type TeacherProfileUncheckedCreateWithoutGroupsInput = {
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileCreateOrConnectWithoutGroupsInput = {
@@ -533,6 +590,8 @@ export type TeacherProfileUpdateWithoutGroupsInput = {
   submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateWithoutGroupsInput = {
@@ -543,6 +602,8 @@ export type TeacherProfileUncheckedUpdateWithoutGroupsInput = {
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileCreateWithoutSubmissionsInput = {
@@ -553,6 +614,8 @@ export type TeacherProfileCreateWithoutSubmissionsInput = {
   groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileUncheckedCreateWithoutSubmissionsInput = {
@@ -563,6 +626,8 @@ export type TeacherProfileUncheckedCreateWithoutSubmissionsInput = {
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileCreateOrConnectWithoutSubmissionsInput = {
@@ -589,6 +654,8 @@ export type TeacherProfileUpdateWithoutSubmissionsInput = {
   groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateWithoutSubmissionsInput = {
@@ -599,6 +666,8 @@ export type TeacherProfileUncheckedUpdateWithoutSubmissionsInput = {
   groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileCreateWithoutWeeklyTargetsInput = {
@@ -609,6 +678,8 @@ export type TeacherProfileCreateWithoutWeeklyTargetsInput = {
   groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileUncheckedCreateWithoutWeeklyTargetsInput = {
@@ -619,6 +690,8 @@ export type TeacherProfileUncheckedCreateWithoutWeeklyTargetsInput = {
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileCreateOrConnectWithoutWeeklyTargetsInput = {
@@ -645,6 +718,8 @@ export type TeacherProfileUpdateWithoutWeeklyTargetsInput = {
   groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateWithoutWeeklyTargetsInput = {
@@ -655,6 +730,8 @@ export type TeacherProfileUncheckedUpdateWithoutWeeklyTargetsInput = {
   groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileCreateWithoutTashihRequestsInput = {
@@ -665,6 +742,8 @@ export type TeacherProfileCreateWithoutTashihRequestsInput = {
   groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileUncheckedCreateWithoutTashihRequestsInput = {
@@ -675,6 +754,8 @@ export type TeacherProfileUncheckedCreateWithoutTashihRequestsInput = {
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedCreateNestedManyWithoutExaminerInput
 }
 
 export type TeacherProfileCreateOrConnectWithoutTashihRequestsInput = {
@@ -701,6 +782,8 @@ export type TeacherProfileUpdateWithoutTashihRequestsInput = {
   groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateWithoutTashihRequestsInput = {
@@ -711,6 +794,136 @@ export type TeacherProfileUncheckedUpdateWithoutTashihRequestsInput = {
   groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedUpdateManyWithoutExaminerNestedInput
+}
+
+export type TeacherProfileCreateWithoutMunaqasyahRequestsInput = {
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTeacherProfilesInput
+  groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleCreateNestedManyWithoutExaminerInput
+}
+
+export type TeacherProfileUncheckedCreateWithoutMunaqasyahRequestsInput = {
+  userId: string
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedCreateNestedManyWithoutExaminerInput
+}
+
+export type TeacherProfileCreateOrConnectWithoutMunaqasyahRequestsInput = {
+  where: Prisma.TeacherProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutMunaqasyahRequestsInput, Prisma.TeacherProfileUncheckedCreateWithoutMunaqasyahRequestsInput>
+}
+
+export type TeacherProfileUpsertWithoutMunaqasyahRequestsInput = {
+  update: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutMunaqasyahRequestsInput, Prisma.TeacherProfileUncheckedUpdateWithoutMunaqasyahRequestsInput>
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutMunaqasyahRequestsInput, Prisma.TeacherProfileUncheckedCreateWithoutMunaqasyahRequestsInput>
+  where?: Prisma.TeacherProfileWhereInput
+}
+
+export type TeacherProfileUpdateToOneWithWhereWithoutMunaqasyahRequestsInput = {
+  where?: Prisma.TeacherProfileWhereInput
+  data: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutMunaqasyahRequestsInput, Prisma.TeacherProfileUncheckedUpdateWithoutMunaqasyahRequestsInput>
+}
+
+export type TeacherProfileUpdateWithoutMunaqasyahRequestsInput = {
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTeacherProfilesNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUpdateManyWithoutExaminerNestedInput
+}
+
+export type TeacherProfileUncheckedUpdateWithoutMunaqasyahRequestsInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedUpdateManyWithoutExaminerNestedInput
+}
+
+export type TeacherProfileCreateWithoutMunaqasyahSchedulesAsExaminerInput = {
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTeacherProfilesInput
+  groups?: Prisma.GroupCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileUncheckedCreateWithoutMunaqasyahSchedulesAsExaminerInput = {
+  userId: string
+  nip: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutTeacherInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutTeacherInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutTeacherInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutTeacherInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutTeacherInput
+}
+
+export type TeacherProfileCreateOrConnectWithoutMunaqasyahSchedulesAsExaminerInput = {
+  where: Prisma.TeacherProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutMunaqasyahSchedulesAsExaminerInput, Prisma.TeacherProfileUncheckedCreateWithoutMunaqasyahSchedulesAsExaminerInput>
+}
+
+export type TeacherProfileUpsertWithoutMunaqasyahSchedulesAsExaminerInput = {
+  update: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutMunaqasyahSchedulesAsExaminerInput, Prisma.TeacherProfileUncheckedUpdateWithoutMunaqasyahSchedulesAsExaminerInput>
+  create: Prisma.XOR<Prisma.TeacherProfileCreateWithoutMunaqasyahSchedulesAsExaminerInput, Prisma.TeacherProfileUncheckedCreateWithoutMunaqasyahSchedulesAsExaminerInput>
+  where?: Prisma.TeacherProfileWhereInput
+}
+
+export type TeacherProfileUpdateToOneWithWhereWithoutMunaqasyahSchedulesAsExaminerInput = {
+  where?: Prisma.TeacherProfileWhereInput
+  data: Prisma.XOR<Prisma.TeacherProfileUpdateWithoutMunaqasyahSchedulesAsExaminerInput, Prisma.TeacherProfileUncheckedUpdateWithoutMunaqasyahSchedulesAsExaminerInput>
+}
+
+export type TeacherProfileUpdateWithoutMunaqasyahSchedulesAsExaminerInput = {
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTeacherProfilesNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutTeacherNestedInput
+}
+
+export type TeacherProfileUncheckedUpdateWithoutMunaqasyahSchedulesAsExaminerInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nip?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutTeacherNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutTeacherNestedInput
 }
 
 export type TeacherProfileCreateManyUserInput = {
@@ -727,6 +940,8 @@ export type TeacherProfileUpdateWithoutUserInput = {
   submissions?: Prisma.SubmissionUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateWithoutUserInput = {
@@ -737,6 +952,8 @@ export type TeacherProfileUncheckedUpdateWithoutUserInput = {
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutTeacherNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutTeacherNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutTeacherNestedInput
+  munaqasyahSchedulesAsExaminer?: Prisma.MunaqasyahScheduleUncheckedUpdateManyWithoutExaminerNestedInput
 }
 
 export type TeacherProfileUncheckedUpdateManyWithoutUserInput = {
@@ -755,6 +972,8 @@ export type TeacherProfileCountOutputType = {
   submissions: number
   weeklyTargets: number
   tashihRequests: number
+  munaqasyahRequests: number
+  munaqasyahSchedulesAsExaminer: number
 }
 
 export type TeacherProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -762,6 +981,8 @@ export type TeacherProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Ex
   submissions?: boolean | TeacherProfileCountOutputTypeCountSubmissionsArgs
   weeklyTargets?: boolean | TeacherProfileCountOutputTypeCountWeeklyTargetsArgs
   tashihRequests?: boolean | TeacherProfileCountOutputTypeCountTashihRequestsArgs
+  munaqasyahRequests?: boolean | TeacherProfileCountOutputTypeCountMunaqasyahRequestsArgs
+  munaqasyahSchedulesAsExaminer?: boolean | TeacherProfileCountOutputTypeCountMunaqasyahSchedulesAsExaminerArgs
 }
 
 /**
@@ -802,6 +1023,20 @@ export type TeacherProfileCountOutputTypeCountTashihRequestsArgs<ExtArgs extends
   where?: Prisma.TashihRequestWhereInput
 }
 
+/**
+ * TeacherProfileCountOutputType without action
+ */
+export type TeacherProfileCountOutputTypeCountMunaqasyahRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunaqasyahRequestWhereInput
+}
+
+/**
+ * TeacherProfileCountOutputType without action
+ */
+export type TeacherProfileCountOutputTypeCountMunaqasyahSchedulesAsExaminerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunaqasyahScheduleWhereInput
+}
+
 
 export type TeacherProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   userId?: boolean
@@ -813,6 +1048,8 @@ export type TeacherProfileSelect<ExtArgs extends runtime.Types.Extensions.Intern
   submissions?: boolean | Prisma.TeacherProfile$submissionsArgs<ExtArgs>
   weeklyTargets?: boolean | Prisma.TeacherProfile$weeklyTargetsArgs<ExtArgs>
   tashihRequests?: boolean | Prisma.TeacherProfile$tashihRequestsArgs<ExtArgs>
+  munaqasyahRequests?: boolean | Prisma.TeacherProfile$munaqasyahRequestsArgs<ExtArgs>
+  munaqasyahSchedulesAsExaminer?: boolean | Prisma.TeacherProfile$munaqasyahSchedulesAsExaminerArgs<ExtArgs>
   _count?: boolean | Prisma.TeacherProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["teacherProfile"]>
 
@@ -832,6 +1069,8 @@ export type TeacherProfileInclude<ExtArgs extends runtime.Types.Extensions.Inter
   submissions?: boolean | Prisma.TeacherProfile$submissionsArgs<ExtArgs>
   weeklyTargets?: boolean | Prisma.TeacherProfile$weeklyTargetsArgs<ExtArgs>
   tashihRequests?: boolean | Prisma.TeacherProfile$tashihRequestsArgs<ExtArgs>
+  munaqasyahRequests?: boolean | Prisma.TeacherProfile$munaqasyahRequestsArgs<ExtArgs>
+  munaqasyahSchedulesAsExaminer?: boolean | Prisma.TeacherProfile$munaqasyahSchedulesAsExaminerArgs<ExtArgs>
   _count?: boolean | Prisma.TeacherProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -843,6 +1082,8 @@ export type $TeacherProfilePayload<ExtArgs extends runtime.Types.Extensions.Inte
     submissions: Prisma.$SubmissionPayload<ExtArgs>[]
     weeklyTargets: Prisma.$WeeklyTargetPayload<ExtArgs>[]
     tashihRequests: Prisma.$TashihRequestPayload<ExtArgs>[]
+    munaqasyahRequests: Prisma.$MunaqasyahRequestPayload<ExtArgs>[]
+    munaqasyahSchedulesAsExaminer: Prisma.$MunaqasyahSchedulePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     userId: string
@@ -1194,6 +1435,8 @@ export interface Prisma__TeacherProfileClient<T, Null = never, ExtArgs extends r
   submissions<T extends Prisma.TeacherProfile$submissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeacherProfile$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   weeklyTargets<T extends Prisma.TeacherProfile$weeklyTargetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeacherProfile$weeklyTargetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tashihRequests<T extends Prisma.TeacherProfile$tashihRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeacherProfile$tashihRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  munaqasyahRequests<T extends Prisma.TeacherProfile$munaqasyahRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeacherProfile$munaqasyahRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  munaqasyahSchedulesAsExaminer<T extends Prisma.TeacherProfile$munaqasyahSchedulesAsExaminerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeacherProfile$munaqasyahSchedulesAsExaminerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1668,6 +1911,54 @@ export type TeacherProfile$tashihRequestsArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   distinct?: Prisma.TashihRequestScalarFieldEnum | Prisma.TashihRequestScalarFieldEnum[]
+}
+
+/**
+ * TeacherProfile.munaqasyahRequests
+ */
+export type TeacherProfile$munaqasyahRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahRequest
+   */
+  select?: Prisma.MunaqasyahRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahRequest
+   */
+  omit?: Prisma.MunaqasyahRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahRequestInclude<ExtArgs> | null
+  where?: Prisma.MunaqasyahRequestWhereInput
+  orderBy?: Prisma.MunaqasyahRequestOrderByWithRelationInput | Prisma.MunaqasyahRequestOrderByWithRelationInput[]
+  cursor?: Prisma.MunaqasyahRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunaqasyahRequestScalarFieldEnum | Prisma.MunaqasyahRequestScalarFieldEnum[]
+}
+
+/**
+ * TeacherProfile.munaqasyahSchedulesAsExaminer
+ */
+export type TeacherProfile$munaqasyahSchedulesAsExaminerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahSchedule
+   */
+  select?: Prisma.MunaqasyahScheduleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahSchedule
+   */
+  omit?: Prisma.MunaqasyahScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahScheduleInclude<ExtArgs> | null
+  where?: Prisma.MunaqasyahScheduleWhereInput
+  orderBy?: Prisma.MunaqasyahScheduleOrderByWithRelationInput | Prisma.MunaqasyahScheduleOrderByWithRelationInput[]
+  cursor?: Prisma.MunaqasyahScheduleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunaqasyahScheduleScalarFieldEnum | Prisma.MunaqasyahScheduleScalarFieldEnum[]
 }
 
 /**

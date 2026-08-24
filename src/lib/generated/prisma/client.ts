@@ -171,3 +171,38 @@ export type TahsinScore = Prisma.TahsinScoreModel
  * 
  */
 export type Report = Prisma.ReportModel
+/**
+ * Model MunaqasyahRequest
+ * 
+ */
+export type MunaqasyahRequest = Prisma.MunaqasyahRequestModel
+/**
+ * Model MunaqasyahSchedule
+ * 
+ */
+export type MunaqasyahSchedule = Prisma.MunaqasyahScheduleModel
+/**
+ * Model MunaqasyahScheduleRequest
+ * 
+ */
+export type MunaqasyahScheduleRequest = Prisma.MunaqasyahScheduleRequestModel
+/**
+ * Model MunaqasyahResult
+ * 
+ */
+export type MunaqasyahResult = Prisma.MunaqasyahResultModel
+/**
+ * Model TasmiDetail
+ * 
+ */
+export type TasmiDetail = Prisma.TasmiDetailModel
+/**
+ * Model MunaqasyahDetail
+ * 
+ */
+export type MunaqasyahDetail = Prisma.MunaqasyahDetailModel
+/**
+ * Model MunaqasyahFinalResult
+ * 
+ */
+export type MunaqasyahFinalResult = Prisma.MunaqasyahFinalResultModel

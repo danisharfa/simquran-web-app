@@ -64,15 +64,29 @@ Query referensi baru untuk dropdown lintas-role: `features/quran-reference/queri
 
 Tombol "Nilai" dan "Rapor" ditambahkan ke tabel anggota kelompok (`GroupStudentTable`, prop `showScoreLink`/`showReportLink`) — guru dapat keduanya di kelompok bimbingannya, koordinator dapat "Rapor" saja (tidak input nilai).
 
-### Tahap 6 — Munaqasyah (paling kompleks)
-- [ ] `MunaqasyahRequest` → `MunaqasyahSchedule` → `MunaqasyahResult` (+ `TasmiDetail`, `MunaqasyahDetail`, `MunaqasyahFinalResult`, skor gabungan Tasmi 70% + Munaqasyah 30%)
+### Tahap 6 — Munaqasyah (paling kompleks) ✅ Selesai
+- [x] `MunaqasyahRequest` → `MunaqasyahSchedule` → `MunaqasyahResult` (+ `TasmiDetail`, `MunaqasyahDetail`, `MunaqasyahFinalResult`). Migrasi `20260824162255_add_munaqasyah`. Alur pola sama seperti Tashih (request → terima/tolak → jadwal → hasil), tapi dengan kompleksitas tambahan:
+  - Request punya `batch` (Tahap 1-4), `stage` (TASMI/MUNAQASYAH), dan `juzId` yang diuji.
+  - Jadwal (`/dashboard/munaqasyah/schedules`, koordinator) punya field **penguji** opsional (`examinerId`, guru manapun — tidak harus guru pembimbing siswa itu sendiri).
+  - **Penilaian dipisah dari koordinator**: guru yang ditunjuk sebagai penguji (`schedule.examinerId === session.user.id`) yang menilai lewat `/dashboard/munaqasyah/assessment` (koordinator tetap boleh menilai juga sebagai fallback). Form Tasmi punya baris dinamis per-surah dalam juz yang diminta (dari `SurahJuz`); form Munaqasyah punya tepat 5 baris soal tetap. Skor dihitung live dari input khofi (kesalahan ringan, -2/-5 poin) dan jali (kesalahan berat) — logika di-porting dari `features/munaqasyah/munaqasyah-scoring.ts` (asli: `sim-siswa-sdit/src/lib/utils/munaqasyah-scoring.ts`).
+  - Setelah kedua tahap (Tasmi & Munaqasyah) untuk siswa+juz+batch+kelompok yang sama selesai dinilai, `MunaqasyahFinalResult` **otomatis** dibuat/diperbarui (70% Tasmi + 30% Munaqasyah) lewat `features/munaqasyah/try-finalize-munaqasyah.ts` — dipanggil otomatis setiap submit hasil, tidak perlu tombol generate manual.
+- **Trimming yang disengaja**: hasil penilaian (per-tahap maupun final) belum bisa diedit/dihapus lewat UI setelah tersimpan (beda dari Tashih yang punya edit/delete) — mengingat kompleksitas form multi-baris dengan kalkulasi, dan untuk MVP ini dianggap cukup karena kesalahan input jarang & datanya bisa dikoreksi langsung lewat Prisma Studio kalau perlu.
 
 Dikerjakan setelah pola CRUD+approval dari Tashih stabil sebagai referensi pola.
 
-### Tahap 7 — Dashboard & Visualisasi
-- [ ] Dashboard grafik per role (admin/koordinator/guru/siswa) dengan Recharts
+### Tahap 7 — Dashboard & Visualisasi ✅ Selesai
+- [x] Dashboard grafik per role di `/dashboard` (satu page.tsx, role-branch) dengan **Recharts** (baru diinstall, belum ada sebelumnya):
+  - Superadmin/Admin: 5 stat card (Koordinator/Guru/Siswa/Kelas/Kelompok), tanpa chart — sama seperti proyek lama.
+  - Koordinator: 4 stat card (Kelompok Aktif, Siswa Berkelompok, Tashih Menunggu, Munaqasyah Menunggu) + bar chart rata-rata nilai Tahfidz/Tahsin per kelompok (dari `Report`, top 8 kelompok).
+  - Guru: 3 stat card (Kelompok Bimbingan, Siswa Bimbingan, Setoran Bulan Ini) + bar chart nilai terkini per siswa bimbingan.
+  - Siswa: 3 stat card (Target Berjalan, Target Tercapai, Total Setoran) + bar chart nilai Tahfidz/Tahsin terbaru miliknya.
+- **Trimming yang disengaja**: tidak ada filter periode/kelompok interaktif atau dialog drill-down saat klik batang grafik (ada di proyek lama) — chart statis berdasarkan data terkini saja. Bisa ditambah nanti kalau benar-benar dibutuhkan.
 
 Terakhir karena butuh data nyata dari semua modul di atas.
+
+## Status akhir
+
+Seluruh 7 tahap roadmap awal (Tahap 1–7) sudah selesai per 2026-08-25. Modul database, alur bisnis inti (kelas, kelompok, setoran, tashih, munaqasyah, penilaian & rapor termasuk ekspor PDF), dan dashboard visualisasi sudah berjalan. Pekerjaan lanjutan yang tersisa (opsional, bukan bagian roadmap awal): edit/hapus hasil Munaqasyah, filter/drill-down dashboard, dan penyempurnaan lain sesuai kebutuhan nyata sekolah setelah dipakai.
 
 ## Cara pakai file ini
 

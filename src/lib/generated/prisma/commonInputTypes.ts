@@ -480,6 +480,101 @@ export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
 }
 
+export type EnumMunaqasyahBatchFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahBatch | Prisma.EnumMunaqasyahBatchFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahBatch[]
+  notIn?: $Enums.MunaqasyahBatch[]
+  not?: Prisma.NestedEnumMunaqasyahBatchFilter<$PrismaModel> | $Enums.MunaqasyahBatch
+}
+
+export type EnumMunaqasyahStageFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahStage | Prisma.EnumMunaqasyahStageFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahStage[]
+  notIn?: $Enums.MunaqasyahStage[]
+  not?: Prisma.NestedEnumMunaqasyahStageFilter<$PrismaModel> | $Enums.MunaqasyahStage
+}
+
+export type EnumMunaqasyahRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahRequestStatus | Prisma.EnumMunaqasyahRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahRequestStatus[]
+  notIn?: $Enums.MunaqasyahRequestStatus[]
+  not?: Prisma.NestedEnumMunaqasyahRequestStatusFilter<$PrismaModel> | $Enums.MunaqasyahRequestStatus
+}
+
+export type EnumMunaqasyahBatchWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahBatch | Prisma.EnumMunaqasyahBatchFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahBatch[]
+  notIn?: $Enums.MunaqasyahBatch[]
+  not?: Prisma.NestedEnumMunaqasyahBatchWithAggregatesFilter<$PrismaModel> | $Enums.MunaqasyahBatch
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunaqasyahBatchFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunaqasyahBatchFilter<$PrismaModel>
+}
+
+export type EnumMunaqasyahStageWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahStage | Prisma.EnumMunaqasyahStageFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahStage[]
+  notIn?: $Enums.MunaqasyahStage[]
+  not?: Prisma.NestedEnumMunaqasyahStageWithAggregatesFilter<$PrismaModel> | $Enums.MunaqasyahStage
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunaqasyahStageFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunaqasyahStageFilter<$PrismaModel>
+}
+
+export type EnumMunaqasyahRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahRequestStatus | Prisma.EnumMunaqasyahRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahRequestStatus[]
+  notIn?: $Enums.MunaqasyahRequestStatus[]
+  not?: Prisma.NestedEnumMunaqasyahRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.MunaqasyahRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunaqasyahRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunaqasyahRequestStatusFilter<$PrismaModel>
+}
+
+export type FloatFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[]
+  notIn?: number[]
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatFilter<$PrismaModel> | number
+}
+
+export type EnumMunaqasyahGradeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahGrade | Prisma.EnumMunaqasyahGradeFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahGrade[]
+  notIn?: $Enums.MunaqasyahGrade[]
+  not?: Prisma.NestedEnumMunaqasyahGradeFilter<$PrismaModel> | $Enums.MunaqasyahGrade
+}
+
+export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[]
+  notIn?: number[]
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
+export type EnumMunaqasyahGradeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahGrade | Prisma.EnumMunaqasyahGradeFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahGrade[]
+  notIn?: $Enums.MunaqasyahGrade[]
+  not?: Prisma.NestedEnumMunaqasyahGradeWithAggregatesFilter<$PrismaModel> | $Enums.MunaqasyahGrade
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunaqasyahGradeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunaqasyahGradeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[]
@@ -950,6 +1045,90 @@ export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumMunaqasyahBatchFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahBatch | Prisma.EnumMunaqasyahBatchFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahBatch[]
+  notIn?: $Enums.MunaqasyahBatch[]
+  not?: Prisma.NestedEnumMunaqasyahBatchFilter<$PrismaModel> | $Enums.MunaqasyahBatch
+}
+
+export type NestedEnumMunaqasyahStageFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahStage | Prisma.EnumMunaqasyahStageFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahStage[]
+  notIn?: $Enums.MunaqasyahStage[]
+  not?: Prisma.NestedEnumMunaqasyahStageFilter<$PrismaModel> | $Enums.MunaqasyahStage
+}
+
+export type NestedEnumMunaqasyahRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahRequestStatus | Prisma.EnumMunaqasyahRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahRequestStatus[]
+  notIn?: $Enums.MunaqasyahRequestStatus[]
+  not?: Prisma.NestedEnumMunaqasyahRequestStatusFilter<$PrismaModel> | $Enums.MunaqasyahRequestStatus
+}
+
+export type NestedEnumMunaqasyahBatchWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahBatch | Prisma.EnumMunaqasyahBatchFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahBatch[]
+  notIn?: $Enums.MunaqasyahBatch[]
+  not?: Prisma.NestedEnumMunaqasyahBatchWithAggregatesFilter<$PrismaModel> | $Enums.MunaqasyahBatch
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunaqasyahBatchFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunaqasyahBatchFilter<$PrismaModel>
+}
+
+export type NestedEnumMunaqasyahStageWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahStage | Prisma.EnumMunaqasyahStageFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahStage[]
+  notIn?: $Enums.MunaqasyahStage[]
+  not?: Prisma.NestedEnumMunaqasyahStageWithAggregatesFilter<$PrismaModel> | $Enums.MunaqasyahStage
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunaqasyahStageFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunaqasyahStageFilter<$PrismaModel>
+}
+
+export type NestedEnumMunaqasyahRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahRequestStatus | Prisma.EnumMunaqasyahRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahRequestStatus[]
+  notIn?: $Enums.MunaqasyahRequestStatus[]
+  not?: Prisma.NestedEnumMunaqasyahRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.MunaqasyahRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunaqasyahRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunaqasyahRequestStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumMunaqasyahGradeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahGrade | Prisma.EnumMunaqasyahGradeFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahGrade[]
+  notIn?: $Enums.MunaqasyahGrade[]
+  not?: Prisma.NestedEnumMunaqasyahGradeFilter<$PrismaModel> | $Enums.MunaqasyahGrade
+}
+
+export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[]
+  notIn?: number[]
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
+export type NestedEnumMunaqasyahGradeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunaqasyahGrade | Prisma.EnumMunaqasyahGradeFieldRefInput<$PrismaModel>
+  in?: $Enums.MunaqasyahGrade[]
+  notIn?: $Enums.MunaqasyahGrade[]
+  not?: Prisma.NestedEnumMunaqasyahGradeWithAggregatesFilter<$PrismaModel> | $Enums.MunaqasyahGrade
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunaqasyahGradeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunaqasyahGradeFilter<$PrismaModel>
 }
 
 

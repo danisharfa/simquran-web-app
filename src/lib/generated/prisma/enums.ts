@@ -89,6 +89,44 @@ export const TahsinType = {
 export type TahsinType = (typeof TahsinType)[keyof typeof TahsinType]
 
 
+export const MunaqasyahBatch = {
+  TAHAP_1: 'TAHAP_1',
+  TAHAP_2: 'TAHAP_2',
+  TAHAP_3: 'TAHAP_3',
+  TAHAP_4: 'TAHAP_4'
+} as const
+
+export type MunaqasyahBatch = (typeof MunaqasyahBatch)[keyof typeof MunaqasyahBatch]
+
+
+export const MunaqasyahStage = {
+  TASMI: 'TASMI',
+  MUNAQASYAH: 'MUNAQASYAH'
+} as const
+
+export type MunaqasyahStage = (typeof MunaqasyahStage)[keyof typeof MunaqasyahStage]
+
+
+export const MunaqasyahRequestStatus = {
+  MENUNGGU: 'MENUNGGU',
+  DITERIMA: 'DITERIMA',
+  DITOLAK: 'DITOLAK',
+  SELESAI: 'SELESAI'
+} as const
+
+export type MunaqasyahRequestStatus = (typeof MunaqasyahRequestStatus)[keyof typeof MunaqasyahRequestStatus]
+
+
+export const MunaqasyahGrade = {
+  MUMTAZ: 'MUMTAZ',
+  JAYYID_JIDDAN: 'JAYYID_JIDDAN',
+  JAYYID: 'JAYYID',
+  TIDAK_LULUS: 'TIDAK_LULUS'
+} as const
+
+export type MunaqasyahGrade = (typeof MunaqasyahGrade)[keyof typeof MunaqasyahGrade]
+
+
 export const Semester = {
   GANJIL: 'GANJIL',
   GENAP: 'GENAP'

@@ -409,7 +409,14 @@ export const ModelName = {
   TashihResult: 'TashihResult',
   TahfidzScore: 'TahfidzScore',
   TahsinScore: 'TahsinScore',
-  Report: 'Report'
+  Report: 'Report',
+  MunaqasyahRequest: 'MunaqasyahRequest',
+  MunaqasyahSchedule: 'MunaqasyahSchedule',
+  MunaqasyahScheduleRequest: 'MunaqasyahScheduleRequest',
+  MunaqasyahResult: 'MunaqasyahResult',
+  TasmiDetail: 'TasmiDetail',
+  MunaqasyahDetail: 'MunaqasyahDetail',
+  MunaqasyahFinalResult: 'MunaqasyahFinalResult'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -425,7 +432,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory" | "group" | "groupHistory" | "surah" | "juz" | "surahJuz" | "wafa" | "submission" | "homeActivity" | "weeklyTarget" | "tashihRequest" | "tashihSchedule" | "tashihScheduleRequest" | "tashihResult" | "tahfidzScore" | "tahsinScore" | "report"
+    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory" | "group" | "groupHistory" | "surah" | "juz" | "surahJuz" | "wafa" | "submission" | "homeActivity" | "weeklyTarget" | "tashihRequest" | "tashihSchedule" | "tashihScheduleRequest" | "tashihResult" | "tahfidzScore" | "tahsinScore" | "report" | "munaqasyahRequest" | "munaqasyahSchedule" | "munaqasyahScheduleRequest" | "munaqasyahResult" | "tasmiDetail" | "munaqasyahDetail" | "munaqasyahFinalResult"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2145,6 +2152,468 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MunaqasyahRequest: {
+      payload: Prisma.$MunaqasyahRequestPayload<ExtArgs>
+      fields: Prisma.MunaqasyahRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunaqasyahRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunaqasyahRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.MunaqasyahRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunaqasyahRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahRequestPayload>
+        }
+        findMany: {
+          args: Prisma.MunaqasyahRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahRequestPayload>[]
+        }
+        create: {
+          args: Prisma.MunaqasyahRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahRequestPayload>
+        }
+        createMany: {
+          args: Prisma.MunaqasyahRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunaqasyahRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahRequestPayload>
+        }
+        update: {
+          args: Prisma.MunaqasyahRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunaqasyahRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunaqasyahRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunaqasyahRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.MunaqasyahRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunaqasyahRequest>
+        }
+        groupBy: {
+          args: Prisma.MunaqasyahRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunaqasyahRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunaqasyahSchedule: {
+      payload: Prisma.$MunaqasyahSchedulePayload<ExtArgs>
+      fields: Prisma.MunaqasyahScheduleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunaqasyahScheduleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahSchedulePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunaqasyahScheduleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahSchedulePayload>
+        }
+        findFirst: {
+          args: Prisma.MunaqasyahScheduleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahSchedulePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunaqasyahScheduleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahSchedulePayload>
+        }
+        findMany: {
+          args: Prisma.MunaqasyahScheduleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahSchedulePayload>[]
+        }
+        create: {
+          args: Prisma.MunaqasyahScheduleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahSchedulePayload>
+        }
+        createMany: {
+          args: Prisma.MunaqasyahScheduleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunaqasyahScheduleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahSchedulePayload>
+        }
+        update: {
+          args: Prisma.MunaqasyahScheduleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahSchedulePayload>
+        }
+        deleteMany: {
+          args: Prisma.MunaqasyahScheduleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunaqasyahScheduleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunaqasyahScheduleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahSchedulePayload>
+        }
+        aggregate: {
+          args: Prisma.MunaqasyahScheduleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunaqasyahSchedule>
+        }
+        groupBy: {
+          args: Prisma.MunaqasyahScheduleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahScheduleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunaqasyahScheduleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahScheduleCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunaqasyahScheduleRequest: {
+      payload: Prisma.$MunaqasyahScheduleRequestPayload<ExtArgs>
+      fields: Prisma.MunaqasyahScheduleRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunaqasyahScheduleRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScheduleRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunaqasyahScheduleRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScheduleRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.MunaqasyahScheduleRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScheduleRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunaqasyahScheduleRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScheduleRequestPayload>
+        }
+        findMany: {
+          args: Prisma.MunaqasyahScheduleRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScheduleRequestPayload>[]
+        }
+        create: {
+          args: Prisma.MunaqasyahScheduleRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScheduleRequestPayload>
+        }
+        createMany: {
+          args: Prisma.MunaqasyahScheduleRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunaqasyahScheduleRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScheduleRequestPayload>
+        }
+        update: {
+          args: Prisma.MunaqasyahScheduleRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScheduleRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunaqasyahScheduleRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunaqasyahScheduleRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunaqasyahScheduleRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScheduleRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.MunaqasyahScheduleRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunaqasyahScheduleRequest>
+        }
+        groupBy: {
+          args: Prisma.MunaqasyahScheduleRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahScheduleRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunaqasyahScheduleRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahScheduleRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunaqasyahResult: {
+      payload: Prisma.$MunaqasyahResultPayload<ExtArgs>
+      fields: Prisma.MunaqasyahResultFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunaqasyahResultFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahResultPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunaqasyahResultFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahResultPayload>
+        }
+        findFirst: {
+          args: Prisma.MunaqasyahResultFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahResultPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunaqasyahResultFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahResultPayload>
+        }
+        findMany: {
+          args: Prisma.MunaqasyahResultFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahResultPayload>[]
+        }
+        create: {
+          args: Prisma.MunaqasyahResultCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahResultPayload>
+        }
+        createMany: {
+          args: Prisma.MunaqasyahResultCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunaqasyahResultDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahResultPayload>
+        }
+        update: {
+          args: Prisma.MunaqasyahResultUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahResultPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunaqasyahResultDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunaqasyahResultUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunaqasyahResultUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahResultPayload>
+        }
+        aggregate: {
+          args: Prisma.MunaqasyahResultAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunaqasyahResult>
+        }
+        groupBy: {
+          args: Prisma.MunaqasyahResultGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahResultGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunaqasyahResultCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahResultCountAggregateOutputType> | number
+        }
+      }
+    }
+    TasmiDetail: {
+      payload: Prisma.$TasmiDetailPayload<ExtArgs>
+      fields: Prisma.TasmiDetailFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TasmiDetailFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TasmiDetailPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TasmiDetailFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TasmiDetailPayload>
+        }
+        findFirst: {
+          args: Prisma.TasmiDetailFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TasmiDetailPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TasmiDetailFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TasmiDetailPayload>
+        }
+        findMany: {
+          args: Prisma.TasmiDetailFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TasmiDetailPayload>[]
+        }
+        create: {
+          args: Prisma.TasmiDetailCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TasmiDetailPayload>
+        }
+        createMany: {
+          args: Prisma.TasmiDetailCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TasmiDetailDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TasmiDetailPayload>
+        }
+        update: {
+          args: Prisma.TasmiDetailUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TasmiDetailPayload>
+        }
+        deleteMany: {
+          args: Prisma.TasmiDetailDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TasmiDetailUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TasmiDetailUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TasmiDetailPayload>
+        }
+        aggregate: {
+          args: Prisma.TasmiDetailAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTasmiDetail>
+        }
+        groupBy: {
+          args: Prisma.TasmiDetailGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TasmiDetailGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TasmiDetailCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TasmiDetailCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunaqasyahDetail: {
+      payload: Prisma.$MunaqasyahDetailPayload<ExtArgs>
+      fields: Prisma.MunaqasyahDetailFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunaqasyahDetailFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahDetailPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunaqasyahDetailFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahDetailPayload>
+        }
+        findFirst: {
+          args: Prisma.MunaqasyahDetailFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahDetailPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunaqasyahDetailFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahDetailPayload>
+        }
+        findMany: {
+          args: Prisma.MunaqasyahDetailFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahDetailPayload>[]
+        }
+        create: {
+          args: Prisma.MunaqasyahDetailCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahDetailPayload>
+        }
+        createMany: {
+          args: Prisma.MunaqasyahDetailCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunaqasyahDetailDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahDetailPayload>
+        }
+        update: {
+          args: Prisma.MunaqasyahDetailUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahDetailPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunaqasyahDetailDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunaqasyahDetailUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunaqasyahDetailUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahDetailPayload>
+        }
+        aggregate: {
+          args: Prisma.MunaqasyahDetailAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunaqasyahDetail>
+        }
+        groupBy: {
+          args: Prisma.MunaqasyahDetailGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahDetailGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunaqasyahDetailCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahDetailCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunaqasyahFinalResult: {
+      payload: Prisma.$MunaqasyahFinalResultPayload<ExtArgs>
+      fields: Prisma.MunaqasyahFinalResultFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunaqasyahFinalResultFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalResultPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunaqasyahFinalResultFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalResultPayload>
+        }
+        findFirst: {
+          args: Prisma.MunaqasyahFinalResultFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalResultPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunaqasyahFinalResultFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalResultPayload>
+        }
+        findMany: {
+          args: Prisma.MunaqasyahFinalResultFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalResultPayload>[]
+        }
+        create: {
+          args: Prisma.MunaqasyahFinalResultCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalResultPayload>
+        }
+        createMany: {
+          args: Prisma.MunaqasyahFinalResultCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MunaqasyahFinalResultDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalResultPayload>
+        }
+        update: {
+          args: Prisma.MunaqasyahFinalResultUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalResultPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunaqasyahFinalResultDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunaqasyahFinalResultUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MunaqasyahFinalResultUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalResultPayload>
+        }
+        aggregate: {
+          args: Prisma.MunaqasyahFinalResultAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunaqasyahFinalResult>
+        }
+        groupBy: {
+          args: Prisma.MunaqasyahFinalResultGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahFinalResultGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunaqasyahFinalResultCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahFinalResultCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2565,6 +3034,117 @@ export const ReportScalarFieldEnum = {
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
 
 
+export const MunaqasyahRequestScalarFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  teacherId: 'teacherId',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  batch: 'batch',
+  stage: 'stage',
+  juzId: 'juzId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahRequestScalarFieldEnum = (typeof MunaqasyahRequestScalarFieldEnum)[keyof typeof MunaqasyahRequestScalarFieldEnum]
+
+
+export const MunaqasyahScheduleScalarFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  date: 'date',
+  sessionName: 'sessionName',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location',
+  examinerId: 'examinerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahScheduleScalarFieldEnum = (typeof MunaqasyahScheduleScalarFieldEnum)[keyof typeof MunaqasyahScheduleScalarFieldEnum]
+
+
+export const MunaqasyahScheduleRequestScalarFieldEnum = {
+  scheduleId: 'scheduleId',
+  requestId: 'requestId'
+} as const
+
+export type MunaqasyahScheduleRequestScalarFieldEnum = (typeof MunaqasyahScheduleRequestScalarFieldEnum)[keyof typeof MunaqasyahScheduleRequestScalarFieldEnum]
+
+
+export const MunaqasyahResultScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  scheduleId: 'scheduleId',
+  totalScore: 'totalScore',
+  grade: 'grade',
+  passed: 'passed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahResultScalarFieldEnum = (typeof MunaqasyahResultScalarFieldEnum)[keyof typeof MunaqasyahResultScalarFieldEnum]
+
+
+export const TasmiDetailScalarFieldEnum = {
+  id: 'id',
+  resultId: 'resultId',
+  surahId: 'surahId',
+  initialScore: 'initialScore',
+  khofiAwalAyat: 'khofiAwalAyat',
+  khofiMakhroj: 'khofiMakhroj',
+  khofiTajwidMad: 'khofiTajwidMad',
+  jaliBaris: 'jaliBaris',
+  jaliLebihSatuKalimat: 'jaliLebihSatuKalimat',
+  totalScore: 'totalScore',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TasmiDetailScalarFieldEnum = (typeof TasmiDetailScalarFieldEnum)[keyof typeof TasmiDetailScalarFieldEnum]
+
+
+export const MunaqasyahDetailScalarFieldEnum = {
+  id: 'id',
+  resultId: 'resultId',
+  questionNo: 'questionNo',
+  initialScore: 'initialScore',
+  khofiAwalAyat: 'khofiAwalAyat',
+  khofiMakhroj: 'khofiMakhroj',
+  khofiTajwidMad: 'khofiTajwidMad',
+  jaliBaris: 'jaliBaris',
+  jaliLebihSatuKalimat: 'jaliLebihSatuKalimat',
+  totalScore: 'totalScore',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahDetailScalarFieldEnum = (typeof MunaqasyahDetailScalarFieldEnum)[keyof typeof MunaqasyahDetailScalarFieldEnum]
+
+
+export const MunaqasyahFinalResultScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  juzId: 'juzId',
+  batch: 'batch',
+  tasmiResultId: 'tasmiResultId',
+  munaqasyahResultId: 'munaqasyahResultId',
+  finalScore: 'finalScore',
+  finalGrade: 'finalGrade',
+  passed: 'passed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahFinalResultScalarFieldEnum = (typeof MunaqasyahFinalResultScalarFieldEnum)[keyof typeof MunaqasyahFinalResultScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2838,6 +3418,76 @@ export const ReportOrderByRelevanceFieldEnum = {
 export type ReportOrderByRelevanceFieldEnum = (typeof ReportOrderByRelevanceFieldEnum)[keyof typeof ReportOrderByRelevanceFieldEnum]
 
 
+export const MunaqasyahRequestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  teacherId: 'teacherId',
+  studentId: 'studentId',
+  groupId: 'groupId'
+} as const
+
+export type MunaqasyahRequestOrderByRelevanceFieldEnum = (typeof MunaqasyahRequestOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahRequestOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahScheduleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  sessionName: 'sessionName',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location',
+  examinerId: 'examinerId'
+} as const
+
+export type MunaqasyahScheduleOrderByRelevanceFieldEnum = (typeof MunaqasyahScheduleOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahScheduleOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahScheduleRequestOrderByRelevanceFieldEnum = {
+  scheduleId: 'scheduleId',
+  requestId: 'requestId'
+} as const
+
+export type MunaqasyahScheduleRequestOrderByRelevanceFieldEnum = (typeof MunaqasyahScheduleRequestOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahScheduleRequestOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahResultOrderByRelevanceFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  scheduleId: 'scheduleId'
+} as const
+
+export type MunaqasyahResultOrderByRelevanceFieldEnum = (typeof MunaqasyahResultOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahResultOrderByRelevanceFieldEnum]
+
+
+export const TasmiDetailOrderByRelevanceFieldEnum = {
+  id: 'id',
+  resultId: 'resultId',
+  note: 'note'
+} as const
+
+export type TasmiDetailOrderByRelevanceFieldEnum = (typeof TasmiDetailOrderByRelevanceFieldEnum)[keyof typeof TasmiDetailOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahDetailOrderByRelevanceFieldEnum = {
+  id: 'id',
+  resultId: 'resultId',
+  note: 'note'
+} as const
+
+export type MunaqasyahDetailOrderByRelevanceFieldEnum = (typeof MunaqasyahDetailOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahDetailOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahFinalResultOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  tasmiResultId: 'tasmiResultId',
+  munaqasyahResultId: 'munaqasyahResultId'
+} as const
+
+export type MunaqasyahFinalResultOrderByRelevanceFieldEnum = (typeof MunaqasyahFinalResultOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahFinalResultOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -2976,6 +3626,34 @@ export type EnumTahsinTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
+
+/**
+ * Reference to a field of type 'MunaqasyahBatch'
+ */
+export type EnumMunaqasyahBatchFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunaqasyahBatch'>
+    
+
+
+/**
+ * Reference to a field of type 'MunaqasyahStage'
+ */
+export type EnumMunaqasyahStageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunaqasyahStage'>
+    
+
+
+/**
+ * Reference to a field of type 'MunaqasyahRequestStatus'
+ */
+export type EnumMunaqasyahRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunaqasyahRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MunaqasyahGrade'
+ */
+export type EnumMunaqasyahGradeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunaqasyahGrade'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -3112,6 +3790,13 @@ export type GlobalOmitConfig = {
   tahfidzScore?: Prisma.TahfidzScoreOmit
   tahsinScore?: Prisma.TahsinScoreOmit
   report?: Prisma.ReportOmit
+  munaqasyahRequest?: Prisma.MunaqasyahRequestOmit
+  munaqasyahSchedule?: Prisma.MunaqasyahScheduleOmit
+  munaqasyahScheduleRequest?: Prisma.MunaqasyahScheduleRequestOmit
+  munaqasyahResult?: Prisma.MunaqasyahResultOmit
+  tasmiDetail?: Prisma.TasmiDetailOmit
+  munaqasyahDetail?: Prisma.MunaqasyahDetailOmit
+  munaqasyahFinalResult?: Prisma.MunaqasyahFinalResultOmit
 }
 
 /* Types for Logging */

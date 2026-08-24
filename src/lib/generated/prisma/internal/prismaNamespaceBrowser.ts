@@ -76,7 +76,14 @@ export const ModelName = {
   TashihResult: 'TashihResult',
   TahfidzScore: 'TahfidzScore',
   TahsinScore: 'TahsinScore',
-  Report: 'Report'
+  Report: 'Report',
+  MunaqasyahRequest: 'MunaqasyahRequest',
+  MunaqasyahSchedule: 'MunaqasyahSchedule',
+  MunaqasyahScheduleRequest: 'MunaqasyahScheduleRequest',
+  MunaqasyahResult: 'MunaqasyahResult',
+  TasmiDetail: 'TasmiDetail',
+  MunaqasyahDetail: 'MunaqasyahDetail',
+  MunaqasyahFinalResult: 'MunaqasyahFinalResult'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -476,6 +483,117 @@ export const ReportScalarFieldEnum = {
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
 
 
+export const MunaqasyahRequestScalarFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  teacherId: 'teacherId',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  batch: 'batch',
+  stage: 'stage',
+  juzId: 'juzId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahRequestScalarFieldEnum = (typeof MunaqasyahRequestScalarFieldEnum)[keyof typeof MunaqasyahRequestScalarFieldEnum]
+
+
+export const MunaqasyahScheduleScalarFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  date: 'date',
+  sessionName: 'sessionName',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location',
+  examinerId: 'examinerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahScheduleScalarFieldEnum = (typeof MunaqasyahScheduleScalarFieldEnum)[keyof typeof MunaqasyahScheduleScalarFieldEnum]
+
+
+export const MunaqasyahScheduleRequestScalarFieldEnum = {
+  scheduleId: 'scheduleId',
+  requestId: 'requestId'
+} as const
+
+export type MunaqasyahScheduleRequestScalarFieldEnum = (typeof MunaqasyahScheduleRequestScalarFieldEnum)[keyof typeof MunaqasyahScheduleRequestScalarFieldEnum]
+
+
+export const MunaqasyahResultScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  scheduleId: 'scheduleId',
+  totalScore: 'totalScore',
+  grade: 'grade',
+  passed: 'passed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahResultScalarFieldEnum = (typeof MunaqasyahResultScalarFieldEnum)[keyof typeof MunaqasyahResultScalarFieldEnum]
+
+
+export const TasmiDetailScalarFieldEnum = {
+  id: 'id',
+  resultId: 'resultId',
+  surahId: 'surahId',
+  initialScore: 'initialScore',
+  khofiAwalAyat: 'khofiAwalAyat',
+  khofiMakhroj: 'khofiMakhroj',
+  khofiTajwidMad: 'khofiTajwidMad',
+  jaliBaris: 'jaliBaris',
+  jaliLebihSatuKalimat: 'jaliLebihSatuKalimat',
+  totalScore: 'totalScore',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TasmiDetailScalarFieldEnum = (typeof TasmiDetailScalarFieldEnum)[keyof typeof TasmiDetailScalarFieldEnum]
+
+
+export const MunaqasyahDetailScalarFieldEnum = {
+  id: 'id',
+  resultId: 'resultId',
+  questionNo: 'questionNo',
+  initialScore: 'initialScore',
+  khofiAwalAyat: 'khofiAwalAyat',
+  khofiMakhroj: 'khofiMakhroj',
+  khofiTajwidMad: 'khofiTajwidMad',
+  jaliBaris: 'jaliBaris',
+  jaliLebihSatuKalimat: 'jaliLebihSatuKalimat',
+  totalScore: 'totalScore',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahDetailScalarFieldEnum = (typeof MunaqasyahDetailScalarFieldEnum)[keyof typeof MunaqasyahDetailScalarFieldEnum]
+
+
+export const MunaqasyahFinalResultScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  juzId: 'juzId',
+  batch: 'batch',
+  tasmiResultId: 'tasmiResultId',
+  munaqasyahResultId: 'munaqasyahResultId',
+  finalScore: 'finalScore',
+  finalGrade: 'finalGrade',
+  passed: 'passed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MunaqasyahFinalResultScalarFieldEnum = (typeof MunaqasyahFinalResultScalarFieldEnum)[keyof typeof MunaqasyahFinalResultScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -747,4 +865,74 @@ export const ReportOrderByRelevanceFieldEnum = {
 } as const
 
 export type ReportOrderByRelevanceFieldEnum = (typeof ReportOrderByRelevanceFieldEnum)[keyof typeof ReportOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahRequestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  teacherId: 'teacherId',
+  studentId: 'studentId',
+  groupId: 'groupId'
+} as const
+
+export type MunaqasyahRequestOrderByRelevanceFieldEnum = (typeof MunaqasyahRequestOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahRequestOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahScheduleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  coordinatorId: 'coordinatorId',
+  sessionName: 'sessionName',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location',
+  examinerId: 'examinerId'
+} as const
+
+export type MunaqasyahScheduleOrderByRelevanceFieldEnum = (typeof MunaqasyahScheduleOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahScheduleOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahScheduleRequestOrderByRelevanceFieldEnum = {
+  scheduleId: 'scheduleId',
+  requestId: 'requestId'
+} as const
+
+export type MunaqasyahScheduleRequestOrderByRelevanceFieldEnum = (typeof MunaqasyahScheduleRequestOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahScheduleRequestOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahResultOrderByRelevanceFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  scheduleId: 'scheduleId'
+} as const
+
+export type MunaqasyahResultOrderByRelevanceFieldEnum = (typeof MunaqasyahResultOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahResultOrderByRelevanceFieldEnum]
+
+
+export const TasmiDetailOrderByRelevanceFieldEnum = {
+  id: 'id',
+  resultId: 'resultId',
+  note: 'note'
+} as const
+
+export type TasmiDetailOrderByRelevanceFieldEnum = (typeof TasmiDetailOrderByRelevanceFieldEnum)[keyof typeof TasmiDetailOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahDetailOrderByRelevanceFieldEnum = {
+  id: 'id',
+  resultId: 'resultId',
+  note: 'note'
+} as const
+
+export type MunaqasyahDetailOrderByRelevanceFieldEnum = (typeof MunaqasyahDetailOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahDetailOrderByRelevanceFieldEnum]
+
+
+export const MunaqasyahFinalResultOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  tasmiResultId: 'tasmiResultId',
+  munaqasyahResultId: 'munaqasyahResultId'
+} as const
+
+export type MunaqasyahFinalResultOrderByRelevanceFieldEnum = (typeof MunaqasyahFinalResultOrderByRelevanceFieldEnum)[keyof typeof MunaqasyahFinalResultOrderByRelevanceFieldEnum]
 

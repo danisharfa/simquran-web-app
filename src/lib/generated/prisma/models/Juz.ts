@@ -196,6 +196,8 @@ export type JuzWhereInput = {
   submissions?: Prisma.SubmissionListRelationFilter
   homeActivities?: Prisma.HomeActivityListRelationFilter
   tashihRequests?: Prisma.TashihRequestListRelationFilter
+  munaqasyahRequests?: Prisma.MunaqasyahRequestListRelationFilter
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultListRelationFilter
 }
 
 export type JuzOrderByWithRelationInput = {
@@ -205,6 +207,8 @@ export type JuzOrderByWithRelationInput = {
   submissions?: Prisma.SubmissionOrderByRelationAggregateInput
   homeActivities?: Prisma.HomeActivityOrderByRelationAggregateInput
   tashihRequests?: Prisma.TashihRequestOrderByRelationAggregateInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestOrderByRelationAggregateInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultOrderByRelationAggregateInput
   _relevance?: Prisma.JuzOrderByRelevanceInput
 }
 
@@ -218,6 +222,8 @@ export type JuzWhereUniqueInput = Prisma.AtLeast<{
   submissions?: Prisma.SubmissionListRelationFilter
   homeActivities?: Prisma.HomeActivityListRelationFilter
   tashihRequests?: Prisma.TashihRequestListRelationFilter
+  munaqasyahRequests?: Prisma.MunaqasyahRequestListRelationFilter
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultListRelationFilter
 }, "id">
 
 export type JuzOrderByWithAggregationInput = {
@@ -245,6 +251,8 @@ export type JuzCreateInput = {
   submissions?: Prisma.SubmissionCreateNestedManyWithoutJuzInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
 }
 
 export type JuzUncheckedCreateInput = {
@@ -254,6 +262,8 @@ export type JuzUncheckedCreateInput = {
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutJuzInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
 }
 
 export type JuzUpdateInput = {
@@ -263,6 +273,8 @@ export type JuzUpdateInput = {
   submissions?: Prisma.SubmissionUpdateManyWithoutJuzNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
 }
 
 export type JuzUncheckedUpdateInput = {
@@ -272,6 +284,8 @@ export type JuzUncheckedUpdateInput = {
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutJuzNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
 }
 
 export type JuzCreateManyInput = {
@@ -388,12 +402,42 @@ export type JuzUpdateOneWithoutTashihRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.JuzUpdateToOneWithWhereWithoutTashihRequestsInput, Prisma.JuzUpdateWithoutTashihRequestsInput>, Prisma.JuzUncheckedUpdateWithoutTashihRequestsInput>
 }
 
+export type JuzCreateNestedOneWithoutMunaqasyahRequestsInput = {
+  create?: Prisma.XOR<Prisma.JuzCreateWithoutMunaqasyahRequestsInput, Prisma.JuzUncheckedCreateWithoutMunaqasyahRequestsInput>
+  connectOrCreate?: Prisma.JuzCreateOrConnectWithoutMunaqasyahRequestsInput
+  connect?: Prisma.JuzWhereUniqueInput
+}
+
+export type JuzUpdateOneRequiredWithoutMunaqasyahRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.JuzCreateWithoutMunaqasyahRequestsInput, Prisma.JuzUncheckedCreateWithoutMunaqasyahRequestsInput>
+  connectOrCreate?: Prisma.JuzCreateOrConnectWithoutMunaqasyahRequestsInput
+  upsert?: Prisma.JuzUpsertWithoutMunaqasyahRequestsInput
+  connect?: Prisma.JuzWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JuzUpdateToOneWithWhereWithoutMunaqasyahRequestsInput, Prisma.JuzUpdateWithoutMunaqasyahRequestsInput>, Prisma.JuzUncheckedUpdateWithoutMunaqasyahRequestsInput>
+}
+
+export type JuzCreateNestedOneWithoutMunaqasyahFinalResultsInput = {
+  create?: Prisma.XOR<Prisma.JuzCreateWithoutMunaqasyahFinalResultsInput, Prisma.JuzUncheckedCreateWithoutMunaqasyahFinalResultsInput>
+  connectOrCreate?: Prisma.JuzCreateOrConnectWithoutMunaqasyahFinalResultsInput
+  connect?: Prisma.JuzWhereUniqueInput
+}
+
+export type JuzUpdateOneRequiredWithoutMunaqasyahFinalResultsNestedInput = {
+  create?: Prisma.XOR<Prisma.JuzCreateWithoutMunaqasyahFinalResultsInput, Prisma.JuzUncheckedCreateWithoutMunaqasyahFinalResultsInput>
+  connectOrCreate?: Prisma.JuzCreateOrConnectWithoutMunaqasyahFinalResultsInput
+  upsert?: Prisma.JuzUpsertWithoutMunaqasyahFinalResultsInput
+  connect?: Prisma.JuzWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JuzUpdateToOneWithWhereWithoutMunaqasyahFinalResultsInput, Prisma.JuzUpdateWithoutMunaqasyahFinalResultsInput>, Prisma.JuzUncheckedUpdateWithoutMunaqasyahFinalResultsInput>
+}
+
 export type JuzCreateWithoutSurahJuzInput = {
   id: number
   name: string
   submissions?: Prisma.SubmissionCreateNestedManyWithoutJuzInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
 }
 
 export type JuzUncheckedCreateWithoutSurahJuzInput = {
@@ -402,6 +446,8 @@ export type JuzUncheckedCreateWithoutSurahJuzInput = {
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutJuzInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
 }
 
 export type JuzCreateOrConnectWithoutSurahJuzInput = {
@@ -426,6 +472,8 @@ export type JuzUpdateWithoutSurahJuzInput = {
   submissions?: Prisma.SubmissionUpdateManyWithoutJuzNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutSurahJuzInput = {
@@ -434,6 +482,8 @@ export type JuzUncheckedUpdateWithoutSurahJuzInput = {
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutJuzNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
 }
 
 export type JuzCreateWithoutSubmissionsInput = {
@@ -442,6 +492,8 @@ export type JuzCreateWithoutSubmissionsInput = {
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutJuzInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
 }
 
 export type JuzUncheckedCreateWithoutSubmissionsInput = {
@@ -450,6 +502,8 @@ export type JuzUncheckedCreateWithoutSubmissionsInput = {
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutJuzInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
 }
 
 export type JuzCreateOrConnectWithoutSubmissionsInput = {
@@ -474,6 +528,8 @@ export type JuzUpdateWithoutSubmissionsInput = {
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutJuzNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutSubmissionsInput = {
@@ -482,6 +538,8 @@ export type JuzUncheckedUpdateWithoutSubmissionsInput = {
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutJuzNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
 }
 
 export type JuzCreateWithoutHomeActivitiesInput = {
@@ -490,6 +548,8 @@ export type JuzCreateWithoutHomeActivitiesInput = {
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutJuzInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
 }
 
 export type JuzUncheckedCreateWithoutHomeActivitiesInput = {
@@ -498,6 +558,8 @@ export type JuzUncheckedCreateWithoutHomeActivitiesInput = {
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutJuzInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
 }
 
 export type JuzCreateOrConnectWithoutHomeActivitiesInput = {
@@ -522,6 +584,8 @@ export type JuzUpdateWithoutHomeActivitiesInput = {
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutJuzNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutHomeActivitiesInput = {
@@ -530,6 +594,8 @@ export type JuzUncheckedUpdateWithoutHomeActivitiesInput = {
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutJuzNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
 }
 
 export type JuzCreateWithoutTashihRequestsInput = {
@@ -538,6 +604,8 @@ export type JuzCreateWithoutTashihRequestsInput = {
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutJuzInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutJuzInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
 }
 
 export type JuzUncheckedCreateWithoutTashihRequestsInput = {
@@ -546,6 +614,8 @@ export type JuzUncheckedCreateWithoutTashihRequestsInput = {
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutJuzInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutJuzInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
 }
 
 export type JuzCreateOrConnectWithoutTashihRequestsInput = {
@@ -570,6 +640,8 @@ export type JuzUpdateWithoutTashihRequestsInput = {
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutJuzNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutJuzNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutTashihRequestsInput = {
@@ -578,6 +650,120 @@ export type JuzUncheckedUpdateWithoutTashihRequestsInput = {
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutJuzNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutJuzNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+}
+
+export type JuzCreateWithoutMunaqasyahRequestsInput = {
+  id: number
+  name: string
+  surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutJuzInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutJuzInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
+}
+
+export type JuzUncheckedCreateWithoutMunaqasyahRequestsInput = {
+  id: number
+  name: string
+  surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutJuzInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutJuzInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
+}
+
+export type JuzCreateOrConnectWithoutMunaqasyahRequestsInput = {
+  where: Prisma.JuzWhereUniqueInput
+  create: Prisma.XOR<Prisma.JuzCreateWithoutMunaqasyahRequestsInput, Prisma.JuzUncheckedCreateWithoutMunaqasyahRequestsInput>
+}
+
+export type JuzUpsertWithoutMunaqasyahRequestsInput = {
+  update: Prisma.XOR<Prisma.JuzUpdateWithoutMunaqasyahRequestsInput, Prisma.JuzUncheckedUpdateWithoutMunaqasyahRequestsInput>
+  create: Prisma.XOR<Prisma.JuzCreateWithoutMunaqasyahRequestsInput, Prisma.JuzUncheckedCreateWithoutMunaqasyahRequestsInput>
+  where?: Prisma.JuzWhereInput
+}
+
+export type JuzUpdateToOneWithWhereWithoutMunaqasyahRequestsInput = {
+  where?: Prisma.JuzWhereInput
+  data: Prisma.XOR<Prisma.JuzUpdateWithoutMunaqasyahRequestsInput, Prisma.JuzUncheckedUpdateWithoutMunaqasyahRequestsInput>
+}
+
+export type JuzUpdateWithoutMunaqasyahRequestsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  surahJuz?: Prisma.SurahJuzUpdateManyWithoutJuzNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutJuzNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
+}
+
+export type JuzUncheckedUpdateWithoutMunaqasyahRequestsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutJuzNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutJuzNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+}
+
+export type JuzCreateWithoutMunaqasyahFinalResultsInput = {
+  id: number
+  name: string
+  surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutJuzInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutJuzInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
+}
+
+export type JuzUncheckedCreateWithoutMunaqasyahFinalResultsInput = {
+  id: number
+  name: string
+  surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutJuzInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutJuzInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
+}
+
+export type JuzCreateOrConnectWithoutMunaqasyahFinalResultsInput = {
+  where: Prisma.JuzWhereUniqueInput
+  create: Prisma.XOR<Prisma.JuzCreateWithoutMunaqasyahFinalResultsInput, Prisma.JuzUncheckedCreateWithoutMunaqasyahFinalResultsInput>
+}
+
+export type JuzUpsertWithoutMunaqasyahFinalResultsInput = {
+  update: Prisma.XOR<Prisma.JuzUpdateWithoutMunaqasyahFinalResultsInput, Prisma.JuzUncheckedUpdateWithoutMunaqasyahFinalResultsInput>
+  create: Prisma.XOR<Prisma.JuzCreateWithoutMunaqasyahFinalResultsInput, Prisma.JuzUncheckedCreateWithoutMunaqasyahFinalResultsInput>
+  where?: Prisma.JuzWhereInput
+}
+
+export type JuzUpdateToOneWithWhereWithoutMunaqasyahFinalResultsInput = {
+  where?: Prisma.JuzWhereInput
+  data: Prisma.XOR<Prisma.JuzUpdateWithoutMunaqasyahFinalResultsInput, Prisma.JuzUncheckedUpdateWithoutMunaqasyahFinalResultsInput>
+}
+
+export type JuzUpdateWithoutMunaqasyahFinalResultsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  surahJuz?: Prisma.SurahJuzUpdateManyWithoutJuzNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutJuzNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
+}
+
+export type JuzUncheckedUpdateWithoutMunaqasyahFinalResultsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutJuzNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutJuzNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
 }
 
 
@@ -590,6 +776,8 @@ export type JuzCountOutputType = {
   submissions: number
   homeActivities: number
   tashihRequests: number
+  munaqasyahRequests: number
+  munaqasyahFinalResults: number
 }
 
 export type JuzCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -597,6 +785,8 @@ export type JuzCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.In
   submissions?: boolean | JuzCountOutputTypeCountSubmissionsArgs
   homeActivities?: boolean | JuzCountOutputTypeCountHomeActivitiesArgs
   tashihRequests?: boolean | JuzCountOutputTypeCountTashihRequestsArgs
+  munaqasyahRequests?: boolean | JuzCountOutputTypeCountMunaqasyahRequestsArgs
+  munaqasyahFinalResults?: boolean | JuzCountOutputTypeCountMunaqasyahFinalResultsArgs
 }
 
 /**
@@ -637,6 +827,20 @@ export type JuzCountOutputTypeCountTashihRequestsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.TashihRequestWhereInput
 }
 
+/**
+ * JuzCountOutputType without action
+ */
+export type JuzCountOutputTypeCountMunaqasyahRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunaqasyahRequestWhereInput
+}
+
+/**
+ * JuzCountOutputType without action
+ */
+export type JuzCountOutputTypeCountMunaqasyahFinalResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunaqasyahFinalResultWhereInput
+}
+
 
 export type JuzSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -645,6 +849,8 @@ export type JuzSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   submissions?: boolean | Prisma.Juz$submissionsArgs<ExtArgs>
   homeActivities?: boolean | Prisma.Juz$homeActivitiesArgs<ExtArgs>
   tashihRequests?: boolean | Prisma.Juz$tashihRequestsArgs<ExtArgs>
+  munaqasyahRequests?: boolean | Prisma.Juz$munaqasyahRequestsArgs<ExtArgs>
+  munaqasyahFinalResults?: boolean | Prisma.Juz$munaqasyahFinalResultsArgs<ExtArgs>
   _count?: boolean | Prisma.JuzCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["juz"]>
 
@@ -661,6 +867,8 @@ export type JuzInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   submissions?: boolean | Prisma.Juz$submissionsArgs<ExtArgs>
   homeActivities?: boolean | Prisma.Juz$homeActivitiesArgs<ExtArgs>
   tashihRequests?: boolean | Prisma.Juz$tashihRequestsArgs<ExtArgs>
+  munaqasyahRequests?: boolean | Prisma.Juz$munaqasyahRequestsArgs<ExtArgs>
+  munaqasyahFinalResults?: boolean | Prisma.Juz$munaqasyahFinalResultsArgs<ExtArgs>
   _count?: boolean | Prisma.JuzCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -671,6 +879,8 @@ export type $JuzPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     submissions: Prisma.$SubmissionPayload<ExtArgs>[]
     homeActivities: Prisma.$HomeActivityPayload<ExtArgs>[]
     tashihRequests: Prisma.$TashihRequestPayload<ExtArgs>[]
+    munaqasyahRequests: Prisma.$MunaqasyahRequestPayload<ExtArgs>[]
+    munaqasyahFinalResults: Prisma.$MunaqasyahFinalResultPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1019,6 +1229,8 @@ export interface Prisma__JuzClient<T, Null = never, ExtArgs extends runtime.Type
   submissions<T extends Prisma.Juz$submissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   homeActivities<T extends Prisma.Juz$homeActivitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$homeActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HomeActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tashihRequests<T extends Prisma.Juz$tashihRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$tashihRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  munaqasyahRequests<T extends Prisma.Juz$munaqasyahRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$munaqasyahRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  munaqasyahFinalResults<T extends Prisma.Juz$munaqasyahFinalResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$munaqasyahFinalResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahFinalResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1491,6 +1703,54 @@ export type Juz$tashihRequestsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.TashihRequestScalarFieldEnum | Prisma.TashihRequestScalarFieldEnum[]
+}
+
+/**
+ * Juz.munaqasyahRequests
+ */
+export type Juz$munaqasyahRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahRequest
+   */
+  select?: Prisma.MunaqasyahRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahRequest
+   */
+  omit?: Prisma.MunaqasyahRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahRequestInclude<ExtArgs> | null
+  where?: Prisma.MunaqasyahRequestWhereInput
+  orderBy?: Prisma.MunaqasyahRequestOrderByWithRelationInput | Prisma.MunaqasyahRequestOrderByWithRelationInput[]
+  cursor?: Prisma.MunaqasyahRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunaqasyahRequestScalarFieldEnum | Prisma.MunaqasyahRequestScalarFieldEnum[]
+}
+
+/**
+ * Juz.munaqasyahFinalResults
+ */
+export type Juz$munaqasyahFinalResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahFinalResult
+   */
+  select?: Prisma.MunaqasyahFinalResultSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahFinalResult
+   */
+  omit?: Prisma.MunaqasyahFinalResultOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahFinalResultInclude<ExtArgs> | null
+  where?: Prisma.MunaqasyahFinalResultWhereInput
+  orderBy?: Prisma.MunaqasyahFinalResultOrderByWithRelationInput | Prisma.MunaqasyahFinalResultOrderByWithRelationInput[]
+  cursor?: Prisma.MunaqasyahFinalResultWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunaqasyahFinalResultScalarFieldEnum | Prisma.MunaqasyahFinalResultScalarFieldEnum[]
 }
 
 /**

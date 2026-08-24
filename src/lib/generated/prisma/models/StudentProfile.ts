@@ -226,6 +226,8 @@ export type StudentProfileWhereInput = {
   tahfidzScores?: Prisma.TahfidzScoreListRelationFilter
   tahsinScores?: Prisma.TahsinScoreListRelationFilter
   reports?: Prisma.ReportListRelationFilter
+  munaqasyahRequests?: Prisma.MunaqasyahRequestListRelationFilter
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultListRelationFilter
 }
 
 export type StudentProfileOrderByWithRelationInput = {
@@ -250,6 +252,8 @@ export type StudentProfileOrderByWithRelationInput = {
   tahfidzScores?: Prisma.TahfidzScoreOrderByRelationAggregateInput
   tahsinScores?: Prisma.TahsinScoreOrderByRelationAggregateInput
   reports?: Prisma.ReportOrderByRelationAggregateInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestOrderByRelationAggregateInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultOrderByRelationAggregateInput
   _relevance?: Prisma.StudentProfileOrderByRelevanceInput
 }
 
@@ -278,6 +282,8 @@ export type StudentProfileWhereUniqueInput = Prisma.AtLeast<{
   tahfidzScores?: Prisma.TahfidzScoreListRelationFilter
   tahsinScores?: Prisma.TahsinScoreListRelationFilter
   reports?: Prisma.ReportListRelationFilter
+  munaqasyahRequests?: Prisma.MunaqasyahRequestListRelationFilter
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultListRelationFilter
 }, "userId" | "nis" | "nisn">
 
 export type StudentProfileOrderByWithAggregationInput = {
@@ -329,6 +335,8 @@ export type StudentProfileCreateInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateInput = {
@@ -350,6 +358,8 @@ export type StudentProfileUncheckedCreateInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUpdateInput = {
@@ -371,6 +381,8 @@ export type StudentProfileUpdateInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateInput = {
@@ -392,6 +404,8 @@ export type StudentProfileUncheckedUpdateInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateManyInput = {
@@ -740,6 +754,34 @@ export type StudentProfileUpdateOneRequiredWithoutReportsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StudentProfileUpdateToOneWithWhereWithoutReportsInput, Prisma.StudentProfileUpdateWithoutReportsInput>, Prisma.StudentProfileUncheckedUpdateWithoutReportsInput>
 }
 
+export type StudentProfileCreateNestedOneWithoutMunaqasyahRequestsInput = {
+  create?: Prisma.XOR<Prisma.StudentProfileCreateWithoutMunaqasyahRequestsInput, Prisma.StudentProfileUncheckedCreateWithoutMunaqasyahRequestsInput>
+  connectOrCreate?: Prisma.StudentProfileCreateOrConnectWithoutMunaqasyahRequestsInput
+  connect?: Prisma.StudentProfileWhereUniqueInput
+}
+
+export type StudentProfileUpdateOneRequiredWithoutMunaqasyahRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.StudentProfileCreateWithoutMunaqasyahRequestsInput, Prisma.StudentProfileUncheckedCreateWithoutMunaqasyahRequestsInput>
+  connectOrCreate?: Prisma.StudentProfileCreateOrConnectWithoutMunaqasyahRequestsInput
+  upsert?: Prisma.StudentProfileUpsertWithoutMunaqasyahRequestsInput
+  connect?: Prisma.StudentProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StudentProfileUpdateToOneWithWhereWithoutMunaqasyahRequestsInput, Prisma.StudentProfileUpdateWithoutMunaqasyahRequestsInput>, Prisma.StudentProfileUncheckedUpdateWithoutMunaqasyahRequestsInput>
+}
+
+export type StudentProfileCreateNestedOneWithoutMunaqasyahFinalResultsInput = {
+  create?: Prisma.XOR<Prisma.StudentProfileCreateWithoutMunaqasyahFinalResultsInput, Prisma.StudentProfileUncheckedCreateWithoutMunaqasyahFinalResultsInput>
+  connectOrCreate?: Prisma.StudentProfileCreateOrConnectWithoutMunaqasyahFinalResultsInput
+  connect?: Prisma.StudentProfileWhereUniqueInput
+}
+
+export type StudentProfileUpdateOneRequiredWithoutMunaqasyahFinalResultsNestedInput = {
+  create?: Prisma.XOR<Prisma.StudentProfileCreateWithoutMunaqasyahFinalResultsInput, Prisma.StudentProfileUncheckedCreateWithoutMunaqasyahFinalResultsInput>
+  connectOrCreate?: Prisma.StudentProfileCreateOrConnectWithoutMunaqasyahFinalResultsInput
+  upsert?: Prisma.StudentProfileUpsertWithoutMunaqasyahFinalResultsInput
+  connect?: Prisma.StudentProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StudentProfileUpdateToOneWithWhereWithoutMunaqasyahFinalResultsInput, Prisma.StudentProfileUpdateWithoutMunaqasyahFinalResultsInput>, Prisma.StudentProfileUncheckedUpdateWithoutMunaqasyahFinalResultsInput>
+}
+
 export type StudentProfileCreateWithoutUserInput = {
   nis: string
   nisn?: string | null
@@ -758,6 +800,8 @@ export type StudentProfileCreateWithoutUserInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutUserInput = {
@@ -778,6 +822,8 @@ export type StudentProfileUncheckedCreateWithoutUserInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutUserInput = {
@@ -839,6 +885,8 @@ export type StudentProfileCreateWithoutClassroomInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutClassroomInput = {
@@ -859,6 +907,8 @@ export type StudentProfileUncheckedCreateWithoutClassroomInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutClassroomInput = {
@@ -905,6 +955,8 @@ export type StudentProfileCreateWithoutClassroomHistoriesInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutClassroomHistoriesInput = {
@@ -925,6 +977,8 @@ export type StudentProfileUncheckedCreateWithoutClassroomHistoriesInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutClassroomHistoriesInput = {
@@ -961,6 +1015,8 @@ export type StudentProfileUpdateWithoutClassroomHistoriesInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutClassroomHistoriesInput = {
@@ -981,6 +1037,8 @@ export type StudentProfileUncheckedUpdateWithoutClassroomHistoriesInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutGroupInput = {
@@ -1001,6 +1059,8 @@ export type StudentProfileCreateWithoutGroupInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutGroupInput = {
@@ -1021,6 +1081,8 @@ export type StudentProfileUncheckedCreateWithoutGroupInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutGroupInput = {
@@ -1067,6 +1129,8 @@ export type StudentProfileCreateWithoutGroupHistoriesInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutGroupHistoriesInput = {
@@ -1087,6 +1151,8 @@ export type StudentProfileUncheckedCreateWithoutGroupHistoriesInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutGroupHistoriesInput = {
@@ -1123,6 +1189,8 @@ export type StudentProfileUpdateWithoutGroupHistoriesInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutGroupHistoriesInput = {
@@ -1143,6 +1211,8 @@ export type StudentProfileUncheckedUpdateWithoutGroupHistoriesInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutSubmissionsInput = {
@@ -1163,6 +1233,8 @@ export type StudentProfileCreateWithoutSubmissionsInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutSubmissionsInput = {
@@ -1183,6 +1255,8 @@ export type StudentProfileUncheckedCreateWithoutSubmissionsInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutSubmissionsInput = {
@@ -1219,6 +1293,8 @@ export type StudentProfileUpdateWithoutSubmissionsInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutSubmissionsInput = {
@@ -1239,6 +1315,8 @@ export type StudentProfileUncheckedUpdateWithoutSubmissionsInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutHomeActivitiesInput = {
@@ -1259,6 +1337,8 @@ export type StudentProfileCreateWithoutHomeActivitiesInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutHomeActivitiesInput = {
@@ -1279,6 +1359,8 @@ export type StudentProfileUncheckedCreateWithoutHomeActivitiesInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutHomeActivitiesInput = {
@@ -1315,6 +1397,8 @@ export type StudentProfileUpdateWithoutHomeActivitiesInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutHomeActivitiesInput = {
@@ -1335,6 +1419,8 @@ export type StudentProfileUncheckedUpdateWithoutHomeActivitiesInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutWeeklyTargetsInput = {
@@ -1355,6 +1441,8 @@ export type StudentProfileCreateWithoutWeeklyTargetsInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutWeeklyTargetsInput = {
@@ -1375,6 +1463,8 @@ export type StudentProfileUncheckedCreateWithoutWeeklyTargetsInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutWeeklyTargetsInput = {
@@ -1411,6 +1501,8 @@ export type StudentProfileUpdateWithoutWeeklyTargetsInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutWeeklyTargetsInput = {
@@ -1431,6 +1523,8 @@ export type StudentProfileUncheckedUpdateWithoutWeeklyTargetsInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutTashihRequestsInput = {
@@ -1451,6 +1545,8 @@ export type StudentProfileCreateWithoutTashihRequestsInput = {
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutTashihRequestsInput = {
@@ -1471,6 +1567,8 @@ export type StudentProfileUncheckedCreateWithoutTashihRequestsInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutTashihRequestsInput = {
@@ -1507,6 +1605,8 @@ export type StudentProfileUpdateWithoutTashihRequestsInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutTashihRequestsInput = {
@@ -1527,6 +1627,8 @@ export type StudentProfileUncheckedUpdateWithoutTashihRequestsInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutTahfidzScoresInput = {
@@ -1547,6 +1649,8 @@ export type StudentProfileCreateWithoutTahfidzScoresInput = {
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutTahfidzScoresInput = {
@@ -1567,6 +1671,8 @@ export type StudentProfileUncheckedCreateWithoutTahfidzScoresInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutTahfidzScoresInput = {
@@ -1603,6 +1709,8 @@ export type StudentProfileUpdateWithoutTahfidzScoresInput = {
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutTahfidzScoresInput = {
@@ -1623,6 +1731,8 @@ export type StudentProfileUncheckedUpdateWithoutTahfidzScoresInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutTahsinScoresInput = {
@@ -1643,6 +1753,8 @@ export type StudentProfileCreateWithoutTahsinScoresInput = {
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutStudentInput
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutTahsinScoresInput = {
@@ -1663,6 +1775,8 @@ export type StudentProfileUncheckedCreateWithoutTahsinScoresInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutStudentInput
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutTahsinScoresInput = {
@@ -1699,6 +1813,8 @@ export type StudentProfileUpdateWithoutTahsinScoresInput = {
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutStudentNestedInput
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutTahsinScoresInput = {
@@ -1719,6 +1835,8 @@ export type StudentProfileUncheckedUpdateWithoutTahsinScoresInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutStudentNestedInput
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateWithoutReportsInput = {
@@ -1739,6 +1857,8 @@ export type StudentProfileCreateWithoutReportsInput = {
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutStudentInput
   tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileUncheckedCreateWithoutReportsInput = {
@@ -1759,6 +1879,8 @@ export type StudentProfileUncheckedCreateWithoutReportsInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutStudentInput
   tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
   tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentProfileCreateOrConnectWithoutReportsInput = {
@@ -1795,6 +1917,8 @@ export type StudentProfileUpdateWithoutReportsInput = {
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutStudentNestedInput
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutReportsInput = {
@@ -1815,6 +1939,216 @@ export type StudentProfileUncheckedUpdateWithoutReportsInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutStudentNestedInput
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentProfileCreateWithoutMunaqasyahRequestsInput = {
+  nis: string
+  nisn?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  status?: $Enums.StudentStatus
+  graduatedAt?: Date | string | null
+  user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
+  classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
+  classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
+  group?: Prisma.GroupCreateNestedOneWithoutStudentsInput
+  groupHistories?: Prisma.GroupHistoryCreateNestedManyWithoutStudentInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutStudentInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutStudentInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutStudentInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutStudentInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
+  reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutStudentInput
+}
+
+export type StudentProfileUncheckedCreateWithoutMunaqasyahRequestsInput = {
+  userId: string
+  nis: string
+  nisn?: string | null
+  classroomId?: string | null
+  groupId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  status?: $Enums.StudentStatus
+  graduatedAt?: Date | string | null
+  classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
+  groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutStudentInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutStudentInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutStudentInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type StudentProfileCreateOrConnectWithoutMunaqasyahRequestsInput = {
+  where: Prisma.StudentProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.StudentProfileCreateWithoutMunaqasyahRequestsInput, Prisma.StudentProfileUncheckedCreateWithoutMunaqasyahRequestsInput>
+}
+
+export type StudentProfileUpsertWithoutMunaqasyahRequestsInput = {
+  update: Prisma.XOR<Prisma.StudentProfileUpdateWithoutMunaqasyahRequestsInput, Prisma.StudentProfileUncheckedUpdateWithoutMunaqasyahRequestsInput>
+  create: Prisma.XOR<Prisma.StudentProfileCreateWithoutMunaqasyahRequestsInput, Prisma.StudentProfileUncheckedCreateWithoutMunaqasyahRequestsInput>
+  where?: Prisma.StudentProfileWhereInput
+}
+
+export type StudentProfileUpdateToOneWithWhereWithoutMunaqasyahRequestsInput = {
+  where?: Prisma.StudentProfileWhereInput
+  data: Prisma.XOR<Prisma.StudentProfileUpdateWithoutMunaqasyahRequestsInput, Prisma.StudentProfileUncheckedUpdateWithoutMunaqasyahRequestsInput>
+}
+
+export type StudentProfileUpdateWithoutMunaqasyahRequestsInput = {
+  nis?: Prisma.StringFieldUpdateOperationsInput | string
+  nisn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
+  graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
+  classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
+  classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
+  group?: Prisma.GroupUpdateOneWithoutStudentsNestedInput
+  groupHistories?: Prisma.GroupHistoryUpdateManyWithoutStudentNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutStudentNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutStudentNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutStudentNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutStudentNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentProfileUncheckedUpdateWithoutMunaqasyahRequestsInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nis?: Prisma.StringFieldUpdateOperationsInput | string
+  nisn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classroomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
+  graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
+  groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutStudentNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutStudentNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutStudentNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentProfileCreateWithoutMunaqasyahFinalResultsInput = {
+  nis: string
+  nisn?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  status?: $Enums.StudentStatus
+  graduatedAt?: Date | string | null
+  user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
+  classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
+  classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
+  group?: Prisma.GroupCreateNestedOneWithoutStudentsInput
+  groupHistories?: Prisma.GroupHistoryCreateNestedManyWithoutStudentInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutStudentInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutStudentInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutStudentInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutStudentInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutStudentInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutStudentInput
+  reports?: Prisma.ReportCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutStudentInput
+}
+
+export type StudentProfileUncheckedCreateWithoutMunaqasyahFinalResultsInput = {
+  userId: string
+  nis: string
+  nisn?: string | null
+  classroomId?: string | null
+  groupId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  status?: $Enums.StudentStatus
+  graduatedAt?: Date | string | null
+  classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
+  groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutStudentInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutStudentInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutStudentInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutStudentInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutStudentInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutStudentInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type StudentProfileCreateOrConnectWithoutMunaqasyahFinalResultsInput = {
+  where: Prisma.StudentProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.StudentProfileCreateWithoutMunaqasyahFinalResultsInput, Prisma.StudentProfileUncheckedCreateWithoutMunaqasyahFinalResultsInput>
+}
+
+export type StudentProfileUpsertWithoutMunaqasyahFinalResultsInput = {
+  update: Prisma.XOR<Prisma.StudentProfileUpdateWithoutMunaqasyahFinalResultsInput, Prisma.StudentProfileUncheckedUpdateWithoutMunaqasyahFinalResultsInput>
+  create: Prisma.XOR<Prisma.StudentProfileCreateWithoutMunaqasyahFinalResultsInput, Prisma.StudentProfileUncheckedCreateWithoutMunaqasyahFinalResultsInput>
+  where?: Prisma.StudentProfileWhereInput
+}
+
+export type StudentProfileUpdateToOneWithWhereWithoutMunaqasyahFinalResultsInput = {
+  where?: Prisma.StudentProfileWhereInput
+  data: Prisma.XOR<Prisma.StudentProfileUpdateWithoutMunaqasyahFinalResultsInput, Prisma.StudentProfileUncheckedUpdateWithoutMunaqasyahFinalResultsInput>
+}
+
+export type StudentProfileUpdateWithoutMunaqasyahFinalResultsInput = {
+  nis?: Prisma.StringFieldUpdateOperationsInput | string
+  nisn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
+  graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
+  classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
+  classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
+  group?: Prisma.GroupUpdateOneWithoutStudentsNestedInput
+  groupHistories?: Prisma.GroupHistoryUpdateManyWithoutStudentNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutStudentNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutStudentNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutStudentNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutStudentNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentProfileUncheckedUpdateWithoutMunaqasyahFinalResultsInput = {
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  nis?: Prisma.StringFieldUpdateOperationsInput | string
+  nisn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classroomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
+  graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
+  groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutStudentNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutStudentNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutStudentNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileCreateManyUserInput = {
@@ -1846,6 +2180,8 @@ export type StudentProfileUpdateWithoutUserInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutUserInput = {
@@ -1866,6 +2202,8 @@ export type StudentProfileUncheckedUpdateWithoutUserInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateManyWithoutUserInput = {
@@ -1908,6 +2246,8 @@ export type StudentProfileUpdateWithoutClassroomInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutClassroomInput = {
@@ -1928,6 +2268,8 @@ export type StudentProfileUncheckedUpdateWithoutClassroomInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateManyWithoutClassroomInput = {
@@ -1970,6 +2312,8 @@ export type StudentProfileUpdateWithoutGroupInput = {
   tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateWithoutGroupInput = {
@@ -1990,6 +2334,8 @@ export type StudentProfileUncheckedUpdateWithoutGroupInput = {
   tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutStudentNestedInput
   tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutStudentNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutStudentNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentProfileUncheckedUpdateManyWithoutGroupInput = {
@@ -2018,6 +2364,8 @@ export type StudentProfileCountOutputType = {
   tahfidzScores: number
   tahsinScores: number
   reports: number
+  munaqasyahRequests: number
+  munaqasyahFinalResults: number
 }
 
 export type StudentProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2030,6 +2378,8 @@ export type StudentProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Ex
   tahfidzScores?: boolean | StudentProfileCountOutputTypeCountTahfidzScoresArgs
   tahsinScores?: boolean | StudentProfileCountOutputTypeCountTahsinScoresArgs
   reports?: boolean | StudentProfileCountOutputTypeCountReportsArgs
+  munaqasyahRequests?: boolean | StudentProfileCountOutputTypeCountMunaqasyahRequestsArgs
+  munaqasyahFinalResults?: boolean | StudentProfileCountOutputTypeCountMunaqasyahFinalResultsArgs
 }
 
 /**
@@ -2105,6 +2455,20 @@ export type StudentProfileCountOutputTypeCountReportsArgs<ExtArgs extends runtim
   where?: Prisma.ReportWhereInput
 }
 
+/**
+ * StudentProfileCountOutputType without action
+ */
+export type StudentProfileCountOutputTypeCountMunaqasyahRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunaqasyahRequestWhereInput
+}
+
+/**
+ * StudentProfileCountOutputType without action
+ */
+export type StudentProfileCountOutputTypeCountMunaqasyahFinalResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MunaqasyahFinalResultWhereInput
+}
+
 
 export type StudentProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   userId?: boolean
@@ -2128,6 +2492,8 @@ export type StudentProfileSelect<ExtArgs extends runtime.Types.Extensions.Intern
   tahfidzScores?: boolean | Prisma.StudentProfile$tahfidzScoresArgs<ExtArgs>
   tahsinScores?: boolean | Prisma.StudentProfile$tahsinScoresArgs<ExtArgs>
   reports?: boolean | Prisma.StudentProfile$reportsArgs<ExtArgs>
+  munaqasyahRequests?: boolean | Prisma.StudentProfile$munaqasyahRequestsArgs<ExtArgs>
+  munaqasyahFinalResults?: boolean | Prisma.StudentProfile$munaqasyahFinalResultsArgs<ExtArgs>
   _count?: boolean | Prisma.StudentProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["studentProfile"]>
 
@@ -2159,6 +2525,8 @@ export type StudentProfileInclude<ExtArgs extends runtime.Types.Extensions.Inter
   tahfidzScores?: boolean | Prisma.StudentProfile$tahfidzScoresArgs<ExtArgs>
   tahsinScores?: boolean | Prisma.StudentProfile$tahsinScoresArgs<ExtArgs>
   reports?: boolean | Prisma.StudentProfile$reportsArgs<ExtArgs>
+  munaqasyahRequests?: boolean | Prisma.StudentProfile$munaqasyahRequestsArgs<ExtArgs>
+  munaqasyahFinalResults?: boolean | Prisma.StudentProfile$munaqasyahFinalResultsArgs<ExtArgs>
   _count?: boolean | Prisma.StudentProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -2177,6 +2545,8 @@ export type $StudentProfilePayload<ExtArgs extends runtime.Types.Extensions.Inte
     tahfidzScores: Prisma.$TahfidzScorePayload<ExtArgs>[]
     tahsinScores: Prisma.$TahsinScorePayload<ExtArgs>[]
     reports: Prisma.$ReportPayload<ExtArgs>[]
+    munaqasyahRequests: Prisma.$MunaqasyahRequestPayload<ExtArgs>[]
+    munaqasyahFinalResults: Prisma.$MunaqasyahFinalResultPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     userId: string
@@ -2540,6 +2910,8 @@ export interface Prisma__StudentProfileClient<T, Null = never, ExtArgs extends r
   tahfidzScores<T extends Prisma.StudentProfile$tahfidzScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudentProfile$tahfidzScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahfidzScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tahsinScores<T extends Prisma.StudentProfile$tahsinScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudentProfile$tahsinScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahsinScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reports<T extends Prisma.StudentProfile$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudentProfile$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  munaqasyahRequests<T extends Prisma.StudentProfile$munaqasyahRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudentProfile$munaqasyahRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  munaqasyahFinalResults<T extends Prisma.StudentProfile$munaqasyahFinalResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudentProfile$munaqasyahFinalResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahFinalResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3177,6 +3549,54 @@ export type StudentProfile$reportsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ReportScalarFieldEnum | Prisma.ReportScalarFieldEnum[]
+}
+
+/**
+ * StudentProfile.munaqasyahRequests
+ */
+export type StudentProfile$munaqasyahRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahRequest
+   */
+  select?: Prisma.MunaqasyahRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahRequest
+   */
+  omit?: Prisma.MunaqasyahRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahRequestInclude<ExtArgs> | null
+  where?: Prisma.MunaqasyahRequestWhereInput
+  orderBy?: Prisma.MunaqasyahRequestOrderByWithRelationInput | Prisma.MunaqasyahRequestOrderByWithRelationInput[]
+  cursor?: Prisma.MunaqasyahRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunaqasyahRequestScalarFieldEnum | Prisma.MunaqasyahRequestScalarFieldEnum[]
+}
+
+/**
+ * StudentProfile.munaqasyahFinalResults
+ */
+export type StudentProfile$munaqasyahFinalResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahFinalResult
+   */
+  select?: Prisma.MunaqasyahFinalResultSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahFinalResult
+   */
+  omit?: Prisma.MunaqasyahFinalResultOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahFinalResultInclude<ExtArgs> | null
+  where?: Prisma.MunaqasyahFinalResultWhereInput
+  orderBy?: Prisma.MunaqasyahFinalResultOrderByWithRelationInput | Prisma.MunaqasyahFinalResultOrderByWithRelationInput[]
+  cursor?: Prisma.MunaqasyahFinalResultWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MunaqasyahFinalResultScalarFieldEnum | Prisma.MunaqasyahFinalResultScalarFieldEnum[]
 }
 
 /**
