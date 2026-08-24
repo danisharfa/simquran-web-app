@@ -26,9 +26,17 @@ interface Props {
   groupId: string;
   data: GroupStudentOption[];
   readOnly?: boolean;
+  showScoreLink?: boolean;
+  showReportLink?: boolean;
 }
 
-export function GroupStudentTable({ groupId, data, readOnly = false }: Props) {
+export function GroupStudentTable({
+  groupId,
+  data,
+  readOnly = false,
+  showScoreLink = false,
+  showReportLink = false,
+}: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -70,7 +78,7 @@ export function GroupStudentTable({ groupId, data, readOnly = false }: Props) {
       },
     ];
 
-    if (readOnly) return base;
+    if (readOnly && !showScoreLink && !showReportLink) return base;
 
     return [
       ...base,
@@ -81,20 +89,42 @@ export function GroupStudentTable({ groupId, data, readOnly = false }: Props) {
         cell: ({ row }) => {
           const student = row.original;
           return (
-            <Button
-              variant="destructive"
-              size="sm"
-              disabled={removingId === student.userId}
-              onClick={() => handleRemove(student.userId)}
-            >
-              <Trash2 />
-              Hapus
-            </Button>
+            <div className="flex items-center gap-1">
+              {showScoreLink && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => router.push(`/dashboard/group/${groupId}/student/${student.userId}/score`)}
+                >
+                  Nilai
+                </Button>
+              )}
+              {showReportLink && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => router.push(`/dashboard/group/${groupId}/student/${student.userId}/report`)}
+                >
+                  Rapor
+                </Button>
+              )}
+              {!readOnly && (
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  disabled={removingId === student.userId}
+                  onClick={() => handleRemove(student.userId)}
+                >
+                  <Trash2 />
+                  Hapus
+                </Button>
+              )}
+            </div>
           );
         },
       },
     ];
-  }, [readOnly, removingId, handleRemove]);
+  }, [readOnly, showScoreLink, showReportLink, removingId, handleRemove, groupId, router]);
 
   const table = useReactTable({
     data,

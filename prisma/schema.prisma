@@ -167,6 +167,9 @@ model StudentProfile {
   homeActivities     HomeActivity[]
   weeklyTargets      WeeklyTarget[]
   tashihRequests     TashihRequest[]
+  tahfidzScores      TahfidzScore[]
+  tahsinScores       TahsinScore[]
+  reports            Report[]
 
   @@index([nis])
   @@map("student_profile")
@@ -226,6 +229,9 @@ model Group {
   homeActivities HomeActivity[]
   weeklyTargets  WeeklyTarget[]
   tashihRequests TashihRequest[]
+  tahfidzScores  TahfidzScore[]
+  tahsinScores   TahsinScore[]
+  reports        Report[]
 
   @@unique([name, classroomId])
   @@map("group")
@@ -259,6 +265,7 @@ model Surah {
   weeklyTargetsAsStart WeeklyTarget[]  @relation("StartSurah")
   weeklyTargetsAsEnd   WeeklyTarget[]  @relation("EndSurah")
   tashihRequests       TashihRequest[]
+  tahfidzScores        TahfidzScore[]
 
   @@map("surah")
 }
@@ -523,6 +530,78 @@ enum TashihRequestStatus {
   DITERIMA
   DITOLAK
   SELESAI
+}
+
+model TahfidzScore {
+  id          String      @id @default(uuid())
+  studentId   String
+  groupId     String
+  surahId     Int
+  score       Int
+  grade       GradeLetter
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
+  group   Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  surah   Surah          @relation(fields: [surahId], references: [id])
+
+  @@unique([studentId, groupId, surahId])
+  @@map("tahfidz_score")
+}
+
+model TahsinScore {
+  id          String      @id @default(uuid())
+  studentId   String
+  groupId     String
+  tahsinType  TahsinType
+  topic       String
+  score       Int
+  grade       GradeLetter
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
+  group   Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, groupId, tahsinType, topic])
+  @@map("tahsin_score")
+}
+
+model Report {
+  id                 String   @id @default(uuid())
+  studentId          String
+  groupId            String
+  academicYear       String
+  semester           Semester
+  tahfidzScore       Float?
+  tahsinScore        Float?
+  lastTahsinMaterial String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
+  group   Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, groupId, academicYear, semester])
+  @@map("report")
+}
+
+enum GradeLetter {
+  A
+  B
+  C
+  D
+}
+
+enum TahsinType {
+  WAFA
+  ALQURAN
 }
 
 enum Semester {

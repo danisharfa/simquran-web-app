@@ -206,6 +206,9 @@ export type GroupWhereInput = {
   homeActivities?: Prisma.HomeActivityListRelationFilter
   weeklyTargets?: Prisma.WeeklyTargetListRelationFilter
   tashihRequests?: Prisma.TashihRequestListRelationFilter
+  tahfidzScores?: Prisma.TahfidzScoreListRelationFilter
+  tahsinScores?: Prisma.TahsinScoreListRelationFilter
+  reports?: Prisma.ReportListRelationFilter
 }
 
 export type GroupOrderByWithRelationInput = {
@@ -224,6 +227,9 @@ export type GroupOrderByWithRelationInput = {
   homeActivities?: Prisma.HomeActivityOrderByRelationAggregateInput
   weeklyTargets?: Prisma.WeeklyTargetOrderByRelationAggregateInput
   tashihRequests?: Prisma.TashihRequestOrderByRelationAggregateInput
+  tahfidzScores?: Prisma.TahfidzScoreOrderByRelationAggregateInput
+  tahsinScores?: Prisma.TahsinScoreOrderByRelationAggregateInput
+  reports?: Prisma.ReportOrderByRelationAggregateInput
   _relevance?: Prisma.GroupOrderByRelevanceInput
 }
 
@@ -247,6 +253,9 @@ export type GroupWhereUniqueInput = Prisma.AtLeast<{
   homeActivities?: Prisma.HomeActivityListRelationFilter
   weeklyTargets?: Prisma.WeeklyTargetListRelationFilter
   tashihRequests?: Prisma.TashihRequestListRelationFilter
+  tahfidzScores?: Prisma.TahfidzScoreListRelationFilter
+  tahsinScores?: Prisma.TahsinScoreListRelationFilter
+  reports?: Prisma.ReportListRelationFilter
 }, "id" | "id" | "name_classroomId">
 
 export type GroupOrderByWithAggregationInput = {
@@ -289,6 +298,9 @@ export type GroupCreateInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUncheckedCreateInput = {
@@ -305,6 +317,9 @@ export type GroupUncheckedCreateInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUpdateInput = {
@@ -321,6 +336,9 @@ export type GroupUpdateInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateInput = {
@@ -337,6 +355,9 @@ export type GroupUncheckedUpdateInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupCreateManyInput = {
@@ -598,6 +619,48 @@ export type GroupUpdateOneRequiredWithoutTashihRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.GroupUpdateToOneWithWhereWithoutTashihRequestsInput, Prisma.GroupUpdateWithoutTashihRequestsInput>, Prisma.GroupUncheckedUpdateWithoutTashihRequestsInput>
 }
 
+export type GroupCreateNestedOneWithoutTahfidzScoresInput = {
+  create?: Prisma.XOR<Prisma.GroupCreateWithoutTahfidzScoresInput, Prisma.GroupUncheckedCreateWithoutTahfidzScoresInput>
+  connectOrCreate?: Prisma.GroupCreateOrConnectWithoutTahfidzScoresInput
+  connect?: Prisma.GroupWhereUniqueInput
+}
+
+export type GroupUpdateOneRequiredWithoutTahfidzScoresNestedInput = {
+  create?: Prisma.XOR<Prisma.GroupCreateWithoutTahfidzScoresInput, Prisma.GroupUncheckedCreateWithoutTahfidzScoresInput>
+  connectOrCreate?: Prisma.GroupCreateOrConnectWithoutTahfidzScoresInput
+  upsert?: Prisma.GroupUpsertWithoutTahfidzScoresInput
+  connect?: Prisma.GroupWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GroupUpdateToOneWithWhereWithoutTahfidzScoresInput, Prisma.GroupUpdateWithoutTahfidzScoresInput>, Prisma.GroupUncheckedUpdateWithoutTahfidzScoresInput>
+}
+
+export type GroupCreateNestedOneWithoutTahsinScoresInput = {
+  create?: Prisma.XOR<Prisma.GroupCreateWithoutTahsinScoresInput, Prisma.GroupUncheckedCreateWithoutTahsinScoresInput>
+  connectOrCreate?: Prisma.GroupCreateOrConnectWithoutTahsinScoresInput
+  connect?: Prisma.GroupWhereUniqueInput
+}
+
+export type GroupUpdateOneRequiredWithoutTahsinScoresNestedInput = {
+  create?: Prisma.XOR<Prisma.GroupCreateWithoutTahsinScoresInput, Prisma.GroupUncheckedCreateWithoutTahsinScoresInput>
+  connectOrCreate?: Prisma.GroupCreateOrConnectWithoutTahsinScoresInput
+  upsert?: Prisma.GroupUpsertWithoutTahsinScoresInput
+  connect?: Prisma.GroupWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GroupUpdateToOneWithWhereWithoutTahsinScoresInput, Prisma.GroupUpdateWithoutTahsinScoresInput>, Prisma.GroupUncheckedUpdateWithoutTahsinScoresInput>
+}
+
+export type GroupCreateNestedOneWithoutReportsInput = {
+  create?: Prisma.XOR<Prisma.GroupCreateWithoutReportsInput, Prisma.GroupUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.GroupCreateOrConnectWithoutReportsInput
+  connect?: Prisma.GroupWhereUniqueInput
+}
+
+export type GroupUpdateOneRequiredWithoutReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.GroupCreateWithoutReportsInput, Prisma.GroupUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.GroupCreateOrConnectWithoutReportsInput
+  upsert?: Prisma.GroupUpsertWithoutReportsInput
+  connect?: Prisma.GroupWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GroupUpdateToOneWithWhereWithoutReportsInput, Prisma.GroupUpdateWithoutReportsInput>, Prisma.GroupUncheckedUpdateWithoutReportsInput>
+}
+
 export type GroupCreateWithoutTeacherInput = {
   id: string
   name: string
@@ -611,6 +674,9 @@ export type GroupCreateWithoutTeacherInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUncheckedCreateWithoutTeacherInput = {
@@ -626,6 +692,9 @@ export type GroupUncheckedCreateWithoutTeacherInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
 }
 
 export type GroupCreateOrConnectWithoutTeacherInput = {
@@ -680,6 +749,9 @@ export type GroupCreateWithoutStudentsInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUncheckedCreateWithoutStudentsInput = {
@@ -695,6 +767,9 @@ export type GroupUncheckedCreateWithoutStudentsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
 }
 
 export type GroupCreateOrConnectWithoutStudentsInput = {
@@ -726,6 +801,9 @@ export type GroupUpdateWithoutStudentsInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateWithoutStudentsInput = {
@@ -741,6 +819,9 @@ export type GroupUncheckedUpdateWithoutStudentsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupCreateWithoutClassroomInput = {
@@ -756,6 +837,9 @@ export type GroupCreateWithoutClassroomInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUncheckedCreateWithoutClassroomInput = {
@@ -771,6 +855,9 @@ export type GroupUncheckedCreateWithoutClassroomInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
 }
 
 export type GroupCreateOrConnectWithoutClassroomInput = {
@@ -812,6 +899,9 @@ export type GroupCreateWithoutGroupHistoriesInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUncheckedCreateWithoutGroupHistoriesInput = {
@@ -827,6 +917,9 @@ export type GroupUncheckedCreateWithoutGroupHistoriesInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
 }
 
 export type GroupCreateOrConnectWithoutGroupHistoriesInput = {
@@ -858,6 +951,9 @@ export type GroupUpdateWithoutGroupHistoriesInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateWithoutGroupHistoriesInput = {
@@ -873,6 +969,9 @@ export type GroupUncheckedUpdateWithoutGroupHistoriesInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupCreateWithoutSubmissionsInput = {
@@ -888,6 +987,9 @@ export type GroupCreateWithoutSubmissionsInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUncheckedCreateWithoutSubmissionsInput = {
@@ -903,6 +1005,9 @@ export type GroupUncheckedCreateWithoutSubmissionsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
 }
 
 export type GroupCreateOrConnectWithoutSubmissionsInput = {
@@ -934,6 +1039,9 @@ export type GroupUpdateWithoutSubmissionsInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateWithoutSubmissionsInput = {
@@ -949,6 +1057,9 @@ export type GroupUncheckedUpdateWithoutSubmissionsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupCreateWithoutHomeActivitiesInput = {
@@ -964,6 +1075,9 @@ export type GroupCreateWithoutHomeActivitiesInput = {
   submissions?: Prisma.SubmissionCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUncheckedCreateWithoutHomeActivitiesInput = {
@@ -979,6 +1093,9 @@ export type GroupUncheckedCreateWithoutHomeActivitiesInput = {
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
 }
 
 export type GroupCreateOrConnectWithoutHomeActivitiesInput = {
@@ -1010,6 +1127,9 @@ export type GroupUpdateWithoutHomeActivitiesInput = {
   submissions?: Prisma.SubmissionUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateWithoutHomeActivitiesInput = {
@@ -1025,6 +1145,9 @@ export type GroupUncheckedUpdateWithoutHomeActivitiesInput = {
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupCreateWithoutWeeklyTargetsInput = {
@@ -1040,6 +1163,9 @@ export type GroupCreateWithoutWeeklyTargetsInput = {
   submissions?: Prisma.SubmissionCreateNestedManyWithoutGroupInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUncheckedCreateWithoutWeeklyTargetsInput = {
@@ -1055,6 +1181,9 @@ export type GroupUncheckedCreateWithoutWeeklyTargetsInput = {
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutGroupInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
 }
 
 export type GroupCreateOrConnectWithoutWeeklyTargetsInput = {
@@ -1086,6 +1215,9 @@ export type GroupUpdateWithoutWeeklyTargetsInput = {
   submissions?: Prisma.SubmissionUpdateManyWithoutGroupNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateWithoutWeeklyTargetsInput = {
@@ -1101,6 +1233,9 @@ export type GroupUncheckedUpdateWithoutWeeklyTargetsInput = {
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutGroupNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupCreateWithoutTashihRequestsInput = {
@@ -1116,6 +1251,9 @@ export type GroupCreateWithoutTashihRequestsInput = {
   submissions?: Prisma.SubmissionCreateNestedManyWithoutGroupInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
 }
 
 export type GroupUncheckedCreateWithoutTashihRequestsInput = {
@@ -1131,6 +1269,9 @@ export type GroupUncheckedCreateWithoutTashihRequestsInput = {
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutGroupInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
 }
 
 export type GroupCreateOrConnectWithoutTashihRequestsInput = {
@@ -1162,6 +1303,9 @@ export type GroupUpdateWithoutTashihRequestsInput = {
   submissions?: Prisma.SubmissionUpdateManyWithoutGroupNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateWithoutTashihRequestsInput = {
@@ -1177,6 +1321,273 @@ export type GroupUncheckedUpdateWithoutTashihRequestsInput = {
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutGroupNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
+}
+
+export type GroupCreateWithoutTahfidzScoresInput = {
+  id: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classroom: Prisma.ClassroomCreateNestedOneWithoutGroupsInput
+  teacher: Prisma.TeacherProfileCreateNestedOneWithoutGroupsInput
+  students?: Prisma.StudentProfileCreateNestedManyWithoutGroupInput
+  groupHistories?: Prisma.GroupHistoryCreateNestedManyWithoutGroupInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutGroupInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
+}
+
+export type GroupUncheckedCreateWithoutTahfidzScoresInput = {
+  id: string
+  name: string
+  classroomId: string
+  teacherId: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentProfileUncheckedCreateNestedManyWithoutGroupInput
+  groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutGroupInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutGroupInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
+}
+
+export type GroupCreateOrConnectWithoutTahfidzScoresInput = {
+  where: Prisma.GroupWhereUniqueInput
+  create: Prisma.XOR<Prisma.GroupCreateWithoutTahfidzScoresInput, Prisma.GroupUncheckedCreateWithoutTahfidzScoresInput>
+}
+
+export type GroupUpsertWithoutTahfidzScoresInput = {
+  update: Prisma.XOR<Prisma.GroupUpdateWithoutTahfidzScoresInput, Prisma.GroupUncheckedUpdateWithoutTahfidzScoresInput>
+  create: Prisma.XOR<Prisma.GroupCreateWithoutTahfidzScoresInput, Prisma.GroupUncheckedCreateWithoutTahfidzScoresInput>
+  where?: Prisma.GroupWhereInput
+}
+
+export type GroupUpdateToOneWithWhereWithoutTahfidzScoresInput = {
+  where?: Prisma.GroupWhereInput
+  data: Prisma.XOR<Prisma.GroupUpdateWithoutTahfidzScoresInput, Prisma.GroupUncheckedUpdateWithoutTahfidzScoresInput>
+}
+
+export type GroupUpdateWithoutTahfidzScoresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classroom?: Prisma.ClassroomUpdateOneRequiredWithoutGroupsNestedInput
+  teacher?: Prisma.TeacherProfileUpdateOneRequiredWithoutGroupsNestedInput
+  students?: Prisma.StudentProfileUpdateManyWithoutGroupNestedInput
+  groupHistories?: Prisma.GroupHistoryUpdateManyWithoutGroupNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutGroupNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
+}
+
+export type GroupUncheckedUpdateWithoutTahfidzScoresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  classroomId?: Prisma.StringFieldUpdateOperationsInput | string
+  teacherId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentProfileUncheckedUpdateManyWithoutGroupNestedInput
+  groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutGroupNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutGroupNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
+}
+
+export type GroupCreateWithoutTahsinScoresInput = {
+  id: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classroom: Prisma.ClassroomCreateNestedOneWithoutGroupsInput
+  teacher: Prisma.TeacherProfileCreateNestedOneWithoutGroupsInput
+  students?: Prisma.StudentProfileCreateNestedManyWithoutGroupInput
+  groupHistories?: Prisma.GroupHistoryCreateNestedManyWithoutGroupInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutGroupInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportCreateNestedManyWithoutGroupInput
+}
+
+export type GroupUncheckedCreateWithoutTahsinScoresInput = {
+  id: string
+  name: string
+  classroomId: string
+  teacherId: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentProfileUncheckedCreateNestedManyWithoutGroupInput
+  groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutGroupInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutGroupInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutGroupInput
+}
+
+export type GroupCreateOrConnectWithoutTahsinScoresInput = {
+  where: Prisma.GroupWhereUniqueInput
+  create: Prisma.XOR<Prisma.GroupCreateWithoutTahsinScoresInput, Prisma.GroupUncheckedCreateWithoutTahsinScoresInput>
+}
+
+export type GroupUpsertWithoutTahsinScoresInput = {
+  update: Prisma.XOR<Prisma.GroupUpdateWithoutTahsinScoresInput, Prisma.GroupUncheckedUpdateWithoutTahsinScoresInput>
+  create: Prisma.XOR<Prisma.GroupCreateWithoutTahsinScoresInput, Prisma.GroupUncheckedCreateWithoutTahsinScoresInput>
+  where?: Prisma.GroupWhereInput
+}
+
+export type GroupUpdateToOneWithWhereWithoutTahsinScoresInput = {
+  where?: Prisma.GroupWhereInput
+  data: Prisma.XOR<Prisma.GroupUpdateWithoutTahsinScoresInput, Prisma.GroupUncheckedUpdateWithoutTahsinScoresInput>
+}
+
+export type GroupUpdateWithoutTahsinScoresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classroom?: Prisma.ClassroomUpdateOneRequiredWithoutGroupsNestedInput
+  teacher?: Prisma.TeacherProfileUpdateOneRequiredWithoutGroupsNestedInput
+  students?: Prisma.StudentProfileUpdateManyWithoutGroupNestedInput
+  groupHistories?: Prisma.GroupHistoryUpdateManyWithoutGroupNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutGroupNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
+}
+
+export type GroupUncheckedUpdateWithoutTahsinScoresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  classroomId?: Prisma.StringFieldUpdateOperationsInput | string
+  teacherId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentProfileUncheckedUpdateManyWithoutGroupNestedInput
+  groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutGroupNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutGroupNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
+}
+
+export type GroupCreateWithoutReportsInput = {
+  id: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  classroom: Prisma.ClassroomCreateNestedOneWithoutGroupsInput
+  teacher: Prisma.TeacherProfileCreateNestedOneWithoutGroupsInput
+  students?: Prisma.StudentProfileCreateNestedManyWithoutGroupInput
+  groupHistories?: Prisma.GroupHistoryCreateNestedManyWithoutGroupInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutGroupInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutGroupInput
+  weeklyTargets?: Prisma.WeeklyTargetCreateNestedManyWithoutGroupInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreCreateNestedManyWithoutGroupInput
+}
+
+export type GroupUncheckedCreateWithoutReportsInput = {
+  id: string
+  name: string
+  classroomId: string
+  teacherId: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentProfileUncheckedCreateNestedManyWithoutGroupInput
+  groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutGroupInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutGroupInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutGroupInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutGroupInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutGroupInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutGroupInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedCreateNestedManyWithoutGroupInput
+}
+
+export type GroupCreateOrConnectWithoutReportsInput = {
+  where: Prisma.GroupWhereUniqueInput
+  create: Prisma.XOR<Prisma.GroupCreateWithoutReportsInput, Prisma.GroupUncheckedCreateWithoutReportsInput>
+}
+
+export type GroupUpsertWithoutReportsInput = {
+  update: Prisma.XOR<Prisma.GroupUpdateWithoutReportsInput, Prisma.GroupUncheckedUpdateWithoutReportsInput>
+  create: Prisma.XOR<Prisma.GroupCreateWithoutReportsInput, Prisma.GroupUncheckedCreateWithoutReportsInput>
+  where?: Prisma.GroupWhereInput
+}
+
+export type GroupUpdateToOneWithWhereWithoutReportsInput = {
+  where?: Prisma.GroupWhereInput
+  data: Prisma.XOR<Prisma.GroupUpdateWithoutReportsInput, Prisma.GroupUncheckedUpdateWithoutReportsInput>
+}
+
+export type GroupUpdateWithoutReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classroom?: Prisma.ClassroomUpdateOneRequiredWithoutGroupsNestedInput
+  teacher?: Prisma.TeacherProfileUpdateOneRequiredWithoutGroupsNestedInput
+  students?: Prisma.StudentProfileUpdateManyWithoutGroupNestedInput
+  groupHistories?: Prisma.GroupHistoryUpdateManyWithoutGroupNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutGroupNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+}
+
+export type GroupUncheckedUpdateWithoutReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  classroomId?: Prisma.StringFieldUpdateOperationsInput | string
+  teacherId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentProfileUncheckedUpdateManyWithoutGroupNestedInput
+  groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutGroupNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutGroupNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
+  weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupCreateManyTeacherInput = {
@@ -1201,6 +1612,9 @@ export type GroupUpdateWithoutTeacherInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateWithoutTeacherInput = {
@@ -1216,6 +1630,9 @@ export type GroupUncheckedUpdateWithoutTeacherInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateManyWithoutTeacherInput = {
@@ -1249,6 +1666,9 @@ export type GroupUpdateWithoutClassroomInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateWithoutClassroomInput = {
@@ -1264,6 +1684,9 @@ export type GroupUncheckedUpdateWithoutClassroomInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutGroupNestedInput
   weeklyTargets?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutGroupNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutGroupNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutGroupNestedInput
+  tahsinScores?: Prisma.TahsinScoreUncheckedUpdateManyWithoutGroupNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutGroupNestedInput
 }
 
 export type GroupUncheckedUpdateManyWithoutClassroomInput = {
@@ -1287,6 +1710,9 @@ export type GroupCountOutputType = {
   homeActivities: number
   weeklyTargets: number
   tashihRequests: number
+  tahfidzScores: number
+  tahsinScores: number
+  reports: number
 }
 
 export type GroupCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1296,6 +1722,9 @@ export type GroupCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   homeActivities?: boolean | GroupCountOutputTypeCountHomeActivitiesArgs
   weeklyTargets?: boolean | GroupCountOutputTypeCountWeeklyTargetsArgs
   tashihRequests?: boolean | GroupCountOutputTypeCountTashihRequestsArgs
+  tahfidzScores?: boolean | GroupCountOutputTypeCountTahfidzScoresArgs
+  tahsinScores?: boolean | GroupCountOutputTypeCountTahsinScoresArgs
+  reports?: boolean | GroupCountOutputTypeCountReportsArgs
 }
 
 /**
@@ -1350,6 +1779,27 @@ export type GroupCountOutputTypeCountTashihRequestsArgs<ExtArgs extends runtime.
   where?: Prisma.TashihRequestWhereInput
 }
 
+/**
+ * GroupCountOutputType without action
+ */
+export type GroupCountOutputTypeCountTahfidzScoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TahfidzScoreWhereInput
+}
+
+/**
+ * GroupCountOutputType without action
+ */
+export type GroupCountOutputTypeCountTahsinScoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TahsinScoreWhereInput
+}
+
+/**
+ * GroupCountOutputType without action
+ */
+export type GroupCountOutputTypeCountReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportWhereInput
+}
+
 
 export type GroupSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1367,6 +1817,9 @@ export type GroupSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   homeActivities?: boolean | Prisma.Group$homeActivitiesArgs<ExtArgs>
   weeklyTargets?: boolean | Prisma.Group$weeklyTargetsArgs<ExtArgs>
   tashihRequests?: boolean | Prisma.Group$tashihRequestsArgs<ExtArgs>
+  tahfidzScores?: boolean | Prisma.Group$tahfidzScoresArgs<ExtArgs>
+  tahsinScores?: boolean | Prisma.Group$tahsinScoresArgs<ExtArgs>
+  reports?: boolean | Prisma.Group$reportsArgs<ExtArgs>
   _count?: boolean | Prisma.GroupCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["group"]>
 
@@ -1392,6 +1845,9 @@ export type GroupInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   homeActivities?: boolean | Prisma.Group$homeActivitiesArgs<ExtArgs>
   weeklyTargets?: boolean | Prisma.Group$weeklyTargetsArgs<ExtArgs>
   tashihRequests?: boolean | Prisma.Group$tashihRequestsArgs<ExtArgs>
+  tahfidzScores?: boolean | Prisma.Group$tahfidzScoresArgs<ExtArgs>
+  tahsinScores?: boolean | Prisma.Group$tahsinScoresArgs<ExtArgs>
+  reports?: boolean | Prisma.Group$reportsArgs<ExtArgs>
   _count?: boolean | Prisma.GroupCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1406,6 +1862,9 @@ export type $GroupPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     homeActivities: Prisma.$HomeActivityPayload<ExtArgs>[]
     weeklyTargets: Prisma.$WeeklyTargetPayload<ExtArgs>[]
     tashihRequests: Prisma.$TashihRequestPayload<ExtArgs>[]
+    tahfidzScores: Prisma.$TahfidzScorePayload<ExtArgs>[]
+    tahsinScores: Prisma.$TahsinScorePayload<ExtArgs>[]
+    reports: Prisma.$ReportPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1763,6 +2222,9 @@ export interface Prisma__GroupClient<T, Null = never, ExtArgs extends runtime.Ty
   homeActivities<T extends Prisma.Group$homeActivitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Group$homeActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HomeActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   weeklyTargets<T extends Prisma.Group$weeklyTargetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Group$weeklyTargetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tashihRequests<T extends Prisma.Group$tashihRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Group$tashihRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tahfidzScores<T extends Prisma.Group$tahfidzScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Group$tahfidzScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahfidzScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tahsinScores<T extends Prisma.Group$tahsinScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Group$tahsinScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahsinScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reports<T extends Prisma.Group$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Group$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2288,6 +2750,78 @@ export type Group$tashihRequestsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.TashihRequestScalarFieldEnum | Prisma.TashihRequestScalarFieldEnum[]
+}
+
+/**
+ * Group.tahfidzScores
+ */
+export type Group$tahfidzScoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TahfidzScore
+   */
+  select?: Prisma.TahfidzScoreSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TahfidzScore
+   */
+  omit?: Prisma.TahfidzScoreOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TahfidzScoreInclude<ExtArgs> | null
+  where?: Prisma.TahfidzScoreWhereInput
+  orderBy?: Prisma.TahfidzScoreOrderByWithRelationInput | Prisma.TahfidzScoreOrderByWithRelationInput[]
+  cursor?: Prisma.TahfidzScoreWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TahfidzScoreScalarFieldEnum | Prisma.TahfidzScoreScalarFieldEnum[]
+}
+
+/**
+ * Group.tahsinScores
+ */
+export type Group$tahsinScoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TahsinScore
+   */
+  select?: Prisma.TahsinScoreSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TahsinScore
+   */
+  omit?: Prisma.TahsinScoreOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TahsinScoreInclude<ExtArgs> | null
+  where?: Prisma.TahsinScoreWhereInput
+  orderBy?: Prisma.TahsinScoreOrderByWithRelationInput | Prisma.TahsinScoreOrderByWithRelationInput[]
+  cursor?: Prisma.TahsinScoreWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TahsinScoreScalarFieldEnum | Prisma.TahsinScoreScalarFieldEnum[]
+}
+
+/**
+ * Group.reports
+ */
+export type Group$reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Report
+   */
+  select?: Prisma.ReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Report
+   */
+  omit?: Prisma.ReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportInclude<ExtArgs> | null
+  where?: Prisma.ReportWhereInput
+  orderBy?: Prisma.ReportOrderByWithRelationInput | Prisma.ReportOrderByWithRelationInput[]
+  cursor?: Prisma.ReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportScalarFieldEnum | Prisma.ReportScalarFieldEnum[]
 }
 
 /**

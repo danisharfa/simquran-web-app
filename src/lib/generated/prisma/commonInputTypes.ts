@@ -419,6 +419,67 @@ export type EnumTashihRequestStatusWithAggregatesFilter<$PrismaModel = never> = 
   _max?: Prisma.NestedEnumTashihRequestStatusFilter<$PrismaModel>
 }
 
+export type EnumGradeLetterFilter<$PrismaModel = never> = {
+  equals?: $Enums.GradeLetter | Prisma.EnumGradeLetterFieldRefInput<$PrismaModel>
+  in?: $Enums.GradeLetter[]
+  notIn?: $Enums.GradeLetter[]
+  not?: Prisma.NestedEnumGradeLetterFilter<$PrismaModel> | $Enums.GradeLetter
+}
+
+export type EnumGradeLetterWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GradeLetter | Prisma.EnumGradeLetterFieldRefInput<$PrismaModel>
+  in?: $Enums.GradeLetter[]
+  notIn?: $Enums.GradeLetter[]
+  not?: Prisma.NestedEnumGradeLetterWithAggregatesFilter<$PrismaModel> | $Enums.GradeLetter
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGradeLetterFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGradeLetterFilter<$PrismaModel>
+}
+
+export type EnumTahsinTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.TahsinType | Prisma.EnumTahsinTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.TahsinType[]
+  notIn?: $Enums.TahsinType[]
+  not?: Prisma.NestedEnumTahsinTypeFilter<$PrismaModel> | $Enums.TahsinType
+}
+
+export type EnumTahsinTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TahsinType | Prisma.EnumTahsinTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.TahsinType[]
+  notIn?: $Enums.TahsinType[]
+  not?: Prisma.NestedEnumTahsinTypeWithAggregatesFilter<$PrismaModel> | $Enums.TahsinType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTahsinTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTahsinTypeFilter<$PrismaModel>
+}
+
+export type FloatNullableFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
+  in?: number[] | null
+  notIn?: number[] | null
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
+}
+
+export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
+  in?: number[] | null
+  notIn?: number[] | null
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[]
@@ -839,6 +900,56 @@ export type NestedEnumTashihRequestStatusWithAggregatesFilter<$PrismaModel = nev
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTashihRequestStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTashihRequestStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumGradeLetterFilter<$PrismaModel = never> = {
+  equals?: $Enums.GradeLetter | Prisma.EnumGradeLetterFieldRefInput<$PrismaModel>
+  in?: $Enums.GradeLetter[]
+  notIn?: $Enums.GradeLetter[]
+  not?: Prisma.NestedEnumGradeLetterFilter<$PrismaModel> | $Enums.GradeLetter
+}
+
+export type NestedEnumGradeLetterWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GradeLetter | Prisma.EnumGradeLetterFieldRefInput<$PrismaModel>
+  in?: $Enums.GradeLetter[]
+  notIn?: $Enums.GradeLetter[]
+  not?: Prisma.NestedEnumGradeLetterWithAggregatesFilter<$PrismaModel> | $Enums.GradeLetter
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGradeLetterFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGradeLetterFilter<$PrismaModel>
+}
+
+export type NestedEnumTahsinTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.TahsinType | Prisma.EnumTahsinTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.TahsinType[]
+  notIn?: $Enums.TahsinType[]
+  not?: Prisma.NestedEnumTahsinTypeFilter<$PrismaModel> | $Enums.TahsinType
+}
+
+export type NestedEnumTahsinTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TahsinType | Prisma.EnumTahsinTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.TahsinType[]
+  notIn?: $Enums.TahsinType[]
+  not?: Prisma.NestedEnumTahsinTypeWithAggregatesFilter<$PrismaModel> | $Enums.TahsinType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTahsinTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTahsinTypeFilter<$PrismaModel>
+}
+
+export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
+  in?: number[] | null
+  notIn?: number[] | null
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
 }
 
 

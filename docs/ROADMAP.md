@@ -57,9 +57,12 @@ Query referensi baru untuk dropdown lintas-role: `features/quran-reference/queri
   - Koordinator: terima/tolak request (`/dashboard/tashih/requests`, tombol Terima/Tolak hanya muncul untuk status MENUNGGU); buat jadwal dari request yang DITERIMA & belum dijadwalkan (`/dashboard/tashih/schedules`, checklist multi-request); input hasil per peserta terjadwal (`/dashboard/tashih/results`, otomatis set status request jadi SELESAI; hapus hasil mengembalikan status ke DITERIMA).
   - Siswa: lihat jadwal & hasil tashih sendiri, read-only (`/dashboard/tashih/schedule`, `/dashboard/tashih/result`, sama-sama role-branch dengan guru).
 
-### Tahap 5 — Penilaian & Rapor
-- [ ] `TahfidzScore`, `TahsinScore` — nilai per surah/topik
-- [ ] `Report` — rapor semester (gabungan skor) + ekspor PDF
+### Tahap 5 — Penilaian & Rapor ✅ Selesai
+- [x] `TahfidzScore`, `TahsinScore` — nilai per surah/topik. Guru input via `/dashboard/group/[groupId]/student/[studentId]/score` (panel Tahfidz per-surah, panel Tahsin per-topik, upsert berdasarkan unique constraint sehingga input ulang surah/topik yang sama otomatis update, bukan duplikat). Grade (A/B/C/D) dihitung otomatis dari skor (`features/scores/grade.ts`).
+- [x] `Report` — **keputusan desain**: tabel `Report` tetap ada seperti skema lama (untuk `lastTahsinMaterial` + record resmi per academicYear/semester), TAPI `tahfidzScore`/`tahsinScore` di dalamnya **otomatis dihitung ulang** (bukan snapshot beku sekali generate) setiap ada perubahan nilai — lewat `features/scores/recalculate-report.ts` yang dipanggil di setiap upsert/delete skor. `lastTahsinMaterial` diedit terpisah oleh guru, tidak tergantung nilai. Ditampilkan read-only di `/dashboard/group/[groupId]/student/[studentId]/report` (guru/koordinator) dan `/dashboard/report` (siswa, otomatis pakai kelompoknya sendiri).
+- [x] **Ekspor PDF rapor** — `@react-pdf/renderer` (user sudah install manual). Layout diadaptasi persis dari `StudentReportPdf.tsx` milik `sim-siswa-sdit` (kop dua logo dari `public/logo-sekolah.png` + `public/logo-wafa.png`, tabel evaluasi Tahsin/Tahfidz, tabel KKM, tanda tangan Kepala Sekolah & Koordinator). Query data gabungan di `features/scores/queries/get-report-pdf-data.ts`; tombol download client-only (`PDFDownloadLink`) di `features/scores/components/export-report-pdf-button.tsx`, dipasang di kedua halaman rapor.
+
+Tombol "Nilai" dan "Rapor" ditambahkan ke tabel anggota kelompok (`GroupStudentTable`, prop `showScoreLink`/`showReportLink`) — guru dapat keduanya di kelompok bimbingannya, koordinator dapat "Rapor" saja (tidak input nilai).
 
 ### Tahap 6 — Munaqasyah (paling kompleks)
 - [ ] `MunaqasyahRequest` → `MunaqasyahSchedule` → `MunaqasyahResult` (+ `TasmiDetail`, `MunaqasyahDetail`, `MunaqasyahFinalResult`, skor gabungan Tasmi 70% + Munaqasyah 30%)

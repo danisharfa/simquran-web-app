@@ -71,6 +71,24 @@ export const TashihRequestStatus = {
 export type TashihRequestStatus = (typeof TashihRequestStatus)[keyof typeof TashihRequestStatus]
 
 
+export const GradeLetter = {
+  A: 'A',
+  B: 'B',
+  C: 'C',
+  D: 'D'
+} as const
+
+export type GradeLetter = (typeof GradeLetter)[keyof typeof GradeLetter]
+
+
+export const TahsinType = {
+  WAFA: 'WAFA',
+  ALQURAN: 'ALQURAN'
+} as const
+
+export type TahsinType = (typeof TahsinType)[keyof typeof TahsinType]
+
+
 export const Semester = {
   GANJIL: 'GANJIL',
   GENAP: 'GENAP'

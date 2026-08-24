@@ -156,3 +156,18 @@ export type TashihScheduleRequest = Prisma.TashihScheduleRequestModel
  * 
  */
 export type TashihResult = Prisma.TashihResultModel
+/**
+ * Model TahfidzScore
+ * 
+ */
+export type TahfidzScore = Prisma.TahfidzScoreModel
+/**
+ * Model TahsinScore
+ * 
+ */
+export type TahsinScore = Prisma.TahsinScoreModel
+/**
+ * Model Report
+ * 
+ */
+export type Report = Prisma.ReportModel

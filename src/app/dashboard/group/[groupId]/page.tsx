@@ -31,7 +31,7 @@ export default async function GroupDetailPage({ params }: Props) {
           </div>
         </div>
 
-        <GroupStudentTable groupId={groupId} data={students} readOnly />
+        <GroupStudentTable groupId={groupId} data={students} readOnly showScoreLink showReportLink />
       </div>
     );
   }
@@ -60,7 +60,7 @@ export default async function GroupDetailPage({ params }: Props) {
         </div>
       </div>
 
-      <GroupStudentTable groupId={groupId} data={students} />
+      <GroupStudentTable groupId={groupId} data={students} showReportLink />
     </div>
   );
 }

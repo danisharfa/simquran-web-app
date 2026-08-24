@@ -210,6 +210,7 @@ export type SurahWhereInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetListRelationFilter
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetListRelationFilter
   tashihRequests?: Prisma.TashihRequestListRelationFilter
+  tahfidzScores?: Prisma.TahfidzScoreListRelationFilter
 }
 
 export type SurahOrderByWithRelationInput = {
@@ -222,6 +223,7 @@ export type SurahOrderByWithRelationInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetOrderByRelationAggregateInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetOrderByRelationAggregateInput
   tashihRequests?: Prisma.TashihRequestOrderByRelationAggregateInput
+  tahfidzScores?: Prisma.TahfidzScoreOrderByRelationAggregateInput
   _relevance?: Prisma.SurahOrderByRelevanceInput
 }
 
@@ -238,6 +240,7 @@ export type SurahWhereUniqueInput = Prisma.AtLeast<{
   weeklyTargetsAsStart?: Prisma.WeeklyTargetListRelationFilter
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetListRelationFilter
   tashihRequests?: Prisma.TashihRequestListRelationFilter
+  tahfidzScores?: Prisma.TahfidzScoreListRelationFilter
 }, "id">
 
 export type SurahOrderByWithAggregationInput = {
@@ -270,6 +273,7 @@ export type SurahCreateInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutSurahInput
 }
 
 export type SurahUncheckedCreateInput = {
@@ -282,6 +286,7 @@ export type SurahUncheckedCreateInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutSurahInput
 }
 
 export type SurahUpdateInput = {
@@ -294,6 +299,7 @@ export type SurahUpdateInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahUncheckedUpdateInput = {
@@ -306,6 +312,7 @@ export type SurahUncheckedUpdateInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahCreateManyInput = {
@@ -462,6 +469,20 @@ export type SurahUpdateOneWithoutTashihRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SurahUpdateToOneWithWhereWithoutTashihRequestsInput, Prisma.SurahUpdateWithoutTashihRequestsInput>, Prisma.SurahUncheckedUpdateWithoutTashihRequestsInput>
 }
 
+export type SurahCreateNestedOneWithoutTahfidzScoresInput = {
+  create?: Prisma.XOR<Prisma.SurahCreateWithoutTahfidzScoresInput, Prisma.SurahUncheckedCreateWithoutTahfidzScoresInput>
+  connectOrCreate?: Prisma.SurahCreateOrConnectWithoutTahfidzScoresInput
+  connect?: Prisma.SurahWhereUniqueInput
+}
+
+export type SurahUpdateOneRequiredWithoutTahfidzScoresNestedInput = {
+  create?: Prisma.XOR<Prisma.SurahCreateWithoutTahfidzScoresInput, Prisma.SurahUncheckedCreateWithoutTahfidzScoresInput>
+  connectOrCreate?: Prisma.SurahCreateOrConnectWithoutTahfidzScoresInput
+  upsert?: Prisma.SurahUpsertWithoutTahfidzScoresInput
+  connect?: Prisma.SurahWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SurahUpdateToOneWithWhereWithoutTahfidzScoresInput, Prisma.SurahUpdateWithoutTahfidzScoresInput>, Prisma.SurahUncheckedUpdateWithoutTahfidzScoresInput>
+}
+
 export type SurahCreateWithoutSurahJuzInput = {
   id: number
   name: string
@@ -471,6 +492,7 @@ export type SurahCreateWithoutSurahJuzInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutSurahInput
 }
 
 export type SurahUncheckedCreateWithoutSurahJuzInput = {
@@ -482,6 +504,7 @@ export type SurahUncheckedCreateWithoutSurahJuzInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutSurahInput
 }
 
 export type SurahCreateOrConnectWithoutSurahJuzInput = {
@@ -509,6 +532,7 @@ export type SurahUpdateWithoutSurahJuzInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahUncheckedUpdateWithoutSurahJuzInput = {
@@ -520,6 +544,7 @@ export type SurahUncheckedUpdateWithoutSurahJuzInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahCreateWithoutSubmissionsInput = {
@@ -531,6 +556,7 @@ export type SurahCreateWithoutSubmissionsInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutSurahInput
 }
 
 export type SurahUncheckedCreateWithoutSubmissionsInput = {
@@ -542,6 +568,7 @@ export type SurahUncheckedCreateWithoutSubmissionsInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutSurahInput
 }
 
 export type SurahCreateOrConnectWithoutSubmissionsInput = {
@@ -569,6 +596,7 @@ export type SurahUpdateWithoutSubmissionsInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahUncheckedUpdateWithoutSubmissionsInput = {
@@ -580,6 +608,7 @@ export type SurahUncheckedUpdateWithoutSubmissionsInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahCreateWithoutHomeActivitiesInput = {
@@ -591,6 +620,7 @@ export type SurahCreateWithoutHomeActivitiesInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutSurahInput
 }
 
 export type SurahUncheckedCreateWithoutHomeActivitiesInput = {
@@ -602,6 +632,7 @@ export type SurahUncheckedCreateWithoutHomeActivitiesInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutSurahInput
 }
 
 export type SurahCreateOrConnectWithoutHomeActivitiesInput = {
@@ -629,6 +660,7 @@ export type SurahUpdateWithoutHomeActivitiesInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahUncheckedUpdateWithoutHomeActivitiesInput = {
@@ -640,6 +672,7 @@ export type SurahUncheckedUpdateWithoutHomeActivitiesInput = {
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahCreateWithoutWeeklyTargetsAsStartInput = {
@@ -651,6 +684,7 @@ export type SurahCreateWithoutWeeklyTargetsAsStartInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutSurahInput
 }
 
 export type SurahUncheckedCreateWithoutWeeklyTargetsAsStartInput = {
@@ -662,6 +696,7 @@ export type SurahUncheckedCreateWithoutWeeklyTargetsAsStartInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahEndInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutSurahInput
 }
 
 export type SurahCreateOrConnectWithoutWeeklyTargetsAsStartInput = {
@@ -678,6 +713,7 @@ export type SurahCreateWithoutWeeklyTargetsAsEndInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutSurahInput
 }
 
 export type SurahUncheckedCreateWithoutWeeklyTargetsAsEndInput = {
@@ -689,6 +725,7 @@ export type SurahUncheckedCreateWithoutWeeklyTargetsAsEndInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutSurahInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutSurahInput
 }
 
 export type SurahCreateOrConnectWithoutWeeklyTargetsAsEndInput = {
@@ -716,6 +753,7 @@ export type SurahUpdateWithoutWeeklyTargetsAsStartInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahUncheckedUpdateWithoutWeeklyTargetsAsStartInput = {
@@ -727,6 +765,7 @@ export type SurahUncheckedUpdateWithoutWeeklyTargetsAsStartInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahEndNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahUpsertWithoutWeeklyTargetsAsEndInput = {
@@ -749,6 +788,7 @@ export type SurahUpdateWithoutWeeklyTargetsAsEndInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahUncheckedUpdateWithoutWeeklyTargetsAsEndInput = {
@@ -760,6 +800,7 @@ export type SurahUncheckedUpdateWithoutWeeklyTargetsAsEndInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutSurahNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahCreateWithoutTashihRequestsInput = {
@@ -771,6 +812,7 @@ export type SurahCreateWithoutTashihRequestsInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahEndInput
+  tahfidzScores?: Prisma.TahfidzScoreCreateNestedManyWithoutSurahInput
 }
 
 export type SurahUncheckedCreateWithoutTashihRequestsInput = {
@@ -782,6 +824,7 @@ export type SurahUncheckedCreateWithoutTashihRequestsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahEndInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedCreateNestedManyWithoutSurahInput
 }
 
 export type SurahCreateOrConnectWithoutTashihRequestsInput = {
@@ -809,6 +852,7 @@ export type SurahUpdateWithoutTashihRequestsInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutSurahEndNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUpdateManyWithoutSurahNestedInput
 }
 
 export type SurahUncheckedUpdateWithoutTashihRequestsInput = {
@@ -820,6 +864,71 @@ export type SurahUncheckedUpdateWithoutTashihRequestsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahEndNestedInput
+  tahfidzScores?: Prisma.TahfidzScoreUncheckedUpdateManyWithoutSurahNestedInput
+}
+
+export type SurahCreateWithoutTahfidzScoresInput = {
+  id: number
+  name: string
+  verseCount: number
+  surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutSurahInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutSurahInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahEndInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutSurahInput
+}
+
+export type SurahUncheckedCreateWithoutTahfidzScoresInput = {
+  id: number
+  name: string
+  verseCount: number
+  surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutSurahInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSurahInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahEndInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutSurahInput
+}
+
+export type SurahCreateOrConnectWithoutTahfidzScoresInput = {
+  where: Prisma.SurahWhereUniqueInput
+  create: Prisma.XOR<Prisma.SurahCreateWithoutTahfidzScoresInput, Prisma.SurahUncheckedCreateWithoutTahfidzScoresInput>
+}
+
+export type SurahUpsertWithoutTahfidzScoresInput = {
+  update: Prisma.XOR<Prisma.SurahUpdateWithoutTahfidzScoresInput, Prisma.SurahUncheckedUpdateWithoutTahfidzScoresInput>
+  create: Prisma.XOR<Prisma.SurahCreateWithoutTahfidzScoresInput, Prisma.SurahUncheckedCreateWithoutTahfidzScoresInput>
+  where?: Prisma.SurahWhereInput
+}
+
+export type SurahUpdateToOneWithWhereWithoutTahfidzScoresInput = {
+  where?: Prisma.SurahWhereInput
+  data: Prisma.XOR<Prisma.SurahUpdateWithoutTahfidzScoresInput, Prisma.SurahUncheckedUpdateWithoutTahfidzScoresInput>
+}
+
+export type SurahUpdateWithoutTahfidzScoresInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  surahJuz?: Prisma.SurahJuzUpdateManyWithoutSurahNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutSurahNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutSurahEndNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutSurahNestedInput
+}
+
+export type SurahUncheckedUpdateWithoutTahfidzScoresInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutSurahNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSurahNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahEndNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutSurahNestedInput
 }
 
 
@@ -834,6 +943,7 @@ export type SurahCountOutputType = {
   weeklyTargetsAsStart: number
   weeklyTargetsAsEnd: number
   tashihRequests: number
+  tahfidzScores: number
 }
 
 export type SurahCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -843,6 +953,7 @@ export type SurahCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   weeklyTargetsAsStart?: boolean | SurahCountOutputTypeCountWeeklyTargetsAsStartArgs
   weeklyTargetsAsEnd?: boolean | SurahCountOutputTypeCountWeeklyTargetsAsEndArgs
   tashihRequests?: boolean | SurahCountOutputTypeCountTashihRequestsArgs
+  tahfidzScores?: boolean | SurahCountOutputTypeCountTahfidzScoresArgs
 }
 
 /**
@@ -897,6 +1008,13 @@ export type SurahCountOutputTypeCountTashihRequestsArgs<ExtArgs extends runtime.
   where?: Prisma.TashihRequestWhereInput
 }
 
+/**
+ * SurahCountOutputType without action
+ */
+export type SurahCountOutputTypeCountTahfidzScoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TahfidzScoreWhereInput
+}
+
 
 export type SurahSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -908,6 +1026,7 @@ export type SurahSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   weeklyTargetsAsStart?: boolean | Prisma.Surah$weeklyTargetsAsStartArgs<ExtArgs>
   weeklyTargetsAsEnd?: boolean | Prisma.Surah$weeklyTargetsAsEndArgs<ExtArgs>
   tashihRequests?: boolean | Prisma.Surah$tashihRequestsArgs<ExtArgs>
+  tahfidzScores?: boolean | Prisma.Surah$tahfidzScoresArgs<ExtArgs>
   _count?: boolean | Prisma.SurahCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["surah"]>
 
@@ -927,6 +1046,7 @@ export type SurahInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   weeklyTargetsAsStart?: boolean | Prisma.Surah$weeklyTargetsAsStartArgs<ExtArgs>
   weeklyTargetsAsEnd?: boolean | Prisma.Surah$weeklyTargetsAsEndArgs<ExtArgs>
   tashihRequests?: boolean | Prisma.Surah$tashihRequestsArgs<ExtArgs>
+  tahfidzScores?: boolean | Prisma.Surah$tahfidzScoresArgs<ExtArgs>
   _count?: boolean | Prisma.SurahCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -939,6 +1059,7 @@ export type $SurahPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     weeklyTargetsAsStart: Prisma.$WeeklyTargetPayload<ExtArgs>[]
     weeklyTargetsAsEnd: Prisma.$WeeklyTargetPayload<ExtArgs>[]
     tashihRequests: Prisma.$TashihRequestPayload<ExtArgs>[]
+    tahfidzScores: Prisma.$TahfidzScorePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1290,6 +1411,7 @@ export interface Prisma__SurahClient<T, Null = never, ExtArgs extends runtime.Ty
   weeklyTargetsAsStart<T extends Prisma.Surah$weeklyTargetsAsStartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Surah$weeklyTargetsAsStartArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   weeklyTargetsAsEnd<T extends Prisma.Surah$weeklyTargetsAsEndArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Surah$weeklyTargetsAsEndArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tashihRequests<T extends Prisma.Surah$tashihRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Surah$tashihRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tahfidzScores<T extends Prisma.Surah$tahfidzScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Surah$tahfidzScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahfidzScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1811,6 +1933,30 @@ export type Surah$tashihRequestsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.TashihRequestScalarFieldEnum | Prisma.TashihRequestScalarFieldEnum[]
+}
+
+/**
+ * Surah.tahfidzScores
+ */
+export type Surah$tahfidzScoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TahfidzScore
+   */
+  select?: Prisma.TahfidzScoreSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TahfidzScore
+   */
+  omit?: Prisma.TahfidzScoreOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TahfidzScoreInclude<ExtArgs> | null
+  where?: Prisma.TahfidzScoreWhereInput
+  orderBy?: Prisma.TahfidzScoreOrderByWithRelationInput | Prisma.TahfidzScoreOrderByWithRelationInput[]
+  cursor?: Prisma.TahfidzScoreWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TahfidzScoreScalarFieldEnum | Prisma.TahfidzScoreScalarFieldEnum[]
 }
 
 /**

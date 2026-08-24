@@ -406,7 +406,10 @@ export const ModelName = {
   TashihRequest: 'TashihRequest',
   TashihSchedule: 'TashihSchedule',
   TashihScheduleRequest: 'TashihScheduleRequest',
-  TashihResult: 'TashihResult'
+  TashihResult: 'TashihResult',
+  TahfidzScore: 'TahfidzScore',
+  TahsinScore: 'TahsinScore',
+  Report: 'Report'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -422,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory" | "group" | "groupHistory" | "surah" | "juz" | "surahJuz" | "wafa" | "submission" | "homeActivity" | "weeklyTarget" | "tashihRequest" | "tashihSchedule" | "tashihScheduleRequest" | "tashihResult"
+    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory" | "group" | "groupHistory" | "surah" | "juz" | "surahJuz" | "wafa" | "submission" | "homeActivity" | "weeklyTarget" | "tashihRequest" | "tashihSchedule" | "tashihScheduleRequest" | "tashihResult" | "tahfidzScore" | "tahsinScore" | "report"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1944,6 +1947,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TahfidzScore: {
+      payload: Prisma.$TahfidzScorePayload<ExtArgs>
+      fields: Prisma.TahfidzScoreFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TahfidzScoreFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahfidzScorePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TahfidzScoreFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahfidzScorePayload>
+        }
+        findFirst: {
+          args: Prisma.TahfidzScoreFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahfidzScorePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TahfidzScoreFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahfidzScorePayload>
+        }
+        findMany: {
+          args: Prisma.TahfidzScoreFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahfidzScorePayload>[]
+        }
+        create: {
+          args: Prisma.TahfidzScoreCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahfidzScorePayload>
+        }
+        createMany: {
+          args: Prisma.TahfidzScoreCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TahfidzScoreDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahfidzScorePayload>
+        }
+        update: {
+          args: Prisma.TahfidzScoreUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahfidzScorePayload>
+        }
+        deleteMany: {
+          args: Prisma.TahfidzScoreDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TahfidzScoreUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TahfidzScoreUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahfidzScorePayload>
+        }
+        aggregate: {
+          args: Prisma.TahfidzScoreAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTahfidzScore>
+        }
+        groupBy: {
+          args: Prisma.TahfidzScoreGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TahfidzScoreGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TahfidzScoreCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TahfidzScoreCountAggregateOutputType> | number
+        }
+      }
+    }
+    TahsinScore: {
+      payload: Prisma.$TahsinScorePayload<ExtArgs>
+      fields: Prisma.TahsinScoreFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TahsinScoreFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsinScorePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TahsinScoreFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsinScorePayload>
+        }
+        findFirst: {
+          args: Prisma.TahsinScoreFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsinScorePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TahsinScoreFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsinScorePayload>
+        }
+        findMany: {
+          args: Prisma.TahsinScoreFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsinScorePayload>[]
+        }
+        create: {
+          args: Prisma.TahsinScoreCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsinScorePayload>
+        }
+        createMany: {
+          args: Prisma.TahsinScoreCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TahsinScoreDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsinScorePayload>
+        }
+        update: {
+          args: Prisma.TahsinScoreUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsinScorePayload>
+        }
+        deleteMany: {
+          args: Prisma.TahsinScoreDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TahsinScoreUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TahsinScoreUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsinScorePayload>
+        }
+        aggregate: {
+          args: Prisma.TahsinScoreAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTahsinScore>
+        }
+        groupBy: {
+          args: Prisma.TahsinScoreGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TahsinScoreGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TahsinScoreCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TahsinScoreCountAggregateOutputType> | number
+        }
+      }
+    }
+    Report: {
+      payload: Prisma.$ReportPayload<ExtArgs>
+      fields: Prisma.ReportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        findFirst: {
+          args: Prisma.ReportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        findMany: {
+          args: Prisma.ReportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>[]
+        }
+        create: {
+          args: Prisma.ReportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        createMany: {
+          args: Prisma.ReportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ReportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        update: {
+          args: Prisma.ReportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ReportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        aggregate: {
+          args: Prisma.ReportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReport>
+        }
+        groupBy: {
+          args: Prisma.ReportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2317,6 +2518,53 @@ export const TashihResultScalarFieldEnum = {
 export type TashihResultScalarFieldEnum = (typeof TashihResultScalarFieldEnum)[keyof typeof TashihResultScalarFieldEnum]
 
 
+export const TahfidzScoreScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  surahId: 'surahId',
+  score: 'score',
+  grade: 'grade',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TahfidzScoreScalarFieldEnum = (typeof TahfidzScoreScalarFieldEnum)[keyof typeof TahfidzScoreScalarFieldEnum]
+
+
+export const TahsinScoreScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  tahsinType: 'tahsinType',
+  topic: 'topic',
+  score: 'score',
+  grade: 'grade',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TahsinScoreScalarFieldEnum = (typeof TahsinScoreScalarFieldEnum)[keyof typeof TahsinScoreScalarFieldEnum]
+
+
+export const ReportScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  academicYear: 'academicYear',
+  semester: 'semester',
+  tahfidzScore: 'tahfidzScore',
+  tahsinScore: 'tahsinScore',
+  lastTahsinMaterial: 'lastTahsinMaterial',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2558,6 +2806,38 @@ export const TashihResultOrderByRelevanceFieldEnum = {
 export type TashihResultOrderByRelevanceFieldEnum = (typeof TashihResultOrderByRelevanceFieldEnum)[keyof typeof TashihResultOrderByRelevanceFieldEnum]
 
 
+export const TahfidzScoreOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  description: 'description'
+} as const
+
+export type TahfidzScoreOrderByRelevanceFieldEnum = (typeof TahfidzScoreOrderByRelevanceFieldEnum)[keyof typeof TahfidzScoreOrderByRelevanceFieldEnum]
+
+
+export const TahsinScoreOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  topic: 'topic',
+  description: 'description'
+} as const
+
+export type TahsinScoreOrderByRelevanceFieldEnum = (typeof TahsinScoreOrderByRelevanceFieldEnum)[keyof typeof TahsinScoreOrderByRelevanceFieldEnum]
+
+
+export const ReportOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  academicYear: 'academicYear',
+  lastTahsinMaterial: 'lastTahsinMaterial'
+} as const
+
+export type ReportOrderByRelevanceFieldEnum = (typeof ReportOrderByRelevanceFieldEnum)[keyof typeof ReportOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -2673,6 +2953,20 @@ export type EnumTashihTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
  * Reference to a field of type 'TashihRequestStatus'
  */
 export type EnumTashihRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TashihRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'GradeLetter'
+ */
+export type EnumGradeLetterFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GradeLetter'>
+    
+
+
+/**
+ * Reference to a field of type 'TahsinType'
+ */
+export type EnumTahsinTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TahsinType'>
     
 
 
@@ -2815,6 +3109,9 @@ export type GlobalOmitConfig = {
   tashihSchedule?: Prisma.TashihScheduleOmit
   tashihScheduleRequest?: Prisma.TashihScheduleRequestOmit
   tashihResult?: Prisma.TashihResultOmit
+  tahfidzScore?: Prisma.TahfidzScoreOmit
+  tahsinScore?: Prisma.TahsinScoreOmit
+  report?: Prisma.ReportOmit
 }
 
 /* Types for Logging */

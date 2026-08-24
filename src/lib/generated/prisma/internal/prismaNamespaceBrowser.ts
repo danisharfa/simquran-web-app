@@ -73,7 +73,10 @@ export const ModelName = {
   TashihRequest: 'TashihRequest',
   TashihSchedule: 'TashihSchedule',
   TashihScheduleRequest: 'TashihScheduleRequest',
-  TashihResult: 'TashihResult'
+  TashihResult: 'TashihResult',
+  TahfidzScore: 'TahfidzScore',
+  TahsinScore: 'TahsinScore',
+  Report: 'Report'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -426,6 +429,53 @@ export const TashihResultScalarFieldEnum = {
 export type TashihResultScalarFieldEnum = (typeof TashihResultScalarFieldEnum)[keyof typeof TashihResultScalarFieldEnum]
 
 
+export const TahfidzScoreScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  surahId: 'surahId',
+  score: 'score',
+  grade: 'grade',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TahfidzScoreScalarFieldEnum = (typeof TahfidzScoreScalarFieldEnum)[keyof typeof TahfidzScoreScalarFieldEnum]
+
+
+export const TahsinScoreScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  tahsinType: 'tahsinType',
+  topic: 'topic',
+  score: 'score',
+  grade: 'grade',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TahsinScoreScalarFieldEnum = (typeof TahsinScoreScalarFieldEnum)[keyof typeof TahsinScoreScalarFieldEnum]
+
+
+export const ReportScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  academicYear: 'academicYear',
+  semester: 'semester',
+  tahfidzScore: 'tahfidzScore',
+  tahsinScore: 'tahsinScore',
+  lastTahsinMaterial: 'lastTahsinMaterial',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -665,4 +715,36 @@ export const TashihResultOrderByRelevanceFieldEnum = {
 } as const
 
 export type TashihResultOrderByRelevanceFieldEnum = (typeof TashihResultOrderByRelevanceFieldEnum)[keyof typeof TashihResultOrderByRelevanceFieldEnum]
+
+
+export const TahfidzScoreOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  description: 'description'
+} as const
+
+export type TahfidzScoreOrderByRelevanceFieldEnum = (typeof TahfidzScoreOrderByRelevanceFieldEnum)[keyof typeof TahfidzScoreOrderByRelevanceFieldEnum]
+
+
+export const TahsinScoreOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  topic: 'topic',
+  description: 'description'
+} as const
+
+export type TahsinScoreOrderByRelevanceFieldEnum = (typeof TahsinScoreOrderByRelevanceFieldEnum)[keyof typeof TahsinScoreOrderByRelevanceFieldEnum]
+
+
+export const ReportOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  groupId: 'groupId',
+  academicYear: 'academicYear',
+  lastTahsinMaterial: 'lastTahsinMaterial'
+} as const
+
+export type ReportOrderByRelevanceFieldEnum = (typeof ReportOrderByRelevanceFieldEnum)[keyof typeof ReportOrderByRelevanceFieldEnum]
 
