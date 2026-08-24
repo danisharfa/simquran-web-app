@@ -1,25 +1,43 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  output   = "../src/lib/generated/prisma"
 }
 
 datasource db {
   provider = "mysql"
 }
 
-model User {
-  id       String @id @default(uuid())
-  username String @unique
-  password String
-  fullName String
-  role     Role
+model AcademicSetting {
+  id String @id
 
-  email       String?
+  currentYear          String
+  currentSemester      Semester
+  currentPrincipalName String
+  schoolName           String
+  schoolAddress        String
+
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+
+  @@map("academic_setting")
+}
+
+model User {
+  id            String  @id
+  name          String
+  email         String? @unique
+  emailVerified Boolean @default(false)
+
+  // Username Plugin
+  username        String  @unique
+  displayUsername String?
+
+  // Admin Plugin
+  banned     Boolean?  @default(false)
+  banReason  String?
+  banExpires DateTime?
+
+  role        Role       @default(STUDENT)
   phoneNumber String?
   birthDate   DateTime?
   birthPlace  String?
@@ -30,19 +48,167 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("users")
+  sessions            Session[]
+  accounts            Account[]
+  coordinatorProfiles CoordinatorProfile[]
+  teacherProfiles     TeacherProfile[]
+  studentProfiles     StudentProfile[]
+
+  @@map("user")
+}
+
+model Session {
+  id String @id
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Admin Plugin
+  impersonatedBy String?
+
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("session")
+}
+
+model Account {
+  id String @id
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  accountId  String
+  providerId String
+
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  idToken               String?
+  password              String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String @id
+  identifier String
+  value      String
+
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("verification")
+}
+
+model CoordinatorProfile {
+  userId String @id
+  nip    String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([nip])
+  @@map("coordinator_profile")
+}
+
+model TeacherProfile {
+  userId String @id
+  nip    String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([nip])
+  @@map("teacher_profile")
+}
+
+model StudentProfile {
+  userId      String  @id
+  nis         String  @unique
+  nisn        String? @unique
+  classroomId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  status      StudentStatus @default(AKTIF)
+  graduatedAt DateTime?
+
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classroom          Classroom?         @relation(fields: [classroomId], references: [id])
+  classroomHistories ClassroomHistory[]
+
+  @@index([nis])
+  @@map("student_profile")
+}
+
+model Classroom {
+  id           String   @id @unique
+  level        Int
+  name         String
+  academicYear String
+  semester     Semester
+  isActive     Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  classroomHistories ClassroomHistory[]
+  students           StudentProfile[]
+
+  @@unique([name, academicYear, semester])
+  @@map("classroom")
+}
+
+model ClassroomHistory {
+  id           String   @id @default(uuid())
+  studentId    String
+  classroomId  String
+  academicYear String
+  semester     Semester
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  classroom Classroom      @relation(fields: [classroomId], references: [id], onDelete: Restrict)
+  student   StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
+
+  @@unique([studentId, academicYear, semester])
+  @@map("classroom_history")
+}
+
+enum Semester {
+  GANJIL
+  GENAP
 }
 
 enum Role {
-  Admin
-  Coordinator
-  Teacher
-  Student
+  SUPERADMIN
+  ADMIN
+  COORDINATOR
+  TEACHER
+  STUDENT
 }
 
 enum Gender {
-  Male
-  Female
+  MALE
+  FEMALE
 }
 
 enum BloodType {
@@ -50,4 +216,11 @@ enum BloodType {
   B
   AB
   O
+}
+
+enum StudentStatus {
+  AKTIF
+  LULUS
+  PINDAH
+  KELUAR
 }

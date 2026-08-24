@@ -1,30 +1,38 @@
 import { prisma } from '../src/lib/prisma';
-import { hash } from 'bcryptjs';
-import { Role } from '@/generated/prisma/enums';
+import { auth } from '../src/lib/auth';
+import { Role } from '@/lib/generated/prisma/enums';
 
 async function main() {
-  const username = 'admin';
-  const password = 'admin';
-  const hashedPassword = await hash(password, 10);
+  const username = 'superadmin';
 
   const existing = await prisma.user.findUnique({
     where: { username },
   });
 
-  if (!existing) {
-    await prisma.user.create({
-      data: {
-        username,
-        password: hashedPassword,
-        fullName: 'admin',
-        role: Role.Admin,
-      },
-    });
-
-    console.log(`User created: ${username}/${password}`);
-  } else {
+  if (existing) {
     console.log(`User already exists: ${username}`);
+    return;
   }
+
+  await auth.api.signUpEmail({
+    body: {
+      name: 'Super Admin',
+      email: 'superadmin@local.test',
+      username: 'superadmin',
+      password: 'superAdmin2026!',
+    },
+  });
+
+  await prisma.user.update({
+    where: {
+      username: 'superadmin',
+    },
+    data: {
+      role: Role.SUPERADMIN,
+    },
+  });
+
+  console.log('Super Admin created');
 }
 
 main()
