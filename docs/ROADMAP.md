@@ -80,7 +80,10 @@ Dikerjakan setelah pola CRUD+approval dari Tashih stabil sebagai referensi pola.
   - Koordinator: 4 stat card (Kelompok Aktif, Siswa Berkelompok, Tashih Menunggu, Munaqasyah Menunggu) + bar chart rata-rata nilai Tahfidz/Tahsin per kelompok (dari `Report`, top 8 kelompok).
   - Guru: 3 stat card (Kelompok Bimbingan, Siswa Bimbingan, Setoran Bulan Ini) + bar chart nilai terkini per siswa bimbingan.
   - Siswa: 3 stat card (Target Berjalan, Target Tercapai, Total Setoran) + bar chart nilai Tahfidz/Tahsin terbaru miliknya.
-- **Trimming yang disengaja**: tidak ada filter periode/kelompok interaktif atau dialog drill-down saat klik batang grafik (ada di proyek lama) — chart statis berdasarkan data terkini saja. Bisa ditambah nanti kalau benar-benar dibutuhkan.
+- [x] **Progres bacaan per Juz/Wafa (ditambahkan setelah replikasi dari `sim-siswa-sdit`)** — `features/reading-progress/`. Chart lama proyek ini bukan nilai rata-rata, tapi progres kumulatif per Juz/buku Wafa dihitung dari `TashihRequest` (Tahfidz Al-Qur'an, Wafa) dan `Submission` (Tahsin Al-Qur'an, berbasis overlap ayat), dibagi status SELESAI/SEDANG_DIJALANI/BELUM_DIMULAI:
+  - Koordinator & Guru: `ReadingProgressPanel` — filter Tahun Akademik + Kelompok (guru dibatasi ke kelompok bimbingannya via `teacherId`), 3 stacked bar chart (Tahfidz, Wafa, Tahsin Al-Qur'an), klik batang buka dialog daftar siswa. Filter re-fetch lewat Server Action (`getProgressCharts`), bukan API route seperti versi lama.
+  - Siswa: `ProgressBarList` — daftar progress bar per juz/buku (bukan chart batang, meniru `ProgressBarCard` versi siswa di proyek lama), filter chip Semua/Sedang/Selesai, tanpa pilihan periode (selalu progres kumulatif sampai semester berjalan — trimming yang disengaja dibanding versi lama yang punya filter periode juga).
+- **Trimming lain yang disengaja**: bar chart nilai rata-rata (dari Tahap 7 awal) tetap dipertahankan berdampingan dengan chart progres di atas — proyek lama tidak punya ini, jadi ini tambahan, bukan pengurangan.
 
 Terakhir karena butuh data nyata dari semua modul di atas.
 

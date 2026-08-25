@@ -13,7 +13,6 @@ import {
   BookMarked,
 } from 'lucide-react';
 import { FaChalkboard, FaUsers } from 'react-icons/fa';
-import { ImProfile } from 'react-icons/im';
 
 type BaseItem = {
   title: string;
@@ -96,11 +95,6 @@ export const menuData: Record<RoleKey, NavItem[]> = {
       exact: true,
     },
     {
-      title: 'Koordinator',
-      url: '/dashboard/profile',
-      icon: ImProfile,
-    },
-    {
       title: 'Kelompok',
       url: '/dashboard/group',
       icon: FaUsers,
@@ -167,11 +161,6 @@ export const menuData: Record<RoleKey, NavItem[]> = {
       url: '/dashboard',
       icon: LayoutDashboard,
       exact: true,
-    },
-    {
-      title: 'Guru',
-      url: '/dashboard/profile',
-      icon: ImProfile,
     },
     {
       title: 'Kelompok',
@@ -255,11 +244,6 @@ export const menuData: Record<RoleKey, NavItem[]> = {
       url: '/dashboard',
       icon: LayoutDashboard,
       exact: true,
-    },
-    {
-      title: 'Siswa',
-      url: '/dashboard/profile',
-      icon: ImProfile,
     },
     {
       title: 'Rapor',

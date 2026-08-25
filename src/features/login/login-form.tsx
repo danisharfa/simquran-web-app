@@ -52,7 +52,14 @@ export function LoginForm() {
         });
 
         if (result.error) {
-          toast.error(result.error.message ?? 'Username atau password salah');
+          const isCredentialsError =
+            result.error.status === 401 || result.error.status === 422;
+
+          toast.error(
+            isCredentialsError
+              ? (result.error.message ?? 'Username atau password salah')
+              : 'Terjadi kesalahan sistem. Silakan coba lagi.',
+          );
 
           return;
         }
@@ -144,20 +151,26 @@ export function LoginForm() {
                       />
 
                       <InputGroupAddon align="inline-end">
-                        <InputGroupButton
-                          type="button"
-                          variant="ghost"
-                          size="icon-sm"
-                          onClick={(event) => {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            setShowPassword((s) => !s);
-                          }}
-                          disabled={form.state.isSubmitting}
-                          aria-label={showPassword ? 'Sembunyikan password' : 'Tampilkan password'}
-                        >
-                          {showPassword ? <EyeOff /> : <Eye />}
-                        </InputGroupButton>
+                        <form.Subscribe selector={(state) => state.isSubmitting}>
+                          {(isSubmitting) => (
+                            <InputGroupButton
+                              type="button"
+                              variant="ghost"
+                              size="icon-sm"
+                              onClick={(event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                setShowPassword((s) => !s);
+                              }}
+                              disabled={isSubmitting}
+                              aria-label={
+                                showPassword ? 'Sembunyikan password' : 'Tampilkan password'
+                              }
+                            >
+                              {showPassword ? <EyeOff /> : <Eye />}
+                            </InputGroupButton>
+                          )}
+                        </form.Subscribe>
                       </InputGroupAddon>
                     </InputGroup>
 
@@ -170,24 +183,23 @@ export function LoginForm() {
         </CardContent>
 
         <CardFooter>
-          <Button
-            type="submit"
-            form="login-form"
-            className="w-full"
-            disabled={form.state.isSubmitting}
-          >
-            {form.state.isSubmitting ? (
-              <>
-                <Spinner />
-                Memproses...
-              </>
-            ) : (
-              <>
-                <LogIn />
-                Masuk
-              </>
+          <form.Subscribe selector={(state) => state.isSubmitting}>
+            {(isSubmitting) => (
+              <Button type="submit" form="login-form" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <Spinner />
+                    Memproses...
+                  </>
+                ) : (
+                  <>
+                    <LogIn />
+                    Masuk
+                  </>
+                )}
+              </Button>
             )}
-          </Button>
+          </form.Subscribe>
         </CardFooter>
       </form>
     </Card>

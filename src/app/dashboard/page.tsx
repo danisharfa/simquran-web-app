@@ -7,6 +7,9 @@ import { getAdminDashboardStats } from '@/features/dashboard/queries/get-admin-d
 import { getCoordinatorDashboardData } from '@/features/dashboard/queries/get-coordinator-dashboard-data';
 import { getTeacherDashboardData } from '@/features/dashboard/queries/get-teacher-dashboard-data';
 import { getStudentDashboardData } from '@/features/dashboard/queries/get-student-dashboard-data';
+import { ReadingProgressPanel } from '@/features/reading-progress/components/reading-progress-panel';
+import { ProgressBarList } from '@/features/reading-progress/components/progress-bar-list';
+import { getOwnProgress } from '@/features/reading-progress/actions/get-own-progress';
 
 export default async function DashboardPage() {
   const session = await requireSession();
@@ -52,6 +55,8 @@ export default async function DashboardPage() {
             { key: 'tahsin', label: 'Tahsin', color: 'var(--chart-2)' },
           ]}
         />
+
+        <ReadingProgressPanel />
       </div>
     );
   }
@@ -77,11 +82,13 @@ export default async function DashboardPage() {
             { key: 'tahsin', label: 'Tahsin', color: 'var(--chart-2)' },
           ]}
         />
+
+        <ReadingProgressPanel />
       </div>
     );
   }
 
-  const data = await getStudentDashboardData();
+  const [data, ownProgress] = await Promise.all([getStudentDashboardData(), getOwnProgress()]);
 
   return (
     <div className="space-y-6">
@@ -98,6 +105,12 @@ export default async function DashboardPage() {
         data={data.scoreChart}
         series={[{ key: 'score', label: 'Nilai', color: 'var(--chart-1)' }]}
       />
+
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+        <ProgressBarList title="Progres Tahfidz" items={ownProgress.tahfidz} />
+        <ProgressBarList title="Progres Wafa" items={ownProgress.wafa} />
+        <ProgressBarList title="Progres Tahsin Al-Qur'an" items={ownProgress.tahsinAlquran} />
+      </div>
     </div>
   );
 }
