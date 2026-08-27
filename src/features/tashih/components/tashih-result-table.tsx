@@ -19,6 +19,7 @@ import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
+import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
 import { deleteTashihResult } from '../actions/delete-tashih-result';
 import { TashihResultEditDialog } from './tashih-result-edit-dialog';
 import type { TashihResultTableData } from '../queries/list-all-tashih-results';
@@ -42,10 +43,11 @@ export function TashihResultTable({ data, editable = false }: Props) {
         const result = await deleteTashihResult(id);
         if (!result.success) {
           toast.error(result.message);
-          return;
+          return false;
         }
         toast.success(result.message);
         router.refresh();
+        return true;
       } finally {
         setDeletingId(null);
       }
@@ -91,16 +93,22 @@ export function TashihResultTable({ data, editable = false }: Props) {
               initialPassed={row.original.passed}
               initialNotes={row.original.notes}
             />
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-destructive hover:text-destructive"
-              disabled={deletingId === row.original.id}
-              onClick={() => handleDelete(row.original.id)}
-            >
-              <Trash2 className="h-4 w-4" />
-              Hapus
-            </Button>
+            <DeleteConfirmDialog
+              title="Hapus Hasil Tashih"
+              description="Apakah Anda yakin ingin menghapus hasil tashih ini? Tindakan ini tidak dapat dibatalkan."
+              onConfirm={() => handleDelete(row.original.id)}
+              trigger={
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-destructive hover:text-destructive"
+                  disabled={deletingId === row.original.id}
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Hapus
+                </Button>
+              }
+            />
           </div>
         ),
       },

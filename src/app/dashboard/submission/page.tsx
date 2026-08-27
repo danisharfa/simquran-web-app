@@ -63,7 +63,7 @@ export default async function SubmissionPage() {
       <div className="space-y-6">
         <PageHeader title="Monitoring Setoran" description="Pantau setoran tahfidz/tahsin seluruh siswa" />
 
-        <SubmissionTable data={submissions} showFilters />
+        <SubmissionTable data={submissions} />
       </div>
     );
   }

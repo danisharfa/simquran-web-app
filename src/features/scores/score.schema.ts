@@ -10,7 +10,6 @@ export const tahfidzScoreSchema = z.object({
   groupId: z.string().min(1),
   surahId: z.number({ message: 'Surah wajib dipilih' }),
   score: z.number().min(0).max(100),
-  description: z.string().nullable(),
 });
 
 export type TahfidzScoreSchema = z.infer<typeof tahfidzScoreSchema>;
@@ -21,7 +20,6 @@ export const tahsinScoreSchema = z.object({
   tahsinType: z.enum(['WAFA', 'ALQURAN']),
   topic: z.string().min(1, 'Topik wajib diisi'),
   score: z.number().min(0).max(100),
-  description: z.string().nullable(),
 });
 
 export type TahsinScoreSchema = z.infer<typeof tahsinScoreSchema>;

@@ -45,6 +45,14 @@ export const HomeActivityType = {
 export type HomeActivityType = (typeof HomeActivityType)[keyof typeof HomeActivityType]
 
 
+export const HomeActivityStatus = {
+  BELUM_DIPERIKSA: 'BELUM_DIPERIKSA',
+  SUDAH_DIPERIKSA: 'SUDAH_DIPERIKSA'
+} as const
+
+export type HomeActivityStatus = (typeof HomeActivityStatus)[keyof typeof HomeActivityStatus]
+
+
 export const TargetStatus = {
   TIDAK_TERCAPAI: 'TIDAK_TERCAPAI',
   TERCAPAI: 'TERCAPAI'

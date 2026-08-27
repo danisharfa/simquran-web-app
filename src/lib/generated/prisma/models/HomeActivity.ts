@@ -51,6 +51,7 @@ export type HomeActivityMinAggregateOutputType = {
   startVerse: number | null
   endVerse: number | null
   note: string | null
+  status: $Enums.HomeActivityStatus | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +67,7 @@ export type HomeActivityMaxAggregateOutputType = {
   startVerse: number | null
   endVerse: number | null
   note: string | null
+  status: $Enums.HomeActivityStatus | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -81,6 +83,7 @@ export type HomeActivityCountAggregateOutputType = {
   startVerse: number
   endVerse: number
   note: number
+  status: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -112,6 +115,7 @@ export type HomeActivityMinAggregateInputType = {
   startVerse?: true
   endVerse?: true
   note?: true
+  status?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -127,6 +131,7 @@ export type HomeActivityMaxAggregateInputType = {
   startVerse?: true
   endVerse?: true
   note?: true
+  status?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -142,6 +147,7 @@ export type HomeActivityCountAggregateInputType = {
   startVerse?: true
   endVerse?: true
   note?: true
+  status?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -244,6 +250,7 @@ export type HomeActivityGroupByOutputType = {
   startVerse: number
   endVerse: number
   note: string | null
+  status: $Enums.HomeActivityStatus
   createdAt: Date
   updatedAt: Date
   _count: HomeActivityCountAggregateOutputType | null
@@ -282,6 +289,7 @@ export type HomeActivityWhereInput = {
   startVerse?: Prisma.IntFilter<"HomeActivity"> | number
   endVerse?: Prisma.IntFilter<"HomeActivity"> | number
   note?: Prisma.StringNullableFilter<"HomeActivity"> | string | null
+  status?: Prisma.EnumHomeActivityStatusFilter<"HomeActivity"> | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFilter<"HomeActivity"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HomeActivity"> | Date | string
   student?: Prisma.XOR<Prisma.StudentProfileScalarRelationFilter, Prisma.StudentProfileWhereInput>
@@ -301,6 +309,7 @@ export type HomeActivityOrderByWithRelationInput = {
   startVerse?: Prisma.SortOrder
   endVerse?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   student?: Prisma.StudentProfileOrderByWithRelationInput
@@ -324,6 +333,7 @@ export type HomeActivityWhereUniqueInput = Prisma.AtLeast<{
   startVerse?: Prisma.IntFilter<"HomeActivity"> | number
   endVerse?: Prisma.IntFilter<"HomeActivity"> | number
   note?: Prisma.StringNullableFilter<"HomeActivity"> | string | null
+  status?: Prisma.EnumHomeActivityStatusFilter<"HomeActivity"> | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFilter<"HomeActivity"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HomeActivity"> | Date | string
   student?: Prisma.XOR<Prisma.StudentProfileScalarRelationFilter, Prisma.StudentProfileWhereInput>
@@ -343,6 +353,7 @@ export type HomeActivityOrderByWithAggregationInput = {
   startVerse?: Prisma.SortOrder
   endVerse?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.HomeActivityCountOrderByAggregateInput
@@ -366,6 +377,7 @@ export type HomeActivityScalarWhereWithAggregatesInput = {
   startVerse?: Prisma.IntWithAggregatesFilter<"HomeActivity"> | number
   endVerse?: Prisma.IntWithAggregatesFilter<"HomeActivity"> | number
   note?: Prisma.StringNullableWithAggregatesFilter<"HomeActivity"> | string | null
+  status?: Prisma.EnumHomeActivityStatusWithAggregatesFilter<"HomeActivity"> | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HomeActivity"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"HomeActivity"> | Date | string
 }
@@ -377,6 +389,7 @@ export type HomeActivityCreateInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   student: Prisma.StudentProfileCreateNestedOneWithoutHomeActivitiesInput
@@ -396,6 +409,7 @@ export type HomeActivityUncheckedCreateInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -407,6 +421,7 @@ export type HomeActivityUpdateInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   student?: Prisma.StudentProfileUpdateOneRequiredWithoutHomeActivitiesNestedInput
@@ -426,6 +441,7 @@ export type HomeActivityUncheckedUpdateInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -441,6 +457,7 @@ export type HomeActivityCreateManyInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -452,6 +469,7 @@ export type HomeActivityUpdateManyMutationInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -467,6 +485,7 @@ export type HomeActivityUncheckedUpdateManyInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -498,6 +517,7 @@ export type HomeActivityCountOrderByAggregateInput = {
   startVerse?: Prisma.SortOrder
   endVerse?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -520,6 +540,7 @@ export type HomeActivityMaxOrderByAggregateInput = {
   startVerse?: Prisma.SortOrder
   endVerse?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -535,6 +556,7 @@ export type HomeActivityMinOrderByAggregateInput = {
   startVerse?: Prisma.SortOrder
   endVerse?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -718,6 +740,10 @@ export type EnumHomeActivityTypeFieldUpdateOperationsInput = {
   set?: $Enums.HomeActivityType
 }
 
+export type EnumHomeActivityStatusFieldUpdateOperationsInput = {
+  set?: $Enums.HomeActivityStatus
+}
+
 export type HomeActivityCreateWithoutStudentInput = {
   id?: string
   date: Date | string
@@ -725,6 +751,7 @@ export type HomeActivityCreateWithoutStudentInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   group: Prisma.GroupCreateNestedOneWithoutHomeActivitiesInput
@@ -742,6 +769,7 @@ export type HomeActivityUncheckedCreateWithoutStudentInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -786,6 +814,7 @@ export type HomeActivityScalarWhereInput = {
   startVerse?: Prisma.IntFilter<"HomeActivity"> | number
   endVerse?: Prisma.IntFilter<"HomeActivity"> | number
   note?: Prisma.StringNullableFilter<"HomeActivity"> | string | null
+  status?: Prisma.EnumHomeActivityStatusFilter<"HomeActivity"> | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFilter<"HomeActivity"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HomeActivity"> | Date | string
 }
@@ -797,6 +826,7 @@ export type HomeActivityCreateWithoutGroupInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   student: Prisma.StudentProfileCreateNestedOneWithoutHomeActivitiesInput
@@ -814,6 +844,7 @@ export type HomeActivityUncheckedCreateWithoutGroupInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -851,6 +882,7 @@ export type HomeActivityCreateWithoutSurahInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   student: Prisma.StudentProfileCreateNestedOneWithoutHomeActivitiesInput
@@ -868,6 +900,7 @@ export type HomeActivityUncheckedCreateWithoutSurahInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -905,6 +938,7 @@ export type HomeActivityCreateWithoutJuzInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   student: Prisma.StudentProfileCreateNestedOneWithoutHomeActivitiesInput
@@ -922,6 +956,7 @@ export type HomeActivityUncheckedCreateWithoutJuzInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -962,6 +997,7 @@ export type HomeActivityCreateManyStudentInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -973,6 +1009,7 @@ export type HomeActivityUpdateWithoutStudentInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   group?: Prisma.GroupUpdateOneRequiredWithoutHomeActivitiesNestedInput
@@ -990,6 +1027,7 @@ export type HomeActivityUncheckedUpdateWithoutStudentInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1004,6 +1042,7 @@ export type HomeActivityUncheckedUpdateManyWithoutStudentInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1018,6 +1057,7 @@ export type HomeActivityCreateManyGroupInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1029,6 +1069,7 @@ export type HomeActivityUpdateWithoutGroupInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   student?: Prisma.StudentProfileUpdateOneRequiredWithoutHomeActivitiesNestedInput
@@ -1046,6 +1087,7 @@ export type HomeActivityUncheckedUpdateWithoutGroupInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1060,6 +1102,7 @@ export type HomeActivityUncheckedUpdateManyWithoutGroupInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1074,6 +1117,7 @@ export type HomeActivityCreateManySurahInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1085,6 +1129,7 @@ export type HomeActivityUpdateWithoutSurahInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   student?: Prisma.StudentProfileUpdateOneRequiredWithoutHomeActivitiesNestedInput
@@ -1102,6 +1147,7 @@ export type HomeActivityUncheckedUpdateWithoutSurahInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1116,6 +1162,7 @@ export type HomeActivityUncheckedUpdateManyWithoutSurahInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1130,6 +1177,7 @@ export type HomeActivityCreateManyJuzInput = {
   startVerse: number
   endVerse: number
   note?: string | null
+  status?: $Enums.HomeActivityStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1141,6 +1189,7 @@ export type HomeActivityUpdateWithoutJuzInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   student?: Prisma.StudentProfileUpdateOneRequiredWithoutHomeActivitiesNestedInput
@@ -1158,6 +1207,7 @@ export type HomeActivityUncheckedUpdateWithoutJuzInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1172,6 +1222,7 @@ export type HomeActivityUncheckedUpdateManyWithoutJuzInput = {
   startVerse?: Prisma.IntFieldUpdateOperationsInput | number
   endVerse?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHomeActivityStatusFieldUpdateOperationsInput | $Enums.HomeActivityStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1189,6 +1240,7 @@ export type HomeActivitySelect<ExtArgs extends runtime.Types.Extensions.Internal
   startVerse?: boolean
   endVerse?: boolean
   note?: boolean
+  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
@@ -1210,11 +1262,12 @@ export type HomeActivitySelectScalar = {
   startVerse?: boolean
   endVerse?: boolean
   note?: boolean
+  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type HomeActivityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "groupId" | "date" | "activityType" | "juzId" | "surahId" | "startVerse" | "endVerse" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["homeActivity"]>
+export type HomeActivityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "groupId" | "date" | "activityType" | "juzId" | "surahId" | "startVerse" | "endVerse" | "note" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["homeActivity"]>
 export type HomeActivityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
@@ -1241,6 +1294,7 @@ export type $HomeActivityPayload<ExtArgs extends runtime.Types.Extensions.Intern
     startVerse: number
     endVerse: number
     note: string | null
+    status: $Enums.HomeActivityStatus
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["homeActivity"]>
@@ -1626,6 +1680,7 @@ export interface HomeActivityFieldRefs {
   readonly startVerse: Prisma.FieldRef<"HomeActivity", 'Int'>
   readonly endVerse: Prisma.FieldRef<"HomeActivity", 'Int'>
   readonly note: Prisma.FieldRef<"HomeActivity", 'String'>
+  readonly status: Prisma.FieldRef<"HomeActivity", 'HomeActivityStatus'>
   readonly createdAt: Prisma.FieldRef<"HomeActivity", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"HomeActivity", 'DateTime'>
 }

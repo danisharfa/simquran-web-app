@@ -2897,6 +2897,7 @@ export const HomeActivityScalarFieldEnum = {
   startVerse: 'startVerse',
   endVerse: 'endVerse',
   note: 'note',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3584,6 +3585,13 @@ export type EnumSubmissionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'HomeActivityType'
  */
 export type EnumHomeActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HomeActivityType'>
+    
+
+
+/**
+ * Reference to a field of type 'HomeActivityStatus'
+ */
+export type EnumHomeActivityStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HomeActivityStatus'>
     
 
 

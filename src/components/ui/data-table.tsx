@@ -19,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from './dropdown-menu';
 import { Input } from '@/components/ui/input';
+import { Field, FieldLabel } from '@/components/ui/field';
 import { Button } from './button';
 import { DataTablePagination } from './table-pagination';
 
@@ -39,16 +40,19 @@ export function DataTable<T>({ title, table, filterColumn, showColumnFilter = tr
         </CardHeader>
       )}
       <CardContent className="min-w-0">
-        <div className="flex flex-wrap items-center gap-2 py-4">
+        <div className="flex flex-wrap items-end gap-2 py-4">
           {toolbar}
           {filterColumn && table.getColumn(filterColumn) && (
-            <Input
-              placeholder={`Cari ${filterColumn}...`}
-              onChange={(event) =>
-                table.getColumn(filterColumn)?.setFilterValue(event.target.value)
-              }
-              className="max-w-sm"
-            />
+            <Field className="w-56">
+              <FieldLabel aria-hidden="true">&nbsp;</FieldLabel>
+              <Input
+                placeholder={`Cari ${filterColumn}...`}
+                aria-label={`Cari ${filterColumn}`}
+                onChange={(event) =>
+                  table.getColumn(filterColumn)?.setFilterValue(event.target.value)
+                }
+              />
+            </Field>
           )}
           {showColumnFilter && (
             <DropdownMenu>

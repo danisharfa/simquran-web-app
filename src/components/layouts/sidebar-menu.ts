@@ -6,7 +6,6 @@ import {
   ClipboardList,
   ClipboardCheck,
   CalendarCheck2,
-  BookPlus,
   FileCheck,
   Target,
   GraduationCap,

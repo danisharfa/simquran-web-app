@@ -4,6 +4,7 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 export interface HomeActivityTableData {
   id: string;
   date: Date;
+  studentId: string;
   studentName: string;
   groupId: string;
   groupName: string;
@@ -14,6 +15,7 @@ export interface HomeActivityTableData {
   activityType: string;
   detail: string;
   note: string | null;
+  status: string;
 }
 
 export async function listOwnHomeActivities(): Promise<HomeActivityTableData[]> {
@@ -28,6 +30,7 @@ export async function listOwnHomeActivities(): Promise<HomeActivityTableData[]> 
   return activities.map((a) => ({
     id: a.id,
     date: a.date,
+    studentId: a.studentId,
     studentName: a.student.user.name,
     groupId: a.groupId,
     groupName: a.group.name,
@@ -38,5 +41,6 @@ export async function listOwnHomeActivities(): Promise<HomeActivityTableData[]> 
     activityType: a.activityType,
     detail: `${a.surah.name} ayat ${a.startVerse}-${a.endVerse}`,
     note: a.note,
+    status: a.status,
   }));
 }

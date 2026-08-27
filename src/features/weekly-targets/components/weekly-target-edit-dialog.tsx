@@ -132,7 +132,6 @@ export function WeeklyTargetEditDialog({ targetId, surahOptions, juzOptions, sur
             wafaOptions={wafaOptions}
             values={values}
             onChange={handleChange}
-            showStatus
           />
         )}
 

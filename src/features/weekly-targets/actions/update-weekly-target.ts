@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { weeklyTargetFieldsSchema, type WeeklyTargetFields } from '../weekly-target.schema';
+import { recalculateWeeklyTargetsForStudent } from '../recalculate-weekly-target-progress';
 
 export async function updateWeeklyTarget(targetId: string, input: WeeklyTargetFields) {
   const session = await requireRoleOrThrow(['teacher']);
@@ -25,6 +26,8 @@ export async function updateWeeklyTarget(targetId: string, input: WeeklyTargetFi
     where: { id: targetId },
     data: { groupId, startDate: new Date(startDate), endDate: new Date(endDate), ...rest },
   });
+
+  await recalculateWeeklyTargetsForStudent(existing.studentId);
 
   revalidatePath('/dashboard/weekly-target');
 

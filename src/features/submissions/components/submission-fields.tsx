@@ -41,6 +41,7 @@ interface Props {
   wafaOptions: ReferenceOption[];
   values: SubmissionFieldValues;
   onChange: <K extends keyof SubmissionFieldValues>(key: K, value: SubmissionFieldValues[K]) => void;
+  hideStatus?: boolean;
 }
 
 export function SubmissionFields({
@@ -51,6 +52,7 @@ export function SubmissionFields({
   wafaOptions,
   values,
   onChange,
+  hideStatus = false,
 }: Props) {
   const selectedGroup = groups.find((g) => g.id === values.groupId);
   const isWafa = values.submissionType === 'TAHSIN_WAFA';
@@ -257,26 +259,28 @@ export function SubmissionFields({
         </Select>
       </Field>
 
-      <Field>
-        <FieldLabel>Status</FieldLabel>
-        <Select
-          value={values.submissionStatus}
-          onValueChange={(v) => onChange('submissionStatus', v as SubmissionFieldValues['submissionStatus'])}
-        >
-          <SelectTrigger>
-            <SelectValue>
-              {SUBMISSION_STATUS_OPTIONS.find((o) => o.value === values.submissionStatus)?.label}
-            </SelectValue>
-          </SelectTrigger>
-          <SelectContent>
-            {SUBMISSION_STATUS_OPTIONS.map((opt) => (
-              <SelectItem key={opt.value} value={opt.value}>
-                {opt.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </Field>
+      {!hideStatus && (
+        <Field>
+          <FieldLabel>Status</FieldLabel>
+          <Select
+            value={values.submissionStatus}
+            onValueChange={(v) => onChange('submissionStatus', v as SubmissionFieldValues['submissionStatus'])}
+          >
+            <SelectTrigger>
+              <SelectValue>
+                {SUBMISSION_STATUS_OPTIONS.find((o) => o.value === values.submissionStatus)?.label}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {SUBMISSION_STATUS_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </Field>
+      )}
 
       <Field className="sm:col-span-2">
         <FieldLabel>Catatan</FieldLabel>

@@ -6,6 +6,11 @@ export const HOME_ACTIVITY_TYPE_OPTIONS = [
   { value: 'TARJAMAH', label: 'Tarjamah' },
 ] as const;
 
+export const HOME_ACTIVITY_STATUS_OPTIONS = [
+  { value: 'BELUM_DIPERIKSA', label: 'Belum Diperiksa' },
+  { value: 'SUDAH_DIPERIKSA', label: 'Sudah Diperiksa' },
+] as const;
+
 export const homeActivitySchema = z.object({
   date: z.string().min(1, 'Tanggal wajib diisi'),
   activityType: z.enum(['MURAJAAH', 'TILAWAH', 'TARJAMAH']),

@@ -19,6 +19,7 @@ import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
+import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
 import { deleteMunaqasyahSchedule } from '../actions/delete-munaqasyah-schedule';
 import type { MunaqasyahScheduleTableData } from '../queries/list-munaqasyah-schedules';
 
@@ -40,10 +41,11 @@ export function MunaqasyahScheduleTable({ data }: Props) {
         const result = await deleteMunaqasyahSchedule(id);
         if (!result.success) {
           toast.error(result.message);
-          return;
+          return false;
         }
         toast.success(result.message);
         router.refresh();
+        return true;
       } finally {
         setDeletingId(null);
       }
@@ -78,16 +80,22 @@ export function MunaqasyahScheduleTable({ data }: Props) {
         enableHiding: false,
         header: 'Aksi',
         cell: ({ row }) => (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-destructive hover:text-destructive"
-            disabled={deletingId === row.original.id}
-            onClick={() => handleDelete(row.original.id)}
-          >
-            <Trash2 className="h-4 w-4" />
-            Hapus
-          </Button>
+          <DeleteConfirmDialog
+            title="Hapus Jadwal Munaqasyah"
+            description="Apakah Anda yakin ingin menghapus jadwal munaqasyah ini? Tindakan ini tidak dapat dibatalkan."
+            onConfirm={() => handleDelete(row.original.id)}
+            trigger={
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-destructive hover:text-destructive"
+                disabled={deletingId === row.original.id}
+              >
+                <Trash2 className="h-4 w-4" />
+                Hapus
+              </Button>
+            }
+          />
         ),
       },
     ],

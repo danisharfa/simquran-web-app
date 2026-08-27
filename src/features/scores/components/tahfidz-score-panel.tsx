@@ -6,9 +6,11 @@ import { toast } from 'sonner';
 import { BookOpenIcon, Trash2 } from 'lucide-react';
 import {
   ColumnDef,
+  ColumnFiltersState,
   useReactTable,
   getCoreRowModel,
   getSortedRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
 } from '@tanstack/react-table';
 
@@ -23,7 +25,6 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Spinner } from '@/components/ui/spinner';
 import { Field, FieldLabel } from '@/components/ui/field';
 import {
@@ -34,6 +35,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { DataTable } from '@/components/ui/data-table';
+import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
 import { GRADE_DESCRIPTION } from '../grade';
 import { upsertTahfidzScore } from '../actions/upsert-tahfidz-score';
 import { deleteTahfidzScore } from '../actions/delete-tahfidz-score';
@@ -51,9 +53,15 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
   const router = useRouter();
   const [surahId, setSurahId] = useState<number | null>(null);
   const [score, setScore] = useState('');
-  const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
+  const scoredSurahIds = useMemo(() => new Set(scores.map((s) => s.surahId)), [scores]);
+  const eligibleSurahOptions = useMemo(
+    () => surahOptions.filter((o) => !scoredSurahIds.has(o.id) || o.id === surahId),
+    [surahOptions, scoredSurahIds, surahId],
+  );
 
   async function handleSave() {
     if (!surahId || !score) {
@@ -68,7 +76,6 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
         groupId,
         surahId,
         score: Number(score),
-        description: description || null,
       });
 
       if (!result.success) {
@@ -79,7 +86,6 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
       toast.success(result.message);
       setSurahId(null);
       setScore('');
-      setDescription('');
       router.refresh();
     } finally {
       setIsSubmitting(false);
@@ -93,10 +99,11 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
         const result = await deleteTahfidzScore(id);
         if (!result.success) {
           toast.error(result.message);
-          return;
+          return false;
         }
         toast.success(result.message);
         router.refresh();
+        return true;
       } finally {
         setDeletingId(null);
       }
@@ -107,7 +114,6 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
   const handleEditRow = useCallback((row: TahfidzScoreData) => {
     setSurahId(row.surahId);
     setScore(String(row.score));
-    setDescription(row.description ?? '');
   }, []);
 
   const columns = useMemo<ColumnDef<TahfidzScoreData>[]>(
@@ -129,16 +135,22 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
             <Button variant="outline" size="sm" onClick={() => handleEditRow(row.original)}>
               Edit
             </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-destructive hover:text-destructive"
-              disabled={deletingId === row.original.id}
-              onClick={() => handleDelete(row.original.id)}
-            >
-              <Trash2 className="h-4 w-4" />
-              Hapus
-            </Button>
+            <DeleteConfirmDialog
+              title="Hapus Nilai Tahfidz"
+              description="Apakah Anda yakin ingin menghapus nilai tahfidz ini? Tindakan ini tidak dapat dibatalkan."
+              onConfirm={() => handleDelete(row.original.id)}
+              trigger={
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-destructive hover:text-destructive"
+                  disabled={deletingId === row.original.id}
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Hapus
+                </Button>
+              }
+            />
           </div>
         ),
       },
@@ -149,8 +161,11 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
   const table = useReactTable({
     data: scores,
     columns,
+    state: { columnFilters },
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
 
@@ -174,7 +189,7 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
           <DialogDescription>Tambah atau perbarui nilai tahfidz siswa.</DialogDescription>
         </DialogHeader>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field>
             <FieldLabel>Surah</FieldLabel>
             <Select
@@ -185,7 +200,7 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
                 <SelectValue>{surahOptions.find((o) => o.id === surahId)?.name ?? 'Pilih surah'}</SelectValue>
               </SelectTrigger>
               <SelectContent>
-                {surahOptions.map((opt) => (
+                {eligibleSurahOptions.map((opt) => (
                   <SelectItem key={opt.id} value={String(opt.id)}>
                     {opt.name}
                   </SelectItem>
@@ -198,14 +213,12 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
             <FieldLabel>Nilai (0-100)</FieldLabel>
             <Input type="number" min={0} max={100} value={score} onChange={(e) => setScore(e.target.value)} />
           </Field>
-
-          <Field>
-            <FieldLabel>Deskripsi</FieldLabel>
-            <Textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={1} />
-          </Field>
         </div>
+        <p className="text-muted-foreground text-sm">
+          Deskripsi dibuat otomatis berdasarkan nilai (mis. &quot;Sangat baik dalam menghafal ...&quot;).
+        </p>
 
-        <DataTable table={table} showColumnFilter={false} />
+        <DataTable table={table} filterColumn="Surah" showColumnFilter={false} />
 
         <DialogFooter>
           <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">

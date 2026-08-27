@@ -3,7 +3,7 @@ import type { Semester } from '@/lib/generated/prisma/enums';
 import { cumulativePeriodFilter, type StudentInPeriod } from './students-in-period';
 import { toStatus, type StudentProgress } from './types';
 
-/** Progres Wafa: jumlah halaman per buku Wafa yang sudah SELESAI di-tashih (jenis WAFA). */
+/** Progres Wafa: jumlah halaman per buku Wafa yang sudah lulus tashih (jenis WAFA). */
 export async function computeWafaProgress(
   students: StudentInPeriod[],
   academicYear: string,
@@ -16,6 +16,7 @@ export async function computeWafaProgress(
         studentId: { in: students.map((s) => s.userId) },
         tashihType: 'WAFA',
         status: 'SELESAI',
+        result: { passed: true },
         group: { classroom: cumulativePeriodFilter(academicYear, semester) },
       },
       select: { studentId: true, wafaId: true, startPage: true, endPage: true },

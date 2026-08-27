@@ -346,6 +346,7 @@ export const HomeActivityScalarFieldEnum = {
   startVerse: 'startVerse',
   endVerse: 'endVerse',
   note: 'note',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

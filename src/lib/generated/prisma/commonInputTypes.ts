@@ -358,6 +358,13 @@ export type EnumHomeActivityTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumHomeActivityTypeFilter<$PrismaModel> | $Enums.HomeActivityType
 }
 
+export type EnumHomeActivityStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.HomeActivityStatus | Prisma.EnumHomeActivityStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.HomeActivityStatus[]
+  notIn?: $Enums.HomeActivityStatus[]
+  not?: Prisma.NestedEnumHomeActivityStatusFilter<$PrismaModel> | $Enums.HomeActivityStatus
+}
+
 export type EnumHomeActivityTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.HomeActivityType | Prisma.EnumHomeActivityTypeFieldRefInput<$PrismaModel>
   in?: $Enums.HomeActivityType[]
@@ -366,6 +373,16 @@ export type EnumHomeActivityTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumHomeActivityTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumHomeActivityTypeFilter<$PrismaModel>
+}
+
+export type EnumHomeActivityStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.HomeActivityStatus | Prisma.EnumHomeActivityStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.HomeActivityStatus[]
+  notIn?: $Enums.HomeActivityStatus[]
+  not?: Prisma.NestedEnumHomeActivityStatusWithAggregatesFilter<$PrismaModel> | $Enums.HomeActivityStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumHomeActivityStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumHomeActivityStatusFilter<$PrismaModel>
 }
 
 export type EnumTargetStatusFilter<$PrismaModel = never> = {
@@ -936,6 +953,13 @@ export type NestedEnumHomeActivityTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumHomeActivityTypeFilter<$PrismaModel> | $Enums.HomeActivityType
 }
 
+export type NestedEnumHomeActivityStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.HomeActivityStatus | Prisma.EnumHomeActivityStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.HomeActivityStatus[]
+  notIn?: $Enums.HomeActivityStatus[]
+  not?: Prisma.NestedEnumHomeActivityStatusFilter<$PrismaModel> | $Enums.HomeActivityStatus
+}
+
 export type NestedEnumHomeActivityTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.HomeActivityType | Prisma.EnumHomeActivityTypeFieldRefInput<$PrismaModel>
   in?: $Enums.HomeActivityType[]
@@ -944,6 +968,16 @@ export type NestedEnumHomeActivityTypeWithAggregatesFilter<$PrismaModel = never>
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumHomeActivityTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumHomeActivityTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumHomeActivityStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.HomeActivityStatus | Prisma.EnumHomeActivityStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.HomeActivityStatus[]
+  notIn?: $Enums.HomeActivityStatus[]
+  not?: Prisma.NestedEnumHomeActivityStatusWithAggregatesFilter<$PrismaModel> | $Enums.HomeActivityStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumHomeActivityStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumHomeActivityStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumTargetStatusFilter<$PrismaModel = never> = {

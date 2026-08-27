@@ -92,6 +92,8 @@ Only comment where the code itself can't explain the "why" (a non-obvious constr
 - **Styling**: Tailwind CSS v4, shadcn/ui with base-nova theme, `cn()` utility from `@/lib/utils`
 - **Icons**: `lucide-react`
 - **Path alias**: `@/*` maps to `src/*`
+- **Delete buttons always need confirmation**: never wire a delete/remove button straight to its handler. Wrap it with [`DeleteConfirmDialog`](src/components/ui/delete-confirm-dialog.tsx) (pass it as `trigger`), and make the handler return `true`/`false` so the dialog only closes on success and stays open with the error toast on failure. Edit buttons don't need this — opening a form isn't destructive.
+- **Tables always need a filter/search matching their content**: any `DataTable` with more than a handful of rows should let the user narrow it down — via [`TableFilters`](src/components/layouts/filters/table-filters.tsx) (period/classroom/group/student dropdowns, extra dropdown filters, date range) when the data has those dimensions, or at minimum `filterColumn` text search on `DataTable` for simpler lists. When adding a new table, check what columns it has and add the dropdowns/search that make sense for that data — don't ship a table with no way to narrow it down.
 
 ### Database Schema
 

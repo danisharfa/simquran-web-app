@@ -5,6 +5,7 @@ import { formatSubmissionDetail } from '../format-submission-detail';
 export interface SubmissionTableData {
   id: string;
   date: Date;
+  studentId: string;
   studentName: string;
   groupId: string;
   groupName: string;
@@ -36,6 +37,7 @@ export async function listMySubmissions(): Promise<SubmissionTableData[]> {
   return submissions.map((s) => ({
     id: s.id,
     date: s.date,
+    studentId: s.studentId,
     studentName: s.student.user.name,
     groupId: s.groupId,
     groupName: s.group.name,

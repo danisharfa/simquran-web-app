@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import type { Semester } from '@/lib/generated/prisma/enums';
+import { mergeIntervals, overlapLength } from '@/lib/interval-utils';
 import { cumulativePeriodFilter, type StudentInPeriod } from './students-in-period';
 import { toStatus, type StudentProgress } from './types';
 
@@ -28,14 +29,16 @@ export async function computeTahsinAlquranProgress(
     const progress = allJuz.map((juz) => {
       const totalAyah = juz.surahJuz.reduce((sum, sj) => sum + (sj.endVerse - sj.startVerse + 1), 0);
 
-      const completedAyah = studentSubmissions.reduce((sum, s) => {
-        if (s.surahId == null || s.startVerse == null || s.endVerse == null) return sum;
-        const surahJuzInfo = juz.surahJuz.find((sj) => sj.surahId === s.surahId);
-        if (!surahJuzInfo) return sum;
+      const completedAyah = juz.surahJuz.reduce((sum, surahJuzInfo) => {
+        const required = { start: surahJuzInfo.startVerse, end: surahJuzInfo.endVerse };
+        const actualIntervals = studentSubmissions
+          .filter((s) => s.surahId === surahJuzInfo.surahId && s.startVerse != null && s.endVerse != null)
+          .map((s) => ({ start: s.startVerse!, end: s.endVerse! }));
 
-        const overlapStart = Math.max(surahJuzInfo.startVerse, s.startVerse);
-        const overlapEnd = Math.min(surahJuzInfo.endVerse, s.endVerse);
-        return overlapStart <= overlapEnd ? sum + (overlapEnd - overlapStart + 1) : sum;
+        return (
+          sum +
+          mergeIntervals(actualIntervals).reduce((acc, interval) => acc + overlapLength(required, interval), 0)
+        );
       }, 0);
 
       return {

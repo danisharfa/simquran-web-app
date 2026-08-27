@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { DateRangePicker } from '@/components/layouts/calendars/date-range-picker';
-import { TARGET_TYPE_OPTIONS, TARGET_STATUS_OPTIONS } from '../weekly-target.schema';
+import { TARGET_TYPE_OPTIONS } from '../weekly-target.schema';
 import { filterSurahOptionsByJuz } from '@/features/quran-reference/filter-surah-by-juz';
 import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
@@ -42,7 +42,6 @@ interface Props {
   wafaOptions: ReferenceOption[];
   values: WeeklyTargetFieldValues;
   onChange: <K extends keyof WeeklyTargetFieldValues>(key: K, value: WeeklyTargetFieldValues[K]) => void;
-  showStatus?: boolean;
 }
 
 export function WeeklyTargetFields({
@@ -52,7 +51,6 @@ export function WeeklyTargetFields({
   wafaOptions,
   values,
   onChange,
-  showStatus = false,
 }: Props) {
   const isWafa = values.type === 'TAHSIN_WAFA';
   const [sameSurah, setSameSurah] = useState(false);
@@ -286,27 +284,6 @@ export function WeeklyTargetFields({
             </Field>
           </div>
         </>
-      )}
-
-      {showStatus && (
-        <Field>
-          <FieldLabel>Status</FieldLabel>
-          <Select
-            value={values.status}
-            onValueChange={(v) => onChange('status', v as WeeklyTargetFieldValues['status'])}
-          >
-            <SelectTrigger>
-              <SelectValue>{TARGET_STATUS_OPTIONS.find((o) => o.value === values.status)?.label}</SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              {TARGET_STATUS_OPTIONS.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </Field>
       )}
 
       <Field className="sm:col-span-2">

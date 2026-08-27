@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import type { DateRange } from 'react-day-picker';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -17,9 +18,10 @@ import { toast } from 'sonner';
 import { Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
+import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
+import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
 import { SUBMISSION_TYPE_OPTIONS, ADAB_OPTIONS, SUBMISSION_STATUS_OPTIONS } from '../submission.schema';
 import { deleteSubmission } from '../actions/delete-submission';
 import { SubmissionEditDialog } from './submission-edit-dialog';
@@ -32,12 +34,9 @@ const ADAB_LABEL = Object.fromEntries(ADAB_OPTIONS.map((o) => [o.value, o.label]
 const STATUS_LABEL = Object.fromEntries(SUBMISSION_STATUS_OPTIONS.map((o) => [o.value, o.label]));
 const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
 
-const ALL = '__ALL__';
-
 interface Props {
   data: SubmissionTableData[];
   editable?: boolean;
-  showFilters?: boolean;
   groups?: GroupWithStudents[];
   surahOptions?: ReferenceOption[];
   juzOptions?: ReferenceOption[];
@@ -48,7 +47,6 @@ interface Props {
 export function SubmissionTable({
   data,
   editable = false,
-  showFilters = editable,
   groups = [],
   surahOptions = [],
   juzOptions = [],
@@ -61,9 +59,11 @@ export function SubmissionTable({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const [period, setPeriod] = useState(ALL);
-  const [classroomId, setClassroomId] = useState(ALL);
-  const [groupId, setGroupId] = useState(ALL);
+  const [period, setPeriod] = useState(FILTER_ALL);
+  const [classroomId, setClassroomId] = useState(FILTER_ALL);
+  const [groupId, setGroupId] = useState(FILTER_ALL);
+  const [studentId, setStudentId] = useState(FILTER_ALL);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
   const periodOptions = useMemo(() => {
     const map = new Map<string, string>();
@@ -75,23 +75,31 @@ export function SubmissionTable({
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
     data.forEach((d) => map.set(d.classroomId, d.classroomName));
-    return Array.from(map, ([id, name]) => ({ id, name }));
+    return Array.from(map, ([value, label]) => ({ value, label }));
   }, [data]);
   const groupOptions = useMemo(() => {
     const map = new Map<string, string>();
     data.forEach((d) => map.set(d.groupId, d.groupName));
-    return Array.from(map, ([id, name]) => ({ id, name }));
+    return Array.from(map, ([value, label]) => ({ value, label }));
+  }, [data]);
+  const studentOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    data.forEach((d) => map.set(d.studentId, d.studentName));
+    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => a.label.localeCompare(b.label));
   }, [data]);
 
-  const filteredData = useMemo(() => {
-    if (!showFilters) return data;
-    return data.filter(
-      (d) =>
-        (period === ALL || `${d.academicYear}|${d.semester}` === period) &&
-        (classroomId === ALL || d.classroomId === classroomId) &&
-        (groupId === ALL || d.groupId === groupId),
-    );
-  }, [data, showFilters, period, classroomId, groupId]);
+  const filteredData = useMemo(
+    () =>
+      data.filter(
+        (d) =>
+          (period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period) &&
+          (classroomId === FILTER_ALL || d.classroomId === classroomId) &&
+          (groupId === FILTER_ALL || d.groupId === groupId) &&
+          (studentId === FILTER_ALL || d.studentId === studentId) &&
+          isDateInRange(d.date, dateRange),
+      ),
+    [data, period, classroomId, groupId, studentId, dateRange],
+  );
 
   const handleDelete = useCallback(
     async (id: string) => {
@@ -100,10 +108,11 @@ export function SubmissionTable({
         const result = await deleteSubmission(id);
         if (!result.success) {
           toast.error(result.message);
-          return;
+          return false;
         }
         toast.success(result.message);
         router.refresh();
+        return true;
       } finally {
         setDeletingId(null);
       }
@@ -172,16 +181,22 @@ export function SubmissionTable({
               surahJuzMap={surahJuzMap}
               wafaOptions={wafaOptions}
             />
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-destructive hover:text-destructive"
-              disabled={deletingId === row.original.id}
-              onClick={() => handleDelete(row.original.id)}
-            >
-              <Trash2 className="h-4 w-4" />
-              Hapus
-            </Button>
+            <DeleteConfirmDialog
+              title="Hapus Setoran"
+              description="Apakah Anda yakin ingin menghapus setoran ini? Tindakan ini tidak dapat dibatalkan."
+              onConfirm={() => handleDelete(row.original.id)}
+              trigger={
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-destructive hover:text-destructive"
+                  disabled={deletingId === row.original.id}
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Hapus
+                </Button>
+              }
+            />
           </div>
         ),
       },
@@ -208,60 +223,14 @@ export function SubmissionTable({
       filterColumn="Nama Siswa"
       showColumnFilter={false}
       toolbar={
-        showFilters ? (
-          <div className="flex flex-wrap items-center gap-2">
-            <Select value={period} onValueChange={(v) => setPeriod(v ?? ALL)}>
-              <SelectTrigger className="w-44">
-                <SelectValue>
-                  {period === ALL ? 'Semua Tahun Ajaran' : (periodOptions.find((p) => p.value === period)?.label ?? period)}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value={ALL}>Semua Tahun Ajaran</SelectItem>
-                {periodOptions.map((p) => (
-                  <SelectItem key={p.value} value={p.value}>
-                    {p.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select value={classroomId} onValueChange={(v) => setClassroomId(v ?? ALL)}>
-              <SelectTrigger className="w-32">
-                <SelectValue>
-                  {classroomId === ALL
-                    ? 'Semua Kelas'
-                    : (classroomOptions.find((c) => c.id === classroomId)?.name ?? 'Semua Kelas')}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value={ALL}>Semua Kelas</SelectItem>
-                {classroomOptions.map((c) => (
-                  <SelectItem key={c.id} value={c.id}>
-                    {c.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select value={groupId} onValueChange={(v) => setGroupId(v ?? ALL)}>
-              <SelectTrigger className="w-36">
-                <SelectValue>
-                  {groupId === ALL
-                    ? 'Semua Kelompok'
-                    : (groupOptions.find((g) => g.id === groupId)?.name ?? 'Semua Kelompok')}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value={ALL}>Semua Kelompok</SelectItem>
-                {groupOptions.map((g) => (
-                  <SelectItem key={g.id} value={g.id}>
-                    {g.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+        data.length > 0 ? (
+          <TableFilters
+            period={{ value: period, onChange: setPeriod, options: periodOptions }}
+            classroom={{ value: classroomId, onChange: setClassroomId, options: classroomOptions }}
+            group={{ value: groupId, onChange: setGroupId, options: groupOptions }}
+            student={{ value: studentId, onChange: setStudentId, options: studentOptions }}
+            dateRange={{ value: dateRange, onChange: setDateRange, label: 'Tanggal Setoran' }}
+          />
         ) : undefined
       }
     />

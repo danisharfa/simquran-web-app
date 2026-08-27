@@ -19,6 +19,7 @@ import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
+import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
 import { removeStudentFromClassroom } from '../actions/remove-student-from-classroom';
 import type { StudentOption } from '../queries/list-classroom-students';
 
@@ -43,11 +44,12 @@ export function ClassroomStudentTable({ classroomId, data }: Props) {
 
         if (!result.success) {
           toast.error(result.message);
-          return;
+          return false;
         }
 
         toast.success(result.message);
         router.refresh();
+        return true;
       } finally {
         setRemovingId(null);
       }
@@ -74,15 +76,17 @@ export function ClassroomStudentTable({ classroomId, data }: Props) {
         cell: ({ row }) => {
           const student = row.original;
           return (
-            <Button
-              variant="destructive"
-              size="sm"
-              disabled={removingId === student.userId}
-              onClick={() => handleRemove(student.userId)}
-            >
-              <Trash2 />
-              Hapus
-            </Button>
+            <DeleteConfirmDialog
+              title="Keluarkan Siswa"
+              description={`Apakah Anda yakin ingin mengeluarkan ${student.name} dari kelas ini?`}
+              onConfirm={() => handleRemove(student.userId)}
+              trigger={
+                <Button variant="destructive" size="sm" disabled={removingId === student.userId}>
+                  <Trash2 />
+                  Hapus
+                </Button>
+              }
+            />
           );
         },
       },

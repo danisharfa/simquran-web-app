@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/require-role';
 import { PageHeader } from '@/components/layouts/page-header';
 import { AddUserForm } from '@/features/users/components/create-user-form';
-import { UserTable } from '@/features/users/components/user-table';
+import { UserTableTabs } from '@/features/users/components/user-table-tabs';
 import { listUsersByRole } from '@/features/users/queries/list-users';
 
 export default async function UsersPage() {
@@ -24,10 +24,14 @@ export default async function UsersPage() {
           action={<AddUserForm />}
         />
 
-        <UserTable data={admins} title="Daftar Admin" />
-        <UserTable data={coordinators} title="Daftar Koordinator" />
-        <UserTable data={teachers} title="Daftar Guru" />
-        <UserTable data={students} title="Daftar Siswa" />
+        <UserTableTabs
+          tabs={[
+            { value: 'admin', label: 'Admin', data: admins },
+            { value: 'coordinator', label: 'Koordinator', data: coordinators },
+            { value: 'teacher', label: 'Guru', data: teachers },
+            { value: 'student', label: 'Siswa', data: students },
+          ]}
+        />
       </div>
     );
   }
@@ -47,9 +51,13 @@ export default async function UsersPage() {
           action={<AddUserForm allowedRoles={['COORDINATOR', 'TEACHER', 'STUDENT']} />}
         />
 
-        <UserTable data={coordinators} title="Daftar Koordinator" />
-        <UserTable data={teachers} title="Daftar Guru" />
-        <UserTable data={students} title="Daftar Siswa" />
+        <UserTableTabs
+          tabs={[
+            { value: 'coordinator', label: 'Koordinator', data: coordinators },
+            { value: 'teacher', label: 'Guru', data: teachers },
+            { value: 'student', label: 'Siswa', data: students },
+          ]}
+        />
       </div>
     );
   }

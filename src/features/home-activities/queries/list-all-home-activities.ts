@@ -13,6 +13,7 @@ export async function listAllHomeActivities(): Promise<HomeActivityTableData[]> 
   return activities.map((a) => ({
     id: a.id,
     date: a.date,
+    studentId: a.studentId,
     studentName: a.student.user.name,
     groupId: a.groupId,
     groupName: a.group.name,
@@ -23,5 +24,6 @@ export async function listAllHomeActivities(): Promise<HomeActivityTableData[]> 
     activityType: a.activityType,
     detail: `${a.surah.name} ayat ${a.startVerse}-${a.endVerse}`,
     note: a.note,
+    status: a.status,
   }));
 }

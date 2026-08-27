@@ -65,7 +65,7 @@ export default async function HomeActivityPage() {
     <div className="space-y-6">
       <PageHeader title="Aktivitas Rumah Siswa" description="Pantau aktivitas murajaah/tilawah/tarjamah siswa" />
 
-      <HomeActivityTable data={activities} showFilters />
+      <HomeActivityTable data={activities} canReview={role === 'teacher'} />
     </div>
   );
 }

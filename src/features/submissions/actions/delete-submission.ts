@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
+import { recalculateWeeklyTargetsForStudent } from '@/features/weekly-targets/recalculate-weekly-target-progress';
 
 export async function deleteSubmission(submissionId: string) {
   const session = await requireRoleOrThrow(['teacher']);
@@ -15,7 +16,10 @@ export async function deleteSubmission(submissionId: string) {
 
   await prisma.submission.delete({ where: { id: submissionId } });
 
+  await recalculateWeeklyTargetsForStudent(existing.studentId);
+
   revalidatePath('/dashboard/submission');
+  revalidatePath('/dashboard/weekly-target');
 
   return { success: true, message: 'Setoran berhasil dihapus' };
 }

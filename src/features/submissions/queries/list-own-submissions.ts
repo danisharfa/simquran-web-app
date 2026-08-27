@@ -20,6 +20,7 @@ export async function listOwnSubmissions(): Promise<SubmissionTableData[]> {
   return submissions.map((s) => ({
     id: s.id,
     date: s.date,
+    studentId: s.studentId,
     studentName: s.student.user.name,
     groupId: s.groupId,
     groupName: s.group.name,

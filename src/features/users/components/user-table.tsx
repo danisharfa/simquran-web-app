@@ -21,7 +21,7 @@ import { UserDetailDialog } from './user-detail-dialog';
 
 interface Props {
   data: UserTableData[];
-  title: string;
+  title?: string;
 }
 
 export function UserTable({ data, title }: Props) {

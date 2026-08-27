@@ -371,6 +371,7 @@ model HomeActivity {
   startVerse Int
   endVerse   Int
   note       String?
+  status     HomeActivityStatus @default(BELUM_DIPERIKSA)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -447,6 +448,11 @@ enum HomeActivityType {
   MURAJAAH
   TILAWAH
   TARJAMAH
+}
+
+enum HomeActivityStatus {
+  BELUM_DIPERIKSA
+  SUDAH_DIPERIKSA
 }
 
 enum TargetStatus {

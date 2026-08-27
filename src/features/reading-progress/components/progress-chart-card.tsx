@@ -25,13 +25,17 @@ interface ChartProps {
   data: ChartBar[];
   height: number;
   wide: boolean;
-  onBarClick: (payload: unknown) => void;
+  onBarClick: (bar: ChartBar) => void;
 }
 
 function ProgressBarChart({ data, height, wide, onBarClick }: ChartProps) {
+  function handleBarClick(entry: { payload?: ChartBar }) {
+    if (entry.payload) onBarClick(entry.payload);
+  }
+
   const chart = (
     <ResponsiveContainer width="100%" height={height}>
-      <BarChart data={data} onClick={onBarClick}>
+      <BarChart data={data}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-border" vertical={false} />
         <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} angle={-45} textAnchor="end" height={60} />
         <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
@@ -44,9 +48,31 @@ function ProgressBarChart({ data, height, wide, onBarClick }: ChartProps) {
           }}
         />
         <Legend />
-        <Bar dataKey="selesai" name="Selesai" stackId="a" fill="var(--chart-1)" />
-        <Bar dataKey="sedangDijalani" name="Sedang Dijalani" stackId="a" fill="var(--chart-2)" />
-        <Bar dataKey="belumDimulai" name="Belum Dimulai" stackId="a" fill="var(--chart-3)" radius={[4, 4, 0, 0]} />
+        <Bar
+          dataKey="selesai"
+          name="Selesai"
+          stackId="a"
+          fill="var(--chart-1)"
+          cursor="pointer"
+          onClick={handleBarClick}
+        />
+        <Bar
+          dataKey="sedangDijalani"
+          name="Sedang Dijalani"
+          stackId="a"
+          fill="var(--chart-2)"
+          cursor="pointer"
+          onClick={handleBarClick}
+        />
+        <Bar
+          dataKey="belumDimulai"
+          name="Belum Dimulai"
+          stackId="a"
+          fill="var(--chart-3)"
+          radius={[4, 4, 0, 0]}
+          cursor="pointer"
+          onClick={handleBarClick}
+        />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -64,9 +90,8 @@ export function ProgressChartCard({ title, description, data }: Props) {
   const [selected, setSelected] = useState<ChartBar | null>(null);
   const [wide, setWide] = useState(false);
 
-  function handleClick(payload: unknown) {
-    const active = (payload as { activePayload?: { payload: ChartBar }[] })?.activePayload?.[0]?.payload;
-    if (active) setSelected(active);
+  function handleClick(bar: ChartBar) {
+    setSelected(bar);
   }
 
   return (
@@ -86,7 +111,7 @@ export function ProgressChartCard({ title, description, data }: Props) {
                 onClick={() => setWide(false)}
               >
                 <AlignJustify className="h-4 w-4" />
-                Compact
+                Rapat
               </Button>
               <Button
                 variant={wide ? 'secondary' : 'ghost'}

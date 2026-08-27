@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { createWeeklyTargetSchema, type CreateWeeklyTargetInput } from '../weekly-target.schema';
+import { recalculateWeeklyTargetsForStudent } from '../recalculate-weekly-target-progress';
 
 export async function createWeeklyTarget(input: CreateWeeklyTargetInput) {
   const session = await requireRoleOrThrow(['teacher']);
@@ -42,6 +43,8 @@ export async function createWeeklyTarget(input: CreateWeeklyTargetInput) {
       ...rest,
     })),
   });
+
+  await Promise.all(validStudents.map((student) => recalculateWeeklyTargetsForStudent(student.userId)));
 
   revalidatePath('/dashboard/weekly-target');
 

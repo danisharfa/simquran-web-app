@@ -19,6 +19,7 @@ import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
+import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
 import { removeStudentFromGroup } from '../actions/remove-student-from-group';
 import type { GroupStudentOption } from '../queries/list-group-students';
 
@@ -50,11 +51,12 @@ export function GroupStudentTable({
 
         if (!result.success) {
           toast.error(result.message);
-          return;
+          return false;
         }
 
         toast.success(result.message);
         router.refresh();
+        return true;
       } finally {
         setRemovingId(null);
       }
@@ -98,15 +100,17 @@ export function GroupStudentTable({
                 </Button>
               )}
               {!readOnly && (
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  disabled={removingId === student.userId}
-                  onClick={() => handleRemove(student.userId)}
-                >
-                  <Trash2 />
-                  Hapus
-                </Button>
+                <DeleteConfirmDialog
+                  title="Keluarkan Siswa"
+                  description={`Apakah Anda yakin ingin mengeluarkan ${student.name} dari kelompok ini?`}
+                  onConfirm={() => handleRemove(student.userId)}
+                  trigger={
+                    <Button variant="destructive" size="sm" disabled={removingId === student.userId}>
+                      <Trash2 />
+                      Hapus
+                    </Button>
+                  }
+                />
               )}
             </div>
           );

@@ -13,3 +13,18 @@ export const GRADE_DESCRIPTION: Record<GradeLetter, string> = {
   C: 'Cukup',
   D: 'Kurang',
 };
+
+const GRADE_ADVERB: Record<GradeLetter, string> = {
+  A: 'Sangat baik',
+  B: 'Baik',
+  C: 'Cukup',
+  D: 'Kurang',
+};
+
+export function generateTahfidzDescription(grade: GradeLetter, surahName: string): string {
+  return `${GRADE_ADVERB[grade]} dalam menghafal ${surahName}`;
+}
+
+export function generateTahsinDescription(grade: GradeLetter, topic: string): string {
+  return `${GRADE_ADVERB[grade]} dalam memahami ${topic}`;
+}

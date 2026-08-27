@@ -3,7 +3,7 @@ import type { Semester } from '@/lib/generated/prisma/enums';
 import { cumulativePeriodFilter, type StudentInPeriod } from './students-in-period';
 import { toStatus, type StudentProgress } from './types';
 
-/** Progres Tahfidz: jumlah surah per juz yang sudah SELESAI di-tashih (jenis ALQURAN). */
+/** Progres Tahfidz: jumlah surah per juz yang sudah lulus tashih (jenis ALQURAN). */
 export async function computeTahfidzProgress(
   students: StudentInPeriod[],
   academicYear: string,
@@ -16,6 +16,7 @@ export async function computeTahfidzProgress(
         studentId: { in: students.map((s) => s.userId) },
         tashihType: 'ALQURAN',
         status: 'SELESAI',
+        result: { passed: true },
         group: { classroom: cumulativePeriodFilter(academicYear, semester) },
       },
       select: { studentId: true, juzId: true, surahId: true },

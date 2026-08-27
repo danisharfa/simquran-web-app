@@ -6,6 +6,8 @@ import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { submissionSchema, type SubmissionSchema } from '../submission.schema';
+import { findDuplicateSubmissionMessage } from '../check-duplicate-submission';
+import { recalculateWeeklyTargetsForStudent } from '@/features/weekly-targets/recalculate-weekly-target-progress';
 
 export async function createSubmission(input: SubmissionSchema) {
   const session = await requireRoleOrThrow(['teacher']);
@@ -27,6 +29,11 @@ export async function createSubmission(input: SubmissionSchema) {
     return { success: false, message: 'Siswa bukan anggota kelompok ini' };
   }
 
+  const duplicateMessage = await findDuplicateSubmissionMessage({ studentId, data: parsed.data });
+  if (duplicateMessage) {
+    return { success: false, message: duplicateMessage };
+  }
+
   await prisma.submission.create({
     data: {
       id: randomUUID(),
@@ -38,7 +45,10 @@ export async function createSubmission(input: SubmissionSchema) {
     },
   });
 
+  await recalculateWeeklyTargetsForStudent(studentId);
+
   revalidatePath('/dashboard/submission');
+  revalidatePath('/dashboard/weekly-target');
 
   return { success: true, message: 'Setoran berhasil dicatat' };
 }

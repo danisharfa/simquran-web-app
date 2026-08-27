@@ -134,6 +134,7 @@ export function SubmissionEditDialog({
             wafaOptions={wafaOptions}
             values={values}
             onChange={handleChange}
+            hideStatus
           />
         )}
 
