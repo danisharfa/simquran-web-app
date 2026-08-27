@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { BookOpenIcon, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,15 +14,6 @@ import {
   getPaginationRowModel,
 } from '@tanstack/react-table';
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
@@ -124,7 +115,8 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
         accessorKey: 'grade',
         id: 'Grade',
         header: 'Grade',
-        cell: ({ row }) => `${row.original.grade} (${GRADE_DESCRIPTION[row.original.grade as 'A' | 'B' | 'C' | 'D']})`,
+        cell: ({ row }) =>
+          `${row.original.grade} (${GRADE_DESCRIPTION[row.original.grade as 'A' | 'B' | 'C' | 'D']})`,
       },
       { accessorKey: 'description', id: 'Deskripsi', header: 'Deskripsi' },
       {
@@ -170,69 +162,59 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
   });
 
   return (
-    <Dialog>
-      <DialogTrigger
-        render={
-          <Button variant="outline">
-            <BookOpenIcon />
-            Input Nilai Tahfidz
-          </Button>
-        }
-      />
+    <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <Field>
+          <FieldLabel>Surah</FieldLabel>
+          <Select
+            value={surahId ? String(surahId) : ''}
+            onValueChange={(v) => setSurahId(v ? Number(v) : null)}
+          >
+            <SelectTrigger>
+              <SelectValue>
+                {surahOptions.find((o) => o.id === surahId)?.name ?? 'Pilih surah'}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {eligibleSurahOptions.map((opt) => (
+                <SelectItem key={opt.id} value={String(opt.id)}>
+                  {opt.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </Field>
 
-      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-3xl">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <BookOpenIcon className="size-5" />
-            Penilaian Tahfidz
-          </DialogTitle>
-          <DialogDescription>Tambah atau perbarui nilai tahfidz siswa.</DialogDescription>
-        </DialogHeader>
+        <Field>
+          <FieldLabel>Nilai (0-100)</FieldLabel>
+          <Input
+            type="number"
+            min={0}
+            max={100}
+            value={score}
+            onChange={(e) => setScore(e.target.value)}
+          />
+        </Field>
+      </div>
+      <p className="text-muted-foreground text-sm">
+        Deskripsi dibuat otomatis berdasarkan nilai (mis. &quot;Sangat baik dalam menghafal
+        ...&quot;).
+      </p>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Field>
-            <FieldLabel>Surah</FieldLabel>
-            <Select
-              value={surahId ? String(surahId) : ''}
-              onValueChange={(v) => setSurahId(v ? Number(v) : null)}
-            >
-              <SelectTrigger>
-                <SelectValue>{surahOptions.find((o) => o.id === surahId)?.name ?? 'Pilih surah'}</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {eligibleSurahOptions.map((opt) => (
-                  <SelectItem key={opt.id} value={String(opt.id)}>
-                    {opt.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </Field>
+      <DataTable table={table} showColumnFilter={false} />
 
-          <Field>
-            <FieldLabel>Nilai (0-100)</FieldLabel>
-            <Input type="number" min={0} max={100} value={score} onChange={(e) => setScore(e.target.value)} />
-          </Field>
-        </div>
-        <p className="text-muted-foreground text-sm">
-          Deskripsi dibuat otomatis berdasarkan nilai (mis. &quot;Sangat baik dalam menghafal ...&quot;).
-        </p>
-
-        <DataTable table={table} filterColumn="Surah" showColumnFilter={false} />
-
-        <DialogFooter>
-          <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">
-            {isSubmitting ? (
-              <>
-                <Spinner />
-                Menyimpan...
-              </>
-            ) : (
-              'Simpan Nilai Tahfidz'
-            )}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      <div className="flex justify-end">
+        <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">
+          {isSubmitting ? (
+            <>
+              <Spinner />
+              Menyimpan...
+            </>
+          ) : (
+            'Simpan Nilai Tahfidz'
+          )}
+        </Button>
+      </div>
+    </div>
   );
 }

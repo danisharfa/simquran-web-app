@@ -56,6 +56,12 @@ export function PromoteClassroomDialog({
   const [semester, setSemester] = useState<'GANJIL' | 'GENAP'>(defaultSemester);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  function reset() {
+    setSelectedIds([]);
+    setAcademicYear(defaultAcademicYear);
+    setSemester(defaultSemester);
+  }
+
   function toggleStudent(studentId: string, checked: boolean) {
     setSelectedIds((prev) =>
       checked ? [...prev, studentId] : prev.filter((id) => id !== studentId),
@@ -78,7 +84,7 @@ export function PromoteClassroomDialog({
       }
 
       toast.success(result.message);
-      setSelectedIds([]);
+      reset();
       setOpen(false);
       router.refresh();
     } finally {
@@ -87,13 +93,7 @@ export function PromoteClassroomDialog({
   }
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(next) => {
-        setOpen(next);
-        if (!next) setSelectedIds([]);
-      }}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
           <Button variant="outline">
@@ -183,6 +183,15 @@ export function PromoteClassroomDialog({
         )}
 
         <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={reset}
+            disabled={selectedIds.length === 0 || isSubmitting}
+            className="w-full sm:w-auto"
+          >
+            Reset
+          </Button>
           <Button
             type="button"
             className="w-full sm:w-auto"

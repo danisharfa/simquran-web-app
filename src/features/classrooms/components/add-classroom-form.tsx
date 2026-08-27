@@ -83,13 +83,7 @@ export function AddClassroomForm({ defaultAcademicYear = '', defaultSemester = '
   });
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(next) => {
-        setOpen(next);
-        if (!next) form.reset();
-      }}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
           <Button>
@@ -225,6 +219,15 @@ export function AddClassroomForm({ defaultAcademicYear = '', defaultSemester = '
         </form>
 
         <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => form.reset()}
+            disabled={form.state.isSubmitting}
+            className="w-full sm:w-auto"
+          >
+            Reset
+          </Button>
           <Button
             type="submit"
             form="add-classroom-form"

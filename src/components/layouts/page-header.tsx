@@ -10,7 +10,7 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, description, action, backHref }: PageHeaderProps) {
   return (
-    <div className="flex items-center justify-between gap-4">
+    <div className="flex flex-wrap items-center justify-between gap-4">
       <div className="flex items-center gap-3">
         {backHref && <BackButton href={backHref} />}
         <div>
@@ -19,7 +19,7 @@ export function PageHeader({ title, description, action, backHref }: PageHeaderP
         </div>
       </div>
 
-      {action}
+      {action && <div className="flex w-full flex-wrap items-center justify-end gap-2 sm:w-auto">{action}</div>}
     </div>
   );
 }

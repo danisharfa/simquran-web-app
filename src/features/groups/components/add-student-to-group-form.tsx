@@ -58,13 +58,7 @@ export function AddStudentToGroupForm({ groupId, students }: Props) {
   }
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(next) => {
-        setOpen(next);
-        if (!next) setSelectedIds([]);
-      }}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
           <Button>
@@ -112,6 +106,15 @@ export function AddStudentToGroupForm({ groupId, students }: Props) {
         )}
 
         <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setSelectedIds([])}
+            disabled={selectedIds.length === 0 || isSubmitting}
+            className="w-full sm:w-auto"
+          >
+            Reset
+          </Button>
           <Button
             type="button"
             className="w-full sm:w-auto"

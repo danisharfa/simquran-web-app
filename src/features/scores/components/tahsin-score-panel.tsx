@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { BookOpenIcon, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,15 +14,6 @@ import {
   getPaginationRowModel,
 } from '@tanstack/react-table';
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
@@ -172,71 +163,52 @@ export function TahsinScorePanel({ studentId, groupId, scores }: Props) {
   });
 
   return (
-    <Dialog>
-      <DialogTrigger
-        render={
-          <Button variant="outline">
-            <BookOpenIcon />
-            Input Nilai Tahsin
-          </Button>
-        }
-      />
+    <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <Field>
+          <FieldLabel>Jenis</FieldLabel>
+          <Select value={tahsinType} onValueChange={(v) => setTahsinType(v as 'WAFA' | 'ALQURAN')}>
+            <SelectTrigger>
+              <SelectValue>{TAHSIN_TYPE_OPTIONS.find((o) => o.value === tahsinType)?.label}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {TAHSIN_TYPE_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </Field>
 
-      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-3xl">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <BookOpenIcon className="size-5" />
-            Penilaian Tahsin
-          </DialogTitle>
-          <DialogDescription>Tambah atau perbarui nilai tahsin siswa.</DialogDescription>
-        </DialogHeader>
+        <Field>
+          <FieldLabel>Topik</FieldLabel>
+          <Input value={topic} onChange={(e) => setTopic(e.target.value)} placeholder="Contoh: Halaman 12" />
+        </Field>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <Field>
-            <FieldLabel>Jenis</FieldLabel>
-            <Select value={tahsinType} onValueChange={(v) => setTahsinType(v as 'WAFA' | 'ALQURAN')}>
-              <SelectTrigger>
-                <SelectValue>{TAHSIN_TYPE_OPTIONS.find((o) => o.value === tahsinType)?.label}</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {TAHSIN_TYPE_OPTIONS.map((opt) => (
-                  <SelectItem key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </Field>
+        <Field>
+          <FieldLabel>Nilai (0-100)</FieldLabel>
+          <Input type="number" min={0} max={100} value={score} onChange={(e) => setScore(e.target.value)} />
+        </Field>
+      </div>
+      <p className="text-muted-foreground text-sm">
+        Deskripsi dibuat otomatis berdasarkan nilai (mis. &quot;Sangat baik dalam memahami ...&quot;).
+      </p>
 
-          <Field>
-            <FieldLabel>Topik</FieldLabel>
-            <Input value={topic} onChange={(e) => setTopic(e.target.value)} placeholder="Contoh: Halaman 12" />
-          </Field>
+      <DataTable table={table} showColumnFilter={false} />
 
-          <Field>
-            <FieldLabel>Nilai (0-100)</FieldLabel>
-            <Input type="number" min={0} max={100} value={score} onChange={(e) => setScore(e.target.value)} />
-          </Field>
-        </div>
-        <p className="text-muted-foreground text-sm">
-          Deskripsi dibuat otomatis berdasarkan nilai (mis. &quot;Sangat baik dalam memahami ...&quot;).
-        </p>
-
-        <DataTable table={table} filterColumn="Topik" showColumnFilter={false} />
-
-        <DialogFooter>
-          <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">
-            {isSubmitting ? (
-              <>
-                <Spinner />
-                Menyimpan...
-              </>
-            ) : (
-              'Simpan Nilai Tahsin'
-            )}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      <div className="flex justify-end">
+        <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">
+          {isSubmitting ? (
+            <>
+              <Spinner />
+              Menyimpan...
+            </>
+          ) : (
+            'Simpan Nilai Tahsin'
+          )}
+        </Button>
+      </div>
+    </div>
   );
 }

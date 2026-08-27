@@ -53,13 +53,7 @@ export function EditClassroomNameDialog({ classroomId, currentName, trigger }: P
   }
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(next) => {
-        setOpen(next);
-        if (!next) setName(currentName);
-      }}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
           trigger ?? (
@@ -98,6 +92,15 @@ export function EditClassroomNameDialog({ classroomId, currentName, trigger }: P
         </form>
 
         <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setName(currentName)}
+            disabled={isSubmitting}
+            className="w-full sm:w-auto"
+          >
+            Reset
+          </Button>
           <Button
             type="submit"
             form="edit-classroom-name-form"

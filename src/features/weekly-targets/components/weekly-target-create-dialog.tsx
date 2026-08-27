@@ -116,13 +116,7 @@ export function WeeklyTargetCreateDialog({ groups, surahOptions, juzOptions, sur
   }
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(next) => {
-        setOpen(next);
-        if (!next) reset();
-      }}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
           <Button>
@@ -207,6 +201,15 @@ export function WeeklyTargetCreateDialog({ groups, surahOptions, juzOptions, sur
         </div>
 
         <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={reset}
+            disabled={isSubmitting}
+            className="w-full sm:w-auto"
+          >
+            Reset
+          </Button>
           <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
             {isSubmitting ? (
               <>

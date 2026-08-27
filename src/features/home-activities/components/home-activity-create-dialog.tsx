@@ -80,13 +80,7 @@ export function HomeActivityCreateDialog({ groupName, surahOptions, juzOptions, 
   }
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(next) => {
-        setOpen(next);
-        if (!next) setValues(INITIAL_VALUES);
-      }}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
           <Button>
@@ -114,6 +108,15 @@ export function HomeActivityCreateDialog({ groupName, surahOptions, juzOptions, 
         />
 
         <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setValues(INITIAL_VALUES)}
+            disabled={isSubmitting}
+            className="w-full sm:w-auto"
+          >
+            Reset
+          </Button>
           <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
             {isSubmitting ? (
               <>
