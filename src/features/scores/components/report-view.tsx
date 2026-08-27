@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { GRADE_DESCRIPTION } from '../grade';
 import { TAHSIN_TYPE_OPTIONS } from '../score.schema';
@@ -58,6 +58,9 @@ export function ReportView({ studentName, nis, groupName, report, tahfidzScores,
       </Card>
 
       <Card>
+        <CardHeader>
+          <CardTitle>Nilai Tahfidz</CardTitle>
+        </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
@@ -93,6 +96,9 @@ export function ReportView({ studentName, nis, groupName, report, tahfidzScores,
       </Card>
 
       <Card>
+        <CardHeader>
+          <CardTitle>Nilai Tahsin</CardTitle>
+        </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>

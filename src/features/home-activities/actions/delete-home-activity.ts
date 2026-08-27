@@ -12,6 +12,9 @@ export async function deleteHomeActivity(activityId: string) {
   if (!existing || existing.studentId !== session.user.id) {
     return { success: false, message: 'Aktivitas tidak ditemukan' };
   }
+  if (existing.status === 'SUDAH_DIPERIKSA') {
+    return { success: false, message: 'Aktivitas yang sudah diperiksa tidak dapat dihapus' };
+  }
 
   await prisma.homeActivity.delete({ where: { id: activityId } });
 

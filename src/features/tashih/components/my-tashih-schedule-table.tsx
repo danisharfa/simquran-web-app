@@ -65,6 +65,6 @@ export function MyTashihScheduleTable({ data }: Props) {
   });
 
   return (
-    <DataTable title="Jadwal Tashih" table={table} filterColumn="Nama Siswa" showColumnFilter={false} />
+    <DataTable title="Jadwal Tashih" table={table} filterColumn="Nama Siswa" />
   );
 }

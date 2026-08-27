@@ -19,6 +19,9 @@ export async function updateHomeActivity(activityId: string, input: HomeActivity
   if (!existing || existing.studentId !== session.user.id) {
     return { success: false, message: 'Aktivitas tidak ditemukan' };
   }
+  if (existing.status === 'SUDAH_DIPERIKSA') {
+    return { success: false, message: 'Aktivitas yang sudah diperiksa tidak dapat diubah' };
+  }
 
   const duplicateMessage = await findDuplicateHomeActivityMessage({
     studentId: session.user.id,

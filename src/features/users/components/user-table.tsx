@@ -143,7 +143,7 @@ export function UserTable({ data, title }: Props) {
 
   return (
     <>
-      <DataTable title={title} table={table} filterColumn="Nama Lengkap" showColumnFilter={false} />
+      <DataTable title={title} table={table} filterColumn="Nama Lengkap" />
 
       {dialogType === 'detail' && selectedUser && (
         <UserDetailDialog

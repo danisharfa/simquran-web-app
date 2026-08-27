@@ -112,6 +112,6 @@ export function ClassroomStudentTable({ classroomId, data }: Props) {
   });
 
   return (
-    <DataTable title="Daftar Siswa" table={table} filterColumn="Nama Siswa" showColumnFilter={false} />
+    <DataTable title="Daftar Siswa" table={table} filterColumn="Nama Siswa" />
   );
 }

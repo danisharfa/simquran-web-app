@@ -129,6 +129,6 @@ export function TashihResultTable({ data, editable = false }: Props) {
   });
 
   return (
-    <DataTable title="Hasil Tashih" table={table} filterColumn="Nama Siswa" showColumnFilter={false} />
+    <DataTable title="Hasil Tashih" table={table} filterColumn="Nama Siswa" />
   );
 }

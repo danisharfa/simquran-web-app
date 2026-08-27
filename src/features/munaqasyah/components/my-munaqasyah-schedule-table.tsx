@@ -81,6 +81,6 @@ export function MyMunaqasyahScheduleTable({ data }: Props) {
   });
 
   return (
-    <DataTable title="Jadwal Munaqasyah" table={table} filterColumn="Nama Siswa" showColumnFilter={false} />
+    <DataTable title="Jadwal Munaqasyah" table={table} filterColumn="Nama Siswa" />
   );
 }

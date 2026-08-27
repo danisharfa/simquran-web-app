@@ -37,6 +37,8 @@ const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap
 interface Props {
   data: SubmissionTableData[];
   editable?: boolean;
+  own?: boolean;
+  showClassroom?: boolean;
   groups?: GroupWithStudents[];
   surahOptions?: ReferenceOption[];
   juzOptions?: ReferenceOption[];
@@ -47,6 +49,8 @@ interface Props {
 export function SubmissionTable({
   data,
   editable = false,
+  own = false,
+  showClassroom = false,
   groups = [],
   surahOptions = [],
   juzOptions = [],
@@ -133,11 +137,24 @@ export function SubmissionTable({
         id: 'Nama Siswa',
         header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
       },
-      {
-        accessorKey: 'groupName',
-        id: 'Kelompok',
-        header: 'Kelompok',
-      },
+      ...(own
+        ? []
+        : [
+            {
+              accessorKey: 'groupName',
+              id: 'Kelompok',
+              header: 'Kelompok',
+            } satisfies ColumnDef<SubmissionTableData>,
+          ]),
+      ...(showClassroom
+        ? [
+            {
+              accessorKey: 'classroomName',
+              id: 'Kelas',
+              header: 'Kelas',
+            } satisfies ColumnDef<SubmissionTableData>,
+          ]
+        : []),
       {
         accessorKey: 'submissionType',
         id: 'Jenis',
@@ -160,6 +177,12 @@ export function SubmissionTable({
         id: 'Status',
         header: 'Status',
         cell: ({ row }) => STATUS_LABEL[row.original.submissionStatus] ?? row.original.submissionStatus,
+      },
+      {
+        accessorKey: 'note',
+        id: 'Catatan',
+        header: 'Catatan',
+        cell: ({ row }) => row.original.note ?? '-',
       },
     ];
 
@@ -201,7 +224,7 @@ export function SubmissionTable({
         ),
       },
     ];
-  }, [editable, groups, surahOptions, juzOptions, surahJuzMap, wafaOptions, deletingId, handleDelete]);
+  }, [editable, own, showClassroom, groups, surahOptions, juzOptions, surahJuzMap, wafaOptions, deletingId, handleDelete]);
 
   const table = useReactTable({
     data: filteredData,
@@ -220,15 +243,14 @@ export function SubmissionTable({
     <DataTable
       title="Riwayat Setoran"
       table={table}
-      filterColumn="Nama Siswa"
-      showColumnFilter={false}
+      filterColumn={own ? undefined : 'Nama Siswa'}
       toolbar={
         data.length > 0 ? (
           <TableFilters
             period={{ value: period, onChange: setPeriod, options: periodOptions }}
-            classroom={{ value: classroomId, onChange: setClassroomId, options: classroomOptions }}
-            group={{ value: groupId, onChange: setGroupId, options: groupOptions }}
-            student={{ value: studentId, onChange: setStudentId, options: studentOptions }}
+            classroom={own ? undefined : { value: classroomId, onChange: setClassroomId, options: classroomOptions }}
+            group={own ? undefined : { value: groupId, onChange: setGroupId, options: groupOptions }}
+            student={own ? undefined : { value: studentId, onChange: setStudentId, options: studentOptions }}
             dateRange={{ value: dateRange, onChange: setDateRange, label: 'Tanggal Setoran' }}
           />
         ) : undefined

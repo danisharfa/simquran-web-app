@@ -137,6 +137,6 @@ export function GroupStudentTable({
   });
 
   return (
-    <DataTable title="Daftar Siswa" table={table} filterColumn="Nama Siswa" showColumnFilter={false} />
+    <DataTable title="Daftar Siswa" table={table} filterColumn="Nama Siswa" />
   );
 }

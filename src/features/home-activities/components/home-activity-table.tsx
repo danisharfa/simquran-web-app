@@ -21,8 +21,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
+import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
 import { HOME_ACTIVITY_TYPE_OPTIONS, HOME_ACTIVITY_STATUS_OPTIONS } from '../home-activity.schema';
 import { deleteHomeActivity } from '../actions/delete-home-activity';
@@ -35,10 +35,17 @@ const TYPE_LABEL = Object.fromEntries(HOME_ACTIVITY_TYPE_OPTIONS.map((o) => [o.v
 const STATUS_LABEL = Object.fromEntries(HOME_ACTIVITY_STATUS_OPTIONS.map((o) => [o.value, o.label]));
 const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
 
+const STATUS_BADGE_CLASS: Record<string, string> = {
+  BELUM_DIPERIKSA: 'border-transparent bg-destructive/15 text-destructive',
+  SUDAH_DIPERIKSA: 'border-transparent bg-[var(--chart-1)]/15 text-[var(--chart-1)]',
+};
+
 interface Props {
   data: HomeActivityTableData[];
   editable?: boolean;
   canReview?: boolean;
+  own?: boolean;
+  showClassroom?: boolean;
   surahOptions?: ReferenceOption[];
   juzOptions?: ReferenceOption[];
   surahJuzMap?: SurahJuzMapping[];
@@ -48,6 +55,8 @@ export function HomeActivityTable({
   data,
   editable = false,
   canReview = false,
+  own = false,
+  showClassroom = false,
   surahOptions = [],
   juzOptions = [],
   surahJuzMap = [],
@@ -153,11 +162,24 @@ export function HomeActivityTable({
         id: 'Nama Siswa',
         header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
       },
-      {
-        accessorKey: 'groupName',
-        id: 'Kelompok',
-        header: 'Kelompok',
-      },
+      ...(own
+        ? []
+        : [
+            {
+              accessorKey: 'groupName',
+              id: 'Kelompok',
+              header: 'Kelompok',
+            } satisfies ColumnDef<HomeActivityTableData>,
+          ]),
+      ...(showClassroom
+        ? [
+            {
+              accessorKey: 'classroomName',
+              id: 'Kelas',
+              header: 'Kelas',
+            } satisfies ColumnDef<HomeActivityTableData>,
+          ]
+        : []),
       {
         accessorKey: 'activityType',
         id: 'Jenis',
@@ -178,33 +200,15 @@ export function HomeActivityTable({
         accessorKey: 'status',
         id: 'Status',
         header: 'Status',
-        cell: ({ row }) =>
-          canReview ? (
-            <Select
-              value={row.original.status}
-              onValueChange={(v) => v && handleStatusChange(row.original.id, v)}
-              disabled={updatingStatusId === row.original.id}
-            >
-              <SelectTrigger className="w-40">
-                <SelectValue>{STATUS_LABEL[row.original.status] ?? row.original.status}</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {HOME_ACTIVITY_STATUS_OPTIONS.map((opt) => (
-                  <SelectItem key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          ) : (
-            <Badge variant={row.original.status === 'SUDAH_DIPERIKSA' ? 'default' : 'secondary'}>
-              {STATUS_LABEL[row.original.status] ?? row.original.status}
-            </Badge>
-          ),
+        cell: ({ row }) => (
+          <Badge className={STATUS_BADGE_CLASS[row.original.status]}>
+            {STATUS_LABEL[row.original.status] ?? row.original.status}
+          </Badge>
+        ),
       },
     ];
 
-    if (!editable) return base;
+    if (!editable && !canReview) return base;
 
     return [
       ...base,
@@ -214,28 +218,60 @@ export function HomeActivityTable({
         header: 'Aksi',
         cell: ({ row }) => (
           <div className="flex items-center gap-1">
-            <HomeActivityEditDialog
-              activityId={row.original.id}
-              surahOptions={surahOptions}
-              juzOptions={juzOptions}
-              surahJuzMap={surahJuzMap}
-            />
-            <DeleteConfirmDialog
-              title="Hapus Aktivitas Rumah"
-              description="Apakah Anda yakin ingin menghapus aktivitas rumah ini? Tindakan ini tidak dapat dibatalkan."
-              onConfirm={() => handleDelete(row.original.id)}
-              trigger={
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive hover:text-destructive"
-                  disabled={deletingId === row.original.id}
-                >
-                  <Trash2 className="h-4 w-4" />
-                  Hapus
-                </Button>
-              }
-            />
+            {canReview &&
+              (row.original.status === 'SUDAH_DIPERIKSA' ? (
+                <ConfirmDialog
+                  title="Batalkan Pemeriksaan"
+                  description="Status aktivitas ini akan dikembalikan ke belum diperiksa, dan siswa dapat mengubah atau menghapusnya kembali."
+                  confirmLabel="Batalkan"
+                  confirmingLabel="Membatalkan..."
+                  onConfirm={() => handleStatusChange(row.original.id, 'BELUM_DIPERIKSA')}
+                  trigger={
+                    <Button variant="outline" size="sm" disabled={updatingStatusId === row.original.id}>
+                      Batalkan
+                    </Button>
+                  }
+                />
+              ) : (
+                <ConfirmDialog
+                  title="Tandai Sudah Diperiksa"
+                  description="Aktivitas ini akan ditandai sudah diperiksa, dan siswa tidak dapat lagi mengubah atau menghapusnya."
+                  confirmLabel="Tandai Diperiksa"
+                  confirmingLabel="Menandai..."
+                  onConfirm={() => handleStatusChange(row.original.id, 'SUDAH_DIPERIKSA')}
+                  trigger={
+                    <Button size="sm" disabled={updatingStatusId === row.original.id}>
+                      Tandai Diperiksa
+                    </Button>
+                  }
+                />
+              ))}
+            {editable && row.original.status !== 'SUDAH_DIPERIKSA' && (
+              <>
+                <HomeActivityEditDialog
+                  activityId={row.original.id}
+                  surahOptions={surahOptions}
+                  juzOptions={juzOptions}
+                  surahJuzMap={surahJuzMap}
+                />
+                <DeleteConfirmDialog
+                  title="Hapus Aktivitas Rumah"
+                  description="Apakah Anda yakin ingin menghapus aktivitas rumah ini? Tindakan ini tidak dapat dibatalkan."
+                  onConfirm={() => handleDelete(row.original.id)}
+                  trigger={
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-destructive hover:text-destructive"
+                      disabled={deletingId === row.original.id}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                      Hapus
+                    </Button>
+                  }
+                />
+              </>
+            )}
           </div>
         ),
       },
@@ -243,6 +279,8 @@ export function HomeActivityTable({
   }, [
     editable,
     canReview,
+    own,
+    showClassroom,
     surahOptions,
     juzOptions,
     surahJuzMap,
@@ -269,15 +307,14 @@ export function HomeActivityTable({
     <DataTable
       title="Aktivitas Rumah"
       table={table}
-      filterColumn="Nama Siswa"
-      showColumnFilter={false}
+      filterColumn={own ? undefined : 'Nama Siswa'}
       toolbar={
         data.length > 0 ? (
           <TableFilters
             period={{ value: period, onChange: setPeriod, options: periodOptions }}
-            classroom={{ value: classroomId, onChange: setClassroomId, options: classroomOptions }}
-            group={{ value: groupId, onChange: setGroupId, options: groupOptions }}
-            student={{ value: studentId, onChange: setStudentId, options: studentOptions }}
+            classroom={own ? undefined : { value: classroomId, onChange: setClassroomId, options: classroomOptions }}
+            group={own ? undefined : { value: groupId, onChange: setGroupId, options: groupOptions }}
+            student={own ? undefined : { value: studentId, onChange: setStudentId, options: studentOptions }}
             extraFilters={[
               {
                 key: 'status',

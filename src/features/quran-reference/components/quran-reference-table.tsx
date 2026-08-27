@@ -60,7 +60,6 @@ export function SurahTable({ data }: { data: SurahTableData[] }) {
       title="Daftar Surah"
       table={table}
       filterColumn="Nama Surah"
-      showColumnFilter={false}
     />
   );
 }
@@ -96,7 +95,7 @@ export function JuzTable({ data }: { data: JuzTableData[] }) {
   });
 
   return (
-    <DataTable title="Daftar Juz" table={table} filterColumn="Nama Juz" showColumnFilter={false} />
+    <DataTable title="Daftar Juz" table={table} filterColumn="Nama Juz" />
   );
 }
 
@@ -145,7 +144,6 @@ export function SurahJuzTable({ data }: { data: SurahJuzTableData[] }) {
       title="Pemetaan Surah – Juz"
       table={table}
       filterColumn="Nama Surah"
-      showColumnFilter={false}
     />
   );
 }
@@ -186,6 +184,6 @@ export function WafaTable({ data }: { data: WafaTableData[] }) {
   });
 
   return (
-    <DataTable title="Daftar Wafa" table={table} filterColumn="Nama" showColumnFilter={false} />
+    <DataTable title="Daftar Wafa" table={table} filterColumn="Nama" />
   );
 }

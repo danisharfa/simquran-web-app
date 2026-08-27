@@ -195,7 +195,7 @@ export function TahsinScorePanel({ studentId, groupId, scores }: Props) {
         Deskripsi dibuat otomatis berdasarkan nilai (mis. &quot;Sangat baik dalam memahami ...&quot;).
       </p>
 
-      <DataTable table={table} showColumnFilter={false} />
+      <DataTable table={table} showColumnFilter={false} showPagination={false} />
 
       <div className="flex justify-end">
         <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">

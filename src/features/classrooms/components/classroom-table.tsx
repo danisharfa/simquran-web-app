@@ -136,6 +136,6 @@ export function ClassroomTable({ data, title, editable = false }: Props) {
   });
 
   return (
-    <DataTable title={title} table={table} filterColumn="Nama Kelas" showColumnFilter={false} />
+    <DataTable title={title} table={table} filterColumn="Nama Kelas" />
   );
 }

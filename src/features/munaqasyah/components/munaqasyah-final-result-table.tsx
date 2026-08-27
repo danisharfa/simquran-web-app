@@ -75,6 +75,6 @@ export function MunaqasyahFinalResultTable({ data }: Props) {
   });
 
   return (
-    <DataTable title="Nilai Akhir Munaqasyah" table={table} filterColumn="Nama Siswa" showColumnFilter={false} />
+    <DataTable title="Nilai Akhir Munaqasyah" table={table} filterColumn="Nama Siswa" />
   );
 }

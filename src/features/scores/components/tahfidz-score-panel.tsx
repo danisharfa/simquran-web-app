@@ -201,7 +201,7 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
         ...&quot;).
       </p>
 
-      <DataTable table={table} showColumnFilter={false} />
+      <DataTable table={table} showColumnFilter={false} showPagination={false} />
 
       <div className="flex justify-end">
         <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">

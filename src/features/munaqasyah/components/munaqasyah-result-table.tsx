@@ -81,6 +81,6 @@ export function MunaqasyahResultTable({ data }: Props) {
   });
 
   return (
-    <DataTable title="Hasil Penilaian" table={table} filterColumn="Nama Siswa" showColumnFilter={false} />
+    <DataTable title="Hasil Penilaian" table={table} filterColumn="Nama Siswa" />
   );
 }

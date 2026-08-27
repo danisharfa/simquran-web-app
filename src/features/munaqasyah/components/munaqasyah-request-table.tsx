@@ -127,6 +127,6 @@ export function MunaqasyahRequestTable({ data, showActions = false }: Props) {
   });
 
   return (
-    <DataTable title="Permintaan Munaqasyah" table={table} filterColumn="Nama Siswa" showColumnFilter={false} />
+    <DataTable title="Permintaan Munaqasyah" table={table} filterColumn="Nama Siswa" />
   );
 }

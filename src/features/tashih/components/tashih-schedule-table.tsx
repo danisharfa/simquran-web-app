@@ -110,6 +110,6 @@ export function TashihScheduleTable({ data }: Props) {
   });
 
   return (
-    <DataTable title="Jadwal Tashih" table={table} filterColumn="Sesi" showColumnFilter={false} />
+    <DataTable title="Jadwal Tashih" table={table} filterColumn="Sesi" />
   );
 }

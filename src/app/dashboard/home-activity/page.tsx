@@ -51,6 +51,7 @@ export default async function HomeActivityPage() {
         <HomeActivityTable
           data={activities}
           editable
+          own
           surahOptions={surahOptions}
           juzOptions={juzOptions}
           surahJuzMap={surahJuzMap}
@@ -65,7 +66,11 @@ export default async function HomeActivityPage() {
     <div className="space-y-6">
       <PageHeader title="Aktivitas Rumah Siswa" description="Pantau aktivitas murajaah/tilawah/tarjamah siswa" />
 
-      <HomeActivityTable data={activities} canReview={role === 'teacher'} />
+      <HomeActivityTable
+        data={activities}
+        canReview={role === 'teacher'}
+        showClassroom={role === 'coordinator'}
+      />
     </div>
   );
 }

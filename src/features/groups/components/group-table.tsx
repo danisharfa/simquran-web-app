@@ -127,7 +127,6 @@ export function GroupTable({ data, title, editable = false }: Props) {
       title={title}
       table={table}
       filterColumn="Nama Kelompok"
-      showColumnFilter={false}
     />
   );
 }

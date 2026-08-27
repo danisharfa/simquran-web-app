@@ -60,7 +60,7 @@ export default async function WeeklyTargetPage() {
     <div className="space-y-6">
       <PageHeader title="Target Setoran" description="Target hafalan/bacaan mingguan Anda" />
 
-      <WeeklyTargetTable data={targets} />
+      <WeeklyTargetTable data={targets} own />
     </div>
   );
 }

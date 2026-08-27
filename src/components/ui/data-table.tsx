@@ -28,10 +28,18 @@ interface Props<T> {
   table: TanStackTable<T>;
   filterColumn?: string;
   showColumnFilter?: boolean;
+  showPagination?: boolean;
   toolbar?: ReactNode;
 }
 
-export function DataTable<T>({ title, table, filterColumn, showColumnFilter = true, toolbar }: Props<T>) {
+export function DataTable<T>({
+  title,
+  table,
+  filterColumn,
+  showColumnFilter = true,
+  showPagination = true,
+  toolbar,
+}: Props<T>) {
   return (
     <Card>
       {title && (
@@ -123,7 +131,7 @@ export function DataTable<T>({ title, table, filterColumn, showColumnFilter = tr
             </TableBody>
           </Table>
         </div>
-        <DataTablePagination table={table} />
+        {showPagination && <DataTablePagination table={table} />}
       </CardContent>
     </Card>
   );

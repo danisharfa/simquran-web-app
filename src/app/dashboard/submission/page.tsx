@@ -63,7 +63,7 @@ export default async function SubmissionPage() {
       <div className="space-y-6">
         <PageHeader title="Monitoring Setoran" description="Pantau setoran tahfidz/tahsin seluruh siswa" />
 
-        <SubmissionTable data={submissions} />
+        <SubmissionTable data={submissions} showClassroom />
       </div>
     );
   }
@@ -74,7 +74,7 @@ export default async function SubmissionPage() {
     <div className="space-y-6">
       <PageHeader title="Riwayat Setoran" description="Riwayat setoran tahfidz/tahsin Anda" />
 
-      <SubmissionTable data={submissions} />
+      <SubmissionTable data={submissions} own />
     </div>
   );
 }

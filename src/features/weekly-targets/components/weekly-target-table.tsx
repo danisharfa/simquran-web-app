@@ -53,6 +53,7 @@ function getProgressColorClass(percent: number): { bar: string; text: string } {
 interface Props {
   data: WeeklyTargetTableData[];
   editable?: boolean;
+  own?: boolean;
   surahOptions?: ReferenceOption[];
   juzOptions?: ReferenceOption[];
   surahJuzMap?: SurahJuzMapping[];
@@ -62,6 +63,7 @@ interface Props {
 export function WeeklyTargetTable({
   data,
   editable = false,
+  own = false,
   surahOptions = [],
   juzOptions = [],
   surahJuzMap = [],
@@ -155,16 +157,20 @@ export function WeeklyTargetTable({
         id: 'Nama Siswa',
         header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
       },
-      {
-        accessorKey: 'groupName',
-        id: 'Kelompok',
-        header: 'Kelompok',
-      },
-      {
-        accessorKey: 'classroomName',
-        id: 'Kelas',
-        header: 'Kelas',
-      },
+      ...(own
+        ? []
+        : [
+            {
+              accessorKey: 'groupName',
+              id: 'Kelompok',
+              header: 'Kelompok',
+            } satisfies ColumnDef<WeeklyTargetTableData>,
+            {
+              accessorKey: 'classroomName',
+              id: 'Kelas',
+              header: 'Kelas',
+            } satisfies ColumnDef<WeeklyTargetTableData>,
+          ]),
       {
         accessorKey: 'type',
         id: 'Jenis',
@@ -261,7 +267,7 @@ export function WeeklyTargetTable({
         ),
       },
     ];
-  }, [editable, surahOptions, juzOptions, surahJuzMap, wafaOptions, deletingId, handleDelete]);
+  }, [editable, own, surahOptions, juzOptions, surahJuzMap, wafaOptions, deletingId, handleDelete]);
 
   const table = useReactTable({
     data: filteredData,
@@ -280,15 +286,14 @@ export function WeeklyTargetTable({
     <DataTable
       title="Target Setoran"
       table={table}
-      filterColumn="Nama Siswa"
-      showColumnFilter={false}
+      filterColumn={own ? undefined : 'Nama Siswa'}
       toolbar={
         data.length > 0 ? (
           <TableFilters
             period={{ value: period, onChange: setPeriod, options: periodOptions }}
-            classroom={{ value: classroomId, onChange: setClassroomId, options: classroomOptions }}
-            group={{ value: groupId, onChange: setGroupId, options: groupOptions }}
-            student={{ value: studentId, onChange: setStudentId, options: studentOptions }}
+            classroom={own ? undefined : { value: classroomId, onChange: setClassroomId, options: classroomOptions }}
+            group={own ? undefined : { value: groupId, onChange: setGroupId, options: groupOptions }}
+            student={own ? undefined : { value: studentId, onChange: setStudentId, options: studentOptions }}
             extraFilters={[
               { key: 'type', label: 'Jenis', allLabel: 'Semua Jenis', value: type, onChange: setType, options: typeOptions },
               {

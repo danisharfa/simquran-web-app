@@ -147,7 +147,6 @@ export function TashihRequestTable({ data, showActions = false }: Props) {
       title="Permintaan Tashih"
       table={table}
       filterColumn="Nama Siswa"
-      showColumnFilter={false}
     />
   );
 }
