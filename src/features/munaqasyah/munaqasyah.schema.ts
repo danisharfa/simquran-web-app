@@ -38,10 +38,10 @@ export type MunaqasyahRequestSchema = z.infer<typeof munaqasyahRequestSchema>;
 
 export const munaqasyahScheduleSchema = z.object({
   date: z.string().min(1, 'Tanggal wajib diisi'),
-  sessionName: z.string().min(1, 'Nama sesi wajib diisi'),
+  sessionName: z.string().min(1, 'Nama sesi wajib diisi').max(100, 'Nama sesi maksimal 100 karakter'),
   startTime: z.string().min(1, 'Waktu mulai wajib diisi'),
   endTime: z.string().min(1, 'Waktu akhir wajib diisi'),
-  location: z.string().min(1, 'Lokasi wajib diisi'),
+  location: z.string().min(1, 'Lokasi wajib diisi').max(150, 'Lokasi maksimal 150 karakter'),
   examinerId: z.string().nullable(),
   requestIds: z.array(z.string()).min(1, 'Pilih minimal satu permintaan'),
 });

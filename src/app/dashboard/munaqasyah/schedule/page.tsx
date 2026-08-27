@@ -20,7 +20,7 @@ export default async function MunaqasyahSchedulePage() {
         }
       />
 
-      <MyMunaqasyahScheduleTable data={schedule} />
+      <MyMunaqasyahScheduleTable data={schedule} own={role === 'student'} />
     </div>
   );
 }

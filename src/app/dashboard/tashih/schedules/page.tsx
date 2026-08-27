@@ -1,6 +1,6 @@
 import { requireRole } from '@/lib/require-role';
 import { PageHeader } from '@/components/layouts/page-header';
-import { TashihScheduleForm } from '@/features/tashih/components/tashih-schedule-form';
+import { TashihScheduleCreateDialog } from '@/features/tashih/components/tashih-schedule-create-dialog';
 import { TashihScheduleTable } from '@/features/tashih/components/tashih-schedule-table';
 import { listTashihSchedules } from '@/features/tashih/queries/list-tashih-schedules';
 import { listSchedulableRequests } from '@/features/tashih/queries/list-schedulable-requests';
@@ -18,9 +18,8 @@ export default async function TashihSchedulesPage() {
       <PageHeader
         title="Penjadwalan Tashih"
         description="Jadwalkan sesi tashih untuk permintaan yang diterima"
+        action={<TashihScheduleCreateDialog schedulableRequests={schedulableRequests} />}
       />
-
-      <TashihScheduleForm schedulableRequests={schedulableRequests} />
 
       <TashihScheduleTable data={schedules} />
     </div>

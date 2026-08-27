@@ -17,8 +17,8 @@ export default async function MunaqasyahResultPage() {
     <div className="space-y-6">
       <PageHeader title="Hasil Munaqasyah" description="Hasil Tasmi, Munaqasyah, dan nilai akhir Anda" />
 
-      <MunaqasyahFinalResultTable data={finalResults} />
-      <MunaqasyahResultTable data={results} />
+      <MunaqasyahFinalResultTable data={finalResults} own />
+      <MunaqasyahResultTable data={results} own />
     </div>
   );
 }

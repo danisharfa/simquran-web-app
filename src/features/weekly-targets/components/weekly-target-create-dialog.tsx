@@ -146,12 +146,14 @@ export function WeeklyTargetCreateDialog({ groups, surahOptions, juzOptions, sur
               }}
             >
               <SelectTrigger>
-                <SelectValue>{selectedGroup?.name ?? 'Pilih kelompok'}</SelectValue>
+                <SelectValue>
+                  {selectedGroup ? `${selectedGroup.name} · ${selectedGroup.classroomName}` : 'Pilih kelompok'}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 {groups.map((group) => (
                   <SelectItem key={group.id} value={group.id}>
-                    {group.name}
+                    {group.name} · {group.classroomName}
                   </SelectItem>
                 ))}
               </SelectContent>

@@ -81,6 +81,7 @@ export function SchoolInfoForm({ setting }: Props) {
                       onChange={(e) => field.handleChange(e.target.value)}
                       placeholder="Masukkan nama sekolah"
                       aria-invalid={isInvalid}
+                      maxLength={150}
                     />
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
@@ -102,6 +103,7 @@ export function SchoolInfoForm({ setting }: Props) {
                       placeholder="Masukkan alamat sekolah"
                       aria-invalid={isInvalid}
                       rows={3}
+                      maxLength={191}
                     />
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
@@ -122,6 +124,7 @@ export function SchoolInfoForm({ setting }: Props) {
                       onChange={(e) => field.handleChange(e.target.value)}
                       placeholder="Masukkan nama kepala sekolah"
                       aria-invalid={isInvalid}
+                      maxLength={100}
                     />
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>

@@ -87,6 +87,7 @@ export function ProfileDetail({ user }: { user: UserDetail }) {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   readOnly={identityReadonly}
+                  maxLength={100}
                   className={identityReadonly ? 'bg-muted cursor-not-allowed' : ''}
                 />
               </Field>
@@ -97,6 +98,7 @@ export function ProfileDetail({ user }: { user: UserDetail }) {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   readOnly={identityReadonly}
+                  maxLength={30}
                   className={identityReadonly ? 'bg-muted cursor-not-allowed' : ''}
                 />
               </Field>
@@ -127,7 +129,7 @@ export function ProfileDetail({ user }: { user: UserDetail }) {
 
               <Field>
                 <FieldLabel>Tempat Lahir</FieldLabel>
-                <Textarea value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} />
+                <Textarea value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} maxLength={100} />
               </Field>
 
               <DatePicker value={date} onChange={setDate} label="Tanggal Lahir" />
@@ -173,17 +175,17 @@ export function ProfileDetail({ user }: { user: UserDetail }) {
 
               <Field>
                 <FieldLabel>Alamat</FieldLabel>
-                <Textarea value={address} onChange={(e) => setAddress(e.target.value)} />
+                <Textarea value={address} onChange={(e) => setAddress(e.target.value)} maxLength={191} />
               </Field>
 
               <Field>
                 <FieldLabel>Email</FieldLabel>
-                <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Input value={email} onChange={(e) => setEmail(e.target.value)} maxLength={191} />
               </Field>
 
               <Field>
                 <FieldLabel>No. HP</FieldLabel>
-                <Input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                <Input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} maxLength={20} />
               </Field>
             </div>
           </FieldGroup>

@@ -126,7 +126,7 @@ export function WeeklyTargetFields({
 
           <div className="grid grid-cols-2 gap-4">
             <Field>
-              <FieldLabel>Halaman Mulai</FieldLabel>
+              <FieldLabel>Halaman Awal</FieldLabel>
               <Input
                 type="number"
                 value={values.startPage ?? ''}
@@ -147,7 +147,7 @@ export function WeeklyTargetFields({
         <>
           <div className="grid grid-cols-2 gap-4">
             <Field>
-              <FieldLabel>Juz Mulai</FieldLabel>
+              <FieldLabel>Juz Awal</FieldLabel>
               <Select
                 value={values.juzStartId ? String(values.juzStartId) : ''}
                 onValueChange={(v) => {
@@ -202,25 +202,29 @@ export function WeeklyTargetFields({
                     if (checked) onChange('juzEndId', values.juzStartId);
                   }}
                 />
-                Sama dengan juz mulai
+                Sama dengan juz awal
               </label>
             </Field>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <Field>
-              <FieldLabel>Surah Mulai</FieldLabel>
+              <FieldLabel>Surah Awal</FieldLabel>
               <Select
+                key={values.juzStartId ?? ''}
                 value={values.surahStartId ? String(values.surahStartId) : ''}
                 onValueChange={(v) => {
                   const id = v ? Number(v) : null;
                   onChange('surahStartId', id);
                   if (sameSurah) onChange('surahEndId', id);
                 }}
+                disabled={!values.juzStartId}
               >
                 <SelectTrigger>
                   <SelectValue>
-                    {surahStartOptions.find((o) => o.id === values.surahStartId)?.name ?? 'Pilih surah'}
+                    {values.juzStartId
+                      ? (surahStartOptions.find((o) => o.id === values.surahStartId)?.name ?? 'Pilih surah')
+                      : 'Pilih juz dahulu'}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
@@ -235,13 +239,16 @@ export function WeeklyTargetFields({
             <Field>
               <FieldLabel>Surah Akhir</FieldLabel>
               <Select
+                key={values.juzEndId ?? ''}
                 value={values.surahEndId ? String(values.surahEndId) : ''}
                 onValueChange={(v) => onChange('surahEndId', v ? Number(v) : null)}
-                disabled={sameSurah}
+                disabled={sameSurah || !values.juzEndId}
               >
                 <SelectTrigger>
                   <SelectValue>
-                    {surahEndOptions.find((o) => o.id === values.surahEndId)?.name ?? 'Pilih surah'}
+                    {values.juzEndId
+                      ? (surahEndOptions.find((o) => o.id === values.surahEndId)?.name ?? 'Pilih surah')
+                      : 'Pilih juz dahulu'}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
@@ -260,16 +267,18 @@ export function WeeklyTargetFields({
                     if (checked) onChange('surahEndId', values.surahStartId);
                   }}
                 />
-                Sama dengan surah mulai
+                Sama dengan surah awal
               </label>
             </Field>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <Field>
-              <FieldLabel>Ayat Mulai</FieldLabel>
+              <FieldLabel>Ayat Awal</FieldLabel>
               <Input
                 type="number"
+                min={1}
+                max={286}
                 value={values.startAyat ?? ''}
                 onChange={(e) => onChange('startAyat', e.target.value ? Number(e.target.value) : null)}
               />
@@ -278,6 +287,8 @@ export function WeeklyTargetFields({
               <FieldLabel>Ayat Akhir</FieldLabel>
               <Input
                 type="number"
+                min={1}
+                max={286}
                 value={values.endAyat ?? ''}
                 onChange={(e) => onChange('endAyat', e.target.value ? Number(e.target.value) : null)}
               />
@@ -292,6 +303,7 @@ export function WeeklyTargetFields({
           value={values.description}
           onChange={(e) => onChange('description', e.target.value)}
           rows={2}
+          maxLength={191}
         />
       </Field>
     </div>

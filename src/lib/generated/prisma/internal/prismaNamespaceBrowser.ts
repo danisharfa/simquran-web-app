@@ -68,6 +68,7 @@ export const ModelName = {
   SurahJuz: 'SurahJuz',
   Wafa: 'Wafa',
   Submission: 'Submission',
+  SubmissionDeletionLog: 'SubmissionDeletionLog',
   HomeActivity: 'HomeActivity',
   WeeklyTarget: 'WeeklyTarget',
   TashihRequest: 'TashihRequest',
@@ -333,6 +334,23 @@ export const SubmissionScalarFieldEnum = {
 } as const
 
 export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
+
+
+export const SubmissionDeletionLogScalarFieldEnum = {
+  id: 'id',
+  studentName: 'studentName',
+  teacherName: 'teacherName',
+  groupName: 'groupName',
+  classroomName: 'classroomName',
+  submissionDate: 'submissionDate',
+  submissionType: 'submissionType',
+  detail: 'detail',
+  note: 'note',
+  deletedByName: 'deletedByName',
+  deletedAt: 'deletedAt'
+} as const
+
+export type SubmissionDeletionLogScalarFieldEnum = (typeof SubmissionDeletionLogScalarFieldEnum)[keyof typeof SubmissionDeletionLogScalarFieldEnum]
 
 
 export const HomeActivityScalarFieldEnum = {
@@ -772,6 +790,20 @@ export const SubmissionOrderByRelevanceFieldEnum = {
 } as const
 
 export type SubmissionOrderByRelevanceFieldEnum = (typeof SubmissionOrderByRelevanceFieldEnum)[keyof typeof SubmissionOrderByRelevanceFieldEnum]
+
+
+export const SubmissionDeletionLogOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentName: 'studentName',
+  teacherName: 'teacherName',
+  groupName: 'groupName',
+  classroomName: 'classroomName',
+  detail: 'detail',
+  note: 'note',
+  deletedByName: 'deletedByName'
+} as const
+
+export type SubmissionDeletionLogOrderByRelevanceFieldEnum = (typeof SubmissionDeletionLogOrderByRelevanceFieldEnum)[keyof typeof SubmissionDeletionLogOrderByRelevanceFieldEnum]
 
 
 export const HomeActivityOrderByRelevanceFieldEnum = {

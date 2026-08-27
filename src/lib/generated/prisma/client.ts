@@ -127,6 +127,11 @@ export type Wafa = Prisma.WafaModel
  */
 export type Submission = Prisma.SubmissionModel
 /**
+ * Model SubmissionDeletionLog
+ * Snapshot log of deleted submissions, kept for audit purposes since deletes are irreversible.
+ */
+export type SubmissionDeletionLog = Prisma.SubmissionDeletionLogModel
+/**
  * Model HomeActivity
  * 
  */

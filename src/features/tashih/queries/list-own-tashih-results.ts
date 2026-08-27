@@ -10,7 +10,15 @@ export async function listOwnTashihResults(): Promise<TashihResultTableData[]> {
     where: { request: { studentId: session.user.id } },
     include: {
       schedule: true,
-      request: { include: { student: { include: { user: true } }, juz: true, surah: true, wafa: true } },
+      request: {
+        include: {
+          student: { include: { user: true } },
+          juz: true,
+          surah: true,
+          wafa: true,
+          group: { include: { classroom: true } },
+        },
+      },
     },
     orderBy: { createdAt: 'desc' },
   });
@@ -18,6 +26,12 @@ export async function listOwnTashihResults(): Promise<TashihResultTableData[]> {
   return results.map((r) => ({
     id: r.id,
     studentName: r.request.student.user.name,
+    groupId: r.request.groupId,
+    groupName: r.request.group.name,
+    classroomId: r.request.group.classroomId,
+    classroomName: `${r.request.group.classroom.level} ${r.request.group.classroom.name}`,
+    academicYear: r.request.group.classroom.academicYear,
+    semester: r.request.group.classroom.semester,
     detail: formatTashihDetail(r.request),
     scheduleDate: r.schedule.date,
     passed: r.passed,

@@ -18,7 +18,7 @@ export const tahsinScoreSchema = z.object({
   studentId: z.string().min(1),
   groupId: z.string().min(1),
   tahsinType: z.enum(['WAFA', 'ALQURAN']),
-  topic: z.string().min(1, 'Topik wajib diisi'),
+  topic: z.string().min(1, 'Topik wajib diisi').max(100, 'Topik maksimal 100 karakter'),
   score: z.number().min(0).max(100),
 });
 

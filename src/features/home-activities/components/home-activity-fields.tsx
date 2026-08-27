@@ -86,12 +86,16 @@ export function HomeActivityFields({ surahOptions, juzOptions, surahJuzMap, valu
       <Field>
         <FieldLabel>Surah</FieldLabel>
         <Select
+          key={values.juzId ?? ''}
           value={values.surahId ? String(values.surahId) : ''}
           onValueChange={(v) => onChange('surahId', v ? Number(v) : null)}
+          disabled={!values.juzId}
         >
           <SelectTrigger>
             <SelectValue>
-              {filteredSurahOptions.find((o) => o.id === values.surahId)?.name ?? 'Pilih surah'}
+              {values.juzId
+                ? (filteredSurahOptions.find((o) => o.id === values.surahId)?.name ?? 'Pilih surah')
+                : 'Pilih juz dahulu'}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
@@ -109,6 +113,8 @@ export function HomeActivityFields({ surahOptions, juzOptions, surahJuzMap, valu
           <FieldLabel>Ayat Mulai</FieldLabel>
           <Input
             type="number"
+            min={1}
+            max={286}
             value={values.startVerse ?? ''}
             onChange={(e) => onChange('startVerse', e.target.value ? Number(e.target.value) : null)}
           />
@@ -117,6 +123,8 @@ export function HomeActivityFields({ surahOptions, juzOptions, surahJuzMap, valu
           <FieldLabel>Ayat Akhir</FieldLabel>
           <Input
             type="number"
+            min={1}
+            max={286}
             value={values.endVerse ?? ''}
             onChange={(e) => onChange('endVerse', e.target.value ? Number(e.target.value) : null)}
           />
@@ -124,8 +132,8 @@ export function HomeActivityFields({ surahOptions, juzOptions, surahJuzMap, valu
       </div>
 
       <Field className="sm:col-span-2">
-        <FieldLabel>Catatan</FieldLabel>
-        <Textarea value={values.note} onChange={(e) => onChange('note', e.target.value)} rows={2} />
+        <FieldLabel>Catatan (opsional)</FieldLabel>
+        <Textarea value={values.note} onChange={(e) => onChange('note', e.target.value)} rows={2} maxLength={191} />
       </Field>
     </div>
   );

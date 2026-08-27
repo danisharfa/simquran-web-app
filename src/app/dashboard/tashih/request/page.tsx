@@ -1,6 +1,6 @@
 import { requireRole } from '@/lib/require-role';
 import { PageHeader } from '@/components/layouts/page-header';
-import { TashihRequestForm } from '@/features/tashih/components/tashih-request-form';
+import { TashihRequestCreateDialog } from '@/features/tashih/components/tashih-request-create-dialog';
 import { TashihRequestTable } from '@/features/tashih/components/tashih-request-table';
 import { listMyTashihRequests } from '@/features/tashih/queries/list-my-tashih-requests';
 import { listMyGroupsWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
@@ -25,17 +25,29 @@ export default async function TashihRequestPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Pendaftaran Tashih" description="Ajukan tashih untuk siswa bimbingan Anda" />
+      <PageHeader
+        title="Pendaftaran Tashih"
+        description="Ajukan tashih untuk siswa bimbingan Anda"
+        action={
+          <TashihRequestCreateDialog
+            groups={groups}
+            surahOptions={surahOptions}
+            juzOptions={juzOptions}
+            surahJuzMap={surahJuzMap}
+            wafaOptions={wafaOptions}
+          />
+        }
+      />
 
-      <TashihRequestForm
+      <TashihRequestTable
+        data={requests}
+        editable
         groups={groups}
         surahOptions={surahOptions}
         juzOptions={juzOptions}
         surahJuzMap={surahJuzMap}
         wafaOptions={wafaOptions}
       />
-
-      <TashihRequestTable data={requests} />
     </div>
   );
 }

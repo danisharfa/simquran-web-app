@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { tashihRequestSchema, type TashihRequestSchema } from '../tashih.schema';
-import { isRangeFullyCovered } from '../is-range-covered';
+import { validateTashihCoverage } from '../validate-tashih-coverage';
 
 export async function createTashihRequest(input: TashihRequestSchema) {
   const session = await requireRoleOrThrow(['teacher']);
@@ -28,63 +28,9 @@ export async function createTashihRequest(input: TashihRequestSchema) {
     return { success: false, message: 'Siswa bukan anggota kelompok ini' };
   }
 
-  if (rest.tashihType === 'ALQURAN') {
-    const surahJuz = await prisma.surahJuz.findFirst({
-      where: { surahId: rest.surahId!, juzId: rest.juzId! },
-    });
-    if (!surahJuz) {
-      return { success: false, message: 'Surah tidak termasuk dalam juz yang dipilih' };
-    }
-
-    const submissions = await prisma.submission.findMany({
-      where: {
-        studentId,
-        submissionType: 'TAHFIDZ',
-        submissionStatus: 'LULUS',
-        surahId: rest.surahId!,
-      },
-      select: { startVerse: true, endVerse: true },
-    });
-
-    const covered = isRangeFullyCovered(
-      surahJuz.startVerse,
-      surahJuz.endVerse,
-      submissions
-        .filter((s) => s.startVerse != null && s.endVerse != null)
-        .map((s) => ({ start: s.startVerse!, end: s.endVerse! })),
-    );
-
-    if (!covered) {
-      return {
-        success: false,
-        message: 'Surah pada juz ini belum disetor penuh (lulus) oleh siswa, tashih belum bisa diajukan',
-      };
-    }
-  } else {
-    const submissions = await prisma.submission.findMany({
-      where: {
-        studentId,
-        submissionType: 'TAHSIN_WAFA',
-        submissionStatus: 'LULUS',
-        wafaId: rest.wafaId!,
-      },
-      select: { startPage: true, endPage: true },
-    });
-
-    const covered = isRangeFullyCovered(
-      rest.startPage!,
-      rest.endPage!,
-      submissions
-        .filter((s) => s.startPage != null && s.endPage != null)
-        .map((s) => ({ start: s.startPage!, end: s.endPage! })),
-    );
-
-    if (!covered) {
-      return {
-        success: false,
-        message: 'Halaman Wafa ini belum disetor penuh (lulus) oleh siswa, tashih belum bisa diajukan',
-      };
-    }
+  const coverage = await validateTashihCoverage(studentId, rest);
+  if (!coverage.valid) {
+    return { success: false, message: coverage.message };
   }
 
   await prisma.tashihRequest.create({

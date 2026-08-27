@@ -92,19 +92,50 @@ export function WeeklyTargetTable({
   }, [data]);
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.classroomId, d.classroomName));
+    data
+      .filter((d) => period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period)
+      .forEach((d) => map.set(d.classroomId, d.classroomName));
     return Array.from(map, ([value, label]) => ({ value, label }));
-  }, [data]);
+  }, [data, period]);
   const groupOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.groupId, d.groupName));
+    data
+      .filter(
+        (d) =>
+          (period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period) &&
+          (classroomId === FILTER_ALL || d.classroomId === classroomId),
+      )
+      .forEach((d) => map.set(d.groupId, d.groupName));
     return Array.from(map, ([value, label]) => ({ value, label }));
-  }, [data]);
+  }, [data, period, classroomId]);
   const studentOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.studentId, d.studentName));
+    data
+      .filter(
+        (d) =>
+          (period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period) &&
+          (classroomId === FILTER_ALL || d.classroomId === classroomId) &&
+          (groupId === FILTER_ALL || d.groupId === groupId),
+      )
+      .forEach((d) => map.set(d.studentId, d.studentName));
     return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => a.label.localeCompare(b.label));
-  }, [data]);
+  }, [data, period, classroomId, groupId]);
+
+  function handlePeriodChange(value: string) {
+    setPeriod(value);
+    setClassroomId(FILTER_ALL);
+    setGroupId(FILTER_ALL);
+    setStudentId(FILTER_ALL);
+  }
+  function handleClassroomChange(value: string) {
+    setClassroomId(value);
+    setGroupId(FILTER_ALL);
+    setStudentId(FILTER_ALL);
+  }
+  function handleGroupChange(value: string) {
+    setGroupId(value);
+    setStudentId(FILTER_ALL);
+  }
   const typeOptions = useMemo(() => {
     const map = new Map<string, string>();
     data.forEach((d) => map.set(d.type, TYPE_LABEL[d.type] ?? d.type));
@@ -152,14 +183,14 @@ export function WeeklyTargetTable({
 
   const columns = useMemo<ColumnDef<WeeklyTargetTableData>[]>(() => {
     const base: ColumnDef<WeeklyTargetTableData>[] = [
-      {
-        accessorKey: 'studentName',
-        id: 'Nama Siswa',
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
-      },
       ...(own
         ? []
         : [
+            {
+              accessorKey: 'studentName',
+              id: 'Nama Siswa',
+              header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
+            } satisfies ColumnDef<WeeklyTargetTableData>,
             {
               accessorKey: 'groupName',
               id: 'Kelompok',
@@ -290,9 +321,9 @@ export function WeeklyTargetTable({
       toolbar={
         data.length > 0 ? (
           <TableFilters
-            period={{ value: period, onChange: setPeriod, options: periodOptions }}
-            classroom={own ? undefined : { value: classroomId, onChange: setClassroomId, options: classroomOptions }}
-            group={own ? undefined : { value: groupId, onChange: setGroupId, options: groupOptions }}
+            period={{ value: period, onChange: handlePeriodChange, options: periodOptions }}
+            classroom={own ? undefined : { value: classroomId, onChange: handleClassroomChange, options: classroomOptions }}
+            group={own ? undefined : { value: groupId, onChange: handleGroupChange, options: groupOptions }}
             student={own ? undefined : { value: studentId, onChange: setStudentId, options: studentOptions }}
             extraFilters={[
               { key: 'type', label: 'Jenis', allLabel: 'Semua Jenis', value: type, onChange: setType, options: typeOptions },

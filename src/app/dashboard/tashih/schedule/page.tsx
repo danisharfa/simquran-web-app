@@ -17,7 +17,7 @@ export default async function TashihSchedulePage() {
         description={role === 'student' ? 'Jadwal tashih Anda' : 'Jadwal tashih siswa bimbingan Anda'}
       />
 
-      <MyTashihScheduleTable data={schedule} />
+      <MyTashihScheduleTable data={schedule} own={role === 'student'} />
     </div>
   );
 }

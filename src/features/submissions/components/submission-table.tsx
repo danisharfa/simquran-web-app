@@ -15,12 +15,13 @@ import {
   getPaginationRowModel,
 } from '@tanstack/react-table';
 import { toast } from 'sonner';
-import { Trash2 } from 'lucide-react';
+import { Lock, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
 import { SUBMISSION_TYPE_OPTIONS, ADAB_OPTIONS, SUBMISSION_STATUS_OPTIONS } from '../submission.schema';
 import { deleteSubmission } from '../actions/delete-submission';
@@ -78,19 +79,50 @@ export function SubmissionTable({
   }, [data]);
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.classroomId, d.classroomName));
+    data
+      .filter((d) => period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period)
+      .forEach((d) => map.set(d.classroomId, d.classroomName));
     return Array.from(map, ([value, label]) => ({ value, label }));
-  }, [data]);
+  }, [data, period]);
   const groupOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.groupId, d.groupName));
+    data
+      .filter(
+        (d) =>
+          (period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period) &&
+          (classroomId === FILTER_ALL || d.classroomId === classroomId),
+      )
+      .forEach((d) => map.set(d.groupId, d.groupName));
     return Array.from(map, ([value, label]) => ({ value, label }));
-  }, [data]);
+  }, [data, period, classroomId]);
   const studentOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.studentId, d.studentName));
+    data
+      .filter(
+        (d) =>
+          (period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period) &&
+          (classroomId === FILTER_ALL || d.classroomId === classroomId) &&
+          (groupId === FILTER_ALL || d.groupId === groupId),
+      )
+      .forEach((d) => map.set(d.studentId, d.studentName));
     return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => a.label.localeCompare(b.label));
-  }, [data]);
+  }, [data, period, classroomId, groupId]);
+
+  function handlePeriodChange(value: string) {
+    setPeriod(value);
+    setClassroomId(FILTER_ALL);
+    setGroupId(FILTER_ALL);
+    setStudentId(FILTER_ALL);
+  }
+  function handleClassroomChange(value: string) {
+    setClassroomId(value);
+    setGroupId(FILTER_ALL);
+    setStudentId(FILTER_ALL);
+  }
+  function handleGroupChange(value: string) {
+    setGroupId(value);
+    setStudentId(FILTER_ALL);
+  }
 
   const filteredData = useMemo(
     () =>
@@ -132,14 +164,14 @@ export function SubmissionTable({
         header: ({ column }) => <DataTableColumnHeader column={column} title="Tanggal" />,
         cell: ({ row }) => new Date(row.original.date).toLocaleDateString('id-ID'),
       },
-      {
-        accessorKey: 'studentName',
-        id: 'Nama Siswa',
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
-      },
       ...(own
         ? []
         : [
+            {
+              accessorKey: 'studentName',
+              id: 'Nama Siswa',
+              header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
+            } satisfies ColumnDef<SubmissionTableData>,
             {
               accessorKey: 'groupName',
               id: 'Kelompok',
@@ -198,28 +230,44 @@ export function SubmissionTable({
           <div className="flex items-center gap-1">
             <SubmissionEditDialog
               submissionId={row.original.id}
+              locked={row.original.isLocked}
               groups={groups}
               surahOptions={surahOptions}
               juzOptions={juzOptions}
               surahJuzMap={surahJuzMap}
               wafaOptions={wafaOptions}
             />
-            <DeleteConfirmDialog
-              title="Hapus Setoran"
-              description="Apakah Anda yakin ingin menghapus setoran ini? Tindakan ini tidak dapat dibatalkan."
-              onConfirm={() => handleDelete(row.original.id)}
-              trigger={
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive hover:text-destructive"
-                  disabled={deletingId === row.original.id}
-                >
-                  <Trash2 className="h-4 w-4" />
-                  Hapus
-                </Button>
-              }
-            />
+            {row.original.isLocked ? (
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <Button variant="ghost" size="sm" disabled className="text-muted-foreground">
+                      <Lock className="h-4 w-4" />
+                    </Button>
+                  }
+                />
+                <TooltipContent>
+                  Sudah menjadi bagian dari pengajuan tashih yang sedang berjalan, tidak dapat dihapus.
+                </TooltipContent>
+              </Tooltip>
+            ) : (
+              <DeleteConfirmDialog
+                title="Hapus Setoran"
+                description="Apakah Anda yakin ingin menghapus setoran ini? Tindakan ini tidak dapat dibatalkan."
+                onConfirm={() => handleDelete(row.original.id)}
+                trigger={
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-destructive hover:text-destructive"
+                    disabled={deletingId === row.original.id}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    Hapus
+                  </Button>
+                }
+              />
+            )}
           </div>
         ),
       },
@@ -247,9 +295,9 @@ export function SubmissionTable({
       toolbar={
         data.length > 0 ? (
           <TableFilters
-            period={{ value: period, onChange: setPeriod, options: periodOptions }}
-            classroom={own ? undefined : { value: classroomId, onChange: setClassroomId, options: classroomOptions }}
-            group={own ? undefined : { value: groupId, onChange: setGroupId, options: groupOptions }}
+            period={{ value: period, onChange: handlePeriodChange, options: periodOptions }}
+            classroom={own ? undefined : { value: classroomId, onChange: handleClassroomChange, options: classroomOptions }}
+            group={own ? undefined : { value: groupId, onChange: handleGroupChange, options: groupOptions }}
             student={own ? undefined : { value: studentId, onChange: setStudentId, options: studentOptions }}
             dateRange={{ value: dateRange, onChange: setDateRange, label: 'Tanggal Setoran' }}
           />

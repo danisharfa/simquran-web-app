@@ -16,9 +16,13 @@ export const homeActivitySchema = z.object({
   activityType: z.enum(['MURAJAAH', 'TILAWAH', 'TARJAMAH']),
   juzId: z.number({ message: 'Juz wajib dipilih' }),
   surahId: z.number({ message: 'Surah wajib dipilih' }),
-  startVerse: z.number({ message: 'Ayat mulai wajib diisi' }),
-  endVerse: z.number({ message: 'Ayat akhir wajib diisi' }),
-  note: z.string().nullable(),
+  startVerse: z
+    .number({ message: 'Ayat mulai wajib diisi' })
+    .int()
+    .min(1, 'Ayat minimal 1')
+    .max(286, 'Ayat maksimal 286'),
+  endVerse: z.number({ message: 'Ayat akhir wajib diisi' }).int().min(1, 'Ayat minimal 1').max(286, 'Ayat maksimal 286'),
+  note: z.string().max(191, 'Catatan maksimal 191 karakter').nullable(),
 });
 
 export type HomeActivitySchema = z.infer<typeof homeActivitySchema>;

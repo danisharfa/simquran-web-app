@@ -10,11 +10,11 @@ datasource db {
 model AcademicSetting {
   id String @id
 
-  currentYear          String
+  currentYear          String   @db.VarChar(20)
   currentSemester      Semester
-  currentPrincipalName String
-  schoolName           String
-  schoolAddress        String
+  currentPrincipalName String   @db.VarChar(100)
+  schoolName           String   @db.VarChar(150)
+  schoolAddress        String   @db.VarChar(191)
 
   updatedAt DateTime @updatedAt
   updatedBy String?
@@ -24,12 +24,12 @@ model AcademicSetting {
 
 model User {
   id            String  @id
-  name          String
-  email         String? @unique
+  name          String  @db.VarChar(100)
+  email         String? @unique @db.VarChar(191)
   emailVerified Boolean @default(false)
 
   // Username Plugin
-  username        String  @unique
+  username        String  @unique @db.VarChar(30)
   displayUsername String?
 
   // Admin Plugin
@@ -38,10 +38,10 @@ model User {
   banExpires DateTime?
 
   role        Role       @default(STUDENT)
-  phoneNumber String?
+  phoneNumber String?    @db.VarChar(20)
   birthDate   DateTime?
-  birthPlace  String?
-  address     String?
+  birthPlace  String?    @db.VarChar(100)
+  address     String?    @db.VarChar(191)
   gender      Gender?
   bloodType   BloodType?
 
@@ -114,7 +114,7 @@ model Verification {
 
 model CoordinatorProfile {
   userId String @id
-  nip    String @unique
+  nip    String @unique @db.VarChar(30)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -132,7 +132,7 @@ model CoordinatorProfile {
 
 model TeacherProfile {
   userId String @id
-  nip    String @unique
+  nip    String @unique @db.VarChar(30)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -151,8 +151,8 @@ model TeacherProfile {
 
 model StudentProfile {
   userId      String  @id
-  nis         String  @unique
-  nisn        String? @unique
+  nis         String  @unique @db.VarChar(30)
+  nisn        String? @unique @db.VarChar(30)
   classroomId String?
   groupId     String?
 
@@ -184,8 +184,8 @@ model StudentProfile {
 model Classroom {
   id           String   @id @unique
   level        Int
-  name         String
-  academicYear String
+  name         String   @db.VarChar(50)
+  academicYear String   @db.VarChar(20)
   semester     Semester
   isActive     Boolean  @default(true)
 
@@ -219,7 +219,7 @@ model ClassroomHistory {
 
 model Group {
   id          String  @id @unique
-  name        String
+  name        String  @db.VarChar(50)
   classroomId String
   teacherId   String
   isActive    Boolean @default(true)
@@ -342,7 +342,7 @@ model Submission {
 
   adab             Adab
   submissionStatus SubmissionStatus
-  note             String?
+  note             String?          @db.VarChar(191)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -358,6 +358,27 @@ model Submission {
   @@map("submission")
 }
 
+/// Snapshot log of deleted submissions, kept for audit purposes since deletes are irreversible.
+model SubmissionDeletionLog {
+  id String @id @default(uuid())
+
+  studentName   String
+  teacherName   String
+  groupName     String
+  classroomName String
+
+  submissionDate DateTime
+  submissionType SubmissionType
+  detail         String
+  note           String?
+
+  deletedByName String
+  deletedAt     DateTime @default(now())
+
+  @@index([deletedAt])
+  @@map("submission_deletion_log")
+}
+
 model HomeActivity {
   id        String @id @default(uuid())
   studentId String
@@ -370,7 +391,7 @@ model HomeActivity {
   surahId    Int
   startVerse Int
   endVerse   Int
-  note       String?
+  note       String?            @db.VarChar(191)
   status     HomeActivityStatus @default(BELUM_DIPERIKSA)
 
   createdAt DateTime @default(now())
@@ -394,7 +415,7 @@ model WeeklyTarget {
   type            SubmissionType
   startDate       DateTime
   endDate         DateTime
-  description     String
+  description     String         @db.VarChar(191)
   status          TargetStatus   @default(TIDAK_TERCAPAI)
   progressPercent Int?           @default(0)
 
@@ -474,7 +495,7 @@ model TashihRequest {
   startPage  Int?
   endPage    Int?
   status     TashihRequestStatus @default(MENUNGGU)
-  notes      String?
+  notes      String?             @db.VarChar(191)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -497,10 +518,10 @@ model TashihSchedule {
   coordinatorId String
 
   date        DateTime
-  sessionName String
+  sessionName String   @db.VarChar(100)
   startTime   String
   endTime     String
-  location    String
+  location    String   @db.VarChar(150)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -581,7 +602,7 @@ model TahsinScore {
   studentId   String
   groupId     String
   tahsinType  TahsinType
-  topic       String
+  topic       String      @db.VarChar(100)
   score       Int
   grade       GradeLetter
   description String?
@@ -659,10 +680,10 @@ model MunaqasyahSchedule {
   coordinatorId String
 
   date        DateTime
-  sessionName String
+  sessionName String   @db.VarChar(100)
   startTime   String
   endTime     String
-  location    String
+  location    String   @db.VarChar(150)
   examinerId  String?
 
   createdAt DateTime @default(now())

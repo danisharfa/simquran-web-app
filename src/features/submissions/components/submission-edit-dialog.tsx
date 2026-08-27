@@ -23,6 +23,7 @@ import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-referenc
 
 interface Props {
   submissionId: string;
+  locked?: boolean;
   groups: GroupWithStudents[];
   surahOptions: ReferenceOption[];
   juzOptions: ReferenceOption[];
@@ -32,6 +33,7 @@ interface Props {
 
 export function SubmissionEditDialog({
   submissionId,
+  locked = false,
   groups,
   surahOptions,
   juzOptions,
@@ -126,16 +128,25 @@ export function SubmissionEditDialog({
             <Spinner className="size-6" />
           </div>
         ) : (
-          <SubmissionFields
-            groups={groups}
-            surahOptions={surahOptions}
-            juzOptions={juzOptions}
-            surahJuzMap={surahJuzMap}
-            wafaOptions={wafaOptions}
-            values={values}
-            onChange={handleChange}
-            hideStatus
-          />
+          <>
+            {locked && (
+              <p className="rounded-md border border-amber-500/30 bg-amber-500/10 p-3 text-sm text-amber-700 dark:text-amber-400">
+                Setoran ini sudah menjadi bagian dari pengajuan tashih yang sedang berjalan. Hanya catatan yang
+                dapat diubah.
+              </p>
+            )}
+            <SubmissionFields
+              groups={groups}
+              surahOptions={surahOptions}
+              juzOptions={juzOptions}
+              surahJuzMap={surahJuzMap}
+              wafaOptions={wafaOptions}
+              values={values}
+              onChange={handleChange}
+              hideStatus
+              locked={locked}
+            />
+          </>
         )}
 
         <DialogFooter>

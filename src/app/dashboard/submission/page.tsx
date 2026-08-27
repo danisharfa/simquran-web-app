@@ -2,9 +2,11 @@ import { requireRole } from '@/lib/require-role';
 import { PageHeader } from '@/components/layouts/page-header';
 import { SubmissionTable } from '@/features/submissions/components/submission-table';
 import { SubmissionCreateDialog } from '@/features/submissions/components/submission-create-dialog';
+import { SubmissionDeletionLogTable } from '@/features/submissions/components/submission-deletion-log-table';
 import { listAllSubmissions } from '@/features/submissions/queries/list-all-submissions';
 import { listMySubmissions } from '@/features/submissions/queries/list-my-submissions';
 import { listOwnSubmissions } from '@/features/submissions/queries/list-own-submissions';
+import { listSubmissionDeletionLog } from '@/features/submissions/queries/list-submission-deletion-log';
 import { listMyGroupsWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
 import {
   listSurahOptions,
@@ -57,13 +59,15 @@ export default async function SubmissionPage() {
   }
 
   if (role === 'coordinator') {
-    const submissions = await listAllSubmissions();
+    const [submissions, deletionLog] = await Promise.all([listAllSubmissions(), listSubmissionDeletionLog()]);
 
     return (
       <div className="space-y-6">
         <PageHeader title="Monitoring Setoran" description="Pantau setoran tahfidz/tahsin seluruh siswa" />
 
         <SubmissionTable data={submissions} showClassroom />
+
+        {deletionLog.length > 0 && <SubmissionDeletionLogTable data={deletionLog} />}
       </div>
     );
   }

@@ -26,14 +26,14 @@ export const submissionSchema = z
     submissionType: z.enum(['TAHFIDZ', 'TAHSIN_WAFA', 'TAHSIN_ALQURAN']),
     juzId: z.number().nullable(),
     surahId: z.number().nullable(),
-    startVerse: z.number().nullable(),
-    endVerse: z.number().nullable(),
+    startVerse: z.number().int().min(1, 'Ayat minimal 1').max(286, 'Ayat maksimal 286').nullable(),
+    endVerse: z.number().int().min(1, 'Ayat minimal 1').max(286, 'Ayat maksimal 286').nullable(),
     wafaId: z.number().nullable(),
     startPage: z.number().nullable(),
     endPage: z.number().nullable(),
     adab: z.enum(['BAIK', 'KURANG_BAIK', 'TIDAK_BAIK']),
     submissionStatus: z.enum(['LULUS', 'TIDAK_LULUS', 'MENGULANG']),
-    note: z.string().nullable(),
+    note: z.string().max(191, 'Catatan maksimal 191 karakter').nullable(),
   })
   .refine(
     (data) =>

@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { formatSubmissionDetail } from '../format-submission-detail';
+import { getLockedSubmissionIds } from '../get-locked-submission-ids';
 
 export interface SubmissionTableData {
   id: string;
@@ -18,6 +19,7 @@ export interface SubmissionTableData {
   adab: string;
   submissionStatus: string;
   note: string | null;
+  isLocked?: boolean;
 }
 
 export async function listMySubmissions(): Promise<SubmissionTableData[]> {
@@ -33,6 +35,11 @@ export async function listMySubmissions(): Promise<SubmissionTableData[]> {
     },
     orderBy: { date: 'desc' },
   });
+
+  const studentIds = Array.from(new Set(submissions.map((s) => s.studentId)));
+  const lockedByStudent = new Map(
+    await Promise.all(studentIds.map(async (id) => [id, await getLockedSubmissionIds(id)] as const)),
+  );
 
   return submissions.map((s) => ({
     id: s.id,
@@ -50,5 +57,6 @@ export async function listMySubmissions(): Promise<SubmissionTableData[]> {
     adab: s.adab,
     submissionStatus: s.submissionStatus,
     note: s.note,
+    isLocked: lockedByStudent.get(s.studentId)?.has(s.id) ?? false,
   }));
 }

@@ -88,7 +88,7 @@ export function TashihResultEditDialog({ resultId, initialPassed, initialNotes }
           </Field>
 
           <Field>
-            <FieldLabel>Catatan</FieldLabel>
+            <FieldLabel>Catatan (opsional)</FieldLabel>
             <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={2} />
           </Field>
         </div>

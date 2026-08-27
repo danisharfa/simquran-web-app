@@ -15,26 +15,22 @@ export function formatWeeklyTargetDetail(target: {
     return `${target.wafa?.name ?? '-'} hal. ${pages}`;
   }
 
-  const parts: string[] = [];
+  if (!target.surahStart || !target.surahEnd) return '-';
 
-  if (target.juzStart) {
-    parts.push(
-      target.juzStart.name === target.juzEnd?.name
-        ? target.juzStart.name
-        : `${target.juzStart.name}-${target.juzEnd?.name ?? '-'}`,
-    );
-  }
+  const juzLabel = target.juzStart
+    ? target.juzStart.name === target.juzEnd?.name
+      ? `${target.juzStart.name} — `
+      : `${target.juzStart.name}-${target.juzEnd?.name ?? '-'} — `
+    : '';
 
-  if (target.surahStart) {
-    parts.push(
-      target.surahStart.name === target.surahEnd?.name
-        ? target.surahStart.name
-        : `${target.surahStart.name}-${target.surahEnd?.name ?? '-'}`,
-    );
-  }
+  // Same surah: "ayat 1-3". Cross-surah: spell out each end so the reading direction is unambiguous
+  // (surah mulai can have a higher id than surah akhir, e.g. An-Nas ayat 1 s.d. Al-Falaq ayat 3).
+  const range =
+    target.surahStart.name === target.surahEnd.name
+      ? `${target.surahStart.name} ayat ${
+          target.startAyat === target.endAyat ? target.startAyat : `${target.startAyat}-${target.endAyat}`
+        }`
+      : `${target.surahStart.name} ayat ${target.startAyat} s.d. ${target.surahEnd.name} ayat ${target.endAyat}`;
 
-  const ayat = target.startAyat === target.endAyat ? `${target.startAyat}` : `${target.startAyat}-${target.endAyat}`;
-  parts.push(`ayat ${ayat}`);
-
-  return parts.join(', ');
+  return `${juzLabel}${range}`;
 }

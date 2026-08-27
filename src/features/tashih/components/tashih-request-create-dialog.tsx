@@ -5,7 +5,15 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { ClipboardList } from 'lucide-react';
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { TashihRequestFields, type TashihRequestFieldValues } from './tashih-request-fields';
@@ -33,10 +41,15 @@ interface Props {
   wafaOptions: ReferenceOption[];
 }
 
-export function TashihRequestForm({ groups, surahOptions, juzOptions, surahJuzMap, wafaOptions }: Props) {
+export function TashihRequestCreateDialog({ groups, surahOptions, juzOptions, surahJuzMap, wafaOptions }: Props) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const [values, setValues] = useState<TashihRequestFieldValues>(INITIAL_VALUES);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  function reset() {
+    setValues(INITIAL_VALUES);
+  }
 
   function handleChange<K extends keyof TashihRequestFieldValues>(key: K, value: TashihRequestFieldValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }));
@@ -59,7 +72,8 @@ export function TashihRequestForm({ groups, surahOptions, juzOptions, surahJuzMa
       }
 
       toast.success(result.message);
-      setValues({ ...INITIAL_VALUES, groupId: values.groupId });
+      reset();
+      setOpen(false);
       router.refresh();
     } finally {
       setIsSubmitting(false);
@@ -67,14 +81,25 @@ export function TashihRequestForm({ groups, surahOptions, juzOptions, surahJuzMa
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <ClipboardList className="size-5" />
-          Pendaftaran Tashih
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger
+        render={
+          <Button>
+            <ClipboardList />
+            Ajukan Tashih
+          </Button>
+        }
+      />
+
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <ClipboardList className="size-5" />
+            Pendaftaran Tashih
+          </DialogTitle>
+          <DialogDescription>Ajukan tashih untuk siswa bimbingan Anda.</DialogDescription>
+        </DialogHeader>
+
         <TashihRequestFields
           groups={groups}
           surahOptions={surahOptions}
@@ -84,19 +109,29 @@ export function TashihRequestForm({ groups, surahOptions, juzOptions, surahJuzMa
           values={values}
           onChange={handleChange}
         />
-      </CardContent>
-      <CardFooter>
-        <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
-          {isSubmitting ? (
-            <>
-              <Spinner />
-              Menyimpan...
-            </>
-          ) : (
-            'Ajukan Tashih'
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
+
+        <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={reset}
+            disabled={isSubmitting}
+            className="w-full sm:w-auto"
+          >
+            Reset
+          </Button>
+          <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
+            {isSubmitting ? (
+              <>
+                <Spinner />
+                Menyimpan...
+              </>
+            ) : (
+              'Ajukan Tashih'
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

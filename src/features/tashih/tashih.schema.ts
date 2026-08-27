@@ -22,7 +22,7 @@ export const tashihRequestSchema = z
     wafaId: z.number().nullable(),
     startPage: z.number().nullable(),
     endPage: z.number().nullable(),
-    notes: z.string().nullable(),
+    notes: z.string().max(191, 'Catatan maksimal 191 karakter').nullable(),
   })
   .refine(
     (data) =>
@@ -36,10 +36,10 @@ export type TashihRequestSchema = z.infer<typeof tashihRequestSchema>;
 
 export const tashihScheduleSchema = z.object({
   date: z.string().min(1, 'Tanggal wajib diisi'),
-  sessionName: z.string().min(1, 'Nama sesi wajib diisi'),
+  sessionName: z.string().min(1, 'Nama sesi wajib diisi').max(100, 'Nama sesi maksimal 100 karakter'),
   startTime: z.string().min(1, 'Waktu mulai wajib diisi'),
   endTime: z.string().min(1, 'Waktu akhir wajib diisi'),
-  location: z.string().min(1, 'Lokasi wajib diisi'),
+  location: z.string().min(1, 'Lokasi wajib diisi').max(150, 'Lokasi maksimal 150 karakter'),
   requestIds: z.array(z.string()).min(1, 'Pilih minimal satu permintaan'),
 });
 

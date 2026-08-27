@@ -82,18 +82,18 @@ export function UserDetail({ user, onSuccess }: UserDetailProps) {
             <div className="space-y-4">
               <Field>
                 <FieldLabel>Nama Lengkap</FieldLabel>
-                <Input value={name} onChange={(e) => setName(e.target.value)} />
+                <Input value={name} onChange={(e) => setName(e.target.value)} maxLength={100} />
               </Field>
 
               <Field>
                 <FieldLabel>Username</FieldLabel>
-                <Input value={username} onChange={(e) => setUsername(e.target.value)} />
+                <Input value={username} onChange={(e) => setUsername(e.target.value)} maxLength={30} />
               </Field>
 
               {isTeacherOrCoordinator && (
                 <Field>
                   <FieldLabel>NIP</FieldLabel>
-                  <Input value={nip} onChange={(e) => setNip(e.target.value)} />
+                  <Input value={nip} onChange={(e) => setNip(e.target.value)} maxLength={30} />
                 </Field>
               )}
 
@@ -101,18 +101,18 @@ export function UserDetail({ user, onSuccess }: UserDetailProps) {
                 <>
                   <Field>
                     <FieldLabel>NIS</FieldLabel>
-                    <Input value={nis} onChange={(e) => setNis(e.target.value)} />
+                    <Input value={nis} onChange={(e) => setNis(e.target.value)} maxLength={30} />
                   </Field>
                   <Field>
                     <FieldLabel>NISN</FieldLabel>
-                    <Input value={nisn} onChange={(e) => setNisn(e.target.value)} />
+                    <Input value={nisn} onChange={(e) => setNisn(e.target.value)} maxLength={30} />
                   </Field>
                 </>
               )}
 
               <Field>
                 <FieldLabel>Tempat Lahir</FieldLabel>
-                <Textarea value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} />
+                <Textarea value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} maxLength={100} />
               </Field>
 
               <DatePicker value={date} onChange={setDate} label="Tanggal Lahir" />
@@ -157,17 +157,17 @@ export function UserDetail({ user, onSuccess }: UserDetailProps) {
               </Field>
               <Field>
                 <FieldLabel>Alamat</FieldLabel>
-                <Textarea value={address} onChange={(e) => setAddress(e.target.value)} />
+                <Textarea value={address} onChange={(e) => setAddress(e.target.value)} maxLength={191} />
               </Field>
 
               <Field>
                 <FieldLabel>Email</FieldLabel>
-                <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Input value={email} onChange={(e) => setEmail(e.target.value)} maxLength={191} />
               </Field>
 
               <Field>
                 <FieldLabel>No. HP</FieldLabel>
-                <Input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                <Input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} maxLength={20} />
               </Field>
             </div>
           </FieldGroup>

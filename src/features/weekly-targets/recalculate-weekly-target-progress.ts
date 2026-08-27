@@ -68,10 +68,11 @@ export async function recalculateWeeklyTargetsForStudent(studentId: string): Pro
       target.startAyat != null &&
       target.endAyat != null
     ) {
-      const rangeStart = Math.min(target.surahStartId, target.surahEndId);
-      const rangeEnd = Math.max(target.surahStartId, target.surahEndId);
+      const startId = target.surahStartId;
+      const endId = target.surahEndId;
+      const step = startId <= endId ? 1 : -1;
 
-      for (let surahId = rangeStart; surahId <= rangeEnd; surahId++) {
+      for (let surahId = startId; step === 1 ? surahId <= endId : surahId >= endId; surahId += step) {
         const verseCount = verseCountBySurah.get(surahId);
         if (verseCount == null) continue;
 

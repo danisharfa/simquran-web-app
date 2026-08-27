@@ -1,6 +1,6 @@
 import { requireRole } from '@/lib/require-role';
 import { PageHeader } from '@/components/layouts/page-header';
-import { MunaqasyahRequestForm } from '@/features/munaqasyah/components/munaqasyah-request-form';
+import { MunaqasyahRequestCreateDialog } from '@/features/munaqasyah/components/munaqasyah-request-create-dialog';
 import { MunaqasyahRequestTable } from '@/features/munaqasyah/components/munaqasyah-request-table';
 import { listMyMunaqasyahRequests } from '@/features/munaqasyah/queries/list-my-munaqasyah-requests';
 import { listMyGroupsWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
@@ -20,11 +20,10 @@ export default async function MunaqasyahRequestPage() {
       <PageHeader
         title="Pendaftaran Munaqasyah"
         description="Ajukan Tasmi/Munaqasyah untuk siswa bimbingan Anda"
+        action={<MunaqasyahRequestCreateDialog groups={groups} juzOptions={juzOptions} />}
       />
 
-      <MunaqasyahRequestForm groups={groups} juzOptions={juzOptions} />
-
-      <MunaqasyahRequestTable data={requests} />
+      <MunaqasyahRequestTable data={requests} editable groups={groups} juzOptions={juzOptions} />
     </div>
   );
 }

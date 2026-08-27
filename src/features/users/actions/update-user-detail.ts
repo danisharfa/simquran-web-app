@@ -6,6 +6,7 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 import { headers } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import type { Gender, BloodType } from '@/lib/generated/prisma/enums';
+import { profileUpdateSchema } from '../profile.schema';
 
 export interface UpdateUserDetailInput {
   userId: string;
@@ -26,6 +27,11 @@ export interface UpdateUserDetailInput {
 }
 
 export async function updateUserDetail(input: UpdateUserDetailInput) {
+  const parsed = profileUpdateSchema.safeParse(input);
+  if (!parsed.success) {
+    throw new Error(parsed.error.issues[0]?.message ?? 'Data tidak valid');
+  }
+
   const session = await requireRoleOrThrow(['superadmin', 'admin']);
   const viewerRole = session.user.role.toLowerCase();
   const targetRole = input.role.toLowerCase();

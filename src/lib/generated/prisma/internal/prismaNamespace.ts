@@ -401,6 +401,7 @@ export const ModelName = {
   SurahJuz: 'SurahJuz',
   Wafa: 'Wafa',
   Submission: 'Submission',
+  SubmissionDeletionLog: 'SubmissionDeletionLog',
   HomeActivity: 'HomeActivity',
   WeeklyTarget: 'WeeklyTarget',
   TashihRequest: 'TashihRequest',
@@ -432,7 +433,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory" | "group" | "groupHistory" | "surah" | "juz" | "surahJuz" | "wafa" | "submission" | "homeActivity" | "weeklyTarget" | "tashihRequest" | "tashihSchedule" | "tashihScheduleRequest" | "tashihResult" | "tahfidzScore" | "tahsinScore" | "report" | "munaqasyahRequest" | "munaqasyahSchedule" | "munaqasyahScheduleRequest" | "munaqasyahResult" | "tasmiDetail" | "munaqasyahDetail" | "munaqasyahFinalResult"
+    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory" | "group" | "groupHistory" | "surah" | "juz" | "surahJuz" | "wafa" | "submission" | "submissionDeletionLog" | "homeActivity" | "weeklyTarget" | "tashihRequest" | "tashihSchedule" | "tashihScheduleRequest" | "tashihResult" | "tahfidzScore" | "tahsinScore" | "report" | "munaqasyahRequest" | "munaqasyahSchedule" | "munaqasyahScheduleRequest" | "munaqasyahResult" | "tasmiDetail" | "munaqasyahDetail" | "munaqasyahFinalResult"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1555,6 +1556,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SubmissionCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SubmissionCountAggregateOutputType> | number
+        }
+      }
+    }
+    SubmissionDeletionLog: {
+      payload: Prisma.$SubmissionDeletionLogPayload<ExtArgs>
+      fields: Prisma.SubmissionDeletionLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SubmissionDeletionLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionDeletionLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SubmissionDeletionLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionDeletionLogPayload>
+        }
+        findFirst: {
+          args: Prisma.SubmissionDeletionLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionDeletionLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SubmissionDeletionLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionDeletionLogPayload>
+        }
+        findMany: {
+          args: Prisma.SubmissionDeletionLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionDeletionLogPayload>[]
+        }
+        create: {
+          args: Prisma.SubmissionDeletionLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionDeletionLogPayload>
+        }
+        createMany: {
+          args: Prisma.SubmissionDeletionLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SubmissionDeletionLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionDeletionLogPayload>
+        }
+        update: {
+          args: Prisma.SubmissionDeletionLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionDeletionLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.SubmissionDeletionLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SubmissionDeletionLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SubmissionDeletionLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubmissionDeletionLogPayload>
+        }
+        aggregate: {
+          args: Prisma.SubmissionDeletionLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSubmissionDeletionLog>
+        }
+        groupBy: {
+          args: Prisma.SubmissionDeletionLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubmissionDeletionLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SubmissionDeletionLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubmissionDeletionLogCountAggregateOutputType> | number
         }
       }
     }
@@ -2886,6 +2953,23 @@ export const SubmissionScalarFieldEnum = {
 export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]
 
 
+export const SubmissionDeletionLogScalarFieldEnum = {
+  id: 'id',
+  studentName: 'studentName',
+  teacherName: 'teacherName',
+  groupName: 'groupName',
+  classroomName: 'classroomName',
+  submissionDate: 'submissionDate',
+  submissionType: 'submissionType',
+  detail: 'detail',
+  note: 'note',
+  deletedByName: 'deletedByName',
+  deletedAt: 'deletedAt'
+} as const
+
+export type SubmissionDeletionLogScalarFieldEnum = (typeof SubmissionDeletionLogScalarFieldEnum)[keyof typeof SubmissionDeletionLogScalarFieldEnum]
+
+
 export const HomeActivityScalarFieldEnum = {
   id: 'id',
   studentId: 'studentId',
@@ -3323,6 +3407,20 @@ export const SubmissionOrderByRelevanceFieldEnum = {
 } as const
 
 export type SubmissionOrderByRelevanceFieldEnum = (typeof SubmissionOrderByRelevanceFieldEnum)[keyof typeof SubmissionOrderByRelevanceFieldEnum]
+
+
+export const SubmissionDeletionLogOrderByRelevanceFieldEnum = {
+  id: 'id',
+  studentName: 'studentName',
+  teacherName: 'teacherName',
+  groupName: 'groupName',
+  classroomName: 'classroomName',
+  detail: 'detail',
+  note: 'note',
+  deletedByName: 'deletedByName'
+} as const
+
+export type SubmissionDeletionLogOrderByRelevanceFieldEnum = (typeof SubmissionDeletionLogOrderByRelevanceFieldEnum)[keyof typeof SubmissionDeletionLogOrderByRelevanceFieldEnum]
 
 
 export const HomeActivityOrderByRelevanceFieldEnum = {
@@ -3791,6 +3889,7 @@ export type GlobalOmitConfig = {
   surahJuz?: Prisma.SurahJuzOmit
   wafa?: Prisma.WafaOmit
   submission?: Prisma.SubmissionOmit
+  submissionDeletionLog?: Prisma.SubmissionDeletionLogOmit
   homeActivity?: Prisma.HomeActivityOmit
   weeklyTarget?: Prisma.WeeklyTargetOmit
   tashihRequest?: Prisma.TashihRequestOmit

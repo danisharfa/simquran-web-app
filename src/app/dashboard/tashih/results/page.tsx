@@ -1,6 +1,6 @@
 import { requireRole } from '@/lib/require-role';
 import { PageHeader } from '@/components/layouts/page-header';
-import { TashihResultForm } from '@/features/tashih/components/tashih-result-form';
+import { TashihResultCreateDialog } from '@/features/tashih/components/tashih-result-create-dialog';
 import { TashihResultTable } from '@/features/tashih/components/tashih-result-table';
 import { listAllTashihResults } from '@/features/tashih/queries/list-all-tashih-results';
 import { listSchedulesWithPendingRequests } from '@/features/tashih/queries/list-schedules-with-pending-requests';
@@ -18,9 +18,8 @@ export default async function TashihResultsPage() {
       <PageHeader
         title="Penilaian Tashih"
         description="Input hasil tashih untuk peserta yang sudah dijadwalkan"
+        action={<TashihResultCreateDialog schedules={schedules} />}
       />
-
-      <TashihResultForm schedules={schedules} />
 
       <TashihResultTable data={results} editable />
     </div>

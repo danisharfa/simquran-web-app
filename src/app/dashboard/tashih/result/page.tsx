@@ -17,7 +17,7 @@ export default async function TashihResultPage() {
         description={role === 'student' ? 'Hasil tashih Anda' : 'Hasil tashih siswa bimbingan Anda'}
       />
 
-      <TashihResultTable data={results} />
+      <TashihResultTable data={results} own={role === 'student'} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { requireRole } from '@/lib/require-role';
 import { PageHeader } from '@/components/layouts/page-header';
-import { MunaqasyahScheduleForm } from '@/features/munaqasyah/components/munaqasyah-schedule-form';
+import { MunaqasyahScheduleCreateDialog } from '@/features/munaqasyah/components/munaqasyah-schedule-create-dialog';
 import { MunaqasyahScheduleTable } from '@/features/munaqasyah/components/munaqasyah-schedule-table';
 import { listMunaqasyahSchedules } from '@/features/munaqasyah/queries/list-munaqasyah-schedules';
 import { listSchedulableMunaqasyahRequests } from '@/features/munaqasyah/queries/list-schedulable-requests';
@@ -20,11 +20,10 @@ export default async function MunaqasyahSchedulesPage() {
       <PageHeader
         title="Penjadwalan Munaqasyah"
         description="Jadwalkan sesi Tasmi/Munaqasyah dan tetapkan penguji"
+        action={<MunaqasyahScheduleCreateDialog schedulableRequests={schedulableRequests} teachers={teachers} />}
       />
 
-      <MunaqasyahScheduleForm schedulableRequests={schedulableRequests} teachers={teachers} />
-
-      <MunaqasyahScheduleTable data={schedules} />
+      <MunaqasyahScheduleTable data={schedules} teachers={teachers} />
     </div>
   );
 }

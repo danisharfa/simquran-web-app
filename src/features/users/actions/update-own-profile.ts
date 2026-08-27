@@ -6,6 +6,7 @@ import { requireSession } from '@/lib/require-role';
 import { headers } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import type { Gender, BloodType } from '@/lib/generated/prisma/enums';
+import { profileUpdateSchema } from '../profile.schema';
 
 export interface UpdateOwnProfileInput {
   name?: string;
@@ -20,6 +21,11 @@ export interface UpdateOwnProfileInput {
 }
 
 export async function updateOwnProfile(input: UpdateOwnProfileInput) {
+  const parsed = profileUpdateSchema.safeParse(input);
+  if (!parsed.success) {
+    throw new Error(parsed.error.issues[0]?.message ?? 'Data tidak valid');
+  }
+
   const session = await requireSession();
   const userId = session.user.id;
   const role = session.user.role.toLowerCase();

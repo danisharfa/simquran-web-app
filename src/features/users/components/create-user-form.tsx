@@ -133,6 +133,7 @@ export function AddUserForm({ allowedRoles }: AddUserFormProps) {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                       placeholder="Masukkan nama lengkap"
+                      maxLength={100}
                     />
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
@@ -155,6 +156,7 @@ export function AddUserForm({ allowedRoles }: AddUserFormProps) {
                       aria-invalid={isInvalid}
                       placeholder="Masukkan nip/nis sebagai username"
                       autoComplete="off"
+                      maxLength={30}
                     />
                     <FieldDescription>Username akan digunakan untuk login.</FieldDescription>
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}

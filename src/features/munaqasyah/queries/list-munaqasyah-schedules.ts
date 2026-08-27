@@ -1,6 +1,20 @@
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 
+export interface MunaqasyahScheduleParticipant {
+  requestId: string;
+  studentName: string;
+  batch: string;
+  stage: string;
+  juzName: string;
+  groupId: string;
+  groupName: string;
+  classroomId: string;
+  classroomName: string;
+  academicYear: string;
+  semester: string;
+}
+
 export interface MunaqasyahScheduleTableData {
   id: string;
   date: Date;
@@ -8,15 +22,29 @@ export interface MunaqasyahScheduleTableData {
   startTime: string;
   endTime: string;
   location: string;
+  examinerId: string | null;
   examinerName: string | null;
-  requestCount: number;
+  participants: MunaqasyahScheduleParticipant[];
 }
 
 export async function listMunaqasyahSchedules(): Promise<MunaqasyahScheduleTableData[]> {
   await requireRoleOrThrow(['coordinator']);
 
   const schedules = await prisma.munaqasyahSchedule.findMany({
-    include: { examiner: { include: { user: true } }, _count: { select: { scheduleRequests: true } } },
+    include: {
+      examiner: { include: { user: true } },
+      scheduleRequests: {
+        include: {
+          request: {
+            include: {
+              student: { include: { user: true } },
+              juz: true,
+              group: { include: { classroom: true } },
+            },
+          },
+        },
+      },
+    },
     orderBy: { date: 'desc' },
   });
 
@@ -27,7 +55,20 @@ export async function listMunaqasyahSchedules(): Promise<MunaqasyahScheduleTable
     startTime: s.startTime,
     endTime: s.endTime,
     location: s.location,
+    examinerId: s.examinerId,
     examinerName: s.examiner?.user.name ?? null,
-    requestCount: s._count.scheduleRequests,
+    participants: s.scheduleRequests.map((sr) => ({
+      requestId: sr.request.id,
+      studentName: sr.request.student.user.name,
+      batch: sr.request.batch,
+      stage: sr.request.stage,
+      juzName: sr.request.juz.name,
+      groupId: sr.request.groupId,
+      groupName: sr.request.group.name,
+      classroomId: sr.request.group.classroomId,
+      classroomName: `${sr.request.group.classroom.level} ${sr.request.group.classroom.name}`,
+      academicYear: sr.request.group.classroom.academicYear,
+      semester: sr.request.group.classroom.semester,
+    })),
   }));
 }

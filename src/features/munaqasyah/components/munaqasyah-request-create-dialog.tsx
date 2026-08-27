@@ -5,7 +5,15 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { ClipboardList } from 'lucide-react';
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { MunaqasyahRequestFields, type MunaqasyahRequestFieldValues } from './munaqasyah-request-fields';
@@ -26,10 +34,15 @@ interface Props {
   juzOptions: ReferenceOption[];
 }
 
-export function MunaqasyahRequestForm({ groups, juzOptions }: Props) {
+export function MunaqasyahRequestCreateDialog({ groups, juzOptions }: Props) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const [values, setValues] = useState<MunaqasyahRequestFieldValues>(INITIAL_VALUES);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  function reset() {
+    setValues(INITIAL_VALUES);
+  }
 
   function handleChange<K extends keyof MunaqasyahRequestFieldValues>(key: K, value: MunaqasyahRequestFieldValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }));
@@ -52,7 +65,8 @@ export function MunaqasyahRequestForm({ groups, juzOptions }: Props) {
       }
 
       toast.success(result.message);
-      setValues({ ...INITIAL_VALUES, groupId: values.groupId });
+      reset();
+      setOpen(false);
       router.refresh();
     } finally {
       setIsSubmitting(false);
@@ -60,28 +74,49 @@ export function MunaqasyahRequestForm({ groups, juzOptions }: Props) {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <ClipboardList className="size-5" />
-          Pendaftaran Munaqasyah
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger
+        render={
+          <Button>
+            <ClipboardList />
+            Ajukan Munaqasyah
+          </Button>
+        }
+      />
+
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <ClipboardList className="size-5" />
+            Pendaftaran Munaqasyah
+          </DialogTitle>
+          <DialogDescription>Ajukan Tasmi/Munaqasyah untuk siswa bimbingan Anda.</DialogDescription>
+        </DialogHeader>
+
         <MunaqasyahRequestFields groups={groups} juzOptions={juzOptions} values={values} onChange={handleChange} />
-      </CardContent>
-      <CardFooter>
-        <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
-          {isSubmitting ? (
-            <>
-              <Spinner />
-              Menyimpan...
-            </>
-          ) : (
-            'Ajukan Munaqasyah'
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
+
+        <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={reset}
+            disabled={isSubmitting}
+            className="w-full sm:w-auto"
+          >
+            Reset
+          </Button>
+          <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
+            {isSubmitting ? (
+              <>
+                <Spinner />
+                Menyimpan...
+              </>
+            ) : (
+              'Ajukan Munaqasyah'
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

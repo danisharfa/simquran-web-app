@@ -7,6 +7,7 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 import { submissionSchema, type SubmissionSchema } from '../submission.schema';
 import { findDuplicateSubmissionMessage } from '../check-duplicate-submission';
 import { recalculateWeeklyTargetsForStudent } from '@/features/weekly-targets/recalculate-weekly-target-progress';
+import { getLockedSubmissionIds } from '../get-locked-submission-ids';
 
 export async function updateSubmission(submissionId: string, input: SubmissionSchema) {
   const session = await requireRoleOrThrow(['teacher']);
@@ -22,6 +23,37 @@ export async function updateSubmission(submissionId: string, input: SubmissionSc
   }
 
   const { studentId, groupId, date, submissionStatus: _submissionStatus, ...rest } = parsed.data;
+
+  const lockedIds = await getLockedSubmissionIds(existing.studentId);
+  if (lockedIds.has(submissionId)) {
+    const changedRestrictedField =
+      studentId !== existing.studentId ||
+      groupId !== existing.groupId ||
+      new Date(date).getTime() !== existing.date.getTime() ||
+      rest.submissionType !== existing.submissionType ||
+      rest.juzId !== existing.juzId ||
+      rest.surahId !== existing.surahId ||
+      rest.startVerse !== existing.startVerse ||
+      rest.endVerse !== existing.endVerse ||
+      rest.wafaId !== existing.wafaId ||
+      rest.startPage !== existing.startPage ||
+      rest.endPage !== existing.endPage ||
+      rest.adab !== existing.adab;
+
+    if (changedRestrictedField) {
+      return {
+        success: false,
+        message:
+          'Setoran ini sudah menjadi bagian dari pengajuan tashih yang sedang berjalan. Hanya catatan yang dapat diubah.',
+      };
+    }
+
+    await prisma.submission.update({ where: { id: submissionId }, data: { note: rest.note } });
+
+    revalidatePath('/dashboard/submission');
+
+    return { success: true, message: 'Catatan setoran berhasil diperbarui' };
+  }
 
   const group = await prisma.group.findUnique({ where: { id: groupId } });
   if (!group || group.teacherId !== session.user.id) {
