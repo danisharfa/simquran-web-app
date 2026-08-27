@@ -1,0 +1,70 @@
+'use client';
+
+import * as React from 'react';
+import { CalendarIcon, ChevronDownIcon } from 'lucide-react';
+import { type DateRange } from 'react-day-picker';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+// import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+
+interface Props {
+  value?: DateRange;
+  onChange?: (range: DateRange | undefined) => void;
+  // label?: string;
+  placeholder?: string;
+  className?: string;
+}
+
+export function DateRangePicker({
+  value,
+  onChange,
+  // label = '',
+  placeholder = 'Pilih Rentang Tanggal',
+  className,
+}: Props) {
+  const currentRange = value;
+
+  const handleSelect = (selectedRange: DateRange | undefined) => {
+    onChange?.(selectedRange);
+  };
+
+  return (
+    <div className={`flex flex-col ${className || ''}`}>
+      {/* <Label htmlFor="date" className="pb-1">
+        {label}
+      </Label> */}
+      <Popover>
+        <PopoverTrigger
+          render={
+            <Button
+              variant="outline"
+              id="dates"
+              className="max-w-[250px] justify-between font-normal"
+            >
+              <div className="flex items-center gap-2">
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {currentRange?.from && currentRange?.to
+                  ? `${currentRange.from.toLocaleDateString(
+                      'id-ID'
+                    )} - ${currentRange.to.toLocaleDateString('id-ID')}`
+                  : placeholder}
+              </div>
+              <ChevronDownIcon />
+            </Button>
+          }
+        />
+        <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+          <Calendar
+            mode="range"
+            selected={currentRange}
+            captionLayout="dropdown"
+            onSelect={handleSelect}
+            startMonth={new Date(1900, 0)}
+            endMonth={new Date(2030, 11)}
+          />
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+}

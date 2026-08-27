@@ -11,7 +11,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { TashihRequestFields, type TashihRequestFieldValues } from './tashih-request-fields';
 import { createTashihRequest } from '../actions/create-tashih-request';
 import type { GroupWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 const INITIAL_VALUES: TashihRequestFieldValues = {
   groupId: '',
@@ -29,10 +29,11 @@ interface Props {
   groups: GroupWithStudents[];
   surahOptions: ReferenceOption[];
   juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
   wafaOptions: ReferenceOption[];
 }
 
-export function TashihRequestForm({ groups, surahOptions, juzOptions, wafaOptions }: Props) {
+export function TashihRequestForm({ groups, surahOptions, juzOptions, surahJuzMap, wafaOptions }: Props) {
   const router = useRouter();
   const [values, setValues] = useState<TashihRequestFieldValues>(INITIAL_VALUES);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -78,6 +79,7 @@ export function TashihRequestForm({ groups, surahOptions, juzOptions, wafaOption
           groups={groups}
           surahOptions={surahOptions}
           juzOptions={juzOptions}
+          surahJuzMap={surahJuzMap}
           wafaOptions={wafaOptions}
           values={values}
           onChange={handleChange}

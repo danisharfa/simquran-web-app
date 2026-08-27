@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import {
@@ -26,9 +27,10 @@ interface Props<T> {
   table: TanStackTable<T>;
   filterColumn?: string;
   showColumnFilter?: boolean;
+  toolbar?: ReactNode;
 }
 
-export function DataTable<T>({ title, table, filterColumn, showColumnFilter = true }: Props<T>) {
+export function DataTable<T>({ title, table, filterColumn, showColumnFilter = true, toolbar }: Props<T>) {
   return (
     <Card>
       {title && (
@@ -37,7 +39,8 @@ export function DataTable<T>({ title, table, filterColumn, showColumnFilter = tr
         </CardHeader>
       )}
       <CardContent className="min-w-0">
-        <div className="flex items-center py-4">
+        <div className="flex flex-wrap items-center gap-2 py-4">
+          {toolbar}
           {filterColumn && table.getColumn(filterColumn) && (
             <Input
               placeholder={`Cari ${filterColumn}...`}

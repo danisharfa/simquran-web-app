@@ -26,7 +26,7 @@ export async function updateHomeActivity(activityId: string, input: HomeActivity
     data: { date: new Date(date), ...rest },
   });
 
-  revalidatePath('/dashboard/home-activity/history');
+  revalidatePath('/dashboard/home-activity');
 
   return { success: true, message: 'Aktivitas rumah berhasil diperbarui' };
 }

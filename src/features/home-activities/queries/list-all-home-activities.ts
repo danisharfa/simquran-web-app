@@ -6,7 +6,7 @@ export async function listAllHomeActivities(): Promise<HomeActivityTableData[]> 
   await requireRoleOrThrow(['coordinator']);
 
   const activities = await prisma.homeActivity.findMany({
-    include: { student: { include: { user: true } }, group: true, surah: true },
+    include: { student: { include: { user: true } }, group: { include: { classroom: true } }, surah: true },
     orderBy: { date: 'desc' },
   });
 
@@ -14,7 +14,12 @@ export async function listAllHomeActivities(): Promise<HomeActivityTableData[]> 
     id: a.id,
     date: a.date,
     studentName: a.student.user.name,
+    groupId: a.groupId,
     groupName: a.group.name,
+    classroomId: a.group.classroomId,
+    classroomName: `${a.group.classroom.level} ${a.group.classroom.name}`,
+    academicYear: a.group.classroom.academicYear,
+    semester: a.group.classroom.semester,
     activityType: a.activityType,
     detail: `${a.surah.name} ayat ${a.startVerse}-${a.endVerse}`,
     note: a.note,

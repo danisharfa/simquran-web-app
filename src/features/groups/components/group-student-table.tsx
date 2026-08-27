@@ -26,7 +26,6 @@ interface Props {
   groupId: string;
   data: GroupStudentOption[];
   readOnly?: boolean;
-  showScoreLink?: boolean;
   showReportLink?: boolean;
 }
 
@@ -34,7 +33,6 @@ export function GroupStudentTable({
   groupId,
   data,
   readOnly = false,
-  showScoreLink = false,
   showReportLink = false,
 }: Props) {
   const router = useRouter();
@@ -78,7 +76,7 @@ export function GroupStudentTable({
       },
     ];
 
-    if (readOnly && !showScoreLink && !showReportLink) return base;
+    if (readOnly && !showReportLink) return base;
 
     return [
       ...base,
@@ -90,15 +88,6 @@ export function GroupStudentTable({
           const student = row.original;
           return (
             <div className="flex items-center gap-1">
-              {showScoreLink && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => router.push(`/dashboard/group/${groupId}/student/${student.userId}/score`)}
-                >
-                  Nilai
-                </Button>
-              )}
               {showReportLink && (
                 <Button
                   variant="outline"
@@ -124,7 +113,7 @@ export function GroupStudentTable({
         },
       },
     ];
-  }, [readOnly, showScoreLink, showReportLink, removingId, handleRemove, groupId, router]);
+  }, [readOnly, showReportLink, removingId, handleRemove, groupId, router]);
 
   const table = useReactTable({
     data,

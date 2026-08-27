@@ -14,16 +14,21 @@ export interface StudentInPeriod {
 export async function getStudentsInPeriod(
   academicYear: string,
   semester: Semester,
+  classroomId: string | null,
   groupId: string | null,
   teacherId: string | null,
 ): Promise<StudentInPeriod[]> {
+  const groupRelationFilter =
+    classroomId || teacherId
+      ? { ...(classroomId && { classroomId }), ...(teacherId && { teacherId }) }
+      : undefined;
+
   const [groupHistories, activeGroups] = await Promise.all([
     prisma.groupHistory.findMany({
       where: {
         academicYear,
         semester,
-        ...(groupId && { groupId }),
-        ...(teacherId && { group: { teacherId } }),
+        ...(groupId ? { groupId } : groupRelationFilter ? { group: groupRelationFilter } : {}),
       },
       include: { student: { include: { user: true } } },
     }),
@@ -31,6 +36,7 @@ export async function getStudentsInPeriod(
       where: {
         classroom: { academicYear, semester },
         ...(groupId && { id: groupId }),
+        ...(classroomId && { classroomId }),
         ...(teacherId && { teacherId }),
       },
       include: { students: { include: { user: true } } },

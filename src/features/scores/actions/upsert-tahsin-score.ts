@@ -36,7 +36,6 @@ export async function upsertTahsinScore(input: TahsinScoreSchema) {
 
   await recalculateReport(studentId, groupId);
 
-  revalidatePath(`/dashboard/group/${groupId}/student/${studentId}/score`);
   revalidatePath(`/dashboard/group/${groupId}/student/${studentId}/report`);
 
   return { success: true, message: 'Nilai tahsin berhasil disimpan' };

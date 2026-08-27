@@ -1,10 +1,21 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 
 import { authClient } from '@/lib/auth-client';
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,8 +48,12 @@ export function NavUser({
   const { isMobile } = useSidebar();
   const router = useRouter();
   const { setTheme } = useTheme();
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleLogout = async () => {
+    setIsLoggingOut(true);
+
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
@@ -47,6 +62,9 @@ export function NavUser({
         },
       },
     });
+
+    setIsLoggingOut(false);
+    setShowLogoutDialog(false);
   };
 
   return (
@@ -111,7 +129,10 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={handleLogout}>
+              <DropdownMenuItem
+                closeOnClick={false}
+                onClick={() => setShowLogoutDialog(true)}
+              >
                 <LogOut />
                 Keluar
               </DropdownMenuItem>
@@ -119,6 +140,27 @@ export function NavUser({
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
+
+      <AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Keluar dari Akun</AlertDialogTitle>
+            <AlertDialogDescription>
+              Apakah Anda yakin ingin keluar dari akun ini?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isLoggingOut}>Batal</AlertDialogCancel>
+            <AlertDialogAction
+              variant="destructive"
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+            >
+              {isLoggingOut ? 'Keluar...' : 'Keluar'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </SidebarMenu>
   );
 }

@@ -36,7 +36,6 @@ export async function upsertTahfidzScore(input: TahfidzScoreSchema) {
 
   await recalculateReport(studentId, groupId);
 
-  revalidatePath(`/dashboard/group/${groupId}/student/${studentId}/score`);
   revalidatePath(`/dashboard/group/${groupId}/student/${studentId}/report`);
 
   return { success: true, message: 'Nilai tahfidz berhasil disimpan' };

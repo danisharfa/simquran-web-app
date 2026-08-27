@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/select';
 import { Field, FieldGroup, FieldLabel, FieldSet } from '@/components/ui/field';
 import { Spinner } from '@/components/ui/spinner';
-import { Calendar22 } from '@/components/layouts/calendars/calendar-22';
+import { DatePicker } from '@/components/layouts/calendars/date-picker';
 import { toast } from 'sonner';
 import type { Gender, BloodType } from '@/lib/generated/prisma/enums';
 import type { UserDetail as UserDetailData } from '../actions/get-user-detail';
@@ -115,7 +115,7 @@ export function UserDetail({ user, onSuccess }: UserDetailProps) {
                 <Textarea value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} />
               </Field>
 
-              <Calendar22 value={date} onChange={setDate} label="Tanggal Lahir" />
+              <DatePicker value={date} onChange={setDate} label="Tanggal Lahir" />
             </div>
 
             <div className="space-y-4">

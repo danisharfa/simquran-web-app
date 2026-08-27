@@ -15,7 +15,7 @@ export async function deleteHomeActivity(activityId: string) {
 
   await prisma.homeActivity.delete({ where: { id: activityId } });
 
-  revalidatePath('/dashboard/home-activity/history');
+  revalidatePath('/dashboard/home-activity');
 
   return { success: true, message: 'Aktivitas rumah berhasil dihapus' };
 }

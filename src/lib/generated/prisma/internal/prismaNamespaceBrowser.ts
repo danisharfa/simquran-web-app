@@ -368,6 +368,8 @@ export const WeeklyTargetScalarFieldEnum = {
   surahEndId: 'surahEndId',
   startAyat: 'startAyat',
   endAyat: 'endAyat',
+  juzStartId: 'juzStartId',
+  juzEndId: 'juzEndId',
   wafaId: 'wafaId',
   startPage: 'startPage',
   endPage: 'endPage',

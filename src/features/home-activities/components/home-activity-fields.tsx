@@ -10,9 +10,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Calendar22 } from '@/components/layouts/calendars/calendar-22';
+import { DatePicker } from '@/components/layouts/calendars/date-picker';
 import { HOME_ACTIVITY_TYPE_OPTIONS } from '../home-activity.schema';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import { filterSurahOptionsByJuz } from '@/features/quran-reference/filter-surah-by-juz';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 export interface HomeActivityFieldValues {
   date: Date | undefined;
@@ -27,14 +28,17 @@ export interface HomeActivityFieldValues {
 interface Props {
   surahOptions: ReferenceOption[];
   juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
   values: HomeActivityFieldValues;
   onChange: <K extends keyof HomeActivityFieldValues>(key: K, value: HomeActivityFieldValues[K]) => void;
 }
 
-export function HomeActivityFields({ surahOptions, juzOptions, values, onChange }: Props) {
+export function HomeActivityFields({ surahOptions, juzOptions, surahJuzMap, values, onChange }: Props) {
+  const filteredSurahOptions = filterSurahOptionsByJuz(surahOptions, surahJuzMap, values.juzId);
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <Calendar22 value={values.date} onChange={(d) => onChange('date', d)} label="Tanggal" />
+      <DatePicker value={values.date} onChange={(d) => onChange('date', d)} label="Tanggal" />
 
       <Field>
         <FieldLabel>Jenis Aktivitas</FieldLabel>
@@ -61,7 +65,10 @@ export function HomeActivityFields({ surahOptions, juzOptions, values, onChange 
         <FieldLabel>Juz</FieldLabel>
         <Select
           value={values.juzId ? String(values.juzId) : ''}
-          onValueChange={(v) => onChange('juzId', v ? Number(v) : null)}
+          onValueChange={(v) => {
+            onChange('juzId', v ? Number(v) : null);
+            onChange('surahId', null);
+          }}
         >
           <SelectTrigger>
             <SelectValue>{juzOptions.find((o) => o.id === values.juzId)?.name ?? 'Pilih juz'}</SelectValue>
@@ -84,11 +91,11 @@ export function HomeActivityFields({ surahOptions, juzOptions, values, onChange 
         >
           <SelectTrigger>
             <SelectValue>
-              {surahOptions.find((o) => o.id === values.surahId)?.name ?? 'Pilih surah'}
+              {filteredSurahOptions.find((o) => o.id === values.surahId)?.name ?? 'Pilih surah'}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
-            {surahOptions.map((opt) => (
+            {filteredSurahOptions.map((opt) => (
               <SelectItem key={opt.id} value={String(opt.id)}>
                 {opt.name}
               </SelectItem>

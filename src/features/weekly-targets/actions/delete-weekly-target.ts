@@ -15,7 +15,7 @@ export async function deleteWeeklyTarget(targetId: string) {
 
   await prisma.weeklyTarget.delete({ where: { id: targetId } });
 
-  revalidatePath('/dashboard/weekly-target/history');
+  revalidatePath('/dashboard/weekly-target');
 
   return { success: true, message: 'Target mingguan berhasil dihapus' };
 }

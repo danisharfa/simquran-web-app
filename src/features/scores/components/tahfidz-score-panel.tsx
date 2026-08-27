@@ -12,7 +12,15 @@ import {
   getPaginationRowModel,
 } from '@tanstack/react-table';
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -147,14 +155,25 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
   });
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <BookOpenIcon className="size-5" />
-          Penilaian Tahfidz
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <Dialog>
+      <DialogTrigger
+        render={
+          <Button variant="outline">
+            <BookOpenIcon />
+            Input Nilai Tahfidz
+          </Button>
+        }
+      />
+
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-3xl">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <BookOpenIcon className="size-5" />
+            Penilaian Tahfidz
+          </DialogTitle>
+          <DialogDescription>Tambah atau perbarui nilai tahfidz siswa.</DialogDescription>
+        </DialogHeader>
+
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Field>
             <FieldLabel>Surah</FieldLabel>
@@ -187,19 +206,20 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
         </div>
 
         <DataTable table={table} showColumnFilter={false} />
-      </CardContent>
-      <CardFooter>
-        <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">
-          {isSubmitting ? (
-            <>
-              <Spinner />
-              Menyimpan...
-            </>
-          ) : (
-            'Simpan Nilai Tahfidz'
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
+
+        <DialogFooter>
+          <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">
+            {isSubmitting ? (
+              <>
+                <Spinner />
+                Menyimpan...
+              </>
+            ) : (
+              'Simpan Nilai Tahfidz'
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -5,6 +5,7 @@ import { GroupTable } from '@/features/groups/components/group-table';
 import { listGroups } from '@/features/groups/queries/list-groups';
 import { listGroupHistory } from '@/features/groups/queries/list-group-history';
 import { listMyGroups } from '@/features/groups/queries/list-my-groups';
+import { listMyGroupHistory } from '@/features/groups/queries/list-my-group-history';
 import { listActiveClassrooms } from '@/features/groups/queries/list-active-classrooms';
 import { listTeachers } from '@/features/groups/queries/list-teachers';
 
@@ -13,7 +14,7 @@ export default async function GroupPage() {
   const role = session.user.role.toLowerCase();
 
   if (role === 'teacher') {
-    const groups = await listMyGroups();
+    const [groups, groupHistory] = await Promise.all([listMyGroups(), listMyGroupHistory()]);
 
     return (
       <div className="space-y-6">
@@ -23,6 +24,7 @@ export default async function GroupPage() {
         />
 
         <GroupTable data={groups} title="Daftar Kelompok" />
+        <GroupTable data={groupHistory} title="Riwayat Kelompok" />
       </div>
     );
   }

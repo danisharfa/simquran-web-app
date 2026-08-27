@@ -5,12 +5,20 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { BookPlus } from 'lucide-react';
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { HomeActivityFields, type HomeActivityFieldValues } from './home-activity-fields';
 import { createHomeActivity } from '../actions/create-home-activity';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 const INITIAL_VALUES: HomeActivityFieldValues = {
   date: undefined,
@@ -26,10 +34,12 @@ interface Props {
   groupName: string;
   surahOptions: ReferenceOption[];
   juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
 }
 
-export function HomeActivityForm({ groupName, surahOptions, juzOptions }: Props) {
+export function HomeActivityCreateDialog({ groupName, surahOptions, juzOptions, surahJuzMap }: Props) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const [values, setValues] = useState<HomeActivityFieldValues>(INITIAL_VALUES);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -62,6 +72,7 @@ export function HomeActivityForm({ groupName, surahOptions, juzOptions }: Props)
 
       toast.success(result.message);
       setValues(INITIAL_VALUES);
+      setOpen(false);
       router.refresh();
     } finally {
       setIsSubmitting(false);
@@ -69,34 +80,52 @@ export function HomeActivityForm({ groupName, surahOptions, juzOptions }: Props)
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <BookPlus className="size-5" />
-          Input Aktivitas Rumah
-        </CardTitle>
-        <p className="text-muted-foreground text-sm">Kelompok: {groupName}</p>
-      </CardHeader>
-      <CardContent>
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) setValues(INITIAL_VALUES);
+      }}
+    >
+      <DialogTrigger
+        render={
+          <Button>
+            <BookPlus />
+            Input Aktivitas Rumah
+          </Button>
+        }
+      />
+
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <BookPlus className="size-5" />
+            Input Aktivitas Rumah
+          </DialogTitle>
+          <DialogDescription>Catat murajaah/tilawah/tarjamah mandiri untuk kelompok {groupName}.</DialogDescription>
+        </DialogHeader>
+
         <HomeActivityFields
           surahOptions={surahOptions}
           juzOptions={juzOptions}
+          surahJuzMap={surahJuzMap}
           values={values}
           onChange={handleChange}
         />
-      </CardContent>
-      <CardFooter>
-        <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
-          {isSubmitting ? (
-            <>
-              <Spinner />
-              Menyimpan...
-            </>
-          ) : (
-            'Simpan Aktivitas'
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
+
+        <DialogFooter>
+          <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
+            {isSubmitting ? (
+              <>
+                <Spinner />
+                Menyimpan...
+              </>
+            ) : (
+              'Simpan Aktivitas'
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

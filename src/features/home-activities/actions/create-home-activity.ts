@@ -32,7 +32,7 @@ export async function createHomeActivity(input: HomeActivitySchema) {
     },
   });
 
-  revalidatePath('/dashboard/home-activity/history');
+  revalidatePath('/dashboard/home-activity');
 
   return { success: true, message: 'Aktivitas rumah berhasil dicatat' };
 }

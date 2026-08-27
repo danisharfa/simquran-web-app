@@ -289,6 +289,8 @@ model Juz {
   tashihRequests         TashihRequest[]
   munaqasyahRequests     MunaqasyahRequest[]
   munaqasyahFinalResults MunaqasyahFinalResult[]
+  weeklyTargetsAsStart   WeeklyTarget[]          @relation("StartJuz")
+  weeklyTargetsAsEnd     WeeklyTarget[]          @relation("EndJuz")
 
   @@map("juz")
 }
@@ -400,6 +402,9 @@ model WeeklyTarget {
   startAyat    Int?
   endAyat      Int?
 
+  juzStartId Int?
+  juzEndId   Int?
+
   wafaId    Int?
   startPage Int?
   endPage   Int?
@@ -412,6 +417,8 @@ model WeeklyTarget {
   group      Group          @relation(fields: [groupId], references: [id])
   surahStart Surah?         @relation("StartSurah", fields: [surahStartId], references: [id])
   surahEnd   Surah?         @relation("EndSurah", fields: [surahEndId], references: [id])
+  juzStart   Juz?           @relation("StartJuz", fields: [juzStartId], references: [id])
+  juzEnd     Juz?           @relation("EndJuz", fields: [juzEndId], references: [id])
   wafa       Wafa?          @relation(fields: [wafaId], references: [id])
 
   @@index([startDate])

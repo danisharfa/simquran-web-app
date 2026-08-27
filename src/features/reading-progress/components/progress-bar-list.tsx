@@ -1,8 +1,10 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { Progress as ProgressPrimitive } from '@base-ui/react/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { ProgressTrack, ProgressIndicator } from '@/components/ui/progress';
 import { STATUS_LABEL, type ProgressItem, type ProgressStatus } from '../types';
 
 const FILTERS: { value: 'ALL' | ProgressStatus; label: string }[] = [
@@ -61,12 +63,11 @@ export function ProgressBarList({ title, items, emptyMessage = 'Belum ada progre
                     {item.completed}/{item.total} &middot; {STATUS_LABEL[item.status]}
                   </span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
-                  <div
-                    className={`h-full rounded-full ${STATUS_COLOR[item.status]}`}
-                    style={{ width: `${Math.min(100, item.percent)}%` }}
-                  />
-                </div>
+                <ProgressPrimitive.Root value={Math.min(100, item.percent)}>
+                  <ProgressTrack className="h-2">
+                    <ProgressIndicator className={STATUS_COLOR[item.status]} />
+                  </ProgressTrack>
+                </ProgressPrimitive.Root>
               </div>
             ))}
           </div>

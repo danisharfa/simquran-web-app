@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { AlignJustify, StretchHorizontal } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -10,6 +11,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { STATUS_LABEL } from '../types';
 import type { ChartBar } from '../aggregate-for-chart';
 
@@ -19,8 +21,48 @@ interface Props {
   data: ChartBar[];
 }
 
+interface ChartProps {
+  data: ChartBar[];
+  height: number;
+  wide: boolean;
+  onBarClick: (payload: unknown) => void;
+}
+
+function ProgressBarChart({ data, height, wide, onBarClick }: ChartProps) {
+  const chart = (
+    <ResponsiveContainer width="100%" height={height}>
+      <BarChart data={data} onClick={onBarClick}>
+        <CartesianGrid strokeDasharray="3 3" className="stroke-border" vertical={false} />
+        <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} angle={-45} textAnchor="end" height={60} />
+        <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
+        <Tooltip
+          contentStyle={{
+            backgroundColor: 'var(--popover)',
+            color: 'var(--popover-foreground)',
+            border: '1px solid var(--border)',
+            borderRadius: 8,
+          }}
+        />
+        <Legend />
+        <Bar dataKey="selesai" name="Selesai" stackId="a" fill="var(--chart-1)" />
+        <Bar dataKey="sedangDijalani" name="Sedang Dijalani" stackId="a" fill="var(--chart-2)" />
+        <Bar dataKey="belumDimulai" name="Belum Dimulai" stackId="a" fill="var(--chart-3)" radius={[4, 4, 0, 0]} />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+
+  if (!wide) return chart;
+
+  return (
+    <div className="overflow-x-auto">
+      <div style={{ minWidth: Math.max(data.length * 90, 480) }}>{chart}</div>
+    </div>
+  );
+}
+
 export function ProgressChartCard({ title, description, data }: Props) {
   const [selected, setSelected] = useState<ChartBar | null>(null);
+  const [wide, setWide] = useState(false);
 
   function handleClick(payload: unknown) {
     const active = (payload as { activePayload?: { payload: ChartBar }[] })?.activePayload?.[0]?.payload;
@@ -30,34 +72,39 @@ export function ProgressChartCard({ title, description, data }: Props) {
   return (
     <>
       <Card>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{description}</CardDescription>
+        <CardHeader className="flex flex-row items-start justify-between gap-2">
+          <div>
+            <CardTitle>{title}</CardTitle>
+            <CardDescription>{description}</CardDescription>
+          </div>
+
+          {data.length > 0 && (
+            <div className="flex items-center gap-1">
+              <Button
+                variant={wide ? 'ghost' : 'secondary'}
+                size="sm"
+                onClick={() => setWide(false)}
+              >
+                <AlignJustify className="h-4 w-4" />
+                Compact
+              </Button>
+              <Button
+                variant={wide ? 'secondary' : 'ghost'}
+                size="sm"
+                onClick={() => setWide(true)}
+              >
+                <StretchHorizontal className="h-4 w-4" />
+                Lebar
+              </Button>
+            </div>
+          )}
         </CardHeader>
         <CardContent>
           {data.length === 0 ? (
             <p className="text-muted-foreground text-sm">Belum ada data untuk periode ini.</p>
           ) : (
             <>
-              <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={data} onClick={handleClick}>
-                  <CartesianGrid strokeDasharray="3 3" className="stroke-border" vertical={false} />
-                  <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} angle={-45} textAnchor="end" height={60} />
-                  <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'var(--popover)',
-                      color: 'var(--popover-foreground)',
-                      border: '1px solid var(--border)',
-                      borderRadius: 8,
-                    }}
-                  />
-                  <Legend />
-                  <Bar dataKey="selesai" name="Selesai" stackId="a" fill="var(--chart-1)" />
-                  <Bar dataKey="sedangDijalani" name="Sedang Dijalani" stackId="a" fill="var(--chart-2)" />
-                  <Bar dataKey="belumDimulai" name="Belum Dimulai" stackId="a" fill="var(--chart-3)" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+              <ProgressBarChart data={data} height={220} wide={wide} onBarClick={handleClick} />
               <p className="text-muted-foreground mt-2 text-sm">Klik batang untuk melihat daftar siswa</p>
             </>
           )}

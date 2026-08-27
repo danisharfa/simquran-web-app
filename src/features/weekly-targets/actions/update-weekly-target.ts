@@ -26,7 +26,7 @@ export async function updateWeeklyTarget(targetId: string, input: WeeklyTargetFi
     data: { groupId, startDate: new Date(startDate), endDate: new Date(endDate), ...rest },
   });
 
-  revalidatePath('/dashboard/weekly-target/history');
+  revalidatePath('/dashboard/weekly-target');
 
   return { success: true, message: 'Target mingguan berhasil diperbarui' };
 }

@@ -52,18 +52,24 @@ export async function promoteClassroom(
     }
   }
 
-  for (const studentId of studentIds) {
+  const students = await prisma.studentProfile.findMany({
+    where: { userId: { in: studentIds } },
+    select: { userId: true, groupId: true },
+  });
+  const affectedGroupIds = new Set<string>();
+
+  for (const student of students) {
     await prisma.classroomHistory.upsert({
       where: {
         studentId_academicYear_semester: {
-          studentId,
+          studentId: student.userId,
           academicYear: classroom.academicYear,
           semester: classroom.semester,
         },
       },
       create: {
         id: randomUUID(),
-        studentId,
+        studentId: student.userId,
         classroomId,
         academicYear: classroom.academicYear,
         semester: classroom.semester,
@@ -71,15 +77,38 @@ export async function promoteClassroom(
       update: {},
     });
 
+    // naik kelas melepaskan siswa dari kelompok lama; kelompok lama otomatis jadi riwayat
+    if (student.groupId) {
+      affectedGroupIds.add(student.groupId);
+
+      await prisma.groupHistory.upsert({
+        where: {
+          studentId_academicYear_semester: {
+            studentId: student.userId,
+            academicYear: classroom.academicYear,
+            semester: classroom.semester,
+          },
+        },
+        create: {
+          id: randomUUID(),
+          studentId: student.userId,
+          groupId: student.groupId,
+          academicYear: classroom.academicYear,
+          semester: classroom.semester,
+        },
+        update: {},
+      });
+    }
+
     if (isGraduating) {
       await prisma.studentProfile.update({
-        where: { userId: studentId },
-        data: { status: 'LULUS', graduatedAt: new Date(), classroomId: null },
+        where: { userId: student.userId },
+        data: { status: 'LULUS', graduatedAt: new Date(), classroomId: null, groupId: null },
       });
     } else {
       await prisma.studentProfile.update({
-        where: { userId: studentId },
-        data: { classroomId: targetClassroomId },
+        where: { userId: student.userId },
+        data: { classroomId: targetClassroomId, groupId: null },
       });
     }
   }
@@ -89,8 +118,16 @@ export async function promoteClassroom(
     await prisma.classroom.update({ where: { id: classroomId }, data: { isActive: false } });
   }
 
+  for (const groupId of affectedGroupIds) {
+    const remainingInGroup = await prisma.studentProfile.count({ where: { groupId } });
+    if (remainingInGroup === 0) {
+      await prisma.group.update({ where: { id: groupId }, data: { isActive: false } });
+    }
+  }
+
   revalidatePath('/dashboard/classrooms');
   revalidatePath(`/dashboard/classrooms/${classroomId}`);
+  revalidatePath('/dashboard/group');
 
   return {
     success: true,

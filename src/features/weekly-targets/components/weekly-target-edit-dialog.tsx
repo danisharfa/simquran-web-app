@@ -18,15 +18,17 @@ import { Spinner } from '@/components/ui/spinner';
 import { WeeklyTargetFields, type WeeklyTargetFieldValues } from './weekly-target-fields';
 import { getWeeklyTarget } from '../actions/get-weekly-target';
 import { updateWeeklyTarget } from '../actions/update-weekly-target';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 interface Props {
   targetId: string;
   surahOptions: ReferenceOption[];
+  juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
   wafaOptions: ReferenceOption[];
 }
 
-export function WeeklyTargetEditDialog({ targetId, surahOptions, wafaOptions }: Props) {
+export function WeeklyTargetEditDialog({ targetId, surahOptions, juzOptions, surahJuzMap, wafaOptions }: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [groupId, setGroupId] = useState<string | null>(null);
@@ -53,6 +55,8 @@ export function WeeklyTargetEditDialog({ targetId, surahOptions, wafaOptions }: 
           surahEndId: data.surahEndId,
           startAyat: data.startAyat,
           endAyat: data.endAyat,
+          juzStartId: data.juzStartId,
+          juzEndId: data.juzEndId,
           wafaId: data.wafaId,
           startPage: data.startPage,
           endPage: data.endPage,
@@ -123,6 +127,8 @@ export function WeeklyTargetEditDialog({ targetId, surahOptions, wafaOptions }: 
         ) : (
           <WeeklyTargetFields
             surahOptions={surahOptions}
+            juzOptions={juzOptions}
+            surahJuzMap={surahJuzMap}
             wafaOptions={wafaOptions}
             values={values}
             onChange={handleChange}

@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Field, FieldLabel } from '@/components/ui/field';
 import {
   Select,
@@ -10,9 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Calendar22 } from '@/components/layouts/calendars/calendar-22';
+import { DateRangePicker } from '@/components/layouts/calendars/date-range-picker';
 import { TARGET_TYPE_OPTIONS, TARGET_STATUS_OPTIONS } from '../weekly-target.schema';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import { filterSurahOptionsByJuz } from '@/features/quran-reference/filter-surah-by-juz';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 export interface WeeklyTargetFieldValues {
   type: 'TAHFIDZ' | 'TAHSIN_WAFA' | 'TAHSIN_ALQURAN';
@@ -25,6 +28,8 @@ export interface WeeklyTargetFieldValues {
   surahEndId: number | null;
   startAyat: number | null;
   endAyat: number | null;
+  juzStartId: number | null;
+  juzEndId: number | null;
   wafaId: number | null;
   startPage: number | null;
   endPage: number | null;
@@ -32,14 +37,28 @@ export interface WeeklyTargetFieldValues {
 
 interface Props {
   surahOptions: ReferenceOption[];
+  juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
   wafaOptions: ReferenceOption[];
   values: WeeklyTargetFieldValues;
   onChange: <K extends keyof WeeklyTargetFieldValues>(key: K, value: WeeklyTargetFieldValues[K]) => void;
   showStatus?: boolean;
 }
 
-export function WeeklyTargetFields({ surahOptions, wafaOptions, values, onChange, showStatus = false }: Props) {
+export function WeeklyTargetFields({
+  surahOptions,
+  juzOptions,
+  surahJuzMap,
+  wafaOptions,
+  values,
+  onChange,
+  showStatus = false,
+}: Props) {
   const isWafa = values.type === 'TAHSIN_WAFA';
+  const [sameSurah, setSameSurah] = useState(false);
+  const [sameJuz, setSameJuz] = useState(false);
+  const surahStartOptions = filterSurahOptionsByJuz(surahOptions, surahJuzMap, values.juzStartId);
+  const surahEndOptions = filterSurahOptionsByJuz(surahOptions, surahJuzMap, values.juzEndId);
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -53,6 +72,8 @@ export function WeeklyTargetFields({ surahOptions, wafaOptions, values, onChange
             onChange('surahEndId', null);
             onChange('startAyat', null);
             onChange('endAyat', null);
+            onChange('juzStartId', null);
+            onChange('juzEndId', null);
             onChange('wafaId', null);
             onChange('startPage', null);
             onChange('endPage', null);
@@ -72,12 +93,17 @@ export function WeeklyTargetFields({ surahOptions, wafaOptions, values, onChange
       </Field>
 
       <Field>
-        <FieldLabel>Deskripsi</FieldLabel>
-        <Input value={values.description} onChange={(e) => onChange('description', e.target.value)} />
+        <FieldLabel>Periode Target</FieldLabel>
+        <DateRangePicker
+          value={
+            values.startDate || values.endDate ? { from: values.startDate, to: values.endDate } : undefined
+          }
+          onChange={(range) => {
+            onChange('startDate', range?.from);
+            onChange('endDate', range?.to);
+          }}
+        />
       </Field>
-
-      <Calendar22 value={values.startDate} onChange={(d) => onChange('startDate', d)} label="Tanggal Mulai" />
-      <Calendar22 value={values.endDate} onChange={(d) => onChange('endDate', d)} label="Tanggal Akhir" />
 
       {isWafa ? (
         <>
@@ -123,18 +149,84 @@ export function WeeklyTargetFields({ surahOptions, wafaOptions, values, onChange
         <>
           <div className="grid grid-cols-2 gap-4">
             <Field>
+              <FieldLabel>Juz Mulai</FieldLabel>
+              <Select
+                value={values.juzStartId ? String(values.juzStartId) : ''}
+                onValueChange={(v) => {
+                  const id = v ? Number(v) : null;
+                  onChange('juzStartId', id);
+                  onChange('surahStartId', null);
+                  if (sameSurah) onChange('surahEndId', null);
+                  if (sameJuz) {
+                    onChange('juzEndId', id);
+                    onChange('surahEndId', null);
+                  }
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue>{juzOptions.find((o) => o.id === values.juzStartId)?.name ?? 'Pilih juz'}</SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {juzOptions.map((opt) => (
+                    <SelectItem key={opt.id} value={String(opt.id)}>
+                      {opt.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Field>
+            <Field>
+              <FieldLabel>Juz Akhir</FieldLabel>
+              <Select
+                value={values.juzEndId ? String(values.juzEndId) : ''}
+                onValueChange={(v) => {
+                  onChange('juzEndId', v ? Number(v) : null);
+                  if (!sameSurah) onChange('surahEndId', null);
+                }}
+                disabled={sameJuz}
+              >
+                <SelectTrigger>
+                  <SelectValue>{juzOptions.find((o) => o.id === values.juzEndId)?.name ?? 'Pilih juz'}</SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {juzOptions.map((opt) => (
+                    <SelectItem key={opt.id} value={String(opt.id)}>
+                      {opt.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <label className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Checkbox
+                  checked={sameJuz}
+                  onCheckedChange={(checked) => {
+                    setSameJuz(!!checked);
+                    if (checked) onChange('juzEndId', values.juzStartId);
+                  }}
+                />
+                Sama dengan juz mulai
+              </label>
+            </Field>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <Field>
               <FieldLabel>Surah Mulai</FieldLabel>
               <Select
                 value={values.surahStartId ? String(values.surahStartId) : ''}
-                onValueChange={(v) => onChange('surahStartId', v ? Number(v) : null)}
+                onValueChange={(v) => {
+                  const id = v ? Number(v) : null;
+                  onChange('surahStartId', id);
+                  if (sameSurah) onChange('surahEndId', id);
+                }}
               >
                 <SelectTrigger>
                   <SelectValue>
-                    {surahOptions.find((o) => o.id === values.surahStartId)?.name ?? 'Pilih surah'}
+                    {surahStartOptions.find((o) => o.id === values.surahStartId)?.name ?? 'Pilih surah'}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
-                  {surahOptions.map((opt) => (
+                  {surahStartOptions.map((opt) => (
                     <SelectItem key={opt.id} value={String(opt.id)}>
                       {opt.name}
                     </SelectItem>
@@ -147,20 +239,31 @@ export function WeeklyTargetFields({ surahOptions, wafaOptions, values, onChange
               <Select
                 value={values.surahEndId ? String(values.surahEndId) : ''}
                 onValueChange={(v) => onChange('surahEndId', v ? Number(v) : null)}
+                disabled={sameSurah}
               >
                 <SelectTrigger>
                   <SelectValue>
-                    {surahOptions.find((o) => o.id === values.surahEndId)?.name ?? 'Pilih surah'}
+                    {surahEndOptions.find((o) => o.id === values.surahEndId)?.name ?? 'Pilih surah'}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
-                  {surahOptions.map((opt) => (
+                  {surahEndOptions.map((opt) => (
                     <SelectItem key={opt.id} value={String(opt.id)}>
                       {opt.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
+              <label className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Checkbox
+                  checked={sameSurah}
+                  onCheckedChange={(checked) => {
+                    setSameSurah(!!checked);
+                    if (checked) onChange('surahEndId', values.surahStartId);
+                  }}
+                />
+                Sama dengan surah mulai
+              </label>
             </Field>
           </div>
 
@@ -186,40 +289,34 @@ export function WeeklyTargetFields({ surahOptions, wafaOptions, values, onChange
       )}
 
       {showStatus && (
-        <>
-          <Field>
-            <FieldLabel>Status</FieldLabel>
-            <Select
-              value={values.status}
-              onValueChange={(v) => onChange('status', v as WeeklyTargetFieldValues['status'])}
-            >
-              <SelectTrigger>
-                <SelectValue>
-                  {TARGET_STATUS_OPTIONS.find((o) => o.value === values.status)?.label}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {TARGET_STATUS_OPTIONS.map((opt) => (
-                  <SelectItem key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </Field>
-
-          <Field>
-            <FieldLabel>Progress (%)</FieldLabel>
-            <Input
-              type="number"
-              min={0}
-              max={100}
-              value={values.progressPercent ?? ''}
-              onChange={(e) => onChange('progressPercent', e.target.value ? Number(e.target.value) : null)}
-            />
-          </Field>
-        </>
+        <Field>
+          <FieldLabel>Status</FieldLabel>
+          <Select
+            value={values.status}
+            onValueChange={(v) => onChange('status', v as WeeklyTargetFieldValues['status'])}
+          >
+            <SelectTrigger>
+              <SelectValue>{TARGET_STATUS_OPTIONS.find((o) => o.value === values.status)?.label}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {TARGET_STATUS_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </Field>
       )}
+
+      <Field className="sm:col-span-2">
+        <FieldLabel>Deskripsi (opsional)</FieldLabel>
+        <Textarea
+          value={values.description}
+          onChange={(e) => onChange('description', e.target.value)}
+          rows={2}
+        />
+      </Field>
     </div>
   );
 }

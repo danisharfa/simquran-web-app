@@ -103,12 +103,12 @@ export const menuData: Record<RoleKey, NavItem[]> = {
       label: 'Setoran Siswa',
       items: [
         {
-          title: 'Riwayat Setoran',
+          title: 'Setoran',
           url: '/dashboard/submission',
           icon: BookOpenIcon,
         },
         {
-          title: 'Riwayat Aktivitas Rumah',
+          title: 'Aktivitas Rumah',
           url: '/dashboard/home-activity',
           icon: BookOpenIcon,
         },
@@ -171,27 +171,17 @@ export const menuData: Record<RoleKey, NavItem[]> = {
       label: 'Setoran Siswa',
       items: [
         {
-          title: 'Input Target Setoran',
-          url: '/dashboard/weekly-target/input',
+          title: 'Target Setoran',
+          url: '/dashboard/weekly-target',
           icon: Target,
         },
         {
-          title: 'Riwayat Target Setoran',
-          url: '/dashboard/weekly-target/history',
+          title: 'Setoran',
+          url: '/dashboard/submission',
           icon: BookOpenIcon,
         },
         {
-          title: 'Input Setoran',
-          url: '/dashboard/submission/input',
-          icon: BookPlus,
-        },
-        {
-          title: 'Riwayat Setoran',
-          url: '/dashboard/submission/history',
-          icon: BookOpenIcon,
-        },
-        {
-          title: 'Riwayat Aktivitas Rumah',
+          title: 'Aktivitas Rumah',
           url: '/dashboard/home-activity',
           icon: BookOpenIcon,
         },
@@ -259,18 +249,13 @@ export const menuData: Record<RoleKey, NavItem[]> = {
           icon: Target,
         },
         {
-          title: 'Riwayat Setoran',
+          title: 'Setoran',
           url: '/dashboard/submission',
           icon: BookOpenIcon,
         },
         {
-          title: 'Input Aktivitas Rumah',
-          url: '/dashboard/home-activity/input',
-          icon: BookPlus,
-        },
-        {
-          title: 'Riwayat Aktivitas Rumah',
-          url: '/dashboard/home-activity/history',
+          title: 'Aktivitas Rumah',
+          url: '/dashboard/home-activity',
           icon: BookOpenIcon,
         },
       ],

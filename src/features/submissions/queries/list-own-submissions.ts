@@ -8,7 +8,12 @@ export async function listOwnSubmissions(): Promise<SubmissionTableData[]> {
 
   const submissions = await prisma.submission.findMany({
     where: { studentId: session.user.id },
-    include: { student: { include: { user: true } }, group: true, surah: true, wafa: true },
+    include: {
+      student: { include: { user: true } },
+      group: { include: { classroom: true } },
+      surah: true,
+      wafa: true,
+    },
     orderBy: { date: 'desc' },
   });
 
@@ -16,7 +21,12 @@ export async function listOwnSubmissions(): Promise<SubmissionTableData[]> {
     id: s.id,
     date: s.date,
     studentName: s.student.user.name,
+    groupId: s.groupId,
     groupName: s.group.name,
+    classroomId: s.group.classroomId,
+    classroomName: `${s.group.classroom.level} ${s.group.classroom.name}`,
+    academicYear: s.group.classroom.academicYear,
+    semester: s.group.classroom.semester,
     submissionType: s.submissionType,
     detail: formatSubmissionDetail(s),
     adab: s.adab,

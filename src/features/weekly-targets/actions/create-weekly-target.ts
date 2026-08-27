@@ -43,7 +43,7 @@ export async function createWeeklyTarget(input: CreateWeeklyTargetInput) {
     })),
   });
 
-  revalidatePath('/dashboard/weekly-target/history');
+  revalidatePath('/dashboard/weekly-target');
 
   return { success: true, message: 'Target mingguan berhasil dibuat' };
 }

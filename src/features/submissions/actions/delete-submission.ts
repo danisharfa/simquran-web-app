@@ -15,7 +15,7 @@ export async function deleteSubmission(submissionId: string) {
 
   await prisma.submission.delete({ where: { id: submissionId } });
 
-  revalidatePath('/dashboard/submission/history');
+  revalidatePath('/dashboard/submission');
 
   return { success: true, message: 'Setoran berhasil dihapus' };
 }

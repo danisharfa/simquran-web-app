@@ -7,17 +7,19 @@ import { listMyGroupsWithStudents } from '@/features/groups/queries/list-my-grou
 import {
   listSurahOptions,
   listJuzOptions,
+  listSurahJuzMap,
   listWafaOptions,
 } from '@/features/quran-reference/queries/list-reference-options';
 
 export default async function TashihRequestPage() {
   await requireRole(['teacher']);
 
-  const [requests, groups, surahOptions, juzOptions, wafaOptions] = await Promise.all([
+  const [requests, groups, surahOptions, juzOptions, surahJuzMap, wafaOptions] = await Promise.all([
     listMyTashihRequests(),
     listMyGroupsWithStudents(),
     listSurahOptions(),
     listJuzOptions(),
+    listSurahJuzMap(),
     listWafaOptions(),
   ]);
 
@@ -29,6 +31,7 @@ export default async function TashihRequestPage() {
         groups={groups}
         surahOptions={surahOptions}
         juzOptions={juzOptions}
+        surahJuzMap={surahJuzMap}
         wafaOptions={wafaOptions}
       />
 

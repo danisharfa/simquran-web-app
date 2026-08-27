@@ -10,10 +10,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Calendar22 } from '@/components/layouts/calendars/calendar-22';
+import { DatePicker } from '@/components/layouts/calendars/date-picker';
 import { SUBMISSION_TYPE_OPTIONS, ADAB_OPTIONS, SUBMISSION_STATUS_OPTIONS } from '../submission.schema';
+import { filterSurahOptionsByJuz } from '@/features/quran-reference/filter-surah-by-juz';
 import type { GroupWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 export interface SubmissionFieldValues {
   groupId: string;
@@ -36,14 +37,24 @@ interface Props {
   groups: GroupWithStudents[];
   surahOptions: ReferenceOption[];
   juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
   wafaOptions: ReferenceOption[];
   values: SubmissionFieldValues;
   onChange: <K extends keyof SubmissionFieldValues>(key: K, value: SubmissionFieldValues[K]) => void;
 }
 
-export function SubmissionFields({ groups, surahOptions, juzOptions, wafaOptions, values, onChange }: Props) {
+export function SubmissionFields({
+  groups,
+  surahOptions,
+  juzOptions,
+  surahJuzMap,
+  wafaOptions,
+  values,
+  onChange,
+}: Props) {
   const selectedGroup = groups.find((g) => g.id === values.groupId);
   const isWafa = values.submissionType === 'TAHSIN_WAFA';
+  const filteredSurahOptions = filterSurahOptionsByJuz(surahOptions, surahJuzMap, values.juzId);
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -88,7 +99,7 @@ export function SubmissionFields({ groups, surahOptions, juzOptions, wafaOptions
         </Select>
       </Field>
 
-      <Calendar22 value={values.date} onChange={(d) => onChange('date', d)} label="Tanggal" />
+      <DatePicker value={values.date} onChange={(d) => onChange('date', d)} label="Tanggal" />
 
       <Field>
         <FieldLabel>Jenis Setoran</FieldLabel>
@@ -168,7 +179,10 @@ export function SubmissionFields({ groups, surahOptions, juzOptions, wafaOptions
             <FieldLabel>Juz</FieldLabel>
             <Select
               value={values.juzId ? String(values.juzId) : ''}
-              onValueChange={(v) => onChange('juzId', v ? Number(v) : null)}
+              onValueChange={(v) => {
+                onChange('juzId', v ? Number(v) : null);
+                onChange('surahId', null);
+              }}
             >
               <SelectTrigger>
                 <SelectValue>
@@ -193,11 +207,11 @@ export function SubmissionFields({ groups, surahOptions, juzOptions, wafaOptions
             >
               <SelectTrigger>
                 <SelectValue>
-                  {surahOptions.find((o) => o.id === values.surahId)?.name ?? 'Pilih surah'}
+                  {filteredSurahOptions.find((o) => o.id === values.surahId)?.name ?? 'Pilih surah'}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                {surahOptions.map((opt) => (
+                {filteredSurahOptions.map((opt) => (
                   <SelectItem key={opt.id} value={String(opt.id)}>
                     {opt.name}
                   </SelectItem>

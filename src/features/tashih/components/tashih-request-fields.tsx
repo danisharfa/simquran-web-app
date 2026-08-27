@@ -11,8 +11,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { TASHIH_TYPE_OPTIONS } from '../tashih.schema';
+import { filterSurahOptionsByJuz } from '@/features/quran-reference/filter-surah-by-juz';
 import type { GroupWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 export interface TashihRequestFieldValues {
   groupId: string;
@@ -30,14 +31,24 @@ interface Props {
   groups: GroupWithStudents[];
   surahOptions: ReferenceOption[];
   juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
   wafaOptions: ReferenceOption[];
   values: TashihRequestFieldValues;
   onChange: <K extends keyof TashihRequestFieldValues>(key: K, value: TashihRequestFieldValues[K]) => void;
 }
 
-export function TashihRequestFields({ groups, surahOptions, juzOptions, wafaOptions, values, onChange }: Props) {
+export function TashihRequestFields({
+  groups,
+  surahOptions,
+  juzOptions,
+  surahJuzMap,
+  wafaOptions,
+  values,
+  onChange,
+}: Props) {
   const selectedGroup = groups.find((g) => g.id === values.groupId);
   const isWafa = values.tashihType === 'WAFA';
+  const filteredSurahOptions = filterSurahOptionsByJuz(surahOptions, surahJuzMap, values.juzId);
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -153,7 +164,10 @@ export function TashihRequestFields({ groups, surahOptions, juzOptions, wafaOpti
             <FieldLabel>Juz</FieldLabel>
             <Select
               value={values.juzId ? String(values.juzId) : ''}
-              onValueChange={(v) => onChange('juzId', v ? Number(v) : null)}
+              onValueChange={(v) => {
+                onChange('juzId', v ? Number(v) : null);
+                onChange('surahId', null);
+              }}
             >
               <SelectTrigger>
                 <SelectValue>{juzOptions.find((o) => o.id === values.juzId)?.name ?? 'Pilih juz'}</SelectValue>
@@ -175,10 +189,12 @@ export function TashihRequestFields({ groups, surahOptions, juzOptions, wafaOpti
               onValueChange={(v) => onChange('surahId', v ? Number(v) : null)}
             >
               <SelectTrigger>
-                <SelectValue>{surahOptions.find((o) => o.id === values.surahId)?.name ?? 'Pilih surah'}</SelectValue>
+                <SelectValue>
+                  {filteredSurahOptions.find((o) => o.id === values.surahId)?.name ?? 'Pilih surah'}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                {surahOptions.map((opt) => (
+                {filteredSurahOptions.map((opt) => (
                   <SelectItem key={opt.id} value={String(opt.id)}>
                     {opt.name}
                   </SelectItem>

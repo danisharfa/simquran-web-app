@@ -32,6 +32,8 @@ export type WeeklyTargetAvgAggregateOutputType = {
   surahEndId: number | null
   startAyat: number | null
   endAyat: number | null
+  juzStartId: number | null
+  juzEndId: number | null
   wafaId: number | null
   startPage: number | null
   endPage: number | null
@@ -43,6 +45,8 @@ export type WeeklyTargetSumAggregateOutputType = {
   surahEndId: number | null
   startAyat: number | null
   endAyat: number | null
+  juzStartId: number | null
+  juzEndId: number | null
   wafaId: number | null
   startPage: number | null
   endPage: number | null
@@ -63,6 +67,8 @@ export type WeeklyTargetMinAggregateOutputType = {
   surahEndId: number | null
   startAyat: number | null
   endAyat: number | null
+  juzStartId: number | null
+  juzEndId: number | null
   wafaId: number | null
   startPage: number | null
   endPage: number | null
@@ -85,6 +91,8 @@ export type WeeklyTargetMaxAggregateOutputType = {
   surahEndId: number | null
   startAyat: number | null
   endAyat: number | null
+  juzStartId: number | null
+  juzEndId: number | null
   wafaId: number | null
   startPage: number | null
   endPage: number | null
@@ -107,6 +115,8 @@ export type WeeklyTargetCountAggregateOutputType = {
   surahEndId: number
   startAyat: number
   endAyat: number
+  juzStartId: number
+  juzEndId: number
   wafaId: number
   startPage: number
   endPage: number
@@ -122,6 +132,8 @@ export type WeeklyTargetAvgAggregateInputType = {
   surahEndId?: true
   startAyat?: true
   endAyat?: true
+  juzStartId?: true
+  juzEndId?: true
   wafaId?: true
   startPage?: true
   endPage?: true
@@ -133,6 +145,8 @@ export type WeeklyTargetSumAggregateInputType = {
   surahEndId?: true
   startAyat?: true
   endAyat?: true
+  juzStartId?: true
+  juzEndId?: true
   wafaId?: true
   startPage?: true
   endPage?: true
@@ -153,6 +167,8 @@ export type WeeklyTargetMinAggregateInputType = {
   surahEndId?: true
   startAyat?: true
   endAyat?: true
+  juzStartId?: true
+  juzEndId?: true
   wafaId?: true
   startPage?: true
   endPage?: true
@@ -175,6 +191,8 @@ export type WeeklyTargetMaxAggregateInputType = {
   surahEndId?: true
   startAyat?: true
   endAyat?: true
+  juzStartId?: true
+  juzEndId?: true
   wafaId?: true
   startPage?: true
   endPage?: true
@@ -197,6 +215,8 @@ export type WeeklyTargetCountAggregateInputType = {
   surahEndId?: true
   startAyat?: true
   endAyat?: true
+  juzStartId?: true
+  juzEndId?: true
   wafaId?: true
   startPage?: true
   endPage?: true
@@ -306,6 +326,8 @@ export type WeeklyTargetGroupByOutputType = {
   surahEndId: number | null
   startAyat: number | null
   endAyat: number | null
+  juzStartId: number | null
+  juzEndId: number | null
   wafaId: number | null
   startPage: number | null
   endPage: number | null
@@ -351,6 +373,8 @@ export type WeeklyTargetWhereInput = {
   surahEndId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   startAyat?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   endAyat?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
+  juzStartId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
+  juzEndId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   wafaId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   startPage?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   endPage?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
@@ -361,6 +385,8 @@ export type WeeklyTargetWhereInput = {
   group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
   surahStart?: Prisma.XOR<Prisma.SurahNullableScalarRelationFilter, Prisma.SurahWhereInput> | null
   surahEnd?: Prisma.XOR<Prisma.SurahNullableScalarRelationFilter, Prisma.SurahWhereInput> | null
+  juzStart?: Prisma.XOR<Prisma.JuzNullableScalarRelationFilter, Prisma.JuzWhereInput> | null
+  juzEnd?: Prisma.XOR<Prisma.JuzNullableScalarRelationFilter, Prisma.JuzWhereInput> | null
   wafa?: Prisma.XOR<Prisma.WafaNullableScalarRelationFilter, Prisma.WafaWhereInput> | null
 }
 
@@ -379,6 +405,8 @@ export type WeeklyTargetOrderByWithRelationInput = {
   surahEndId?: Prisma.SortOrderInput | Prisma.SortOrder
   startAyat?: Prisma.SortOrderInput | Prisma.SortOrder
   endAyat?: Prisma.SortOrderInput | Prisma.SortOrder
+  juzStartId?: Prisma.SortOrderInput | Prisma.SortOrder
+  juzEndId?: Prisma.SortOrderInput | Prisma.SortOrder
   wafaId?: Prisma.SortOrderInput | Prisma.SortOrder
   startPage?: Prisma.SortOrderInput | Prisma.SortOrder
   endPage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -389,6 +417,8 @@ export type WeeklyTargetOrderByWithRelationInput = {
   group?: Prisma.GroupOrderByWithRelationInput
   surahStart?: Prisma.SurahOrderByWithRelationInput
   surahEnd?: Prisma.SurahOrderByWithRelationInput
+  juzStart?: Prisma.JuzOrderByWithRelationInput
+  juzEnd?: Prisma.JuzOrderByWithRelationInput
   wafa?: Prisma.WafaOrderByWithRelationInput
   _relevance?: Prisma.WeeklyTargetOrderByRelevanceInput
 }
@@ -411,6 +441,8 @@ export type WeeklyTargetWhereUniqueInput = Prisma.AtLeast<{
   surahEndId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   startAyat?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   endAyat?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
+  juzStartId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
+  juzEndId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   wafaId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   startPage?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   endPage?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
@@ -421,6 +453,8 @@ export type WeeklyTargetWhereUniqueInput = Prisma.AtLeast<{
   group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
   surahStart?: Prisma.XOR<Prisma.SurahNullableScalarRelationFilter, Prisma.SurahWhereInput> | null
   surahEnd?: Prisma.XOR<Prisma.SurahNullableScalarRelationFilter, Prisma.SurahWhereInput> | null
+  juzStart?: Prisma.XOR<Prisma.JuzNullableScalarRelationFilter, Prisma.JuzWhereInput> | null
+  juzEnd?: Prisma.XOR<Prisma.JuzNullableScalarRelationFilter, Prisma.JuzWhereInput> | null
   wafa?: Prisma.XOR<Prisma.WafaNullableScalarRelationFilter, Prisma.WafaWhereInput> | null
 }, "id">
 
@@ -439,6 +473,8 @@ export type WeeklyTargetOrderByWithAggregationInput = {
   surahEndId?: Prisma.SortOrderInput | Prisma.SortOrder
   startAyat?: Prisma.SortOrderInput | Prisma.SortOrder
   endAyat?: Prisma.SortOrderInput | Prisma.SortOrder
+  juzStartId?: Prisma.SortOrderInput | Prisma.SortOrder
+  juzEndId?: Prisma.SortOrderInput | Prisma.SortOrder
   wafaId?: Prisma.SortOrderInput | Prisma.SortOrder
   startPage?: Prisma.SortOrderInput | Prisma.SortOrder
   endPage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -469,6 +505,8 @@ export type WeeklyTargetScalarWhereWithAggregatesInput = {
   surahEndId?: Prisma.IntNullableWithAggregatesFilter<"WeeklyTarget"> | number | null
   startAyat?: Prisma.IntNullableWithAggregatesFilter<"WeeklyTarget"> | number | null
   endAyat?: Prisma.IntNullableWithAggregatesFilter<"WeeklyTarget"> | number | null
+  juzStartId?: Prisma.IntNullableWithAggregatesFilter<"WeeklyTarget"> | number | null
+  juzEndId?: Prisma.IntNullableWithAggregatesFilter<"WeeklyTarget"> | number | null
   wafaId?: Prisma.IntNullableWithAggregatesFilter<"WeeklyTarget"> | number | null
   startPage?: Prisma.IntNullableWithAggregatesFilter<"WeeklyTarget"> | number | null
   endPage?: Prisma.IntNullableWithAggregatesFilter<"WeeklyTarget"> | number | null
@@ -495,6 +533,8 @@ export type WeeklyTargetCreateInput = {
   group: Prisma.GroupCreateNestedOneWithoutWeeklyTargetsInput
   surahStart?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsStartInput
   surahEnd?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsEndInput
+  juzStart?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  juzEnd?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsEndInput
   wafa?: Prisma.WafaCreateNestedOneWithoutWeeklyTargetsInput
 }
 
@@ -513,6 +553,8 @@ export type WeeklyTargetUncheckedCreateInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -539,6 +581,8 @@ export type WeeklyTargetUpdateInput = {
   group?: Prisma.GroupUpdateOneRequiredWithoutWeeklyTargetsNestedInput
   surahStart?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsStartNestedInput
   surahEnd?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsEndNestedInput
+  juzStart?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  juzEnd?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsEndNestedInput
   wafa?: Prisma.WafaUpdateOneWithoutWeeklyTargetsNestedInput
 }
 
@@ -557,6 +601,8 @@ export type WeeklyTargetUncheckedUpdateInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -579,6 +625,8 @@ export type WeeklyTargetCreateManyInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -617,6 +665,8 @@ export type WeeklyTargetUncheckedUpdateManyInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -655,6 +705,8 @@ export type WeeklyTargetCountOrderByAggregateInput = {
   surahEndId?: Prisma.SortOrder
   startAyat?: Prisma.SortOrder
   endAyat?: Prisma.SortOrder
+  juzStartId?: Prisma.SortOrder
+  juzEndId?: Prisma.SortOrder
   wafaId?: Prisma.SortOrder
   startPage?: Prisma.SortOrder
   endPage?: Prisma.SortOrder
@@ -668,6 +720,8 @@ export type WeeklyTargetAvgOrderByAggregateInput = {
   surahEndId?: Prisma.SortOrder
   startAyat?: Prisma.SortOrder
   endAyat?: Prisma.SortOrder
+  juzStartId?: Prisma.SortOrder
+  juzEndId?: Prisma.SortOrder
   wafaId?: Prisma.SortOrder
   startPage?: Prisma.SortOrder
   endPage?: Prisma.SortOrder
@@ -688,6 +742,8 @@ export type WeeklyTargetMaxOrderByAggregateInput = {
   surahEndId?: Prisma.SortOrder
   startAyat?: Prisma.SortOrder
   endAyat?: Prisma.SortOrder
+  juzStartId?: Prisma.SortOrder
+  juzEndId?: Prisma.SortOrder
   wafaId?: Prisma.SortOrder
   startPage?: Prisma.SortOrder
   endPage?: Prisma.SortOrder
@@ -710,6 +766,8 @@ export type WeeklyTargetMinOrderByAggregateInput = {
   surahEndId?: Prisma.SortOrder
   startAyat?: Prisma.SortOrder
   endAyat?: Prisma.SortOrder
+  juzStartId?: Prisma.SortOrder
+  juzEndId?: Prisma.SortOrder
   wafaId?: Prisma.SortOrder
   startPage?: Prisma.SortOrder
   endPage?: Prisma.SortOrder
@@ -723,6 +781,8 @@ export type WeeklyTargetSumOrderByAggregateInput = {
   surahEndId?: Prisma.SortOrder
   startAyat?: Prisma.SortOrder
   endAyat?: Prisma.SortOrder
+  juzStartId?: Prisma.SortOrder
+  juzEndId?: Prisma.SortOrder
   wafaId?: Prisma.SortOrder
   startPage?: Prisma.SortOrder
   endPage?: Prisma.SortOrder
@@ -938,6 +998,90 @@ export type WeeklyTargetUncheckedUpdateManyWithoutSurahEndNestedInput = {
   deleteMany?: Prisma.WeeklyTargetScalarWhereInput | Prisma.WeeklyTargetScalarWhereInput[]
 }
 
+export type WeeklyTargetCreateNestedManyWithoutJuzStartInput = {
+  create?: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzStartInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput> | Prisma.WeeklyTargetCreateWithoutJuzStartInput[] | Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput[]
+  connectOrCreate?: Prisma.WeeklyTargetCreateOrConnectWithoutJuzStartInput | Prisma.WeeklyTargetCreateOrConnectWithoutJuzStartInput[]
+  createMany?: Prisma.WeeklyTargetCreateManyJuzStartInputEnvelope
+  connect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+}
+
+export type WeeklyTargetCreateNestedManyWithoutJuzEndInput = {
+  create?: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzEndInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput> | Prisma.WeeklyTargetCreateWithoutJuzEndInput[] | Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput[]
+  connectOrCreate?: Prisma.WeeklyTargetCreateOrConnectWithoutJuzEndInput | Prisma.WeeklyTargetCreateOrConnectWithoutJuzEndInput[]
+  createMany?: Prisma.WeeklyTargetCreateManyJuzEndInputEnvelope
+  connect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+}
+
+export type WeeklyTargetUncheckedCreateNestedManyWithoutJuzStartInput = {
+  create?: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzStartInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput> | Prisma.WeeklyTargetCreateWithoutJuzStartInput[] | Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput[]
+  connectOrCreate?: Prisma.WeeklyTargetCreateOrConnectWithoutJuzStartInput | Prisma.WeeklyTargetCreateOrConnectWithoutJuzStartInput[]
+  createMany?: Prisma.WeeklyTargetCreateManyJuzStartInputEnvelope
+  connect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+}
+
+export type WeeklyTargetUncheckedCreateNestedManyWithoutJuzEndInput = {
+  create?: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzEndInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput> | Prisma.WeeklyTargetCreateWithoutJuzEndInput[] | Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput[]
+  connectOrCreate?: Prisma.WeeklyTargetCreateOrConnectWithoutJuzEndInput | Prisma.WeeklyTargetCreateOrConnectWithoutJuzEndInput[]
+  createMany?: Prisma.WeeklyTargetCreateManyJuzEndInputEnvelope
+  connect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+}
+
+export type WeeklyTargetUpdateManyWithoutJuzStartNestedInput = {
+  create?: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzStartInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput> | Prisma.WeeklyTargetCreateWithoutJuzStartInput[] | Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput[]
+  connectOrCreate?: Prisma.WeeklyTargetCreateOrConnectWithoutJuzStartInput | Prisma.WeeklyTargetCreateOrConnectWithoutJuzStartInput[]
+  upsert?: Prisma.WeeklyTargetUpsertWithWhereUniqueWithoutJuzStartInput | Prisma.WeeklyTargetUpsertWithWhereUniqueWithoutJuzStartInput[]
+  createMany?: Prisma.WeeklyTargetCreateManyJuzStartInputEnvelope
+  set?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  disconnect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  delete?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  connect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  update?: Prisma.WeeklyTargetUpdateWithWhereUniqueWithoutJuzStartInput | Prisma.WeeklyTargetUpdateWithWhereUniqueWithoutJuzStartInput[]
+  updateMany?: Prisma.WeeklyTargetUpdateManyWithWhereWithoutJuzStartInput | Prisma.WeeklyTargetUpdateManyWithWhereWithoutJuzStartInput[]
+  deleteMany?: Prisma.WeeklyTargetScalarWhereInput | Prisma.WeeklyTargetScalarWhereInput[]
+}
+
+export type WeeklyTargetUpdateManyWithoutJuzEndNestedInput = {
+  create?: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzEndInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput> | Prisma.WeeklyTargetCreateWithoutJuzEndInput[] | Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput[]
+  connectOrCreate?: Prisma.WeeklyTargetCreateOrConnectWithoutJuzEndInput | Prisma.WeeklyTargetCreateOrConnectWithoutJuzEndInput[]
+  upsert?: Prisma.WeeklyTargetUpsertWithWhereUniqueWithoutJuzEndInput | Prisma.WeeklyTargetUpsertWithWhereUniqueWithoutJuzEndInput[]
+  createMany?: Prisma.WeeklyTargetCreateManyJuzEndInputEnvelope
+  set?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  disconnect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  delete?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  connect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  update?: Prisma.WeeklyTargetUpdateWithWhereUniqueWithoutJuzEndInput | Prisma.WeeklyTargetUpdateWithWhereUniqueWithoutJuzEndInput[]
+  updateMany?: Prisma.WeeklyTargetUpdateManyWithWhereWithoutJuzEndInput | Prisma.WeeklyTargetUpdateManyWithWhereWithoutJuzEndInput[]
+  deleteMany?: Prisma.WeeklyTargetScalarWhereInput | Prisma.WeeklyTargetScalarWhereInput[]
+}
+
+export type WeeklyTargetUncheckedUpdateManyWithoutJuzStartNestedInput = {
+  create?: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzStartInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput> | Prisma.WeeklyTargetCreateWithoutJuzStartInput[] | Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput[]
+  connectOrCreate?: Prisma.WeeklyTargetCreateOrConnectWithoutJuzStartInput | Prisma.WeeklyTargetCreateOrConnectWithoutJuzStartInput[]
+  upsert?: Prisma.WeeklyTargetUpsertWithWhereUniqueWithoutJuzStartInput | Prisma.WeeklyTargetUpsertWithWhereUniqueWithoutJuzStartInput[]
+  createMany?: Prisma.WeeklyTargetCreateManyJuzStartInputEnvelope
+  set?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  disconnect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  delete?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  connect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  update?: Prisma.WeeklyTargetUpdateWithWhereUniqueWithoutJuzStartInput | Prisma.WeeklyTargetUpdateWithWhereUniqueWithoutJuzStartInput[]
+  updateMany?: Prisma.WeeklyTargetUpdateManyWithWhereWithoutJuzStartInput | Prisma.WeeklyTargetUpdateManyWithWhereWithoutJuzStartInput[]
+  deleteMany?: Prisma.WeeklyTargetScalarWhereInput | Prisma.WeeklyTargetScalarWhereInput[]
+}
+
+export type WeeklyTargetUncheckedUpdateManyWithoutJuzEndNestedInput = {
+  create?: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzEndInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput> | Prisma.WeeklyTargetCreateWithoutJuzEndInput[] | Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput[]
+  connectOrCreate?: Prisma.WeeklyTargetCreateOrConnectWithoutJuzEndInput | Prisma.WeeklyTargetCreateOrConnectWithoutJuzEndInput[]
+  upsert?: Prisma.WeeklyTargetUpsertWithWhereUniqueWithoutJuzEndInput | Prisma.WeeklyTargetUpsertWithWhereUniqueWithoutJuzEndInput[]
+  createMany?: Prisma.WeeklyTargetCreateManyJuzEndInputEnvelope
+  set?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  disconnect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  delete?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  connect?: Prisma.WeeklyTargetWhereUniqueInput | Prisma.WeeklyTargetWhereUniqueInput[]
+  update?: Prisma.WeeklyTargetUpdateWithWhereUniqueWithoutJuzEndInput | Prisma.WeeklyTargetUpdateWithWhereUniqueWithoutJuzEndInput[]
+  updateMany?: Prisma.WeeklyTargetUpdateManyWithWhereWithoutJuzEndInput | Prisma.WeeklyTargetUpdateManyWithWhereWithoutJuzEndInput[]
+  deleteMany?: Prisma.WeeklyTargetScalarWhereInput | Prisma.WeeklyTargetScalarWhereInput[]
+}
+
 export type WeeklyTargetCreateNestedManyWithoutWafaInput = {
   create?: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutWafaInput, Prisma.WeeklyTargetUncheckedCreateWithoutWafaInput> | Prisma.WeeklyTargetCreateWithoutWafaInput[] | Prisma.WeeklyTargetUncheckedCreateWithoutWafaInput[]
   connectOrCreate?: Prisma.WeeklyTargetCreateOrConnectWithoutWafaInput | Prisma.WeeklyTargetCreateOrConnectWithoutWafaInput[]
@@ -1002,6 +1146,8 @@ export type WeeklyTargetCreateWithoutTeacherInput = {
   group: Prisma.GroupCreateNestedOneWithoutWeeklyTargetsInput
   surahStart?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsStartInput
   surahEnd?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsEndInput
+  juzStart?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  juzEnd?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsEndInput
   wafa?: Prisma.WafaCreateNestedOneWithoutWeeklyTargetsInput
 }
 
@@ -1019,6 +1165,8 @@ export type WeeklyTargetUncheckedCreateWithoutTeacherInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1070,6 +1218,8 @@ export type WeeklyTargetScalarWhereInput = {
   surahEndId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   startAyat?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   endAyat?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
+  juzStartId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
+  juzEndId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   wafaId?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   startPage?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
   endPage?: Prisma.IntNullableFilter<"WeeklyTarget"> | number | null
@@ -1095,6 +1245,8 @@ export type WeeklyTargetCreateWithoutStudentInput = {
   group: Prisma.GroupCreateNestedOneWithoutWeeklyTargetsInput
   surahStart?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsStartInput
   surahEnd?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsEndInput
+  juzStart?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  juzEnd?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsEndInput
   wafa?: Prisma.WafaCreateNestedOneWithoutWeeklyTargetsInput
 }
 
@@ -1112,6 +1264,8 @@ export type WeeklyTargetUncheckedCreateWithoutStudentInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1163,6 +1317,8 @@ export type WeeklyTargetCreateWithoutGroupInput = {
   teacher: Prisma.TeacherProfileCreateNestedOneWithoutWeeklyTargetsInput
   surahStart?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsStartInput
   surahEnd?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsEndInput
+  juzStart?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  juzEnd?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsEndInput
   wafa?: Prisma.WafaCreateNestedOneWithoutWeeklyTargetsInput
 }
 
@@ -1180,6 +1336,8 @@ export type WeeklyTargetUncheckedCreateWithoutGroupInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1231,6 +1389,8 @@ export type WeeklyTargetCreateWithoutSurahStartInput = {
   teacher: Prisma.TeacherProfileCreateNestedOneWithoutWeeklyTargetsInput
   group: Prisma.GroupCreateNestedOneWithoutWeeklyTargetsInput
   surahEnd?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsEndInput
+  juzStart?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  juzEnd?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsEndInput
   wafa?: Prisma.WafaCreateNestedOneWithoutWeeklyTargetsInput
 }
 
@@ -1248,6 +1408,8 @@ export type WeeklyTargetUncheckedCreateWithoutSurahStartInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1283,6 +1445,8 @@ export type WeeklyTargetCreateWithoutSurahEndInput = {
   teacher: Prisma.TeacherProfileCreateNestedOneWithoutWeeklyTargetsInput
   group: Prisma.GroupCreateNestedOneWithoutWeeklyTargetsInput
   surahStart?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  juzStart?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  juzEnd?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsEndInput
   wafa?: Prisma.WafaCreateNestedOneWithoutWeeklyTargetsInput
 }
 
@@ -1300,6 +1464,8 @@ export type WeeklyTargetUncheckedCreateWithoutSurahEndInput = {
   surahStartId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1349,6 +1515,150 @@ export type WeeklyTargetUpdateManyWithWhereWithoutSurahEndInput = {
   data: Prisma.XOR<Prisma.WeeklyTargetUpdateManyMutationInput, Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahEndInput>
 }
 
+export type WeeklyTargetCreateWithoutJuzStartInput = {
+  id?: string
+  type: $Enums.SubmissionType
+  startDate: Date | string
+  endDate: Date | string
+  description: string
+  status?: $Enums.TargetStatus
+  progressPercent?: number | null
+  startAyat?: number | null
+  endAyat?: number | null
+  startPage?: number | null
+  endPage?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  student: Prisma.StudentProfileCreateNestedOneWithoutWeeklyTargetsInput
+  teacher: Prisma.TeacherProfileCreateNestedOneWithoutWeeklyTargetsInput
+  group: Prisma.GroupCreateNestedOneWithoutWeeklyTargetsInput
+  surahStart?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  surahEnd?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsEndInput
+  juzEnd?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsEndInput
+  wafa?: Prisma.WafaCreateNestedOneWithoutWeeklyTargetsInput
+}
+
+export type WeeklyTargetUncheckedCreateWithoutJuzStartInput = {
+  id?: string
+  studentId: string
+  teacherId: string
+  groupId: string
+  type: $Enums.SubmissionType
+  startDate: Date | string
+  endDate: Date | string
+  description: string
+  status?: $Enums.TargetStatus
+  progressPercent?: number | null
+  surahStartId?: number | null
+  surahEndId?: number | null
+  startAyat?: number | null
+  endAyat?: number | null
+  juzEndId?: number | null
+  wafaId?: number | null
+  startPage?: number | null
+  endPage?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WeeklyTargetCreateOrConnectWithoutJuzStartInput = {
+  where: Prisma.WeeklyTargetWhereUniqueInput
+  create: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzStartInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput>
+}
+
+export type WeeklyTargetCreateManyJuzStartInputEnvelope = {
+  data: Prisma.WeeklyTargetCreateManyJuzStartInput | Prisma.WeeklyTargetCreateManyJuzStartInput[]
+  skipDuplicates?: boolean
+}
+
+export type WeeklyTargetCreateWithoutJuzEndInput = {
+  id?: string
+  type: $Enums.SubmissionType
+  startDate: Date | string
+  endDate: Date | string
+  description: string
+  status?: $Enums.TargetStatus
+  progressPercent?: number | null
+  startAyat?: number | null
+  endAyat?: number | null
+  startPage?: number | null
+  endPage?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  student: Prisma.StudentProfileCreateNestedOneWithoutWeeklyTargetsInput
+  teacher: Prisma.TeacherProfileCreateNestedOneWithoutWeeklyTargetsInput
+  group: Prisma.GroupCreateNestedOneWithoutWeeklyTargetsInput
+  surahStart?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  surahEnd?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsEndInput
+  juzStart?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  wafa?: Prisma.WafaCreateNestedOneWithoutWeeklyTargetsInput
+}
+
+export type WeeklyTargetUncheckedCreateWithoutJuzEndInput = {
+  id?: string
+  studentId: string
+  teacherId: string
+  groupId: string
+  type: $Enums.SubmissionType
+  startDate: Date | string
+  endDate: Date | string
+  description: string
+  status?: $Enums.TargetStatus
+  progressPercent?: number | null
+  surahStartId?: number | null
+  surahEndId?: number | null
+  startAyat?: number | null
+  endAyat?: number | null
+  juzStartId?: number | null
+  wafaId?: number | null
+  startPage?: number | null
+  endPage?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WeeklyTargetCreateOrConnectWithoutJuzEndInput = {
+  where: Prisma.WeeklyTargetWhereUniqueInput
+  create: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzEndInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput>
+}
+
+export type WeeklyTargetCreateManyJuzEndInputEnvelope = {
+  data: Prisma.WeeklyTargetCreateManyJuzEndInput | Prisma.WeeklyTargetCreateManyJuzEndInput[]
+  skipDuplicates?: boolean
+}
+
+export type WeeklyTargetUpsertWithWhereUniqueWithoutJuzStartInput = {
+  where: Prisma.WeeklyTargetWhereUniqueInput
+  update: Prisma.XOR<Prisma.WeeklyTargetUpdateWithoutJuzStartInput, Prisma.WeeklyTargetUncheckedUpdateWithoutJuzStartInput>
+  create: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzStartInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzStartInput>
+}
+
+export type WeeklyTargetUpdateWithWhereUniqueWithoutJuzStartInput = {
+  where: Prisma.WeeklyTargetWhereUniqueInput
+  data: Prisma.XOR<Prisma.WeeklyTargetUpdateWithoutJuzStartInput, Prisma.WeeklyTargetUncheckedUpdateWithoutJuzStartInput>
+}
+
+export type WeeklyTargetUpdateManyWithWhereWithoutJuzStartInput = {
+  where: Prisma.WeeklyTargetScalarWhereInput
+  data: Prisma.XOR<Prisma.WeeklyTargetUpdateManyMutationInput, Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzStartInput>
+}
+
+export type WeeklyTargetUpsertWithWhereUniqueWithoutJuzEndInput = {
+  where: Prisma.WeeklyTargetWhereUniqueInput
+  update: Prisma.XOR<Prisma.WeeklyTargetUpdateWithoutJuzEndInput, Prisma.WeeklyTargetUncheckedUpdateWithoutJuzEndInput>
+  create: Prisma.XOR<Prisma.WeeklyTargetCreateWithoutJuzEndInput, Prisma.WeeklyTargetUncheckedCreateWithoutJuzEndInput>
+}
+
+export type WeeklyTargetUpdateWithWhereUniqueWithoutJuzEndInput = {
+  where: Prisma.WeeklyTargetWhereUniqueInput
+  data: Prisma.XOR<Prisma.WeeklyTargetUpdateWithoutJuzEndInput, Prisma.WeeklyTargetUncheckedUpdateWithoutJuzEndInput>
+}
+
+export type WeeklyTargetUpdateManyWithWhereWithoutJuzEndInput = {
+  where: Prisma.WeeklyTargetScalarWhereInput
+  data: Prisma.XOR<Prisma.WeeklyTargetUpdateManyMutationInput, Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzEndInput>
+}
+
 export type WeeklyTargetCreateWithoutWafaInput = {
   id?: string
   type: $Enums.SubmissionType
@@ -1368,6 +1678,8 @@ export type WeeklyTargetCreateWithoutWafaInput = {
   group: Prisma.GroupCreateNestedOneWithoutWeeklyTargetsInput
   surahStart?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsStartInput
   surahEnd?: Prisma.SurahCreateNestedOneWithoutWeeklyTargetsAsEndInput
+  juzStart?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsStartInput
+  juzEnd?: Prisma.JuzCreateNestedOneWithoutWeeklyTargetsAsEndInput
 }
 
 export type WeeklyTargetUncheckedCreateWithoutWafaInput = {
@@ -1385,6 +1697,8 @@ export type WeeklyTargetUncheckedCreateWithoutWafaInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   startPage?: number | null
   endPage?: number | null
   createdAt?: Date | string
@@ -1431,6 +1745,8 @@ export type WeeklyTargetCreateManyTeacherInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1456,6 +1772,8 @@ export type WeeklyTargetUpdateWithoutTeacherInput = {
   group?: Prisma.GroupUpdateOneRequiredWithoutWeeklyTargetsNestedInput
   surahStart?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsStartNestedInput
   surahEnd?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsEndNestedInput
+  juzStart?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  juzEnd?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsEndNestedInput
   wafa?: Prisma.WafaUpdateOneWithoutWeeklyTargetsNestedInput
 }
 
@@ -1473,6 +1791,8 @@ export type WeeklyTargetUncheckedUpdateWithoutTeacherInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1494,6 +1814,8 @@ export type WeeklyTargetUncheckedUpdateManyWithoutTeacherInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1515,6 +1837,8 @@ export type WeeklyTargetCreateManyStudentInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1540,6 +1864,8 @@ export type WeeklyTargetUpdateWithoutStudentInput = {
   group?: Prisma.GroupUpdateOneRequiredWithoutWeeklyTargetsNestedInput
   surahStart?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsStartNestedInput
   surahEnd?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsEndNestedInput
+  juzStart?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  juzEnd?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsEndNestedInput
   wafa?: Prisma.WafaUpdateOneWithoutWeeklyTargetsNestedInput
 }
 
@@ -1557,6 +1883,8 @@ export type WeeklyTargetUncheckedUpdateWithoutStudentInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1578,6 +1906,8 @@ export type WeeklyTargetUncheckedUpdateManyWithoutStudentInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1599,6 +1929,8 @@ export type WeeklyTargetCreateManyGroupInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1624,6 +1956,8 @@ export type WeeklyTargetUpdateWithoutGroupInput = {
   teacher?: Prisma.TeacherProfileUpdateOneRequiredWithoutWeeklyTargetsNestedInput
   surahStart?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsStartNestedInput
   surahEnd?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsEndNestedInput
+  juzStart?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  juzEnd?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsEndNestedInput
   wafa?: Prisma.WafaUpdateOneWithoutWeeklyTargetsNestedInput
 }
 
@@ -1641,6 +1975,8 @@ export type WeeklyTargetUncheckedUpdateWithoutGroupInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1662,6 +1998,8 @@ export type WeeklyTargetUncheckedUpdateManyWithoutGroupInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1683,6 +2021,8 @@ export type WeeklyTargetCreateManySurahStartInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1704,6 +2044,8 @@ export type WeeklyTargetCreateManySurahEndInput = {
   surahStartId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   wafaId?: number | null
   startPage?: number | null
   endPage?: number | null
@@ -1729,6 +2071,8 @@ export type WeeklyTargetUpdateWithoutSurahStartInput = {
   teacher?: Prisma.TeacherProfileUpdateOneRequiredWithoutWeeklyTargetsNestedInput
   group?: Prisma.GroupUpdateOneRequiredWithoutWeeklyTargetsNestedInput
   surahEnd?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsEndNestedInput
+  juzStart?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  juzEnd?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsEndNestedInput
   wafa?: Prisma.WafaUpdateOneWithoutWeeklyTargetsNestedInput
 }
 
@@ -1746,6 +2090,8 @@ export type WeeklyTargetUncheckedUpdateWithoutSurahStartInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1767,6 +2113,8 @@ export type WeeklyTargetUncheckedUpdateManyWithoutSurahStartInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1792,6 +2140,8 @@ export type WeeklyTargetUpdateWithoutSurahEndInput = {
   teacher?: Prisma.TeacherProfileUpdateOneRequiredWithoutWeeklyTargetsNestedInput
   group?: Prisma.GroupUpdateOneRequiredWithoutWeeklyTargetsNestedInput
   surahStart?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  juzStart?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  juzEnd?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsEndNestedInput
   wafa?: Prisma.WafaUpdateOneWithoutWeeklyTargetsNestedInput
 }
 
@@ -1809,6 +2159,8 @@ export type WeeklyTargetUncheckedUpdateWithoutSurahEndInput = {
   surahStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1830,6 +2182,192 @@ export type WeeklyTargetUncheckedUpdateManyWithoutSurahEndInput = {
   surahStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WeeklyTargetCreateManyJuzStartInput = {
+  id?: string
+  studentId: string
+  teacherId: string
+  groupId: string
+  type: $Enums.SubmissionType
+  startDate: Date | string
+  endDate: Date | string
+  description: string
+  status?: $Enums.TargetStatus
+  progressPercent?: number | null
+  surahStartId?: number | null
+  surahEndId?: number | null
+  startAyat?: number | null
+  endAyat?: number | null
+  juzEndId?: number | null
+  wafaId?: number | null
+  startPage?: number | null
+  endPage?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WeeklyTargetCreateManyJuzEndInput = {
+  id?: string
+  studentId: string
+  teacherId: string
+  groupId: string
+  type: $Enums.SubmissionType
+  startDate: Date | string
+  endDate: Date | string
+  description: string
+  status?: $Enums.TargetStatus
+  progressPercent?: number | null
+  surahStartId?: number | null
+  surahEndId?: number | null
+  startAyat?: number | null
+  endAyat?: number | null
+  juzStartId?: number | null
+  wafaId?: number | null
+  startPage?: number | null
+  endPage?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WeeklyTargetUpdateWithoutJuzStartInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumSubmissionTypeFieldUpdateOperationsInput | $Enums.SubmissionType
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTargetStatusFieldUpdateOperationsInput | $Enums.TargetStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  student?: Prisma.StudentProfileUpdateOneRequiredWithoutWeeklyTargetsNestedInput
+  teacher?: Prisma.TeacherProfileUpdateOneRequiredWithoutWeeklyTargetsNestedInput
+  group?: Prisma.GroupUpdateOneRequiredWithoutWeeklyTargetsNestedInput
+  surahStart?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  surahEnd?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsEndNestedInput
+  juzEnd?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsEndNestedInput
+  wafa?: Prisma.WafaUpdateOneWithoutWeeklyTargetsNestedInput
+}
+
+export type WeeklyTargetUncheckedUpdateWithoutJuzStartInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
+  teacherId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumSubmissionTypeFieldUpdateOperationsInput | $Enums.SubmissionType
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTargetStatusFieldUpdateOperationsInput | $Enums.TargetStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  surahStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WeeklyTargetUncheckedUpdateManyWithoutJuzStartInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
+  teacherId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumSubmissionTypeFieldUpdateOperationsInput | $Enums.SubmissionType
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTargetStatusFieldUpdateOperationsInput | $Enums.TargetStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  surahStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WeeklyTargetUpdateWithoutJuzEndInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumSubmissionTypeFieldUpdateOperationsInput | $Enums.SubmissionType
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTargetStatusFieldUpdateOperationsInput | $Enums.TargetStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  student?: Prisma.StudentProfileUpdateOneRequiredWithoutWeeklyTargetsNestedInput
+  teacher?: Prisma.TeacherProfileUpdateOneRequiredWithoutWeeklyTargetsNestedInput
+  group?: Prisma.GroupUpdateOneRequiredWithoutWeeklyTargetsNestedInput
+  surahStart?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  surahEnd?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsEndNestedInput
+  juzStart?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  wafa?: Prisma.WafaUpdateOneWithoutWeeklyTargetsNestedInput
+}
+
+export type WeeklyTargetUncheckedUpdateWithoutJuzEndInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
+  teacherId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumSubmissionTypeFieldUpdateOperationsInput | $Enums.SubmissionType
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTargetStatusFieldUpdateOperationsInput | $Enums.TargetStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  surahStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WeeklyTargetUncheckedUpdateManyWithoutJuzEndInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
+  teacherId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumSubmissionTypeFieldUpdateOperationsInput | $Enums.SubmissionType
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTargetStatusFieldUpdateOperationsInput | $Enums.TargetStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  surahStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   wafaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1852,6 +2390,8 @@ export type WeeklyTargetCreateManyWafaInput = {
   surahEndId?: number | null
   startAyat?: number | null
   endAyat?: number | null
+  juzStartId?: number | null
+  juzEndId?: number | null
   startPage?: number | null
   endPage?: number | null
   createdAt?: Date | string
@@ -1877,6 +2417,8 @@ export type WeeklyTargetUpdateWithoutWafaInput = {
   group?: Prisma.GroupUpdateOneRequiredWithoutWeeklyTargetsNestedInput
   surahStart?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsStartNestedInput
   surahEnd?: Prisma.SurahUpdateOneWithoutWeeklyTargetsAsEndNestedInput
+  juzStart?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsStartNestedInput
+  juzEnd?: Prisma.JuzUpdateOneWithoutWeeklyTargetsAsEndNestedInput
 }
 
 export type WeeklyTargetUncheckedUpdateWithoutWafaInput = {
@@ -1894,6 +2436,8 @@ export type WeeklyTargetUncheckedUpdateWithoutWafaInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1915,6 +2459,8 @@ export type WeeklyTargetUncheckedUpdateManyWithoutWafaInput = {
   surahEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endAyat?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzStartId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  juzEndId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   endPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1938,6 +2484,8 @@ export type WeeklyTargetSelect<ExtArgs extends runtime.Types.Extensions.Internal
   surahEndId?: boolean
   startAyat?: boolean
   endAyat?: boolean
+  juzStartId?: boolean
+  juzEndId?: boolean
   wafaId?: boolean
   startPage?: boolean
   endPage?: boolean
@@ -1948,6 +2496,8 @@ export type WeeklyTargetSelect<ExtArgs extends runtime.Types.Extensions.Internal
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   surahStart?: boolean | Prisma.WeeklyTarget$surahStartArgs<ExtArgs>
   surahEnd?: boolean | Prisma.WeeklyTarget$surahEndArgs<ExtArgs>
+  juzStart?: boolean | Prisma.WeeklyTarget$juzStartArgs<ExtArgs>
+  juzEnd?: boolean | Prisma.WeeklyTarget$juzEndArgs<ExtArgs>
   wafa?: boolean | Prisma.WeeklyTarget$wafaArgs<ExtArgs>
 }, ExtArgs["result"]["weeklyTarget"]>
 
@@ -1968,6 +2518,8 @@ export type WeeklyTargetSelectScalar = {
   surahEndId?: boolean
   startAyat?: boolean
   endAyat?: boolean
+  juzStartId?: boolean
+  juzEndId?: boolean
   wafaId?: boolean
   startPage?: boolean
   endPage?: boolean
@@ -1975,13 +2527,15 @@ export type WeeklyTargetSelectScalar = {
   updatedAt?: boolean
 }
 
-export type WeeklyTargetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "teacherId" | "groupId" | "type" | "startDate" | "endDate" | "description" | "status" | "progressPercent" | "surahStartId" | "surahEndId" | "startAyat" | "endAyat" | "wafaId" | "startPage" | "endPage" | "createdAt" | "updatedAt", ExtArgs["result"]["weeklyTarget"]>
+export type WeeklyTargetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "teacherId" | "groupId" | "type" | "startDate" | "endDate" | "description" | "status" | "progressPercent" | "surahStartId" | "surahEndId" | "startAyat" | "endAyat" | "juzStartId" | "juzEndId" | "wafaId" | "startPage" | "endPage" | "createdAt" | "updatedAt", ExtArgs["result"]["weeklyTarget"]>
 export type WeeklyTargetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
   teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   surahStart?: boolean | Prisma.WeeklyTarget$surahStartArgs<ExtArgs>
   surahEnd?: boolean | Prisma.WeeklyTarget$surahEndArgs<ExtArgs>
+  juzStart?: boolean | Prisma.WeeklyTarget$juzStartArgs<ExtArgs>
+  juzEnd?: boolean | Prisma.WeeklyTarget$juzEndArgs<ExtArgs>
   wafa?: boolean | Prisma.WeeklyTarget$wafaArgs<ExtArgs>
 }
 
@@ -1993,6 +2547,8 @@ export type $WeeklyTargetPayload<ExtArgs extends runtime.Types.Extensions.Intern
     group: Prisma.$GroupPayload<ExtArgs>
     surahStart: Prisma.$SurahPayload<ExtArgs> | null
     surahEnd: Prisma.$SurahPayload<ExtArgs> | null
+    juzStart: Prisma.$JuzPayload<ExtArgs> | null
+    juzEnd: Prisma.$JuzPayload<ExtArgs> | null
     wafa: Prisma.$WafaPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2010,6 +2566,8 @@ export type $WeeklyTargetPayload<ExtArgs extends runtime.Types.Extensions.Intern
     surahEndId: number | null
     startAyat: number | null
     endAyat: number | null
+    juzStartId: number | null
+    juzEndId: number | null
     wafaId: number | null
     startPage: number | null
     endPage: number | null
@@ -2360,6 +2918,8 @@ export interface Prisma__WeeklyTargetClient<T, Null = never, ExtArgs extends run
   group<T extends Prisma.GroupDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GroupDefaultArgs<ExtArgs>>): Prisma.Prisma__GroupClient<runtime.Types.Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   surahStart<T extends Prisma.WeeklyTarget$surahStartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyTarget$surahStartArgs<ExtArgs>>): Prisma.Prisma__SurahClient<runtime.Types.Result.GetResult<Prisma.$SurahPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   surahEnd<T extends Prisma.WeeklyTarget$surahEndArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyTarget$surahEndArgs<ExtArgs>>): Prisma.Prisma__SurahClient<runtime.Types.Result.GetResult<Prisma.$SurahPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  juzStart<T extends Prisma.WeeklyTarget$juzStartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyTarget$juzStartArgs<ExtArgs>>): Prisma.Prisma__JuzClient<runtime.Types.Result.GetResult<Prisma.$JuzPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  juzEnd<T extends Prisma.WeeklyTarget$juzEndArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyTarget$juzEndArgs<ExtArgs>>): Prisma.Prisma__JuzClient<runtime.Types.Result.GetResult<Prisma.$JuzPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   wafa<T extends Prisma.WeeklyTarget$wafaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyTarget$wafaArgs<ExtArgs>>): Prisma.Prisma__WafaClient<runtime.Types.Result.GetResult<Prisma.$WafaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2404,6 +2964,8 @@ export interface WeeklyTargetFieldRefs {
   readonly surahEndId: Prisma.FieldRef<"WeeklyTarget", 'Int'>
   readonly startAyat: Prisma.FieldRef<"WeeklyTarget", 'Int'>
   readonly endAyat: Prisma.FieldRef<"WeeklyTarget", 'Int'>
+  readonly juzStartId: Prisma.FieldRef<"WeeklyTarget", 'Int'>
+  readonly juzEndId: Prisma.FieldRef<"WeeklyTarget", 'Int'>
   readonly wafaId: Prisma.FieldRef<"WeeklyTarget", 'Int'>
   readonly startPage: Prisma.FieldRef<"WeeklyTarget", 'Int'>
   readonly endPage: Prisma.FieldRef<"WeeklyTarget", 'Int'>
@@ -2792,6 +3354,44 @@ export type WeeklyTarget$surahEndArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   include?: Prisma.SurahInclude<ExtArgs> | null
   where?: Prisma.SurahWhereInput
+}
+
+/**
+ * WeeklyTarget.juzStart
+ */
+export type WeeklyTarget$juzStartArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Juz
+   */
+  select?: Prisma.JuzSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Juz
+   */
+  omit?: Prisma.JuzOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JuzInclude<ExtArgs> | null
+  where?: Prisma.JuzWhereInput
+}
+
+/**
+ * WeeklyTarget.juzEnd
+ */
+export type WeeklyTarget$juzEndArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Juz
+   */
+  select?: Prisma.JuzSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Juz
+   */
+  omit?: Prisma.JuzOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JuzInclude<ExtArgs> | null
+  where?: Prisma.JuzWhereInput
 }
 
 /**

@@ -38,7 +38,7 @@ export async function createSubmission(input: SubmissionSchema) {
     },
   });
 
-  revalidatePath('/dashboard/submission/history');
+  revalidatePath('/dashboard/submission');
 
   return { success: true, message: 'Setoran berhasil dicatat' };
 }

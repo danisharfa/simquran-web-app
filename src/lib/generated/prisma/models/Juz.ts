@@ -198,6 +198,8 @@ export type JuzWhereInput = {
   tashihRequests?: Prisma.TashihRequestListRelationFilter
   munaqasyahRequests?: Prisma.MunaqasyahRequestListRelationFilter
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultListRelationFilter
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetListRelationFilter
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetListRelationFilter
 }
 
 export type JuzOrderByWithRelationInput = {
@@ -209,6 +211,8 @@ export type JuzOrderByWithRelationInput = {
   tashihRequests?: Prisma.TashihRequestOrderByRelationAggregateInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestOrderByRelationAggregateInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultOrderByRelationAggregateInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetOrderByRelationAggregateInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetOrderByRelationAggregateInput
   _relevance?: Prisma.JuzOrderByRelevanceInput
 }
 
@@ -224,6 +228,8 @@ export type JuzWhereUniqueInput = Prisma.AtLeast<{
   tashihRequests?: Prisma.TashihRequestListRelationFilter
   munaqasyahRequests?: Prisma.MunaqasyahRequestListRelationFilter
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultListRelationFilter
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetListRelationFilter
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetListRelationFilter
 }, "id">
 
 export type JuzOrderByWithAggregationInput = {
@@ -253,6 +259,8 @@ export type JuzCreateInput = {
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzUncheckedCreateInput = {
@@ -264,6 +272,8 @@ export type JuzUncheckedCreateInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzUpdateInput = {
@@ -275,6 +285,8 @@ export type JuzUpdateInput = {
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzUncheckedUpdateInput = {
@@ -286,6 +298,8 @@ export type JuzUncheckedUpdateInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzCreateManyInput = {
@@ -386,6 +400,38 @@ export type JuzUpdateOneRequiredWithoutHomeActivitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.JuzUpdateToOneWithWhereWithoutHomeActivitiesInput, Prisma.JuzUpdateWithoutHomeActivitiesInput>, Prisma.JuzUncheckedUpdateWithoutHomeActivitiesInput>
 }
 
+export type JuzCreateNestedOneWithoutWeeklyTargetsAsStartInput = {
+  create?: Prisma.XOR<Prisma.JuzCreateWithoutWeeklyTargetsAsStartInput, Prisma.JuzUncheckedCreateWithoutWeeklyTargetsAsStartInput>
+  connectOrCreate?: Prisma.JuzCreateOrConnectWithoutWeeklyTargetsAsStartInput
+  connect?: Prisma.JuzWhereUniqueInput
+}
+
+export type JuzCreateNestedOneWithoutWeeklyTargetsAsEndInput = {
+  create?: Prisma.XOR<Prisma.JuzCreateWithoutWeeklyTargetsAsEndInput, Prisma.JuzUncheckedCreateWithoutWeeklyTargetsAsEndInput>
+  connectOrCreate?: Prisma.JuzCreateOrConnectWithoutWeeklyTargetsAsEndInput
+  connect?: Prisma.JuzWhereUniqueInput
+}
+
+export type JuzUpdateOneWithoutWeeklyTargetsAsStartNestedInput = {
+  create?: Prisma.XOR<Prisma.JuzCreateWithoutWeeklyTargetsAsStartInput, Prisma.JuzUncheckedCreateWithoutWeeklyTargetsAsStartInput>
+  connectOrCreate?: Prisma.JuzCreateOrConnectWithoutWeeklyTargetsAsStartInput
+  upsert?: Prisma.JuzUpsertWithoutWeeklyTargetsAsStartInput
+  disconnect?: Prisma.JuzWhereInput | boolean
+  delete?: Prisma.JuzWhereInput | boolean
+  connect?: Prisma.JuzWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JuzUpdateToOneWithWhereWithoutWeeklyTargetsAsStartInput, Prisma.JuzUpdateWithoutWeeklyTargetsAsStartInput>, Prisma.JuzUncheckedUpdateWithoutWeeklyTargetsAsStartInput>
+}
+
+export type JuzUpdateOneWithoutWeeklyTargetsAsEndNestedInput = {
+  create?: Prisma.XOR<Prisma.JuzCreateWithoutWeeklyTargetsAsEndInput, Prisma.JuzUncheckedCreateWithoutWeeklyTargetsAsEndInput>
+  connectOrCreate?: Prisma.JuzCreateOrConnectWithoutWeeklyTargetsAsEndInput
+  upsert?: Prisma.JuzUpsertWithoutWeeklyTargetsAsEndInput
+  disconnect?: Prisma.JuzWhereInput | boolean
+  delete?: Prisma.JuzWhereInput | boolean
+  connect?: Prisma.JuzWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JuzUpdateToOneWithWhereWithoutWeeklyTargetsAsEndInput, Prisma.JuzUpdateWithoutWeeklyTargetsAsEndInput>, Prisma.JuzUncheckedUpdateWithoutWeeklyTargetsAsEndInput>
+}
+
 export type JuzCreateNestedOneWithoutTashihRequestsInput = {
   create?: Prisma.XOR<Prisma.JuzCreateWithoutTashihRequestsInput, Prisma.JuzUncheckedCreateWithoutTashihRequestsInput>
   connectOrCreate?: Prisma.JuzCreateOrConnectWithoutTashihRequestsInput
@@ -438,6 +484,8 @@ export type JuzCreateWithoutSurahJuzInput = {
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzUncheckedCreateWithoutSurahJuzInput = {
@@ -448,6 +496,8 @@ export type JuzUncheckedCreateWithoutSurahJuzInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzCreateOrConnectWithoutSurahJuzInput = {
@@ -474,6 +524,8 @@ export type JuzUpdateWithoutSurahJuzInput = {
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutSurahJuzInput = {
@@ -484,6 +536,8 @@ export type JuzUncheckedUpdateWithoutSurahJuzInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzCreateWithoutSubmissionsInput = {
@@ -494,6 +548,8 @@ export type JuzCreateWithoutSubmissionsInput = {
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzUncheckedCreateWithoutSubmissionsInput = {
@@ -504,6 +560,8 @@ export type JuzUncheckedCreateWithoutSubmissionsInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzCreateOrConnectWithoutSubmissionsInput = {
@@ -530,6 +588,8 @@ export type JuzUpdateWithoutSubmissionsInput = {
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutSubmissionsInput = {
@@ -540,6 +600,8 @@ export type JuzUncheckedUpdateWithoutSubmissionsInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzCreateWithoutHomeActivitiesInput = {
@@ -550,6 +612,8 @@ export type JuzCreateWithoutHomeActivitiesInput = {
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzUncheckedCreateWithoutHomeActivitiesInput = {
@@ -560,6 +624,8 @@ export type JuzUncheckedCreateWithoutHomeActivitiesInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzCreateOrConnectWithoutHomeActivitiesInput = {
@@ -586,6 +652,8 @@ export type JuzUpdateWithoutHomeActivitiesInput = {
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutHomeActivitiesInput = {
@@ -596,6 +664,136 @@ export type JuzUncheckedUpdateWithoutHomeActivitiesInput = {
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzEndNestedInput
+}
+
+export type JuzCreateWithoutWeeklyTargetsAsStartInput = {
+  id: number
+  name: string
+  surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutJuzInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutJuzInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzEndInput
+}
+
+export type JuzUncheckedCreateWithoutWeeklyTargetsAsStartInput = {
+  id: number
+  name: string
+  surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutJuzInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutJuzInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzEndInput
+}
+
+export type JuzCreateOrConnectWithoutWeeklyTargetsAsStartInput = {
+  where: Prisma.JuzWhereUniqueInput
+  create: Prisma.XOR<Prisma.JuzCreateWithoutWeeklyTargetsAsStartInput, Prisma.JuzUncheckedCreateWithoutWeeklyTargetsAsStartInput>
+}
+
+export type JuzCreateWithoutWeeklyTargetsAsEndInput = {
+  id: number
+  name: string
+  surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutJuzInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutJuzInput
+  homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
+  tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzStartInput
+}
+
+export type JuzUncheckedCreateWithoutWeeklyTargetsAsEndInput = {
+  id: number
+  name: string
+  surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutJuzInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutJuzInput
+  homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
+  tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzStartInput
+}
+
+export type JuzCreateOrConnectWithoutWeeklyTargetsAsEndInput = {
+  where: Prisma.JuzWhereUniqueInput
+  create: Prisma.XOR<Prisma.JuzCreateWithoutWeeklyTargetsAsEndInput, Prisma.JuzUncheckedCreateWithoutWeeklyTargetsAsEndInput>
+}
+
+export type JuzUpsertWithoutWeeklyTargetsAsStartInput = {
+  update: Prisma.XOR<Prisma.JuzUpdateWithoutWeeklyTargetsAsStartInput, Prisma.JuzUncheckedUpdateWithoutWeeklyTargetsAsStartInput>
+  create: Prisma.XOR<Prisma.JuzCreateWithoutWeeklyTargetsAsStartInput, Prisma.JuzUncheckedCreateWithoutWeeklyTargetsAsStartInput>
+  where?: Prisma.JuzWhereInput
+}
+
+export type JuzUpdateToOneWithWhereWithoutWeeklyTargetsAsStartInput = {
+  where?: Prisma.JuzWhereInput
+  data: Prisma.XOR<Prisma.JuzUpdateWithoutWeeklyTargetsAsStartInput, Prisma.JuzUncheckedUpdateWithoutWeeklyTargetsAsStartInput>
+}
+
+export type JuzUpdateWithoutWeeklyTargetsAsStartInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  surahJuz?: Prisma.SurahJuzUpdateManyWithoutJuzNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutJuzNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutJuzEndNestedInput
+}
+
+export type JuzUncheckedUpdateWithoutWeeklyTargetsAsStartInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutJuzNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutJuzNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzEndNestedInput
+}
+
+export type JuzUpsertWithoutWeeklyTargetsAsEndInput = {
+  update: Prisma.XOR<Prisma.JuzUpdateWithoutWeeklyTargetsAsEndInput, Prisma.JuzUncheckedUpdateWithoutWeeklyTargetsAsEndInput>
+  create: Prisma.XOR<Prisma.JuzCreateWithoutWeeklyTargetsAsEndInput, Prisma.JuzUncheckedCreateWithoutWeeklyTargetsAsEndInput>
+  where?: Prisma.JuzWhereInput
+}
+
+export type JuzUpdateToOneWithWhereWithoutWeeklyTargetsAsEndInput = {
+  where?: Prisma.JuzWhereInput
+  data: Prisma.XOR<Prisma.JuzUpdateWithoutWeeklyTargetsAsEndInput, Prisma.JuzUncheckedUpdateWithoutWeeklyTargetsAsEndInput>
+}
+
+export type JuzUpdateWithoutWeeklyTargetsAsEndInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  surahJuz?: Prisma.SurahJuzUpdateManyWithoutJuzNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutJuzNestedInput
+  homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
+  tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutJuzStartNestedInput
+}
+
+export type JuzUncheckedUpdateWithoutWeeklyTargetsAsEndInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutJuzNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutJuzNestedInput
+  homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
+  tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
+  munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzStartNestedInput
 }
 
 export type JuzCreateWithoutTashihRequestsInput = {
@@ -606,6 +804,8 @@ export type JuzCreateWithoutTashihRequestsInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzUncheckedCreateWithoutTashihRequestsInput = {
@@ -616,6 +816,8 @@ export type JuzUncheckedCreateWithoutTashihRequestsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzCreateOrConnectWithoutTashihRequestsInput = {
@@ -642,6 +844,8 @@ export type JuzUpdateWithoutTashihRequestsInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutTashihRequestsInput = {
@@ -652,6 +856,8 @@ export type JuzUncheckedUpdateWithoutTashihRequestsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzCreateWithoutMunaqasyahRequestsInput = {
@@ -662,6 +868,8 @@ export type JuzCreateWithoutMunaqasyahRequestsInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzUncheckedCreateWithoutMunaqasyahRequestsInput = {
@@ -672,6 +880,8 @@ export type JuzUncheckedCreateWithoutMunaqasyahRequestsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzCreateOrConnectWithoutMunaqasyahRequestsInput = {
@@ -698,6 +908,8 @@ export type JuzUpdateWithoutMunaqasyahRequestsInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutMunaqasyahRequestsInput = {
@@ -708,6 +920,8 @@ export type JuzUncheckedUpdateWithoutMunaqasyahRequestsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzCreateWithoutMunaqasyahFinalResultsInput = {
@@ -718,6 +932,8 @@ export type JuzCreateWithoutMunaqasyahFinalResultsInput = {
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzUncheckedCreateWithoutMunaqasyahFinalResultsInput = {
@@ -728,6 +944,8 @@ export type JuzUncheckedCreateWithoutMunaqasyahFinalResultsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutJuzInput
   tashihRequests?: Prisma.TashihRequestUncheckedCreateNestedManyWithoutJuzInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedCreateNestedManyWithoutJuzInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzStartInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutJuzEndInput
 }
 
 export type JuzCreateOrConnectWithoutMunaqasyahFinalResultsInput = {
@@ -754,6 +972,8 @@ export type JuzUpdateWithoutMunaqasyahFinalResultsInput = {
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUpdateManyWithoutJuzEndNestedInput
 }
 
 export type JuzUncheckedUpdateWithoutMunaqasyahFinalResultsInput = {
@@ -764,6 +984,8 @@ export type JuzUncheckedUpdateWithoutMunaqasyahFinalResultsInput = {
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutJuzNestedInput
   tashihRequests?: Prisma.TashihRequestUncheckedUpdateManyWithoutJuzNestedInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput
+  weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzStartNestedInput
+  weeklyTargetsAsEnd?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutJuzEndNestedInput
 }
 
 
@@ -778,6 +1000,8 @@ export type JuzCountOutputType = {
   tashihRequests: number
   munaqasyahRequests: number
   munaqasyahFinalResults: number
+  weeklyTargetsAsStart: number
+  weeklyTargetsAsEnd: number
 }
 
 export type JuzCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -787,6 +1011,8 @@ export type JuzCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.In
   tashihRequests?: boolean | JuzCountOutputTypeCountTashihRequestsArgs
   munaqasyahRequests?: boolean | JuzCountOutputTypeCountMunaqasyahRequestsArgs
   munaqasyahFinalResults?: boolean | JuzCountOutputTypeCountMunaqasyahFinalResultsArgs
+  weeklyTargetsAsStart?: boolean | JuzCountOutputTypeCountWeeklyTargetsAsStartArgs
+  weeklyTargetsAsEnd?: boolean | JuzCountOutputTypeCountWeeklyTargetsAsEndArgs
 }
 
 /**
@@ -841,6 +1067,20 @@ export type JuzCountOutputTypeCountMunaqasyahFinalResultsArgs<ExtArgs extends ru
   where?: Prisma.MunaqasyahFinalResultWhereInput
 }
 
+/**
+ * JuzCountOutputType without action
+ */
+export type JuzCountOutputTypeCountWeeklyTargetsAsStartArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WeeklyTargetWhereInput
+}
+
+/**
+ * JuzCountOutputType without action
+ */
+export type JuzCountOutputTypeCountWeeklyTargetsAsEndArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WeeklyTargetWhereInput
+}
+
 
 export type JuzSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -851,6 +1091,8 @@ export type JuzSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   tashihRequests?: boolean | Prisma.Juz$tashihRequestsArgs<ExtArgs>
   munaqasyahRequests?: boolean | Prisma.Juz$munaqasyahRequestsArgs<ExtArgs>
   munaqasyahFinalResults?: boolean | Prisma.Juz$munaqasyahFinalResultsArgs<ExtArgs>
+  weeklyTargetsAsStart?: boolean | Prisma.Juz$weeklyTargetsAsStartArgs<ExtArgs>
+  weeklyTargetsAsEnd?: boolean | Prisma.Juz$weeklyTargetsAsEndArgs<ExtArgs>
   _count?: boolean | Prisma.JuzCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["juz"]>
 
@@ -869,6 +1111,8 @@ export type JuzInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   tashihRequests?: boolean | Prisma.Juz$tashihRequestsArgs<ExtArgs>
   munaqasyahRequests?: boolean | Prisma.Juz$munaqasyahRequestsArgs<ExtArgs>
   munaqasyahFinalResults?: boolean | Prisma.Juz$munaqasyahFinalResultsArgs<ExtArgs>
+  weeklyTargetsAsStart?: boolean | Prisma.Juz$weeklyTargetsAsStartArgs<ExtArgs>
+  weeklyTargetsAsEnd?: boolean | Prisma.Juz$weeklyTargetsAsEndArgs<ExtArgs>
   _count?: boolean | Prisma.JuzCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -881,6 +1125,8 @@ export type $JuzPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     tashihRequests: Prisma.$TashihRequestPayload<ExtArgs>[]
     munaqasyahRequests: Prisma.$MunaqasyahRequestPayload<ExtArgs>[]
     munaqasyahFinalResults: Prisma.$MunaqasyahFinalResultPayload<ExtArgs>[]
+    weeklyTargetsAsStart: Prisma.$WeeklyTargetPayload<ExtArgs>[]
+    weeklyTargetsAsEnd: Prisma.$WeeklyTargetPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1231,6 +1477,8 @@ export interface Prisma__JuzClient<T, Null = never, ExtArgs extends runtime.Type
   tashihRequests<T extends Prisma.Juz$tashihRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$tashihRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   munaqasyahRequests<T extends Prisma.Juz$munaqasyahRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$munaqasyahRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   munaqasyahFinalResults<T extends Prisma.Juz$munaqasyahFinalResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$munaqasyahFinalResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahFinalResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  weeklyTargetsAsStart<T extends Prisma.Juz$weeklyTargetsAsStartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$weeklyTargetsAsStartArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  weeklyTargetsAsEnd<T extends Prisma.Juz$weeklyTargetsAsEndArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Juz$weeklyTargetsAsEndArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1751,6 +1999,54 @@ export type Juz$munaqasyahFinalResultsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.MunaqasyahFinalResultScalarFieldEnum | Prisma.MunaqasyahFinalResultScalarFieldEnum[]
+}
+
+/**
+ * Juz.weeklyTargetsAsStart
+ */
+export type Juz$weeklyTargetsAsStartArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeeklyTarget
+   */
+  select?: Prisma.WeeklyTargetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WeeklyTarget
+   */
+  omit?: Prisma.WeeklyTargetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeeklyTargetInclude<ExtArgs> | null
+  where?: Prisma.WeeklyTargetWhereInput
+  orderBy?: Prisma.WeeklyTargetOrderByWithRelationInput | Prisma.WeeklyTargetOrderByWithRelationInput[]
+  cursor?: Prisma.WeeklyTargetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WeeklyTargetScalarFieldEnum | Prisma.WeeklyTargetScalarFieldEnum[]
+}
+
+/**
+ * Juz.weeklyTargetsAsEnd
+ */
+export type Juz$weeklyTargetsAsEndArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeeklyTarget
+   */
+  select?: Prisma.WeeklyTargetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WeeklyTarget
+   */
+  omit?: Prisma.WeeklyTargetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeeklyTargetInclude<ExtArgs> | null
+  where?: Prisma.WeeklyTargetWhereInput
+  orderBy?: Prisma.WeeklyTargetOrderByWithRelationInput | Prisma.WeeklyTargetOrderByWithRelationInput[]
+  cursor?: Prisma.WeeklyTargetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WeeklyTargetScalarFieldEnum | Prisma.WeeklyTargetScalarFieldEnum[]
 }
 
 /**

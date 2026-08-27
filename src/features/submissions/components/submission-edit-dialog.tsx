@@ -19,17 +19,25 @@ import { SubmissionFields, type SubmissionFieldValues } from './submission-field
 import { getSubmission } from '../actions/get-submission';
 import { updateSubmission } from '../actions/update-submission';
 import type { GroupWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 interface Props {
   submissionId: string;
   groups: GroupWithStudents[];
   surahOptions: ReferenceOption[];
   juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
   wafaOptions: ReferenceOption[];
 }
 
-export function SubmissionEditDialog({ submissionId, groups, surahOptions, juzOptions, wafaOptions }: Props) {
+export function SubmissionEditDialog({
+  submissionId,
+  groups,
+  surahOptions,
+  juzOptions,
+  surahJuzMap,
+  wafaOptions,
+}: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState<SubmissionFieldValues | null>(null);
@@ -122,6 +130,7 @@ export function SubmissionEditDialog({ submissionId, groups, surahOptions, juzOp
             groups={groups}
             surahOptions={surahOptions}
             juzOptions={juzOptions}
+            surahJuzMap={surahJuzMap}
             wafaOptions={wafaOptions}
             values={values}
             onChange={handleChange}

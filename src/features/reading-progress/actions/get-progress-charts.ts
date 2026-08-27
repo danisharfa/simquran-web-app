@@ -18,13 +18,14 @@ export interface ProgressChartsResult {
 export async function getProgressCharts(
   academicYear: string,
   semester: Semester,
+  classroomId: string | null,
   groupId: string | null,
 ): Promise<ProgressChartsResult> {
   const session = await requireRoleOrThrow(['coordinator', 'teacher']);
   const role = session.user.role.toLowerCase();
   const teacherId = role === 'teacher' ? session.user.id : null;
 
-  const students = await getStudentsInPeriod(academicYear, semester, groupId, teacherId);
+  const students = await getStudentsInPeriod(academicYear, semester, classroomId, groupId, teacherId);
 
   if (students.length === 0) {
     return { studentCount: 0, tahfidz: [], tahsinAlquran: [], wafa: [] };

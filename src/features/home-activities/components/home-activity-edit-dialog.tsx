@@ -18,15 +18,16 @@ import { Spinner } from '@/components/ui/spinner';
 import { HomeActivityFields, type HomeActivityFieldValues } from './home-activity-fields';
 import { getHomeActivity } from '../actions/get-home-activity';
 import { updateHomeActivity } from '../actions/update-home-activity';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 interface Props {
   activityId: string;
   surahOptions: ReferenceOption[];
   juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
 }
 
-export function HomeActivityEditDialog({ activityId, surahOptions, juzOptions }: Props) {
+export function HomeActivityEditDialog({ activityId, surahOptions, juzOptions, surahJuzMap }: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState<HomeActivityFieldValues | null>(null);
@@ -118,6 +119,7 @@ export function HomeActivityEditDialog({ activityId, surahOptions, juzOptions }:
           <HomeActivityFields
             surahOptions={surahOptions}
             juzOptions={juzOptions}
+            surahJuzMap={surahJuzMap}
             values={values}
             onChange={handleChange}
           />

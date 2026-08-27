@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Calendar22 } from '@/components/layouts/calendars/calendar-22';
+import { DatePicker } from '@/components/layouts/calendars/date-picker';
 import { BATCH_OPTIONS, STAGE_OPTIONS } from '../munaqasyah.schema';
 import { createMunaqasyahSchedule } from '../actions/create-munaqasyah-schedule';
 import type { SchedulableMunaqasyahRequest } from '../queries/list-schedulable-requests';
@@ -95,7 +95,7 @@ export function MunaqasyahScheduleForm({ schedulableRequests, teachers }: Props)
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Calendar22 value={date} onChange={setDate} label="Tanggal" />
+          <DatePicker value={date} onChange={setDate} label="Tanggal" />
 
           <Field>
             <FieldLabel>Nama Sesi</FieldLabel>

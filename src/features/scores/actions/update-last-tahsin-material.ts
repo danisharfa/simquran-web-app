@@ -32,7 +32,6 @@ export async function updateLastTahsinMaterial(studentId: string, groupId: strin
     update: { lastTahsinMaterial: material },
   });
 
-  revalidatePath(`/dashboard/group/${groupId}/student/${studentId}/score`);
   revalidatePath(`/dashboard/group/${groupId}/student/${studentId}/report`);
 
   return { success: true, message: 'Materi tahsin terakhir berhasil disimpan' };

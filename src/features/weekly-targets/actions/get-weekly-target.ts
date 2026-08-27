@@ -16,6 +16,8 @@ export interface WeeklyTargetDetail {
   surahEndId: number | null;
   startAyat: number | null;
   endAyat: number | null;
+  juzStartId: number | null;
+  juzEndId: number | null;
   wafaId: number | null;
   startPage: number | null;
   endPage: number | null;

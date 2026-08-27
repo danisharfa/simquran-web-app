@@ -22,7 +22,6 @@ export async function deleteTahfidzScore(scoreId: string) {
   await prisma.tahfidzScore.delete({ where: { id: scoreId } });
   await recalculateReport(score.studentId, score.groupId);
 
-  revalidatePath(`/dashboard/group/${score.groupId}/student/${score.studentId}/score`);
   revalidatePath(`/dashboard/group/${score.groupId}/student/${score.studentId}/report`);
 
   return { success: true, message: 'Nilai tahfidz berhasil dihapus' };

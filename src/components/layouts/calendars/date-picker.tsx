@@ -15,7 +15,7 @@ interface Props {
   className?: string;
 }
 
-export function Calendar22({
+export function DatePicker({
   value,
   onChange,
   label = 'Tanggal',

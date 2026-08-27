@@ -10,14 +10,22 @@ export interface PeriodOption {
   semester: string;
 }
 
-export interface GroupFilterOption {
+export interface ClassroomFilterOption {
   id: string;
   label: string;
   period: string;
 }
 
+export interface GroupFilterOption {
+  id: string;
+  label: string;
+  period: string;
+  classroomId: string;
+}
+
 export interface ProgressFilterData {
   periods: PeriodOption[];
+  classrooms: ClassroomFilterOption[];
   groups: GroupFilterOption[];
   defaultPeriod: string;
 }
@@ -42,6 +50,7 @@ export async function getProgressFilters(): Promise<ProgressFilterData> {
   ]);
 
   const periodsMap = new Map<string, PeriodOption>();
+  const classroomsMap = new Map<string, ClassroomFilterOption>();
   const groupsMap = new Map<string, GroupFilterOption>();
 
   for (const classroom of classrooms) {
@@ -53,11 +62,20 @@ export async function getProgressFilters(): Promise<ProgressFilterData> {
       semester: classroom.semester,
     });
 
+    if (classroom.groups.length > 0) {
+      classroomsMap.set(`${classroom.id}-${periodKey}`, {
+        id: classroom.id,
+        label: `${classroom.level} ${classroom.name}`,
+        period: periodKey,
+      });
+    }
+
     for (const group of classroom.groups) {
       groupsMap.set(`${group.id}-${periodKey}`, {
         id: group.id,
         label: `${group.name} - ${classroom.name}`,
         period: periodKey,
+        classroomId: classroom.id,
       });
     }
   }
@@ -70,10 +88,16 @@ export async function getProgressFilters(): Promise<ProgressFilterData> {
       academicYear: gh.academicYear,
       semester: gh.semester,
     });
+    classroomsMap.set(`${gh.group.classroom.id}-${periodKey}`, {
+      id: gh.group.classroom.id,
+      label: `${gh.group.classroom.level} ${gh.group.classroom.name}`,
+      period: periodKey,
+    });
     groupsMap.set(`${gh.group.id}-${periodKey}`, {
       id: gh.group.id,
       label: `${gh.group.name} - ${gh.group.classroom.name}`,
       period: periodKey,
+      classroomId: gh.group.classroomId,
     });
   }
 
@@ -86,5 +110,14 @@ export async function getProgressFilters(): Promise<ProgressFilterData> {
     ? `${academicSetting.currentYear}|${academicSetting.currentSemester}`
     : (periods[0]?.value ?? '');
 
-  return { periods, groups: Array.from(groupsMap.values()), defaultPeriod };
+  const classroomsList = Array.from(classroomsMap.values()).sort((a, b) =>
+    a.label.localeCompare(b.label),
+  );
+
+  return {
+    periods,
+    classrooms: classroomsList,
+    groups: Array.from(groupsMap.values()),
+    defaultPeriod,
+  };
 }

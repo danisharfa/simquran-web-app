@@ -7,7 +7,12 @@ export async function listAllSubmissions(): Promise<SubmissionTableData[]> {
   await requireRoleOrThrow(['coordinator']);
 
   const submissions = await prisma.submission.findMany({
-    include: { student: { include: { user: true } }, group: true, surah: true, wafa: true },
+    include: {
+      student: { include: { user: true } },
+      group: { include: { classroom: true } },
+      surah: true,
+      wafa: true,
+    },
     orderBy: { date: 'desc' },
   });
 
@@ -15,7 +20,12 @@ export async function listAllSubmissions(): Promise<SubmissionTableData[]> {
     id: s.id,
     date: s.date,
     studentName: s.student.user.name,
+    groupId: s.groupId,
     groupName: s.group.name,
+    classroomId: s.group.classroomId,
+    classroomName: `${s.group.classroom.level} ${s.group.classroom.name}`,
+    academicYear: s.group.classroom.academicYear,
+    semester: s.group.classroom.semester,
     submissionType: s.submissionType,
     detail: formatSubmissionDetail(s),
     adab: s.adab,

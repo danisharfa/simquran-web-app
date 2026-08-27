@@ -36,7 +36,7 @@ export async function updateSubmission(submissionId: string, input: SubmissionSc
     data: { studentId, groupId, date: new Date(date), ...rest },
   });
 
-  revalidatePath('/dashboard/submission/history');
+  revalidatePath('/dashboard/submission');
 
   return { success: true, message: 'Setoran berhasil diperbarui' };
 }

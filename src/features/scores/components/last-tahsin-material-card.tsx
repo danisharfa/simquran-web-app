@@ -3,8 +3,17 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { NotebookPenIcon } from 'lucide-react';
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Spinner } from '@/components/ui/spinner';
@@ -18,6 +27,7 @@ interface Props {
 
 export function LastTahsinMaterialCard({ studentId, groupId, initialValue }: Props) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const [material, setMaterial] = useState(initialValue ?? '');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -30,6 +40,7 @@ export function LastTahsinMaterialCard({ studentId, groupId, initialValue }: Pro
         return;
       }
       toast.success(result.message);
+      setOpen(false);
       router.refresh();
     } finally {
       setIsSubmitting(false);
@@ -37,30 +48,51 @@ export function LastTahsinMaterialCard({ studentId, groupId, initialValue }: Pro
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">Materi Tahsin Terakhir</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) setMaterial(initialValue ?? '');
+      }}
+    >
+      <DialogTrigger
+        render={
+          <Button variant="outline">
+            <NotebookPenIcon />
+            Materi Tahsin Terakhir
+          </Button>
+        }
+      />
+
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <NotebookPenIcon className="size-5" />
+            Materi Tahsin Terakhir
+          </DialogTitle>
+          <DialogDescription>Catat materi tahsin terakhir yang dipelajari siswa.</DialogDescription>
+        </DialogHeader>
+
         <Textarea
           value={material}
           onChange={(e) => setMaterial(e.target.value)}
           rows={2}
           placeholder="Contoh: Wafa 3 halaman 20"
         />
-      </CardContent>
-      <CardFooter>
-        <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">
-          {isSubmitting ? (
-            <>
-              <Spinner />
-              Menyimpan...
-            </>
-          ) : (
-            'Simpan'
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
+
+        <DialogFooter>
+          <Button onClick={handleSave} disabled={isSubmitting} className="w-full sm:w-auto">
+            {isSubmitting ? (
+              <>
+                <Spinner />
+                Menyimpan...
+              </>
+            ) : (
+              'Simpan'
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

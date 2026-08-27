@@ -5,13 +5,21 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { BookPlus } from 'lucide-react';
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { SubmissionFields, type SubmissionFieldValues } from './submission-fields';
 import { createSubmission } from '../actions/create-submission';
 import type { GroupWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 const INITIAL_VALUES: SubmissionFieldValues = {
   groupId: '',
@@ -34,11 +42,13 @@ interface Props {
   groups: GroupWithStudents[];
   surahOptions: ReferenceOption[];
   juzOptions: ReferenceOption[];
+  surahJuzMap: SurahJuzMapping[];
   wafaOptions: ReferenceOption[];
 }
 
-export function SubmissionForm({ groups, surahOptions, juzOptions, wafaOptions }: Props) {
+export function SubmissionCreateDialog({ groups, surahOptions, juzOptions, surahJuzMap, wafaOptions }: Props) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const [values, setValues] = useState<SubmissionFieldValues>(INITIAL_VALUES);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -63,7 +73,8 @@ export function SubmissionForm({ groups, surahOptions, juzOptions, wafaOptions }
       }
 
       toast.success(result.message);
-      setValues({ ...INITIAL_VALUES, groupId: values.groupId });
+      setValues(INITIAL_VALUES);
+      setOpen(false);
       router.refresh();
     } finally {
       setIsSubmitting(false);
@@ -71,35 +82,54 @@ export function SubmissionForm({ groups, surahOptions, juzOptions, wafaOptions }
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <BookPlus className="size-5" />
-          Input Setoran
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) setValues(INITIAL_VALUES);
+      }}
+    >
+      <DialogTrigger
+        render={
+          <Button>
+            <BookPlus />
+            Input Setoran
+          </Button>
+        }
+      />
+
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <BookPlus className="size-5" />
+            Input Setoran
+          </DialogTitle>
+          <DialogDescription>Catat setoran harian tahfidz/tahsin siswa bimbingan Anda.</DialogDescription>
+        </DialogHeader>
+
         <SubmissionFields
           groups={groups}
           surahOptions={surahOptions}
           juzOptions={juzOptions}
+          surahJuzMap={surahJuzMap}
           wafaOptions={wafaOptions}
           values={values}
           onChange={handleChange}
         />
-      </CardContent>
-      <CardFooter>
-        <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
-          {isSubmitting ? (
-            <>
-              <Spinner />
-              Menyimpan...
-            </>
-          ) : (
-            'Simpan Setoran'
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
+
+        <DialogFooter>
+          <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full sm:w-auto">
+            {isSubmitting ? (
+              <>
+                <Spinner />
+                Menyimpan...
+              </>
+            ) : (
+              'Simpan Setoran'
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

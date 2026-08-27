@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Spinner } from '@/components/ui/spinner';
 import { Field, FieldLabel } from '@/components/ui/field';
-import { Calendar22 } from '@/components/layouts/calendars/calendar-22';
+import { DatePicker } from '@/components/layouts/calendars/date-picker';
 import { createTashihSchedule } from '../actions/create-tashih-schedule';
 import type { SchedulableRequestOption } from '../queries/list-schedulable-requests';
 
@@ -79,7 +79,7 @@ export function TashihScheduleForm({ schedulableRequests }: Props) {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Calendar22 value={date} onChange={setDate} label="Tanggal" />
+          <DatePicker value={date} onChange={setDate} label="Tanggal" />
 
           <Field>
             <FieldLabel>Nama Sesi</FieldLabel>

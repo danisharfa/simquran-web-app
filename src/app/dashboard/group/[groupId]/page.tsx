@@ -2,10 +2,10 @@ import { requireRole } from '@/lib/require-role';
 import { PageHeader } from '@/components/layouts/page-header';
 import { getGroup } from '@/features/groups/queries/get-group';
 import { listGroupStudents } from '@/features/groups/queries/list-group-students';
+import { listGroupHistoryStudents } from '@/features/groups/queries/list-group-history-students';
 import { listClassroomStudentsWithoutGroup } from '@/features/groups/queries/list-classroom-students-without-group';
 import { AddStudentToGroupForm } from '@/features/groups/components/add-student-to-group-form';
 import { GroupStudentTable } from '@/features/groups/components/group-student-table';
-import { PromoteGroupDialog } from '@/features/groups/components/promote-group-dialog';
 import { EditGroupNameDialog } from '@/features/groups/components/edit-group-name-dialog';
 
 interface Props {
@@ -18,10 +18,12 @@ export default async function GroupDetailPage({ params }: Props) {
   const { groupId } = await params;
 
   const group = await getGroup(groupId);
+  // kelompok nonaktif tidak lagi menautkan siswa via groupId, siswanya diambil dari riwayat
+  const students = group.isActive
+    ? await listGroupStudents(groupId)
+    : await listGroupHistoryStudents(groupId);
 
   if (role === 'teacher') {
-    const students = await listGroupStudents(groupId);
-
     return (
       <div className="space-y-6">
         <PageHeader
@@ -30,34 +32,32 @@ export default async function GroupDetailPage({ params }: Props) {
           backHref="/dashboard/group"
         />
 
-        <GroupStudentTable groupId={groupId} data={students} readOnly showScoreLink showReportLink />
+        <GroupStudentTable groupId={groupId} data={students} readOnly showReportLink />
       </div>
     );
   }
 
-  const [students, availableStudents] = await Promise.all([
-    listGroupStudents(groupId),
-    listClassroomStudentsWithoutGroup(group.classroomId),
-  ]);
+  const availableStudents = group.isActive
+    ? await listClassroomStudentsWithoutGroup(group.classroomId)
+    : [];
 
   return (
     <div className="space-y-6">
       <PageHeader
         title={group.name}
-        description={`Kelas ${group.classroomName} · Dibimbing ${group.teacherName}`}
+        description={`Kelas ${group.classroomName} · ${group.teacherName}`}
         backHref="/dashboard/group"
         action={
-          <div className="flex items-center gap-2">
-            {group.isActive && (
+          group.isActive ? (
+            <div className="flex items-center gap-2">
               <EditGroupNameDialog groupId={groupId} currentName={group.name} />
-            )}
-            <PromoteGroupDialog groupId={groupId} />
-            <AddStudentToGroupForm groupId={groupId} students={availableStudents} />
-          </div>
+              <AddStudentToGroupForm groupId={groupId} students={availableStudents} />
+            </div>
+          ) : undefined
         }
       />
 
-      <GroupStudentTable groupId={groupId} data={students} showReportLink />
+      <GroupStudentTable groupId={groupId} data={students} readOnly={!group.isActive} showReportLink />
     </div>
   );
 }

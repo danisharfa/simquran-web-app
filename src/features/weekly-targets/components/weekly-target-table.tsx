@@ -17,30 +17,76 @@ import { toast } from 'sonner';
 import { Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { TARGET_TYPE_OPTIONS, TARGET_STATUS_OPTIONS } from '../weekly-target.schema';
 import { deleteWeeklyTarget } from '../actions/delete-weekly-target';
 import { WeeklyTargetEditDialog } from './weekly-target-edit-dialog';
 import type { WeeklyTargetTableData } from '../queries/list-my-weekly-targets';
-import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
 const TYPE_LABEL = Object.fromEntries(TARGET_TYPE_OPTIONS.map((o) => [o.value, o.label]));
 const STATUS_LABEL = Object.fromEntries(TARGET_STATUS_OPTIONS.map((o) => [o.value, o.label]));
+const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
+
+const ALL = '__ALL__';
 
 interface Props {
   data: WeeklyTargetTableData[];
   editable?: boolean;
   surahOptions?: ReferenceOption[];
+  juzOptions?: ReferenceOption[];
+  surahJuzMap?: SurahJuzMapping[];
   wafaOptions?: ReferenceOption[];
 }
 
-export function WeeklyTargetTable({ data, editable = false, surahOptions = [], wafaOptions = [] }: Props) {
+export function WeeklyTargetTable({
+  data,
+  editable = false,
+  surahOptions = [],
+  juzOptions = [],
+  surahJuzMap = [],
+  wafaOptions = [],
+}: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const [period, setPeriod] = useState(ALL);
+  const [classroomId, setClassroomId] = useState(ALL);
+  const [groupId, setGroupId] = useState(ALL);
+
+  const periodOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    data.forEach((d) =>
+      map.set(`${d.academicYear}|${d.semester}`, `${d.academicYear} ${SEMESTER_LABEL[d.semester] ?? d.semester}`),
+    );
+    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
+  }, [data]);
+  const classroomOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    data.forEach((d) => map.set(d.classroomId, d.classroomName));
+    return Array.from(map, ([id, name]) => ({ id, name }));
+  }, [data]);
+  const groupOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    data.forEach((d) => map.set(d.groupId, d.groupName));
+    return Array.from(map, ([id, name]) => ({ id, name }));
+  }, [data]);
+
+  const filteredData = useMemo(() => {
+    if (!editable) return data;
+    return data.filter(
+      (d) =>
+        (period === ALL || `${d.academicYear}|${d.semester}` === period) &&
+        (classroomId === ALL || d.classroomId === classroomId) &&
+        (groupId === ALL || d.groupId === groupId),
+    );
+  }, [data, editable, period, classroomId, groupId]);
 
   const handleDelete = useCallback(
     async (id: string) => {
@@ -94,7 +140,15 @@ export function WeeklyTargetTable({ data, editable = false, surahOptions = [], w
         accessorKey: 'progressPercent',
         id: 'Progress',
         header: 'Progress',
-        cell: ({ row }) => `${row.original.progressPercent ?? 0}%`,
+        cell: ({ row }) => {
+          const percent = row.original.progressPercent ?? 0;
+          return (
+            <div className="flex min-w-32 items-center gap-2">
+              <Progress value={percent} className="w-24" />
+              <span className="text-muted-foreground text-xs tabular-nums">{percent}%</span>
+            </div>
+          );
+        },
       },
       {
         accessorKey: 'status',
@@ -117,6 +171,8 @@ export function WeeklyTargetTable({ data, editable = false, surahOptions = [], w
             <WeeklyTargetEditDialog
               targetId={row.original.id}
               surahOptions={surahOptions}
+              juzOptions={juzOptions}
+              surahJuzMap={surahJuzMap}
               wafaOptions={wafaOptions}
             />
             <Button
@@ -133,10 +189,10 @@ export function WeeklyTargetTable({ data, editable = false, surahOptions = [], w
         ),
       },
     ];
-  }, [editable, surahOptions, wafaOptions, deletingId, handleDelete]);
+  }, [editable, surahOptions, juzOptions, surahJuzMap, wafaOptions, deletingId, handleDelete]);
 
   const table = useReactTable({
-    data,
+    data: filteredData,
     columns,
     state: { sorting, columnFilters, columnVisibility },
     onSortingChange: setSorting,
@@ -154,6 +210,63 @@ export function WeeklyTargetTable({ data, editable = false, surahOptions = [], w
       table={table}
       filterColumn="Nama Siswa"
       showColumnFilter={false}
+      toolbar={
+        editable ? (
+          <div className="flex flex-wrap items-center gap-2">
+            <Select value={period} onValueChange={(v) => setPeriod(v ?? ALL)}>
+              <SelectTrigger className="w-44">
+                <SelectValue>
+                  {period === ALL ? 'Semua Tahun Ajaran' : (periodOptions.find((p) => p.value === period)?.label ?? period)}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={ALL}>Semua Tahun Ajaran</SelectItem>
+                {periodOptions.map((p) => (
+                  <SelectItem key={p.value} value={p.value}>
+                    {p.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select value={classroomId} onValueChange={(v) => setClassroomId(v ?? ALL)}>
+              <SelectTrigger className="w-32">
+                <SelectValue>
+                  {classroomId === ALL
+                    ? 'Semua Kelas'
+                    : (classroomOptions.find((c) => c.id === classroomId)?.name ?? 'Semua Kelas')}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={ALL}>Semua Kelas</SelectItem>
+                {classroomOptions.map((c) => (
+                  <SelectItem key={c.id} value={c.id}>
+                    {c.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select value={groupId} onValueChange={(v) => setGroupId(v ?? ALL)}>
+              <SelectTrigger className="w-36">
+                <SelectValue>
+                  {groupId === ALL
+                    ? 'Semua Kelompok'
+                    : (groupOptions.find((g) => g.id === groupId)?.name ?? 'Semua Kelompok')}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={ALL}>Semua Kelompok</SelectItem>
+                {groupOptions.map((g) => (
+                  <SelectItem key={g.id} value={g.id}>
+                    {g.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        ) : undefined
+      }
     />
   );
 }

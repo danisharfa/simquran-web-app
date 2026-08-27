@@ -22,7 +22,6 @@ export async function deleteTahsinScore(scoreId: string) {
   await prisma.tahsinScore.delete({ where: { id: scoreId } });
   await recalculateReport(score.studentId, score.groupId);
 
-  revalidatePath(`/dashboard/group/${score.groupId}/student/${score.studentId}/score`);
   revalidatePath(`/dashboard/group/${score.groupId}/student/${score.studentId}/report`);
 
   return { success: true, message: 'Nilai tahsin berhasil dihapus' };
