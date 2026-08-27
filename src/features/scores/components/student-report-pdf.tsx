@@ -2,6 +2,13 @@
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import type { ReportPdfData } from '../queries/get-report-pdf-data';
 
+// react-pdf renders to a PDF canvas and can't read CSS custom properties/OKLCH,
+// so this print palette is intentionally kept separate from the app's design tokens.
+const PDF_COLOR = {
+  border: '#000',
+  headerBackground: '#f0f0f0',
+} as const;
+
 const styles = StyleSheet.create({
   page: { padding: 30, fontSize: 11, fontFamily: 'Helvetica' },
   headerSection: { flexDirection: 'row', alignItems: 'center' },
@@ -14,22 +21,31 @@ const styles = StyleSheet.create({
   studentSeparator: { width: '2%', fontSize: 11, textAlign: 'center' },
   studentValue: { width: '78%', fontSize: 11 },
   heading: { fontSize: 14, fontWeight: 'bold', marginBottom: 6, textTransform: 'uppercase' },
-  row: { flexDirection: 'row', borderBottom: '1px solid #000', paddingVertical: 4, alignItems: 'center' },
-  header: { borderBottom: '2px solid #000', fontWeight: 'bold', backgroundColor: '#f0f0f0' },
+  row: { flexDirection: 'row', borderBottom: `1px solid ${PDF_COLOR.border}`, paddingVertical: 4, alignItems: 'center' },
+  header: { borderBottom: `2px solid ${PDF_COLOR.border}`, fontWeight: 'bold', backgroundColor: PDF_COLOR.headerBackground },
   cellNo: { width: '7%', textAlign: 'center' },
   cellTopic: { width: '30%', paddingLeft: 4 },
   cellScoreDouble: { width: '20%', flexDirection: 'row' },
   cellDesc: { width: '43%', paddingLeft: 4 },
-  scoreHeaderWrapper: { flexDirection: 'column', width: '20%', borderLeft: '1px solid #000', borderRight: '1px solid #000' },
-  scoreHeaderTop: { textAlign: 'center', fontWeight: 'bold', borderBottom: '1px solid #000' },
+  scoreHeaderWrapper: {
+    flexDirection: 'column',
+    width: '20%',
+    borderLeft: `1px solid ${PDF_COLOR.border}`,
+    borderRight: `1px solid ${PDF_COLOR.border}`,
+  },
+  scoreHeaderTop: { textAlign: 'center', fontWeight: 'bold', borderBottom: `1px solid ${PDF_COLOR.border}` },
   scoreHeaderBottom: { flexDirection: 'row' },
-  scoreHeaderItem: { flex: 1, textAlign: 'center', borderRight: '1px solid #000' },
+  scoreHeaderItem: { flex: 1, textAlign: 'center', borderRight: `1px solid ${PDF_COLOR.border}` },
   scoreText: { fontSize: 11, paddingVertical: 1, textAlign: 'center', width: '50%' },
-  separator: { borderBottom: '1.5px solid #000', marginVertical: 8 },
-  kkmTable: { border: '1px solid #000', marginTop: 12 },
-  kkmRow: { flexDirection: 'row', borderBottom: '1px solid #000' },
-  kkmCell: { borderRight: '1px solid #000', padding: 4, textAlign: 'center' },
-  pembimbingRow: { flexDirection: 'row', borderTop: '1px solid #000', borderBottom: '1px solid #000' },
+  separator: { borderBottom: `1.5px solid ${PDF_COLOR.border}`, marginVertical: 8 },
+  kkmTable: { border: `1px solid ${PDF_COLOR.border}`, marginTop: 12 },
+  kkmRow: { flexDirection: 'row', borderBottom: `1px solid ${PDF_COLOR.border}` },
+  kkmCell: { borderRight: `1px solid ${PDF_COLOR.border}`, padding: 4, textAlign: 'center' },
+  pembimbingRow: {
+    flexDirection: 'row',
+    borderTop: `1px solid ${PDF_COLOR.border}`,
+    borderBottom: `1px solid ${PDF_COLOR.border}`,
+  },
   pembimbingText: { width: '100%', textAlign: 'center', padding: 4 },
 });
 

@@ -1,5 +1,5 @@
 import { requireRole } from '@/lib/require-role';
-import { BackButton } from '@/components/ui/back-button';
+import { PageHeader } from '@/components/layouts/page-header';
 import { getScoreContext } from '@/features/scores/queries/get-score-context';
 import { listTahfidzScores } from '@/features/scores/queries/list-tahfidz-scores';
 import { listTahsinScores } from '@/features/scores/queries/list-tahsin-scores';
@@ -27,15 +27,11 @@ export default async function ScoreInputPage({ params }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-3">
-        <BackButton href={`/dashboard/group/${groupId}`} />
-        <div>
-          <h1 className="text-2xl font-bold">Input Nilai — {context.studentName}</h1>
-          <p className="text-muted-foreground text-sm">
-            NIS {context.nis} &middot; Kelompok {context.groupName}
-          </p>
-        </div>
-      </div>
+      <PageHeader
+        title={`Input Nilai — ${context.studentName}`}
+        description={`NIS ${context.nis} · Kelompok ${context.groupName}`}
+        backHref={`/dashboard/group/${groupId}`}
+      />
 
       <TahfidzScorePanel
         studentId={studentId}

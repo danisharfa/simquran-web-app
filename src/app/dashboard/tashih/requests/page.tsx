@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { TashihRequestTable } from '@/features/tashih/components/tashih-request-table';
 import { listAllTashihRequests } from '@/features/tashih/queries/list-all-tashih-requests';
 
@@ -9,10 +10,7 @@ export default async function TashihRequestsPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Permintaan Tashih</h1>
-        <p className="text-muted-foreground text-sm">Terima atau tolak permintaan tashih dari guru</p>
-      </div>
+      <PageHeader title="Permintaan Tashih" description="Terima atau tolak permintaan tashih dari guru" />
 
       <TashihRequestTable data={requests} showActions />
     </div>

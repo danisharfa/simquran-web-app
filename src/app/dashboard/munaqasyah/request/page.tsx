@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { MunaqasyahRequestForm } from '@/features/munaqasyah/components/munaqasyah-request-form';
 import { MunaqasyahRequestTable } from '@/features/munaqasyah/components/munaqasyah-request-table';
 import { listMyMunaqasyahRequests } from '@/features/munaqasyah/queries/list-my-munaqasyah-requests';
@@ -16,10 +17,10 @@ export default async function MunaqasyahRequestPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Pendaftaran Munaqasyah</h1>
-        <p className="text-muted-foreground text-sm">Ajukan Tasmi/Munaqasyah untuk siswa bimbingan Anda</p>
-      </div>
+      <PageHeader
+        title="Pendaftaran Munaqasyah"
+        description="Ajukan Tasmi/Munaqasyah untuk siswa bimbingan Anda"
+      />
 
       <MunaqasyahRequestForm groups={groups} juzOptions={juzOptions} />
 

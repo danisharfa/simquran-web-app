@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from '@tanstack/react-form';
 import { toast } from 'sonner';
-import { School } from 'lucide-react';
+import { FaChalkboard } from 'react-icons/fa';
 
 import {
   Dialog,
@@ -93,7 +93,7 @@ export function AddClassroomForm({ defaultAcademicYear = '', defaultSemester = '
       <DialogTrigger
         render={
           <Button>
-            <School />
+            <FaChalkboard />
             Tambah Kelas
           </Button>
         }
@@ -102,7 +102,7 @@ export function AddClassroomForm({ defaultAcademicYear = '', defaultSemester = '
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <School className="size-5" />
+            <FaChalkboard className="size-5" />
             Tambah Kelas
           </DialogTitle>
           <DialogDescription>

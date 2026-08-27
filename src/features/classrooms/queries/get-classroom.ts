@@ -7,6 +7,7 @@ export interface ClassroomDetail {
   name: string;
   academicYear: string;
   semester: 'GANJIL' | 'GENAP';
+  isActive: boolean;
 }
 
 export async function getClassroom(classroomId: string): Promise<ClassroomDetail> {
@@ -22,5 +23,6 @@ export async function getClassroom(classroomId: string): Promise<ClassroomDetail
     name: classroom.name,
     academicYear: classroom.academicYear,
     semester: classroom.semester,
+    isActive: classroom.isActive,
   };
 }

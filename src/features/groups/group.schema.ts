@@ -7,3 +7,9 @@ export const groupSchema = z.object({
 });
 
 export type GroupSchema = z.infer<typeof groupSchema>;
+
+export const groupNameSchema = z.object({
+  name: z.string().min(1, 'Nama kelompok wajib diisi'),
+});
+
+export type GroupNameSchema = z.infer<typeof groupNameSchema>;

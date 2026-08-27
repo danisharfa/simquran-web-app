@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { MyMunaqasyahScheduleTable } from '@/features/munaqasyah/components/my-munaqasyah-schedule-table';
 import { listMyMunaqasyahSchedule } from '@/features/munaqasyah/queries/list-my-munaqasyah-schedule';
 import { listOwnMunaqasyahSchedule } from '@/features/munaqasyah/queries/list-own-munaqasyah-schedule';
@@ -12,12 +13,12 @@ export default async function MunaqasyahSchedulePage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Jadwal Munaqasyah</h1>
-        <p className="text-muted-foreground text-sm">
-          {role === 'student' ? 'Jadwal Tasmi/Munaqasyah Anda' : 'Jadwal Tasmi/Munaqasyah siswa bimbingan Anda'}
-        </p>
-      </div>
+      <PageHeader
+        title="Jadwal Munaqasyah"
+        description={
+          role === 'student' ? 'Jadwal Tasmi/Munaqasyah Anda' : 'Jadwal Tasmi/Munaqasyah siswa bimbingan Anda'
+        }
+      />
 
       <MyMunaqasyahScheduleTable data={schedule} />
     </div>

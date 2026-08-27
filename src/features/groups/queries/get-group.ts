@@ -8,6 +8,7 @@ export interface GroupDetail {
   classroomName: string;
   teacherId: string;
   teacherName: string;
+  isActive: boolean;
 }
 
 export async function getGroup(groupId: string): Promise<GroupDetail> {
@@ -31,5 +32,6 @@ export async function getGroup(groupId: string): Promise<GroupDetail> {
     classroomName: `${group.classroom.level} ${group.classroom.name}`,
     teacherId: group.teacherId,
     teacherName: group.teacher.user.name,
+    isActive: group.isActive,
   };
 }

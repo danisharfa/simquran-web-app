@@ -10,14 +10,8 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from '@tanstack/react-table';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Eye, KeyRound, MoreVertical, Trash2 } from 'lucide-react';
+import { Eye, KeyRound, Trash2 } from 'lucide-react';
 import { UserTableData } from '../queries/list-users';
 import { useDataTableState } from '@/hooks/use-data-table';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
@@ -104,40 +98,25 @@ export function UserTable({ data, title }: Props) {
         cell: ({ row }) => {
           const user = row.original;
           return (
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                render={
-                  <Button variant="ghost" size="icon" className="size-8">
-                    <MoreVertical className="h-4 w-4" />
-                    <span className="sr-only">User Option</span>
-                  </Button>
-                }
-              />
-              <DropdownMenuContent align="end" className="w-50 z-50">
-                <DropdownMenuItem
-                  onClick={() => handleOpenDetailDialog(user)}
-                  className="flex items-center gap-2"
-                >
-                  <Eye />
-                  Detail
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => handleOpenResetDialog(user)}
-                  className="flex items-center gap-2"
-                >
-                  <KeyRound />
-                  Reset Password
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => handleOpenDeleteDialog(user)}
-                  variant="destructive"
-                  className="flex items-center gap-2"
-                >
-                  <Trash2 />
-                  Hapus
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center gap-1">
+              <Button variant="ghost" size="sm" onClick={() => handleOpenDetailDialog(user)}>
+                <Eye className="h-4 w-4" />
+                Detail
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => handleOpenResetDialog(user)}>
+                <KeyRound className="h-4 w-4" />
+                Reset Password
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-destructive hover:text-destructive"
+                onClick={() => handleOpenDeleteDialog(user)}
+              >
+                <Trash2 className="h-4 w-4" />
+                Hapus
+              </Button>
+            </div>
           );
         },
       },

@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { HomeActivityTable } from '@/features/home-activities/components/home-activity-table';
 import { listOwnHomeActivities } from '@/features/home-activities/queries/list-own-home-activities';
 import { listSurahOptions, listJuzOptions } from '@/features/quran-reference/queries/list-reference-options';
@@ -14,10 +15,7 @@ export default async function HomeActivityHistoryPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Riwayat Aktivitas Rumah</h1>
-        <p className="text-muted-foreground text-sm">Aktivitas rumah yang pernah Anda catat</p>
-      </div>
+      <PageHeader title="Riwayat Aktivitas Rumah" description="Aktivitas rumah yang pernah Anda catat" />
 
       <HomeActivityTable data={activities} editable surahOptions={surahOptions} juzOptions={juzOptions} />
     </div>

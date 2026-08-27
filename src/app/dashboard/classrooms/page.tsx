@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { AddClassroomForm } from '@/features/classrooms/components/add-classroom-form';
 import { ClassroomTable } from '@/features/classrooms/components/classroom-table';
 import { listClassrooms } from '@/features/classrooms/queries/list-classrooms';
@@ -16,19 +17,18 @@ export default async function ClassroomsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold">Manajemen Kelas</h1>
-          <p className="text-muted-foreground text-sm">Kelola kelas dan anggota kelas</p>
-        </div>
+      <PageHeader
+        title="Manajemen Kelas"
+        description="Kelola kelas dan anggota kelas"
+        action={
+          <AddClassroomForm
+            defaultAcademicYear={academicSetting?.currentYear}
+            defaultSemester={academicSetting?.currentSemester}
+          />
+        }
+      />
 
-        <AddClassroomForm
-          defaultAcademicYear={academicSetting?.currentYear}
-          defaultSemester={academicSetting?.currentSemester}
-        />
-      </div>
-
-      <ClassroomTable data={classrooms} title="Daftar Kelas" />
+      <ClassroomTable data={classrooms} title="Daftar Kelas" editable />
       <ClassroomTable data={classroomHistory} title="Riwayat Kelas" />
     </div>
   );

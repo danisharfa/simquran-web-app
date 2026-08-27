@@ -10,3 +10,9 @@ export const classroomSchema = z.object({
 });
 
 export type ClassroomSchema = z.infer<typeof classroomSchema>;
+
+export const classroomNameSchema = z.object({
+  name: z.string().min(1, 'Nama kelas wajib diisi'),
+});
+
+export type ClassroomNameSchema = z.infer<typeof classroomNameSchema>;

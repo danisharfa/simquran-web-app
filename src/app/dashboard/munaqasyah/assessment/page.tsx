@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { AssessmentPanel } from '@/features/munaqasyah/components/assessment-panel';
 import { MunaqasyahResultTable } from '@/features/munaqasyah/components/munaqasyah-result-table';
 import { listMyPendingAssessments } from '@/features/munaqasyah/queries/list-my-pending-assessments';
@@ -21,10 +22,10 @@ export default async function MunaqasyahAssessmentPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Penilaian Munaqasyah</h1>
-        <p className="text-muted-foreground text-sm">Nilai peserta yang dijadwalkan kepada Anda sebagai penguji</p>
-      </div>
+      <PageHeader
+        title="Penilaian Munaqasyah"
+        description="Nilai peserta yang dijadwalkan kepada Anda sebagai penguji"
+      />
 
       <AssessmentPanel pendingAssessments={pendingAssessments} surahsByJuz={surahsByJuz} />
 

@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { getAcademicSetting } from '@/features/academic-settings/queries/get-academic-setting';
 import { AcademicYearForm } from '@/features/academic-settings/components/academic-year-form';
 import { SchoolInfoForm } from '@/features/academic-settings/components/school-info-form';
@@ -10,10 +11,7 @@ export default async function AcademicSettingPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Pengaturan Akademik</h1>
-        <p className="text-muted-foreground text-sm">Kelola tahun akademik dan informasi sekolah</p>
-      </div>
+      <PageHeader title="Pengaturan Akademik" description="Kelola tahun akademik dan informasi sekolah" />
 
       <Tabs defaultValue="academic-year" className="mx-auto w-full max-w-3xl">
         <TabsList className="mx-auto">

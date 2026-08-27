@@ -13,11 +13,13 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from '@tanstack/react-table';
-import { SquareArrowOutUpRight } from 'lucide-react';
+import { SquareArrowOutUpRight, Pencil, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
+import { EditClassroomNameDialog } from './edit-classroom-name-dialog';
+import { DeleteClassroomDialog } from './delete-classroom-dialog';
 import type { ClassroomTableData } from '../queries/list-classrooms';
 
 const SEMESTER_LABEL: Record<'GANJIL' | 'GENAP', string> = {
@@ -28,9 +30,10 @@ const SEMESTER_LABEL: Record<'GANJIL' | 'GENAP', string> = {
 interface Props {
   data: ClassroomTableData[];
   title: string;
+  editable?: boolean;
 }
 
-export function ClassroomTable({ data, title }: Props) {
+export function ClassroomTable({ data, title, editable = false }: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -70,20 +73,49 @@ export function ClassroomTable({ data, title }: Props) {
         id: 'Aksi',
         enableHiding: false,
         header: 'Aksi',
-        cell: ({ row }) => (
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-8"
-            onClick={() => router.push(`/dashboard/classrooms/${row.original.id}`)}
-          >
-            <SquareArrowOutUpRight className="h-4 w-4" />
-            <span className="sr-only">Detail</span>
-          </Button>
-        ),
+        cell: ({ row }) => {
+          const classroom = row.original;
+          return (
+            <div className="flex items-center gap-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => router.push(`/dashboard/classrooms/${classroom.id}`)}
+              >
+                <SquareArrowOutUpRight className="h-4 w-4" />
+                Detail
+              </Button>
+
+              {editable && (
+                <>
+                  <EditClassroomNameDialog
+                    classroomId={classroom.id}
+                    currentName={classroom.name}
+                    trigger={
+                      <Button variant="ghost" size="sm">
+                        <Pencil className="h-4 w-4" />
+                        Edit
+                      </Button>
+                    }
+                  />
+                  <DeleteClassroomDialog
+                    classroomId={classroom.id}
+                    classroomName={classroom.name}
+                    trigger={
+                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
+                        <Trash2 className="h-4 w-4" />
+                        Hapus
+                      </Button>
+                    }
+                  />
+                </>
+              )}
+            </div>
+          );
+        },
       },
     ],
-    [router],
+    [router, editable],
   );
 
   const table = useReactTable({

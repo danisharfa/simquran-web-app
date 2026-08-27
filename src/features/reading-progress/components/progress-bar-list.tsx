@@ -41,7 +41,6 @@ export function ProgressBarList({ title, items, emptyMessage = 'Belum ada progre
               key={f.value}
               size="sm"
               variant={filter === f.value ? 'default' : 'outline'}
-              className="text-xs"
               onClick={() => setFilter(f.value)}
             >
               {f.label}
@@ -58,7 +57,7 @@ export function ProgressBarList({ title, items, emptyMessage = 'Belum ada progre
               <div key={item.id} className="space-y-1">
                 <div className="flex items-center justify-between text-sm">
                   <span className="font-medium">{item.name}</span>
-                  <span className="text-muted-foreground text-xs">
+                  <span className="text-muted-foreground text-sm">
                     {item.completed}/{item.total} &middot; {STATUS_LABEL[item.status]}
                   </span>
                 </div>

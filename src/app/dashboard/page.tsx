@@ -1,4 +1,5 @@
 import { requireSession } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { UserCog, GraduationCap, Users, School, ClipboardList, BookOpenIcon, Target, CheckCircle2 } from 'lucide-react';
 import { FaChalkboard, FaUsers } from 'react-icons/fa';
 import { StatCard } from '@/features/dashboard/components/stat-card';
@@ -20,7 +21,7 @@ export default async function DashboardPage() {
 
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold">Selamat datang, {session.user.name}</h1>
+        <PageHeader title={`Selamat datang, ${session.user.name}`} />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
           <StatCard label="Koordinator" value={stats.coordinatorCount} icon={UserCog} />
@@ -38,7 +39,7 @@ export default async function DashboardPage() {
 
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold">Selamat datang, {session.user.name}</h1>
+        <PageHeader title={`Selamat datang, ${session.user.name}`} />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard label="Kelompok Aktif" value={data.groupCount} icon={FaUsers} />
@@ -66,7 +67,7 @@ export default async function DashboardPage() {
 
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold">Selamat datang, {session.user.name}</h1>
+        <PageHeader title={`Selamat datang, ${session.user.name}`} />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <StatCard label="Kelompok Bimbingan" value={data.groupCount} icon={FaUsers} />
@@ -92,7 +93,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Selamat datang, {session.user.name}</h1>
+      <PageHeader title={`Selamat datang, ${session.user.name}`} />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard label="Target Berjalan" value={data.activeTargetCount} icon={Target} />

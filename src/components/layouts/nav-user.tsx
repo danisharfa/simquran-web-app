@@ -61,7 +61,7 @@ export function NavUser({
               >
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs text-muted-foreground">@{user.username}</span>
+                  <span className="truncate text-sm text-muted-foreground">@{user.username}</span>
                 </div>
                 <ChevronsUpDown className="ml-auto size-4" />
               </SidebarMenuButton>
@@ -77,7 +77,7 @@ export function NavUser({
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex flex-col gap-0.5 px-1 py-1.5 text-left text-sm">
                   <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs text-muted-foreground">@{user.username}</span>
+                  <span className="truncate text-sm text-muted-foreground">@{user.username}</span>
                 </div>
               </DropdownMenuLabel>
             </DropdownMenuGroup>

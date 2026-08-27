@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { SubmissionTable } from '@/features/submissions/components/submission-table';
 import { listAllSubmissions } from '@/features/submissions/queries/list-all-submissions';
 import { listOwnSubmissions } from '@/features/submissions/queries/list-own-submissions';
@@ -11,16 +12,14 @@ export default async function SubmissionPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">
-          {role === 'student' ? 'Riwayat Setoran' : 'Monitoring Setoran'}
-        </h1>
-        <p className="text-muted-foreground text-sm">
-          {role === 'student'
+      <PageHeader
+        title={role === 'student' ? 'Riwayat Setoran' : 'Monitoring Setoran'}
+        description={
+          role === 'student'
             ? 'Riwayat setoran tahfidz/tahsin Anda'
-            : 'Pantau setoran tahfidz/tahsin seluruh siswa'}
-        </p>
-      </div>
+            : 'Pantau setoran tahfidz/tahsin seluruh siswa'
+        }
+      />
 
       <SubmissionTable data={submissions} />
     </div>

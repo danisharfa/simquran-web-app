@@ -102,9 +102,9 @@ export function SubmissionEditDialog({ submissionId, groups, surahOptions, juzOp
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button variant="ghost" size="icon" className="size-8">
+          <Button variant="ghost" size="sm">
             <Pencil className="h-4 w-4" />
-            <span className="sr-only">Edit</span>
+            Edit
           </Button>
         }
       />

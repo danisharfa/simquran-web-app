@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { MunaqasyahScheduleForm } from '@/features/munaqasyah/components/munaqasyah-schedule-form';
 import { MunaqasyahScheduleTable } from '@/features/munaqasyah/components/munaqasyah-schedule-table';
 import { listMunaqasyahSchedules } from '@/features/munaqasyah/queries/list-munaqasyah-schedules';
@@ -16,10 +17,10 @@ export default async function MunaqasyahSchedulesPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Penjadwalan Munaqasyah</h1>
-        <p className="text-muted-foreground text-sm">Jadwalkan sesi Tasmi/Munaqasyah dan tetapkan penguji</p>
-      </div>
+      <PageHeader
+        title="Penjadwalan Munaqasyah"
+        description="Jadwalkan sesi Tasmi/Munaqasyah dan tetapkan penguji"
+      />
 
       <MunaqasyahScheduleForm schedulableRequests={schedulableRequests} teachers={teachers} />
 

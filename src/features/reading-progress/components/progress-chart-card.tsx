@@ -58,7 +58,7 @@ export function ProgressChartCard({ title, description, data }: Props) {
                   <Bar dataKey="belumDimulai" name="Belum Dimulai" stackId="a" fill="var(--chart-3)" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
-              <p className="text-muted-foreground mt-2 text-xs">Klik batang untuk melihat daftar siswa</p>
+              <p className="text-muted-foreground mt-2 text-sm">Klik batang untuk melihat daftar siswa</p>
             </>
           )}
         </CardContent>
@@ -70,7 +70,7 @@ export function ProgressChartCard({ title, description, data }: Props) {
             <DialogTitle>Detail Siswa</DialogTitle>
             <DialogDescription>{selected?.name}</DialogDescription>
           </DialogHeader>
-          <div className="max-h-[300px] space-y-2 overflow-y-auto text-sm">
+          <div className="max-h-75 space-y-2 overflow-y-auto text-sm">
             {!selected || selected.detail.length === 0 ? (
               <p className="text-muted-foreground py-4 text-center">Belum ada siswa dengan progres di sini</p>
             ) : (
@@ -85,7 +85,7 @@ export function ProgressChartCard({ title, description, data }: Props) {
                     </span>
                     <span className="font-medium">{s.percent}%</span>
                   </div>
-                  <span className="text-muted-foreground text-xs">
+                  <span className="text-muted-foreground text-sm">
                     {s.completed} dari {s.total}
                   </span>
                 </div>

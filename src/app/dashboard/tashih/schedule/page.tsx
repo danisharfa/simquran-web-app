@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { MyTashihScheduleTable } from '@/features/tashih/components/my-tashih-schedule-table';
 import { listMyTashihSchedule } from '@/features/tashih/queries/list-my-tashih-schedule';
 import { listOwnTashihSchedule } from '@/features/tashih/queries/list-own-tashih-schedule';
@@ -11,12 +12,10 @@ export default async function TashihSchedulePage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Jadwal Tashih</h1>
-        <p className="text-muted-foreground text-sm">
-          {role === 'student' ? 'Jadwal tashih Anda' : 'Jadwal tashih siswa bimbingan Anda'}
-        </p>
-      </div>
+      <PageHeader
+        title="Jadwal Tashih"
+        description={role === 'student' ? 'Jadwal tashih Anda' : 'Jadwal tashih siswa bimbingan Anda'}
+      />
 
       <MyTashihScheduleTable data={schedule} />
     </div>

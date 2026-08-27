@@ -1,11 +1,12 @@
 import { requireRole } from '@/lib/require-role';
-import { BackButton } from '@/components/ui/back-button';
+import { PageHeader } from '@/components/layouts/page-header';
 import { getClassroom } from '@/features/classrooms/queries/get-classroom';
 import { listClassroomStudents } from '@/features/classrooms/queries/list-classroom-students';
 import { listUnassignedStudents } from '@/features/classrooms/queries/list-unassigned-students';
 import { AddStudentToClassroomForm } from '@/features/classrooms/components/add-student-to-classroom-form';
 import { ClassroomStudentTable } from '@/features/classrooms/components/classroom-student-table';
 import { PromoteClassroomDialog } from '@/features/classrooms/components/promote-classroom-dialog';
+import { EditClassroomNameDialog } from '@/features/classrooms/components/edit-classroom-name-dialog';
 import { getAcademicSetting } from '@/features/academic-settings/queries/get-academic-setting';
 
 const SEMESTER_LABEL: Record<'GANJIL' | 'GENAP', string> = {
@@ -30,30 +31,26 @@ export default async function ClassroomDetailPage({ params }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <BackButton href="/dashboard/classrooms" />
-          <div>
-            <h1 className="text-2xl font-bold">
-              Kelas {classroom.level} {classroom.name}
-            </h1>
-            <p className="text-muted-foreground text-sm">
-              {classroom.academicYear} &middot; Semester {SEMESTER_LABEL[classroom.semester]}
-            </p>
+      <PageHeader
+        title={`Kelas ${classroom.level} ${classroom.name}`}
+        description={`${classroom.academicYear} · Semester ${SEMESTER_LABEL[classroom.semester]}`}
+        backHref="/dashboard/classrooms"
+        action={
+          <div className="flex items-center gap-2">
+            {classroom.isActive && (
+              <EditClassroomNameDialog classroomId={classroomId} currentName={classroom.name} />
+            )}
+            <PromoteClassroomDialog
+              classroomId={classroomId}
+              isGraduating={classroom.level >= 6}
+              students={classroomStudents}
+              defaultAcademicYear={academicSetting?.currentYear}
+              defaultSemester={academicSetting?.currentSemester}
+            />
+            <AddStudentToClassroomForm classroomId={classroomId} students={unassignedStudents} />
           </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <PromoteClassroomDialog
-            classroomId={classroomId}
-            isGraduating={classroom.level >= 6}
-            students={classroomStudents}
-            defaultAcademicYear={academicSetting?.currentYear}
-            defaultSemester={academicSetting?.currentSemester}
-          />
-          <AddStudentToClassroomForm classroomId={classroomId} students={unassignedStudents} />
-        </div>
-      </div>
+        }
+      />
 
       <ClassroomStudentTable classroomId={classroomId} data={classroomStudents} />
     </div>

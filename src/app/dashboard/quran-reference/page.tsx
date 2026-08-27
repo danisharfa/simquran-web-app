@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import {
   listSurah,
   listJuz,
@@ -24,12 +25,10 @@ export default async function QuranReferencePage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Data Referensi Qur&apos;an</h1>
-        <p className="text-muted-foreground text-sm">
-          Data surah, juz, pemetaan surah-juz, dan Wafa (hanya lihat)
-        </p>
-      </div>
+      <PageHeader
+        title="Data Referensi Qur&apos;an"
+        description="Data surah, juz, pemetaan surah-juz, dan Wafa (hanya lihat)"
+      />
 
       <SurahTable data={surah} />
       <JuzTable data={juz} />

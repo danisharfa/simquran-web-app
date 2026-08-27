@@ -1,5 +1,6 @@
 import { requireRole } from '@/lib/require-role';
 import { requireSession } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { getMyGroup } from '@/features/home-activities/queries/get-my-group';
 import { getScoreContext } from '@/features/scores/queries/get-score-context';
 import { listTahfidzScores } from '@/features/scores/queries/list-tahfidz-scores';
@@ -18,10 +19,10 @@ export default async function MyReportPage() {
   if (!myGroup) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold">Rapor</h1>
-        <p className="text-muted-foreground text-sm">
-          Anda belum tergabung dalam kelompok, rapor belum tersedia.
-        </p>
+        <PageHeader
+          title="Rapor"
+          description="Anda belum tergabung dalam kelompok, rapor belum tersedia."
+        />
       </div>
     );
   }
@@ -39,10 +40,7 @@ export default async function MyReportPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold">Rapor</h1>
-        <ExportReportPdfButton data={pdfData} />
-      </div>
+      <PageHeader title="Rapor" action={<ExportReportPdfButton data={pdfData} />} />
 
       <ReportView
         studentName={context.studentName}

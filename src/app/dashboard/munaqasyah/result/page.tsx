@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/require-role';
+import { PageHeader } from '@/components/layouts/page-header';
 import { MunaqasyahResultTable } from '@/features/munaqasyah/components/munaqasyah-result-table';
 import { MunaqasyahFinalResultTable } from '@/features/munaqasyah/components/munaqasyah-final-result-table';
 import { listOwnMunaqasyahResults } from '@/features/munaqasyah/queries/list-own-munaqasyah-results';
@@ -14,10 +15,7 @@ export default async function MunaqasyahResultPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Hasil Munaqasyah</h1>
-        <p className="text-muted-foreground text-sm">Hasil Tasmi, Munaqasyah, dan nilai akhir Anda</p>
-      </div>
+      <PageHeader title="Hasil Munaqasyah" description="Hasil Tasmi, Munaqasyah, dan nilai akhir Anda" />
 
       <MunaqasyahFinalResultTable data={finalResults} />
       <MunaqasyahResultTable data={results} />

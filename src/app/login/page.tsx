@@ -22,7 +22,7 @@ export default function LoginPage() {
               <span className="text-lg font-bold bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                 SIM-Qur&apos;an
               </span>
-              <span className="text-xs text-muted-foreground">SDIT Ulul Albab Mataram</span>
+              <span className="text-sm text-muted-foreground">SDIT Ulul Albab Mataram</span>
             </div>
           </Link>
         </div>
@@ -43,7 +43,7 @@ export default function LoginPage() {
         </div>
 
         <div className="text-center">
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             Copyright &copy; 2026 IT Developer SDIT Ulul Albab Mataram. All Rights Reserved.
           </p>
         </div>

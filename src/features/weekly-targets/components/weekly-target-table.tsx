@@ -121,13 +121,13 @@ export function WeeklyTargetTable({ data, editable = false, surahOptions = [], w
             />
             <Button
               variant="ghost"
-              size="icon"
-              className="size-8"
+              size="sm"
+              className="text-destructive hover:text-destructive"
               disabled={deletingId === row.original.id}
               onClick={() => handleDelete(row.original.id)}
             >
-              <Trash2 className="h-4 w-4 text-destructive" />
-              <span className="sr-only">Hapus</span>
+              <Trash2 className="h-4 w-4" />
+              Hapus
             </Button>
           </div>
         ),

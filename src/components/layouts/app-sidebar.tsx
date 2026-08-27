@@ -49,7 +49,7 @@ export function AppSidebar({ role, user, ...props }: AppSidebarProps) {
                 </div>
                 <div className="grid flex-1 text-left leading-tight">
                   <span className="truncate font-semibold">SIM-Qur&apos;an</span>
-                  <span className="truncate text-xs">SDIT Ulul Albab Mataram</span>
+                  <span className="truncate text-sm">SDIT Ulul Albab Mataram</span>
                 </div>
               </Link>
             </SidebarMenuButton>
