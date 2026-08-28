@@ -212,7 +212,6 @@ export type GroupHistoryOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   group?: Prisma.GroupOrderByWithRelationInput
   student?: Prisma.StudentProfileOrderByWithRelationInput
-  _relevance?: Prisma.GroupHistoryOrderByRelevanceInput
 }
 
 export type GroupHistoryWhereUniqueInput = Prisma.AtLeast<{
@@ -333,12 +332,6 @@ export type GroupHistoryListRelationFilter = {
 
 export type GroupHistoryOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type GroupHistoryOrderByRelevanceInput = {
-  fields: Prisma.GroupHistoryOrderByRelevanceFieldEnum | Prisma.GroupHistoryOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type GroupHistoryStudentIdGroupIdAcademicYearSemesterCompoundUniqueInput = {
@@ -649,7 +642,29 @@ export type GroupHistorySelect<ExtArgs extends runtime.Types.Extensions.Internal
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["groupHistory"]>
 
+export type GroupHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  academicYear?: boolean
+  semester?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["groupHistory"]>
 
+export type GroupHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  academicYear?: boolean
+  semester?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["groupHistory"]>
 
 export type GroupHistorySelectScalar = {
   id?: boolean
@@ -663,6 +678,14 @@ export type GroupHistorySelectScalar = {
 
 export type GroupHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "groupId" | "academicYear" | "semester" | "createdAt" | "updatedAt", ExtArgs["result"]["groupHistory"]>
 export type GroupHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+}
+export type GroupHistoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+}
+export type GroupHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
 }
@@ -799,6 +822,30 @@ export interface GroupHistoryDelegate<ExtArgs extends runtime.Types.Extensions.I
   createMany<T extends GroupHistoryCreateManyArgs>(args?: Prisma.SelectSubset<T, GroupHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many GroupHistories and returns the data saved in the database.
+   * @param {GroupHistoryCreateManyAndReturnArgs} args - Arguments to create many GroupHistories.
+   * @example
+   * // Create many GroupHistories
+   * const groupHistory = await prisma.groupHistory.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many GroupHistories and only return the `id`
+   * const groupHistoryWithIdOnly = await prisma.groupHistory.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends GroupHistoryCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, GroupHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GroupHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a GroupHistory.
    * @param {GroupHistoryDeleteArgs} args - Arguments to delete one GroupHistory.
    * @example
@@ -861,6 +908,36 @@ export interface GroupHistoryDelegate<ExtArgs extends runtime.Types.Extensions.I
    * 
    */
   updateMany<T extends GroupHistoryUpdateManyArgs>(args: Prisma.SelectSubset<T, GroupHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more GroupHistories and returns the data updated in the database.
+   * @param {GroupHistoryUpdateManyAndReturnArgs} args - Arguments to update many GroupHistories.
+   * @example
+   * // Update many GroupHistories
+   * const groupHistory = await prisma.groupHistory.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more GroupHistories and only return the `id`
+   * const groupHistoryWithIdOnly = await prisma.groupHistory.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends GroupHistoryUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, GroupHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GroupHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one GroupHistory.
@@ -1297,6 +1374,29 @@ export type GroupHistoryCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
+ * GroupHistory createManyAndReturn
+ */
+export type GroupHistoryCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GroupHistory
+   */
+  select?: Prisma.GroupHistorySelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the GroupHistory
+   */
+  omit?: Prisma.GroupHistoryOmit<ExtArgs> | null
+  /**
+   * The data used to create many GroupHistories.
+   */
+  data: Prisma.GroupHistoryCreateManyInput | Prisma.GroupHistoryCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GroupHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * GroupHistory update
  */
 export type GroupHistoryUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1338,6 +1438,36 @@ export type GroupHistoryUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many GroupHistories to update.
    */
   limit?: number
+}
+
+/**
+ * GroupHistory updateManyAndReturn
+ */
+export type GroupHistoryUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GroupHistory
+   */
+  select?: Prisma.GroupHistorySelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the GroupHistory
+   */
+  omit?: Prisma.GroupHistoryOmit<ExtArgs> | null
+  /**
+   * The data used to update GroupHistories.
+   */
+  data: Prisma.XOR<Prisma.GroupHistoryUpdateManyMutationInput, Prisma.GroupHistoryUncheckedUpdateManyInput>
+  /**
+   * Filter which GroupHistories to update
+   */
+  where?: Prisma.GroupHistoryWhereInput
+  /**
+   * Limit how many GroupHistories to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GroupHistoryIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

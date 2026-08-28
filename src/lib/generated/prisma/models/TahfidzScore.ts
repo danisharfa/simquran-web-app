@@ -270,7 +270,6 @@ export type TahfidzScoreOrderByWithRelationInput = {
   student?: Prisma.StudentProfileOrderByWithRelationInput
   group?: Prisma.GroupOrderByWithRelationInput
   surah?: Prisma.SurahOrderByWithRelationInput
-  _relevance?: Prisma.TahfidzScoreOrderByRelevanceInput
 }
 
 export type TahfidzScoreWhereUniqueInput = Prisma.AtLeast<{
@@ -413,12 +412,6 @@ export type TahfidzScoreListRelationFilter = {
 
 export type TahfidzScoreOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type TahfidzScoreOrderByRelevanceInput = {
-  fields: Prisma.TahfidzScoreOrderByRelevanceFieldEnum | Prisma.TahfidzScoreOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type TahfidzScoreStudentIdGroupIdSurahIdCompoundUniqueInput = {
@@ -911,7 +904,35 @@ export type TahfidzScoreSelect<ExtArgs extends runtime.Types.Extensions.Internal
   surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tahfidzScore"]>
 
+export type TahfidzScoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  surahId?: boolean
+  score?: boolean
+  grade?: boolean
+  description?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["tahfidzScore"]>
 
+export type TahfidzScoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  surahId?: boolean
+  score?: boolean
+  grade?: boolean
+  description?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["tahfidzScore"]>
 
 export type TahfidzScoreSelectScalar = {
   id?: boolean
@@ -927,6 +948,16 @@ export type TahfidzScoreSelectScalar = {
 
 export type TahfidzScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "groupId" | "surahId" | "score" | "grade" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["tahfidzScore"]>
 export type TahfidzScoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}
+export type TahfidzScoreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}
+export type TahfidzScoreIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
@@ -1067,6 +1098,30 @@ export interface TahfidzScoreDelegate<ExtArgs extends runtime.Types.Extensions.I
   createMany<T extends TahfidzScoreCreateManyArgs>(args?: Prisma.SelectSubset<T, TahfidzScoreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many TahfidzScores and returns the data saved in the database.
+   * @param {TahfidzScoreCreateManyAndReturnArgs} args - Arguments to create many TahfidzScores.
+   * @example
+   * // Create many TahfidzScores
+   * const tahfidzScore = await prisma.tahfidzScore.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many TahfidzScores and only return the `id`
+   * const tahfidzScoreWithIdOnly = await prisma.tahfidzScore.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends TahfidzScoreCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, TahfidzScoreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahfidzScorePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a TahfidzScore.
    * @param {TahfidzScoreDeleteArgs} args - Arguments to delete one TahfidzScore.
    * @example
@@ -1129,6 +1184,36 @@ export interface TahfidzScoreDelegate<ExtArgs extends runtime.Types.Extensions.I
    * 
    */
   updateMany<T extends TahfidzScoreUpdateManyArgs>(args: Prisma.SelectSubset<T, TahfidzScoreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more TahfidzScores and returns the data updated in the database.
+   * @param {TahfidzScoreUpdateManyAndReturnArgs} args - Arguments to update many TahfidzScores.
+   * @example
+   * // Update many TahfidzScores
+   * const tahfidzScore = await prisma.tahfidzScore.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more TahfidzScores and only return the `id`
+   * const tahfidzScoreWithIdOnly = await prisma.tahfidzScore.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends TahfidzScoreUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, TahfidzScoreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahfidzScorePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one TahfidzScore.
@@ -1568,6 +1653,29 @@ export type TahfidzScoreCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
+ * TahfidzScore createManyAndReturn
+ */
+export type TahfidzScoreCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TahfidzScore
+   */
+  select?: Prisma.TahfidzScoreSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TahfidzScore
+   */
+  omit?: Prisma.TahfidzScoreOmit<ExtArgs> | null
+  /**
+   * The data used to create many TahfidzScores.
+   */
+  data: Prisma.TahfidzScoreCreateManyInput | Prisma.TahfidzScoreCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TahfidzScoreIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * TahfidzScore update
  */
 export type TahfidzScoreUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1609,6 +1717,36 @@ export type TahfidzScoreUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many TahfidzScores to update.
    */
   limit?: number
+}
+
+/**
+ * TahfidzScore updateManyAndReturn
+ */
+export type TahfidzScoreUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TahfidzScore
+   */
+  select?: Prisma.TahfidzScoreSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TahfidzScore
+   */
+  omit?: Prisma.TahfidzScoreOmit<ExtArgs> | null
+  /**
+   * The data used to update TahfidzScores.
+   */
+  data: Prisma.XOR<Prisma.TahfidzScoreUpdateManyMutationInput, Prisma.TahfidzScoreUncheckedUpdateManyInput>
+  /**
+   * Filter which TahfidzScores to update
+   */
+  where?: Prisma.TahfidzScoreWhereInput
+  /**
+   * Limit how many TahfidzScores to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TahfidzScoreIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

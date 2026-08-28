@@ -328,7 +328,6 @@ export type TasmiDetailOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   result?: Prisma.MunaqasyahResultOrderByWithRelationInput
   surah?: Prisma.SurahOrderByWithRelationInput
-  _relevance?: Prisma.TasmiDetailOrderByRelevanceInput
 }
 
 export type TasmiDetailWhereUniqueInput = Prisma.AtLeast<{
@@ -511,12 +510,6 @@ export type TasmiDetailListRelationFilter = {
 
 export type TasmiDetailOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type TasmiDetailOrderByRelevanceInput = {
-  fields: Prisma.TasmiDetailOrderByRelevanceFieldEnum | Prisma.TasmiDetailOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type TasmiDetailResultIdSurahIdCompoundUniqueInput = {
@@ -949,7 +942,41 @@ export type TasmiDetailSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tasmiDetail"]>
 
+export type TasmiDetailSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  resultId?: boolean
+  surahId?: boolean
+  initialScore?: boolean
+  khofiAwalAyat?: boolean
+  khofiMakhroj?: boolean
+  khofiTajwidMad?: boolean
+  jaliBaris?: boolean
+  jaliLebihSatuKalimat?: boolean
+  totalScore?: boolean
+  note?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  result?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["tasmiDetail"]>
 
+export type TasmiDetailSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  resultId?: boolean
+  surahId?: boolean
+  initialScore?: boolean
+  khofiAwalAyat?: boolean
+  khofiMakhroj?: boolean
+  khofiTajwidMad?: boolean
+  jaliBaris?: boolean
+  jaliLebihSatuKalimat?: boolean
+  totalScore?: boolean
+  note?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  result?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["tasmiDetail"]>
 
 export type TasmiDetailSelectScalar = {
   id?: boolean
@@ -969,6 +996,14 @@ export type TasmiDetailSelectScalar = {
 
 export type TasmiDetailOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "resultId" | "surahId" | "initialScore" | "khofiAwalAyat" | "khofiMakhroj" | "khofiTajwidMad" | "jaliBaris" | "jaliLebihSatuKalimat" | "totalScore" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["tasmiDetail"]>
 export type TasmiDetailInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  result?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}
+export type TasmiDetailIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  result?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}
+export type TasmiDetailIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   result?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
   surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
 }
@@ -1111,6 +1146,30 @@ export interface TasmiDetailDelegate<ExtArgs extends runtime.Types.Extensions.In
   createMany<T extends TasmiDetailCreateManyArgs>(args?: Prisma.SelectSubset<T, TasmiDetailCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many TasmiDetails and returns the data saved in the database.
+   * @param {TasmiDetailCreateManyAndReturnArgs} args - Arguments to create many TasmiDetails.
+   * @example
+   * // Create many TasmiDetails
+   * const tasmiDetail = await prisma.tasmiDetail.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many TasmiDetails and only return the `id`
+   * const tasmiDetailWithIdOnly = await prisma.tasmiDetail.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends TasmiDetailCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, TasmiDetailCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TasmiDetailPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a TasmiDetail.
    * @param {TasmiDetailDeleteArgs} args - Arguments to delete one TasmiDetail.
    * @example
@@ -1173,6 +1232,36 @@ export interface TasmiDetailDelegate<ExtArgs extends runtime.Types.Extensions.In
    * 
    */
   updateMany<T extends TasmiDetailUpdateManyArgs>(args: Prisma.SelectSubset<T, TasmiDetailUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more TasmiDetails and returns the data updated in the database.
+   * @param {TasmiDetailUpdateManyAndReturnArgs} args - Arguments to update many TasmiDetails.
+   * @example
+   * // Update many TasmiDetails
+   * const tasmiDetail = await prisma.tasmiDetail.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more TasmiDetails and only return the `id`
+   * const tasmiDetailWithIdOnly = await prisma.tasmiDetail.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends TasmiDetailUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, TasmiDetailUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TasmiDetailPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one TasmiDetail.
@@ -1615,6 +1704,29 @@ export type TasmiDetailCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * TasmiDetail createManyAndReturn
+ */
+export type TasmiDetailCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TasmiDetail
+   */
+  select?: Prisma.TasmiDetailSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TasmiDetail
+   */
+  omit?: Prisma.TasmiDetailOmit<ExtArgs> | null
+  /**
+   * The data used to create many TasmiDetails.
+   */
+  data: Prisma.TasmiDetailCreateManyInput | Prisma.TasmiDetailCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TasmiDetailIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * TasmiDetail update
  */
 export type TasmiDetailUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1656,6 +1768,36 @@ export type TasmiDetailUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many TasmiDetails to update.
    */
   limit?: number
+}
+
+/**
+ * TasmiDetail updateManyAndReturn
+ */
+export type TasmiDetailUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TasmiDetail
+   */
+  select?: Prisma.TasmiDetailSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TasmiDetail
+   */
+  omit?: Prisma.TasmiDetailOmit<ExtArgs> | null
+  /**
+   * The data used to update TasmiDetails.
+   */
+  data: Prisma.XOR<Prisma.TasmiDetailUpdateManyMutationInput, Prisma.TasmiDetailUncheckedUpdateManyInput>
+  /**
+   * Filter which TasmiDetails to update
+   */
+  where?: Prisma.TasmiDetailWhereInput
+  /**
+   * Limit how many TasmiDetails to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TasmiDetailIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

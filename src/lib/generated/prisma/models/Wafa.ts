@@ -216,7 +216,6 @@ export type WafaOrderByWithRelationInput = {
   submissions?: Prisma.SubmissionOrderByRelationAggregateInput
   weeklyTargets?: Prisma.WeeklyTargetOrderByRelationAggregateInput
   tashihRequests?: Prisma.TashihRequestOrderByRelationAggregateInput
-  _relevance?: Prisma.WafaOrderByRelevanceInput
 }
 
 export type WafaWhereUniqueInput = Prisma.AtLeast<{
@@ -303,12 +302,6 @@ export type WafaUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   pageCount?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
-export type WafaOrderByRelevanceInput = {
-  fields: Prisma.WafaOrderByRelevanceFieldEnum | Prisma.WafaOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type WafaCountOrderByAggregateInput = {
@@ -595,7 +588,17 @@ export type WafaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   _count?: boolean | Prisma.WafaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["wafa"]>
 
+export type WafaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  pageCount?: boolean
+}, ExtArgs["result"]["wafa"]>
 
+export type WafaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  pageCount?: boolean
+}, ExtArgs["result"]["wafa"]>
 
 export type WafaSelectScalar = {
   id?: boolean
@@ -610,6 +613,8 @@ export type WafaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   tashihRequests?: boolean | Prisma.Wafa$tashihRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.WafaCountOutputTypeDefaultArgs<ExtArgs>
 }
+export type WafaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type WafaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $WafaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Wafa"
@@ -740,6 +745,30 @@ export interface WafaDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
   createMany<T extends WafaCreateManyArgs>(args?: Prisma.SelectSubset<T, WafaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many Wafas and returns the data saved in the database.
+   * @param {WafaCreateManyAndReturnArgs} args - Arguments to create many Wafas.
+   * @example
+   * // Create many Wafas
+   * const wafa = await prisma.wafa.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many Wafas and only return the `id`
+   * const wafaWithIdOnly = await prisma.wafa.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends WafaCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, WafaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WafaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a Wafa.
    * @param {WafaDeleteArgs} args - Arguments to delete one Wafa.
    * @example
@@ -802,6 +831,36 @@ export interface WafaDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    * 
    */
   updateMany<T extends WafaUpdateManyArgs>(args: Prisma.SelectSubset<T, WafaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more Wafas and returns the data updated in the database.
+   * @param {WafaUpdateManyAndReturnArgs} args - Arguments to update many Wafas.
+   * @example
+   * // Update many Wafas
+   * const wafa = await prisma.wafa.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more Wafas and only return the `id`
+   * const wafaWithIdOnly = await prisma.wafa.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends WafaUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, WafaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WafaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Wafa.
@@ -1235,6 +1294,25 @@ export type WafaCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * Wafa createManyAndReturn
+ */
+export type WafaCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Wafa
+   */
+  select?: Prisma.WafaSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Wafa
+   */
+  omit?: Prisma.WafaOmit<ExtArgs> | null
+  /**
+   * The data used to create many Wafas.
+   */
+  data: Prisma.WafaCreateManyInput | Prisma.WafaCreateManyInput[]
+  skipDuplicates?: boolean
+}
+
+/**
  * Wafa update
  */
 export type WafaUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1264,6 +1342,32 @@ export type WafaUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
  * Wafa updateMany
  */
 export type WafaUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The data used to update Wafas.
+   */
+  data: Prisma.XOR<Prisma.WafaUpdateManyMutationInput, Prisma.WafaUncheckedUpdateManyInput>
+  /**
+   * Filter which Wafas to update
+   */
+  where?: Prisma.WafaWhereInput
+  /**
+   * Limit how many Wafas to update.
+   */
+  limit?: number
+}
+
+/**
+ * Wafa updateManyAndReturn
+ */
+export type WafaUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Wafa
+   */
+  select?: Prisma.WafaSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Wafa
+   */
+  omit?: Prisma.WafaOmit<ExtArgs> | null
   /**
    * The data used to update Wafas.
    */

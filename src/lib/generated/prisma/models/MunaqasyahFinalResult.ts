@@ -301,7 +301,6 @@ export type MunaqasyahFinalResultOrderByWithRelationInput = {
   juz?: Prisma.JuzOrderByWithRelationInput
   tasmiResult?: Prisma.MunaqasyahResultOrderByWithRelationInput
   munaqasyahResult?: Prisma.MunaqasyahResultOrderByWithRelationInput
-  _relevance?: Prisma.MunaqasyahFinalResultOrderByRelevanceInput
 }
 
 export type MunaqasyahFinalResultWhereUniqueInput = Prisma.AtLeast<{
@@ -479,12 +478,6 @@ export type MunaqasyahFinalResultOrderByRelationAggregateInput = {
 export type MunaqasyahFinalResultNullableScalarRelationFilter = {
   is?: Prisma.MunaqasyahFinalResultWhereInput | null
   isNot?: Prisma.MunaqasyahFinalResultWhereInput | null
-}
-
-export type MunaqasyahFinalResultOrderByRelevanceInput = {
-  fields: Prisma.MunaqasyahFinalResultOrderByRelevanceFieldEnum | Prisma.MunaqasyahFinalResultOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type MunaqasyahFinalResultStudentIdJuzIdTahapCompoundUniqueInput = {
@@ -1252,7 +1245,45 @@ export type MunaqasyahFinalResultSelect<ExtArgs extends runtime.Types.Extensions
   munaqasyahResult?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["munaqasyahFinalResult"]>
 
+export type MunaqasyahFinalResultSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  juzId?: boolean
+  tahap?: boolean
+  tasmiResultId?: boolean
+  munaqasyahResultId?: boolean
+  finalScore?: boolean
+  finalGrade?: boolean
+  passed?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+  tasmiResult?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+  munaqasyahResult?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["munaqasyahFinalResult"]>
 
+export type MunaqasyahFinalResultSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  juzId?: boolean
+  tahap?: boolean
+  tasmiResultId?: boolean
+  munaqasyahResultId?: boolean
+  finalScore?: boolean
+  finalGrade?: boolean
+  passed?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+  tasmiResult?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+  munaqasyahResult?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["munaqasyahFinalResult"]>
 
 export type MunaqasyahFinalResultSelectScalar = {
   id?: boolean
@@ -1271,6 +1302,20 @@ export type MunaqasyahFinalResultSelectScalar = {
 
 export type MunaqasyahFinalResultOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "groupId" | "juzId" | "tahap" | "tasmiResultId" | "munaqasyahResultId" | "finalScore" | "finalGrade" | "passed" | "createdAt" | "updatedAt", ExtArgs["result"]["munaqasyahFinalResult"]>
 export type MunaqasyahFinalResultInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+  tasmiResult?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+  munaqasyahResult?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+}
+export type MunaqasyahFinalResultIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+  tasmiResult?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+  munaqasyahResult?: boolean | Prisma.MunaqasyahResultDefaultArgs<ExtArgs>
+}
+export type MunaqasyahFinalResultIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
@@ -1418,6 +1463,30 @@ export interface MunaqasyahFinalResultDelegate<ExtArgs extends runtime.Types.Ext
   createMany<T extends MunaqasyahFinalResultCreateManyArgs>(args?: Prisma.SelectSubset<T, MunaqasyahFinalResultCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many MunaqasyahFinalResults and returns the data saved in the database.
+   * @param {MunaqasyahFinalResultCreateManyAndReturnArgs} args - Arguments to create many MunaqasyahFinalResults.
+   * @example
+   * // Create many MunaqasyahFinalResults
+   * const munaqasyahFinalResult = await prisma.munaqasyahFinalResult.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many MunaqasyahFinalResults and only return the `id`
+   * const munaqasyahFinalResultWithIdOnly = await prisma.munaqasyahFinalResult.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends MunaqasyahFinalResultCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, MunaqasyahFinalResultCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahFinalResultPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a MunaqasyahFinalResult.
    * @param {MunaqasyahFinalResultDeleteArgs} args - Arguments to delete one MunaqasyahFinalResult.
    * @example
@@ -1480,6 +1549,36 @@ export interface MunaqasyahFinalResultDelegate<ExtArgs extends runtime.Types.Ext
    * 
    */
   updateMany<T extends MunaqasyahFinalResultUpdateManyArgs>(args: Prisma.SelectSubset<T, MunaqasyahFinalResultUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more MunaqasyahFinalResults and returns the data updated in the database.
+   * @param {MunaqasyahFinalResultUpdateManyAndReturnArgs} args - Arguments to update many MunaqasyahFinalResults.
+   * @example
+   * // Update many MunaqasyahFinalResults
+   * const munaqasyahFinalResult = await prisma.munaqasyahFinalResult.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more MunaqasyahFinalResults and only return the `id`
+   * const munaqasyahFinalResultWithIdOnly = await prisma.munaqasyahFinalResult.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends MunaqasyahFinalResultUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, MunaqasyahFinalResultUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahFinalResultPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one MunaqasyahFinalResult.
@@ -1924,6 +2023,29 @@ export type MunaqasyahFinalResultCreateManyArgs<ExtArgs extends runtime.Types.Ex
 }
 
 /**
+ * MunaqasyahFinalResult createManyAndReturn
+ */
+export type MunaqasyahFinalResultCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahFinalResult
+   */
+  select?: Prisma.MunaqasyahFinalResultSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahFinalResult
+   */
+  omit?: Prisma.MunaqasyahFinalResultOmit<ExtArgs> | null
+  /**
+   * The data used to create many MunaqasyahFinalResults.
+   */
+  data: Prisma.MunaqasyahFinalResultCreateManyInput | Prisma.MunaqasyahFinalResultCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahFinalResultIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * MunaqasyahFinalResult update
  */
 export type MunaqasyahFinalResultUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1965,6 +2087,36 @@ export type MunaqasyahFinalResultUpdateManyArgs<ExtArgs extends runtime.Types.Ex
    * Limit how many MunaqasyahFinalResults to update.
    */
   limit?: number
+}
+
+/**
+ * MunaqasyahFinalResult updateManyAndReturn
+ */
+export type MunaqasyahFinalResultUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahFinalResult
+   */
+  select?: Prisma.MunaqasyahFinalResultSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahFinalResult
+   */
+  omit?: Prisma.MunaqasyahFinalResultOmit<ExtArgs> | null
+  /**
+   * The data used to update MunaqasyahFinalResults.
+   */
+  data: Prisma.XOR<Prisma.MunaqasyahFinalResultUpdateManyMutationInput, Prisma.MunaqasyahFinalResultUncheckedUpdateManyInput>
+  /**
+   * Filter which MunaqasyahFinalResults to update
+   */
+  where?: Prisma.MunaqasyahFinalResultWhereInput
+  /**
+   * Limit how many MunaqasyahFinalResults to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahFinalResultIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

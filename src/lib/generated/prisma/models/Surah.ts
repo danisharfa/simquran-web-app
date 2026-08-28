@@ -226,7 +226,6 @@ export type SurahOrderByWithRelationInput = {
   tashihRequests?: Prisma.TashihRequestOrderByRelationAggregateInput
   tahfidzScores?: Prisma.TahfidzScoreOrderByRelationAggregateInput
   tasmiDetails?: Prisma.TasmiDetailOrderByRelationAggregateInput
-  _relevance?: Prisma.SurahOrderByRelevanceInput
 }
 
 export type SurahWhereUniqueInput = Prisma.AtLeast<{
@@ -338,12 +337,6 @@ export type SurahUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
-export type SurahOrderByRelevanceInput = {
-  fields: Prisma.SurahOrderByRelevanceFieldEnum | Prisma.SurahOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type SurahCountOrderByAggregateInput = {
@@ -1157,7 +1150,17 @@ export type SurahSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   _count?: boolean | Prisma.SurahCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["surah"]>
 
+export type SurahSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  verseCount?: boolean
+}, ExtArgs["result"]["surah"]>
 
+export type SurahSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  verseCount?: boolean
+}, ExtArgs["result"]["surah"]>
 
 export type SurahSelectScalar = {
   id?: boolean
@@ -1177,6 +1180,8 @@ export type SurahInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   tasmiDetails?: boolean | Prisma.Surah$tasmiDetailsArgs<ExtArgs>
   _count?: boolean | Prisma.SurahCountOutputTypeDefaultArgs<ExtArgs>
 }
+export type SurahIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type SurahIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $SurahPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Surah"
@@ -1312,6 +1317,30 @@ export interface SurahDelegate<ExtArgs extends runtime.Types.Extensions.Internal
   createMany<T extends SurahCreateManyArgs>(args?: Prisma.SelectSubset<T, SurahCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many Surahs and returns the data saved in the database.
+   * @param {SurahCreateManyAndReturnArgs} args - Arguments to create many Surahs.
+   * @example
+   * // Create many Surahs
+   * const surah = await prisma.surah.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many Surahs and only return the `id`
+   * const surahWithIdOnly = await prisma.surah.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends SurahCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, SurahCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SurahPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a Surah.
    * @param {SurahDeleteArgs} args - Arguments to delete one Surah.
    * @example
@@ -1374,6 +1403,36 @@ export interface SurahDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * 
    */
   updateMany<T extends SurahUpdateManyArgs>(args: Prisma.SelectSubset<T, SurahUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more Surahs and returns the data updated in the database.
+   * @param {SurahUpdateManyAndReturnArgs} args - Arguments to update many Surahs.
+   * @example
+   * // Update many Surahs
+   * const surah = await prisma.surah.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more Surahs and only return the `id`
+   * const surahWithIdOnly = await prisma.surah.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends SurahUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, SurahUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SurahPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Surah.
@@ -1812,6 +1871,25 @@ export type SurahCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Surah createManyAndReturn
+ */
+export type SurahCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Surah
+   */
+  select?: Prisma.SurahSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Surah
+   */
+  omit?: Prisma.SurahOmit<ExtArgs> | null
+  /**
+   * The data used to create many Surahs.
+   */
+  data: Prisma.SurahCreateManyInput | Prisma.SurahCreateManyInput[]
+  skipDuplicates?: boolean
+}
+
+/**
  * Surah update
  */
 export type SurahUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1841,6 +1919,32 @@ export type SurahUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
  * Surah updateMany
  */
 export type SurahUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The data used to update Surahs.
+   */
+  data: Prisma.XOR<Prisma.SurahUpdateManyMutationInput, Prisma.SurahUncheckedUpdateManyInput>
+  /**
+   * Filter which Surahs to update
+   */
+  where?: Prisma.SurahWhereInput
+  /**
+   * Limit how many Surahs to update.
+   */
+  limit?: number
+}
+
+/**
+ * Surah updateManyAndReturn
+ */
+export type SurahUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Surah
+   */
+  select?: Prisma.SurahSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Surah
+   */
+  omit?: Prisma.SurahOmit<ExtArgs> | null
   /**
    * The data used to update Surahs.
    */

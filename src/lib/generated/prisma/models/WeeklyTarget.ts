@@ -420,7 +420,6 @@ export type WeeklyTargetOrderByWithRelationInput = {
   juzStart?: Prisma.JuzOrderByWithRelationInput
   juzEnd?: Prisma.JuzOrderByWithRelationInput
   wafa?: Prisma.WafaOrderByWithRelationInput
-  _relevance?: Prisma.WeeklyTargetOrderByRelevanceInput
 }
 
 export type WeeklyTargetWhereUniqueInput = Prisma.AtLeast<{
@@ -682,12 +681,6 @@ export type WeeklyTargetListRelationFilter = {
 
 export type WeeklyTargetOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type WeeklyTargetOrderByRelevanceInput = {
-  fields: Prisma.WeeklyTargetOrderByRelevanceFieldEnum | Prisma.WeeklyTargetOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type WeeklyTargetCountOrderByAggregateInput = {
@@ -2501,7 +2494,69 @@ export type WeeklyTargetSelect<ExtArgs extends runtime.Types.Extensions.Internal
   wafa?: boolean | Prisma.WeeklyTarget$wafaArgs<ExtArgs>
 }, ExtArgs["result"]["weeklyTarget"]>
 
+export type WeeklyTargetSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  teacherId?: boolean
+  groupId?: boolean
+  type?: boolean
+  startDate?: boolean
+  endDate?: boolean
+  description?: boolean
+  status?: boolean
+  progressPercent?: boolean
+  surahStartId?: boolean
+  surahEndId?: boolean
+  startAyat?: boolean
+  endAyat?: boolean
+  juzStartId?: boolean
+  juzEndId?: boolean
+  wafaId?: boolean
+  startPage?: boolean
+  endPage?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  surahStart?: boolean | Prisma.WeeklyTarget$surahStartArgs<ExtArgs>
+  surahEnd?: boolean | Prisma.WeeklyTarget$surahEndArgs<ExtArgs>
+  juzStart?: boolean | Prisma.WeeklyTarget$juzStartArgs<ExtArgs>
+  juzEnd?: boolean | Prisma.WeeklyTarget$juzEndArgs<ExtArgs>
+  wafa?: boolean | Prisma.WeeklyTarget$wafaArgs<ExtArgs>
+}, ExtArgs["result"]["weeklyTarget"]>
 
+export type WeeklyTargetSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  teacherId?: boolean
+  groupId?: boolean
+  type?: boolean
+  startDate?: boolean
+  endDate?: boolean
+  description?: boolean
+  status?: boolean
+  progressPercent?: boolean
+  surahStartId?: boolean
+  surahEndId?: boolean
+  startAyat?: boolean
+  endAyat?: boolean
+  juzStartId?: boolean
+  juzEndId?: boolean
+  wafaId?: boolean
+  startPage?: boolean
+  endPage?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  surahStart?: boolean | Prisma.WeeklyTarget$surahStartArgs<ExtArgs>
+  surahEnd?: boolean | Prisma.WeeklyTarget$surahEndArgs<ExtArgs>
+  juzStart?: boolean | Prisma.WeeklyTarget$juzStartArgs<ExtArgs>
+  juzEnd?: boolean | Prisma.WeeklyTarget$juzEndArgs<ExtArgs>
+  wafa?: boolean | Prisma.WeeklyTarget$wafaArgs<ExtArgs>
+}, ExtArgs["result"]["weeklyTarget"]>
 
 export type WeeklyTargetSelectScalar = {
   id?: boolean
@@ -2529,6 +2584,26 @@ export type WeeklyTargetSelectScalar = {
 
 export type WeeklyTargetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "teacherId" | "groupId" | "type" | "startDate" | "endDate" | "description" | "status" | "progressPercent" | "surahStartId" | "surahEndId" | "startAyat" | "endAyat" | "juzStartId" | "juzEndId" | "wafaId" | "startPage" | "endPage" | "createdAt" | "updatedAt", ExtArgs["result"]["weeklyTarget"]>
 export type WeeklyTargetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  surahStart?: boolean | Prisma.WeeklyTarget$surahStartArgs<ExtArgs>
+  surahEnd?: boolean | Prisma.WeeklyTarget$surahEndArgs<ExtArgs>
+  juzStart?: boolean | Prisma.WeeklyTarget$juzStartArgs<ExtArgs>
+  juzEnd?: boolean | Prisma.WeeklyTarget$juzEndArgs<ExtArgs>
+  wafa?: boolean | Prisma.WeeklyTarget$wafaArgs<ExtArgs>
+}
+export type WeeklyTargetIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  surahStart?: boolean | Prisma.WeeklyTarget$surahStartArgs<ExtArgs>
+  surahEnd?: boolean | Prisma.WeeklyTarget$surahEndArgs<ExtArgs>
+  juzStart?: boolean | Prisma.WeeklyTarget$juzStartArgs<ExtArgs>
+  juzEnd?: boolean | Prisma.WeeklyTarget$juzEndArgs<ExtArgs>
+  wafa?: boolean | Prisma.WeeklyTarget$wafaArgs<ExtArgs>
+}
+export type WeeklyTargetIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
   teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
@@ -2691,6 +2766,30 @@ export interface WeeklyTargetDelegate<ExtArgs extends runtime.Types.Extensions.I
   createMany<T extends WeeklyTargetCreateManyArgs>(args?: Prisma.SelectSubset<T, WeeklyTargetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many WeeklyTargets and returns the data saved in the database.
+   * @param {WeeklyTargetCreateManyAndReturnArgs} args - Arguments to create many WeeklyTargets.
+   * @example
+   * // Create many WeeklyTargets
+   * const weeklyTarget = await prisma.weeklyTarget.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many WeeklyTargets and only return the `id`
+   * const weeklyTargetWithIdOnly = await prisma.weeklyTarget.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends WeeklyTargetCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, WeeklyTargetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyTargetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a WeeklyTarget.
    * @param {WeeklyTargetDeleteArgs} args - Arguments to delete one WeeklyTarget.
    * @example
@@ -2753,6 +2852,36 @@ export interface WeeklyTargetDelegate<ExtArgs extends runtime.Types.Extensions.I
    * 
    */
   updateMany<T extends WeeklyTargetUpdateManyArgs>(args: Prisma.SelectSubset<T, WeeklyTargetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more WeeklyTargets and returns the data updated in the database.
+   * @param {WeeklyTargetUpdateManyAndReturnArgs} args - Arguments to update many WeeklyTargets.
+   * @example
+   * // Update many WeeklyTargets
+   * const weeklyTarget = await prisma.weeklyTarget.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more WeeklyTargets and only return the `id`
+   * const weeklyTargetWithIdOnly = await prisma.weeklyTarget.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends WeeklyTargetUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, WeeklyTargetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyTargetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one WeeklyTarget.
@@ -3209,6 +3338,29 @@ export type WeeklyTargetCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
+ * WeeklyTarget createManyAndReturn
+ */
+export type WeeklyTargetCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeeklyTarget
+   */
+  select?: Prisma.WeeklyTargetSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the WeeklyTarget
+   */
+  omit?: Prisma.WeeklyTargetOmit<ExtArgs> | null
+  /**
+   * The data used to create many WeeklyTargets.
+   */
+  data: Prisma.WeeklyTargetCreateManyInput | Prisma.WeeklyTargetCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeeklyTargetIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * WeeklyTarget update
  */
 export type WeeklyTargetUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3250,6 +3402,36 @@ export type WeeklyTargetUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many WeeklyTargets to update.
    */
   limit?: number
+}
+
+/**
+ * WeeklyTarget updateManyAndReturn
+ */
+export type WeeklyTargetUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeeklyTarget
+   */
+  select?: Prisma.WeeklyTargetSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the WeeklyTarget
+   */
+  omit?: Prisma.WeeklyTargetOmit<ExtArgs> | null
+  /**
+   * The data used to update WeeklyTargets.
+   */
+  data: Prisma.XOR<Prisma.WeeklyTargetUpdateManyMutationInput, Prisma.WeeklyTargetUncheckedUpdateManyInput>
+  /**
+   * Filter which WeeklyTargets to update
+   */
+  where?: Prisma.WeeklyTargetWhereInput
+  /**
+   * Limit how many WeeklyTargets to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeeklyTargetIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

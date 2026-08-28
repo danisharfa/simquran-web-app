@@ -292,7 +292,6 @@ export type MunaqasyahRequestOrderByWithRelationInput = {
   juz?: Prisma.JuzOrderByWithRelationInput
   scheduleRequests?: Prisma.MunaqasyahScheduleRequestOrderByRelationAggregateInput
   result?: Prisma.MunaqasyahResultOrderByWithRelationInput
-  _relevance?: Prisma.MunaqasyahRequestOrderByRelevanceInput
 }
 
 export type MunaqasyahRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -464,12 +463,6 @@ export type MunaqasyahRequestListRelationFilter = {
 
 export type MunaqasyahRequestOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type MunaqasyahRequestOrderByRelevanceInput = {
-  fields: Prisma.MunaqasyahRequestOrderByRelevanceFieldEnum | Prisma.MunaqasyahRequestOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type MunaqasyahRequestCountOrderByAggregateInput = {
@@ -1559,7 +1552,43 @@ export type MunaqasyahRequestSelect<ExtArgs extends runtime.Types.Extensions.Int
   _count?: boolean | Prisma.MunaqasyahRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["munaqasyahRequest"]>
 
+export type MunaqasyahRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  coordinatorId?: boolean
+  teacherId?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  tahap?: boolean
+  jenis?: boolean
+  juzId?: boolean
+  status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  coordinator?: boolean | Prisma.MunaqasyahRequest$coordinatorArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["munaqasyahRequest"]>
 
+export type MunaqasyahRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  coordinatorId?: boolean
+  teacherId?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  tahap?: boolean
+  jenis?: boolean
+  juzId?: boolean
+  status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  coordinator?: boolean | Prisma.MunaqasyahRequest$coordinatorArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["munaqasyahRequest"]>
 
 export type MunaqasyahRequestSelectScalar = {
   id?: boolean
@@ -1585,6 +1614,20 @@ export type MunaqasyahRequestInclude<ExtArgs extends runtime.Types.Extensions.In
   scheduleRequests?: boolean | Prisma.MunaqasyahRequest$scheduleRequestsArgs<ExtArgs>
   result?: boolean | Prisma.MunaqasyahRequest$resultArgs<ExtArgs>
   _count?: boolean | Prisma.MunaqasyahRequestCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type MunaqasyahRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  coordinator?: boolean | Prisma.MunaqasyahRequest$coordinatorArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+}
+export type MunaqasyahRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  coordinator?: boolean | Prisma.MunaqasyahRequest$coordinatorArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
 }
 
 export type $MunaqasyahRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1728,6 +1771,30 @@ export interface MunaqasyahRequestDelegate<ExtArgs extends runtime.Types.Extensi
   createMany<T extends MunaqasyahRequestCreateManyArgs>(args?: Prisma.SelectSubset<T, MunaqasyahRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many MunaqasyahRequests and returns the data saved in the database.
+   * @param {MunaqasyahRequestCreateManyAndReturnArgs} args - Arguments to create many MunaqasyahRequests.
+   * @example
+   * // Create many MunaqasyahRequests
+   * const munaqasyahRequest = await prisma.munaqasyahRequest.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many MunaqasyahRequests and only return the `id`
+   * const munaqasyahRequestWithIdOnly = await prisma.munaqasyahRequest.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends MunaqasyahRequestCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, MunaqasyahRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a MunaqasyahRequest.
    * @param {MunaqasyahRequestDeleteArgs} args - Arguments to delete one MunaqasyahRequest.
    * @example
@@ -1790,6 +1857,36 @@ export interface MunaqasyahRequestDelegate<ExtArgs extends runtime.Types.Extensi
    * 
    */
   updateMany<T extends MunaqasyahRequestUpdateManyArgs>(args: Prisma.SelectSubset<T, MunaqasyahRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more MunaqasyahRequests and returns the data updated in the database.
+   * @param {MunaqasyahRequestUpdateManyAndReturnArgs} args - Arguments to update many MunaqasyahRequests.
+   * @example
+   * // Update many MunaqasyahRequests
+   * const munaqasyahRequest = await prisma.munaqasyahRequest.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more MunaqasyahRequests and only return the `id`
+   * const munaqasyahRequestWithIdOnly = await prisma.munaqasyahRequest.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends MunaqasyahRequestUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, MunaqasyahRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one MunaqasyahRequest.
@@ -2235,6 +2332,29 @@ export type MunaqasyahRequestCreateManyArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
+ * MunaqasyahRequest createManyAndReturn
+ */
+export type MunaqasyahRequestCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahRequest
+   */
+  select?: Prisma.MunaqasyahRequestSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahRequest
+   */
+  omit?: Prisma.MunaqasyahRequestOmit<ExtArgs> | null
+  /**
+   * The data used to create many MunaqasyahRequests.
+   */
+  data: Prisma.MunaqasyahRequestCreateManyInput | Prisma.MunaqasyahRequestCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahRequestIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * MunaqasyahRequest update
  */
 export type MunaqasyahRequestUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2276,6 +2396,36 @@ export type MunaqasyahRequestUpdateManyArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many MunaqasyahRequests to update.
    */
   limit?: number
+}
+
+/**
+ * MunaqasyahRequest updateManyAndReturn
+ */
+export type MunaqasyahRequestUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahRequest
+   */
+  select?: Prisma.MunaqasyahRequestSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahRequest
+   */
+  omit?: Prisma.MunaqasyahRequestOmit<ExtArgs> | null
+  /**
+   * The data used to update MunaqasyahRequests.
+   */
+  data: Prisma.XOR<Prisma.MunaqasyahRequestUpdateManyMutationInput, Prisma.MunaqasyahRequestUncheckedUpdateManyInput>
+  /**
+   * Filter which MunaqasyahRequests to update
+   */
+  where?: Prisma.MunaqasyahRequestWhereInput
+  /**
+   * Limit how many MunaqasyahRequests to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahRequestIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

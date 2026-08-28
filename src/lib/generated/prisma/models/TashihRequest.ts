@@ -348,7 +348,6 @@ export type TashihRequestOrderByWithRelationInput = {
   wafa?: Prisma.WafaOrderByWithRelationInput
   scheduleRequests?: Prisma.TashihScheduleRequestOrderByRelationAggregateInput
   result?: Prisma.TashihResultOrderByWithRelationInput
-  _relevance?: Prisma.TashihRequestOrderByRelevanceInput
 }
 
 export type TashihRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -560,12 +559,6 @@ export type TashihRequestListRelationFilter = {
 
 export type TashihRequestOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type TashihRequestOrderByRelevanceInput = {
-  fields: Prisma.TashihRequestOrderByRelevanceFieldEnum | Prisma.TashihRequestOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type TashihRequestCountOrderByAggregateInput = {
@@ -2189,7 +2182,55 @@ export type TashihRequestSelect<ExtArgs extends runtime.Types.Extensions.Interna
   _count?: boolean | Prisma.TashihRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tashihRequest"]>
 
+export type TashihRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  teacherId?: boolean
+  groupId?: boolean
+  coordinatorId?: boolean
+  tashihType?: boolean
+  juzId?: boolean
+  surahId?: boolean
+  wafaId?: boolean
+  startPage?: boolean
+  endPage?: boolean
+  status?: boolean
+  notes?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  coordinator?: boolean | Prisma.TashihRequest$coordinatorArgs<ExtArgs>
+  juz?: boolean | Prisma.TashihRequest$juzArgs<ExtArgs>
+  surah?: boolean | Prisma.TashihRequest$surahArgs<ExtArgs>
+  wafa?: boolean | Prisma.TashihRequest$wafaArgs<ExtArgs>
+}, ExtArgs["result"]["tashihRequest"]>
 
+export type TashihRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  teacherId?: boolean
+  groupId?: boolean
+  coordinatorId?: boolean
+  tashihType?: boolean
+  juzId?: boolean
+  surahId?: boolean
+  wafaId?: boolean
+  startPage?: boolean
+  endPage?: boolean
+  status?: boolean
+  notes?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  coordinator?: boolean | Prisma.TashihRequest$coordinatorArgs<ExtArgs>
+  juz?: boolean | Prisma.TashihRequest$juzArgs<ExtArgs>
+  surah?: boolean | Prisma.TashihRequest$surahArgs<ExtArgs>
+  wafa?: boolean | Prisma.TashihRequest$wafaArgs<ExtArgs>
+}, ExtArgs["result"]["tashihRequest"]>
 
 export type TashihRequestSelectScalar = {
   id?: boolean
@@ -2221,6 +2262,24 @@ export type TashihRequestInclude<ExtArgs extends runtime.Types.Extensions.Intern
   scheduleRequests?: boolean | Prisma.TashihRequest$scheduleRequestsArgs<ExtArgs>
   result?: boolean | Prisma.TashihRequest$resultArgs<ExtArgs>
   _count?: boolean | Prisma.TashihRequestCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type TashihRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  coordinator?: boolean | Prisma.TashihRequest$coordinatorArgs<ExtArgs>
+  juz?: boolean | Prisma.TashihRequest$juzArgs<ExtArgs>
+  surah?: boolean | Prisma.TashihRequest$surahArgs<ExtArgs>
+  wafa?: boolean | Prisma.TashihRequest$wafaArgs<ExtArgs>
+}
+export type TashihRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  coordinator?: boolean | Prisma.TashihRequest$coordinatorArgs<ExtArgs>
+  juz?: boolean | Prisma.TashihRequest$juzArgs<ExtArgs>
+  surah?: boolean | Prisma.TashihRequest$surahArgs<ExtArgs>
+  wafa?: boolean | Prisma.TashihRequest$wafaArgs<ExtArgs>
 }
 
 export type $TashihRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2370,6 +2429,30 @@ export interface TashihRequestDelegate<ExtArgs extends runtime.Types.Extensions.
   createMany<T extends TashihRequestCreateManyArgs>(args?: Prisma.SelectSubset<T, TashihRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many TashihRequests and returns the data saved in the database.
+   * @param {TashihRequestCreateManyAndReturnArgs} args - Arguments to create many TashihRequests.
+   * @example
+   * // Create many TashihRequests
+   * const tashihRequest = await prisma.tashihRequest.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many TashihRequests and only return the `id`
+   * const tashihRequestWithIdOnly = await prisma.tashihRequest.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends TashihRequestCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, TashihRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a TashihRequest.
    * @param {TashihRequestDeleteArgs} args - Arguments to delete one TashihRequest.
    * @example
@@ -2432,6 +2515,36 @@ export interface TashihRequestDelegate<ExtArgs extends runtime.Types.Extensions.
    * 
    */
   updateMany<T extends TashihRequestUpdateManyArgs>(args: Prisma.SelectSubset<T, TashihRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more TashihRequests and returns the data updated in the database.
+   * @param {TashihRequestUpdateManyAndReturnArgs} args - Arguments to update many TashihRequests.
+   * @example
+   * // Update many TashihRequests
+   * const tashihRequest = await prisma.tashihRequest.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more TashihRequests and only return the `id`
+   * const tashihRequestWithIdOnly = await prisma.tashihRequest.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends TashihRequestUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, TashihRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one TashihRequest.
@@ -2883,6 +2996,29 @@ export type TashihRequestCreateManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * TashihRequest createManyAndReturn
+ */
+export type TashihRequestCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TashihRequest
+   */
+  select?: Prisma.TashihRequestSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TashihRequest
+   */
+  omit?: Prisma.TashihRequestOmit<ExtArgs> | null
+  /**
+   * The data used to create many TashihRequests.
+   */
+  data: Prisma.TashihRequestCreateManyInput | Prisma.TashihRequestCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TashihRequestIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * TashihRequest update
  */
 export type TashihRequestUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2924,6 +3060,36 @@ export type TashihRequestUpdateManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many TashihRequests to update.
    */
   limit?: number
+}
+
+/**
+ * TashihRequest updateManyAndReturn
+ */
+export type TashihRequestUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TashihRequest
+   */
+  select?: Prisma.TashihRequestSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TashihRequest
+   */
+  omit?: Prisma.TashihRequestOmit<ExtArgs> | null
+  /**
+   * The data used to update TashihRequests.
+   */
+  data: Prisma.XOR<Prisma.TashihRequestUpdateManyMutationInput, Prisma.TashihRequestUncheckedUpdateManyInput>
+  /**
+   * Filter which TashihRequests to update
+   */
+  where?: Prisma.TashihRequestWhereInput
+  /**
+   * Limit how many TashihRequests to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TashihRequestIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

@@ -193,7 +193,6 @@ export type CoordinatorProfileOrderByWithRelationInput = {
   tashihResults?: Prisma.TashihResultOrderByRelationAggregateInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestOrderByRelationAggregateInput
   munaqasyahSchedules?: Prisma.MunaqasyahScheduleOrderByRelationAggregateInput
-  _relevance?: Prisma.CoordinatorProfileOrderByRelevanceInput
 }
 
 export type CoordinatorProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -308,12 +307,6 @@ export type CoordinatorProfileListRelationFilter = {
 
 export type CoordinatorProfileOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type CoordinatorProfileOrderByRelevanceInput = {
-  fields: Prisma.CoordinatorProfileOrderByRelevanceFieldEnum | Prisma.CoordinatorProfileOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type CoordinatorProfileCountOrderByAggregateInput = {
@@ -936,7 +929,21 @@ export type CoordinatorProfileSelect<ExtArgs extends runtime.Types.Extensions.In
   _count?: boolean | Prisma.CoordinatorProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["coordinatorProfile"]>
 
+export type CoordinatorProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  userId?: boolean
+  nip?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["coordinatorProfile"]>
 
+export type CoordinatorProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  userId?: boolean
+  nip?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["coordinatorProfile"]>
 
 export type CoordinatorProfileSelectScalar = {
   userId?: boolean
@@ -954,6 +961,12 @@ export type CoordinatorProfileInclude<ExtArgs extends runtime.Types.Extensions.I
   munaqasyahRequests?: boolean | Prisma.CoordinatorProfile$munaqasyahRequestsArgs<ExtArgs>
   munaqasyahSchedules?: boolean | Prisma.CoordinatorProfile$munaqasyahSchedulesArgs<ExtArgs>
   _count?: boolean | Prisma.CoordinatorProfileCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type CoordinatorProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type CoordinatorProfileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $CoordinatorProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1089,6 +1102,30 @@ export interface CoordinatorProfileDelegate<ExtArgs extends runtime.Types.Extens
   createMany<T extends CoordinatorProfileCreateManyArgs>(args?: Prisma.SelectSubset<T, CoordinatorProfileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many CoordinatorProfiles and returns the data saved in the database.
+   * @param {CoordinatorProfileCreateManyAndReturnArgs} args - Arguments to create many CoordinatorProfiles.
+   * @example
+   * // Create many CoordinatorProfiles
+   * const coordinatorProfile = await prisma.coordinatorProfile.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many CoordinatorProfiles and only return the `userId`
+   * const coordinatorProfileWithUserIdOnly = await prisma.coordinatorProfile.createManyAndReturn({
+   *   select: { userId: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends CoordinatorProfileCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, CoordinatorProfileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CoordinatorProfilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a CoordinatorProfile.
    * @param {CoordinatorProfileDeleteArgs} args - Arguments to delete one CoordinatorProfile.
    * @example
@@ -1151,6 +1188,36 @@ export interface CoordinatorProfileDelegate<ExtArgs extends runtime.Types.Extens
    * 
    */
   updateMany<T extends CoordinatorProfileUpdateManyArgs>(args: Prisma.SelectSubset<T, CoordinatorProfileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more CoordinatorProfiles and returns the data updated in the database.
+   * @param {CoordinatorProfileUpdateManyAndReturnArgs} args - Arguments to update many CoordinatorProfiles.
+   * @example
+   * // Update many CoordinatorProfiles
+   * const coordinatorProfile = await prisma.coordinatorProfile.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more CoordinatorProfiles and only return the `userId`
+   * const coordinatorProfileWithUserIdOnly = await prisma.coordinatorProfile.updateManyAndReturn({
+   *   select: { userId: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends CoordinatorProfileUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, CoordinatorProfileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CoordinatorProfilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one CoordinatorProfile.
@@ -1588,6 +1655,29 @@ export type CoordinatorProfileCreateManyArgs<ExtArgs extends runtime.Types.Exten
 }
 
 /**
+ * CoordinatorProfile createManyAndReturn
+ */
+export type CoordinatorProfileCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CoordinatorProfile
+   */
+  select?: Prisma.CoordinatorProfileSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the CoordinatorProfile
+   */
+  omit?: Prisma.CoordinatorProfileOmit<ExtArgs> | null
+  /**
+   * The data used to create many CoordinatorProfiles.
+   */
+  data: Prisma.CoordinatorProfileCreateManyInput | Prisma.CoordinatorProfileCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CoordinatorProfileIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * CoordinatorProfile update
  */
 export type CoordinatorProfileUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1629,6 +1719,36 @@ export type CoordinatorProfileUpdateManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many CoordinatorProfiles to update.
    */
   limit?: number
+}
+
+/**
+ * CoordinatorProfile updateManyAndReturn
+ */
+export type CoordinatorProfileUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CoordinatorProfile
+   */
+  select?: Prisma.CoordinatorProfileSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the CoordinatorProfile
+   */
+  omit?: Prisma.CoordinatorProfileOmit<ExtArgs> | null
+  /**
+   * The data used to update CoordinatorProfiles.
+   */
+  data: Prisma.XOR<Prisma.CoordinatorProfileUpdateManyMutationInput, Prisma.CoordinatorProfileUncheckedUpdateManyInput>
+  /**
+   * Filter which CoordinatorProfiles to update
+   */
+  where?: Prisma.CoordinatorProfileWhereInput
+  /**
+   * Limit how many CoordinatorProfiles to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CoordinatorProfileIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

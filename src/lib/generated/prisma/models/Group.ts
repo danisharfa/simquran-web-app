@@ -234,7 +234,6 @@ export type GroupOrderByWithRelationInput = {
   reports?: Prisma.ReportOrderByRelationAggregateInput
   munaqasyahRequests?: Prisma.MunaqasyahRequestOrderByRelationAggregateInput
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultOrderByRelationAggregateInput
-  _relevance?: Prisma.GroupOrderByRelevanceInput
 }
 
 export type GroupWhereUniqueInput = Prisma.AtLeast<{
@@ -415,12 +414,6 @@ export type GroupOrderByRelationAggregateInput = {
 export type GroupNullableScalarRelationFilter = {
   is?: Prisma.GroupWhereInput | null
   isNot?: Prisma.GroupWhereInput | null
-}
-
-export type GroupOrderByRelevanceInput = {
-  fields: Prisma.GroupOrderByRelevanceFieldEnum | Prisma.GroupOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type GroupNameClassroomIdCompoundUniqueInput = {
@@ -2165,7 +2158,29 @@ export type GroupSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   _count?: boolean | Prisma.GroupCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["group"]>
 
+export type GroupSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  classroomId?: boolean
+  teacherId?: boolean
+  isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  classroom?: boolean | Prisma.ClassroomDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["group"]>
 
+export type GroupSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  classroomId?: boolean
+  teacherId?: boolean
+  isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  classroom?: boolean | Prisma.ClassroomDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["group"]>
 
 export type GroupSelectScalar = {
   id?: boolean
@@ -2193,6 +2208,14 @@ export type GroupInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   munaqasyahRequests?: boolean | Prisma.Group$munaqasyahRequestsArgs<ExtArgs>
   munaqasyahFinalResults?: boolean | Prisma.Group$munaqasyahFinalResultsArgs<ExtArgs>
   _count?: boolean | Prisma.GroupCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type GroupIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  classroom?: boolean | Prisma.ClassroomDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
+}
+export type GroupIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  classroom?: boolean | Prisma.ClassroomDefaultArgs<ExtArgs>
+  teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
 }
 
 export type $GroupPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2338,6 +2361,30 @@ export interface GroupDelegate<ExtArgs extends runtime.Types.Extensions.Internal
   createMany<T extends GroupCreateManyArgs>(args?: Prisma.SelectSubset<T, GroupCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many Groups and returns the data saved in the database.
+   * @param {GroupCreateManyAndReturnArgs} args - Arguments to create many Groups.
+   * @example
+   * // Create many Groups
+   * const group = await prisma.group.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many Groups and only return the `id`
+   * const groupWithIdOnly = await prisma.group.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends GroupCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, GroupCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a Group.
    * @param {GroupDeleteArgs} args - Arguments to delete one Group.
    * @example
@@ -2400,6 +2447,36 @@ export interface GroupDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * 
    */
   updateMany<T extends GroupUpdateManyArgs>(args: Prisma.SelectSubset<T, GroupUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more Groups and returns the data updated in the database.
+   * @param {GroupUpdateManyAndReturnArgs} args - Arguments to update many Groups.
+   * @example
+   * // Update many Groups
+   * const group = await prisma.group.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more Groups and only return the `id`
+   * const groupWithIdOnly = await prisma.group.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends GroupUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, GroupUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Group.
@@ -2847,6 +2924,29 @@ export type GroupCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Group createManyAndReturn
+ */
+export type GroupCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Group
+   */
+  select?: Prisma.GroupSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Group
+   */
+  omit?: Prisma.GroupOmit<ExtArgs> | null
+  /**
+   * The data used to create many Groups.
+   */
+  data: Prisma.GroupCreateManyInput | Prisma.GroupCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GroupIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * Group update
  */
 export type GroupUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2888,6 +2988,36 @@ export type GroupUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Groups to update.
    */
   limit?: number
+}
+
+/**
+ * Group updateManyAndReturn
+ */
+export type GroupUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Group
+   */
+  select?: Prisma.GroupSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Group
+   */
+  omit?: Prisma.GroupOmit<ExtArgs> | null
+  /**
+   * The data used to update Groups.
+   */
+  data: Prisma.XOR<Prisma.GroupUpdateManyMutationInput, Prisma.GroupUncheckedUpdateManyInput>
+  /**
+   * Filter which Groups to update
+   */
+  where?: Prisma.GroupWhereInput
+  /**
+   * Limit how many Groups to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GroupIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

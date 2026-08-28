@@ -167,7 +167,6 @@ export type TashihScheduleRequestOrderByWithRelationInput = {
   requestId?: Prisma.SortOrder
   schedule?: Prisma.TashihScheduleOrderByWithRelationInput
   request?: Prisma.TashihRequestOrderByWithRelationInput
-  _relevance?: Prisma.TashihScheduleRequestOrderByRelevanceInput
 }
 
 export type TashihScheduleRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -239,12 +238,6 @@ export type TashihScheduleRequestListRelationFilter = {
 
 export type TashihScheduleRequestOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type TashihScheduleRequestOrderByRelevanceInput = {
-  fields: Prisma.TashihScheduleRequestOrderByRelevanceFieldEnum | Prisma.TashihScheduleRequestOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type TashihScheduleRequestScheduleIdRequestIdCompoundUniqueInput = {
@@ -468,7 +461,19 @@ export type TashihScheduleRequestSelect<ExtArgs extends runtime.Types.Extensions
   request?: boolean | Prisma.TashihRequestDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tashihScheduleRequest"]>
 
+export type TashihScheduleRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  scheduleId?: boolean
+  requestId?: boolean
+  schedule?: boolean | Prisma.TashihScheduleDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.TashihRequestDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["tashihScheduleRequest"]>
 
+export type TashihScheduleRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  scheduleId?: boolean
+  requestId?: boolean
+  schedule?: boolean | Prisma.TashihScheduleDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.TashihRequestDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["tashihScheduleRequest"]>
 
 export type TashihScheduleRequestSelectScalar = {
   scheduleId?: boolean
@@ -477,6 +482,14 @@ export type TashihScheduleRequestSelectScalar = {
 
 export type TashihScheduleRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"scheduleId" | "requestId", ExtArgs["result"]["tashihScheduleRequest"]>
 export type TashihScheduleRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  schedule?: boolean | Prisma.TashihScheduleDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.TashihRequestDefaultArgs<ExtArgs>
+}
+export type TashihScheduleRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  schedule?: boolean | Prisma.TashihScheduleDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.TashihRequestDefaultArgs<ExtArgs>
+}
+export type TashihScheduleRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   schedule?: boolean | Prisma.TashihScheduleDefaultArgs<ExtArgs>
   request?: boolean | Prisma.TashihRequestDefaultArgs<ExtArgs>
 }
@@ -608,6 +621,30 @@ export interface TashihScheduleRequestDelegate<ExtArgs extends runtime.Types.Ext
   createMany<T extends TashihScheduleRequestCreateManyArgs>(args?: Prisma.SelectSubset<T, TashihScheduleRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many TashihScheduleRequests and returns the data saved in the database.
+   * @param {TashihScheduleRequestCreateManyAndReturnArgs} args - Arguments to create many TashihScheduleRequests.
+   * @example
+   * // Create many TashihScheduleRequests
+   * const tashihScheduleRequest = await prisma.tashihScheduleRequest.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many TashihScheduleRequests and only return the `scheduleId`
+   * const tashihScheduleRequestWithScheduleIdOnly = await prisma.tashihScheduleRequest.createManyAndReturn({
+   *   select: { scheduleId: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends TashihScheduleRequestCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, TashihScheduleRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihScheduleRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a TashihScheduleRequest.
    * @param {TashihScheduleRequestDeleteArgs} args - Arguments to delete one TashihScheduleRequest.
    * @example
@@ -670,6 +707,36 @@ export interface TashihScheduleRequestDelegate<ExtArgs extends runtime.Types.Ext
    * 
    */
   updateMany<T extends TashihScheduleRequestUpdateManyArgs>(args: Prisma.SelectSubset<T, TashihScheduleRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more TashihScheduleRequests and returns the data updated in the database.
+   * @param {TashihScheduleRequestUpdateManyAndReturnArgs} args - Arguments to update many TashihScheduleRequests.
+   * @example
+   * // Update many TashihScheduleRequests
+   * const tashihScheduleRequest = await prisma.tashihScheduleRequest.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more TashihScheduleRequests and only return the `scheduleId`
+   * const tashihScheduleRequestWithScheduleIdOnly = await prisma.tashihScheduleRequest.updateManyAndReturn({
+   *   select: { scheduleId: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends TashihScheduleRequestUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, TashihScheduleRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TashihScheduleRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one TashihScheduleRequest.
@@ -1101,6 +1168,29 @@ export type TashihScheduleRequestCreateManyArgs<ExtArgs extends runtime.Types.Ex
 }
 
 /**
+ * TashihScheduleRequest createManyAndReturn
+ */
+export type TashihScheduleRequestCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TashihScheduleRequest
+   */
+  select?: Prisma.TashihScheduleRequestSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TashihScheduleRequest
+   */
+  omit?: Prisma.TashihScheduleRequestOmit<ExtArgs> | null
+  /**
+   * The data used to create many TashihScheduleRequests.
+   */
+  data: Prisma.TashihScheduleRequestCreateManyInput | Prisma.TashihScheduleRequestCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TashihScheduleRequestIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * TashihScheduleRequest update
  */
 export type TashihScheduleRequestUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1142,6 +1232,36 @@ export type TashihScheduleRequestUpdateManyArgs<ExtArgs extends runtime.Types.Ex
    * Limit how many TashihScheduleRequests to update.
    */
   limit?: number
+}
+
+/**
+ * TashihScheduleRequest updateManyAndReturn
+ */
+export type TashihScheduleRequestUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TashihScheduleRequest
+   */
+  select?: Prisma.TashihScheduleRequestSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TashihScheduleRequest
+   */
+  omit?: Prisma.TashihScheduleRequestOmit<ExtArgs> | null
+  /**
+   * The data used to update TashihScheduleRequests.
+   */
+  data: Prisma.XOR<Prisma.TashihScheduleRequestUpdateManyMutationInput, Prisma.TashihScheduleRequestUncheckedUpdateManyInput>
+  /**
+   * Filter which TashihScheduleRequests to update
+   */
+  where?: Prisma.TashihScheduleRequestWhereInput
+  /**
+   * Limit how many TashihScheduleRequests to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TashihScheduleRequestIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

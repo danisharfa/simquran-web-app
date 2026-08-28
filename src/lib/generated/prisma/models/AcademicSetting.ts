@@ -217,7 +217,6 @@ export type AcademicSettingOrderByWithRelationInput = {
   schoolAddress?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
-  _relevance?: Prisma.AcademicSettingOrderByRelevanceInput
 }
 
 export type AcademicSettingWhereUniqueInput = Prisma.AtLeast<{
@@ -339,12 +338,6 @@ export type AcademicSettingUncheckedUpdateManyInput = {
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type AcademicSettingOrderByRelevanceInput = {
-  fields: Prisma.AcademicSettingOrderByRelevanceFieldEnum | Prisma.AcademicSettingOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
-}
-
 export type AcademicSettingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   currentYear?: Prisma.SortOrder
@@ -407,7 +400,27 @@ export type AcademicSettingSelect<ExtArgs extends runtime.Types.Extensions.Inter
   updatedBy?: boolean
 }, ExtArgs["result"]["academicSetting"]>
 
+export type AcademicSettingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  currentYear?: boolean
+  currentSemester?: boolean
+  currentPrincipalName?: boolean
+  schoolName?: boolean
+  schoolAddress?: boolean
+  updatedAt?: boolean
+  updatedBy?: boolean
+}, ExtArgs["result"]["academicSetting"]>
 
+export type AcademicSettingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  currentYear?: boolean
+  currentSemester?: boolean
+  currentPrincipalName?: boolean
+  schoolName?: boolean
+  schoolAddress?: boolean
+  updatedAt?: boolean
+  updatedBy?: boolean
+}, ExtArgs["result"]["academicSetting"]>
 
 export type AcademicSettingSelectScalar = {
   id?: boolean
@@ -552,6 +565,30 @@ export interface AcademicSettingDelegate<ExtArgs extends runtime.Types.Extension
   createMany<T extends AcademicSettingCreateManyArgs>(args?: Prisma.SelectSubset<T, AcademicSettingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many AcademicSettings and returns the data saved in the database.
+   * @param {AcademicSettingCreateManyAndReturnArgs} args - Arguments to create many AcademicSettings.
+   * @example
+   * // Create many AcademicSettings
+   * const academicSetting = await prisma.academicSetting.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many AcademicSettings and only return the `id`
+   * const academicSettingWithIdOnly = await prisma.academicSetting.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends AcademicSettingCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, AcademicSettingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AcademicSettingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a AcademicSetting.
    * @param {AcademicSettingDeleteArgs} args - Arguments to delete one AcademicSetting.
    * @example
@@ -614,6 +651,36 @@ export interface AcademicSettingDelegate<ExtArgs extends runtime.Types.Extension
    * 
    */
   updateMany<T extends AcademicSettingUpdateManyArgs>(args: Prisma.SelectSubset<T, AcademicSettingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more AcademicSettings and returns the data updated in the database.
+   * @param {AcademicSettingUpdateManyAndReturnArgs} args - Arguments to update many AcademicSettings.
+   * @example
+   * // Update many AcademicSettings
+   * const academicSetting = await prisma.academicSetting.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more AcademicSettings and only return the `id`
+   * const academicSettingWithIdOnly = await prisma.academicSetting.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends AcademicSettingUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, AcademicSettingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AcademicSettingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one AcademicSetting.
@@ -1025,6 +1092,25 @@ export type AcademicSettingCreateManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * AcademicSetting createManyAndReturn
+ */
+export type AcademicSettingCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AcademicSetting
+   */
+  select?: Prisma.AcademicSettingSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the AcademicSetting
+   */
+  omit?: Prisma.AcademicSettingOmit<ExtArgs> | null
+  /**
+   * The data used to create many AcademicSettings.
+   */
+  data: Prisma.AcademicSettingCreateManyInput | Prisma.AcademicSettingCreateManyInput[]
+  skipDuplicates?: boolean
+}
+
+/**
  * AcademicSetting update
  */
 export type AcademicSettingUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1050,6 +1136,32 @@ export type AcademicSettingUpdateArgs<ExtArgs extends runtime.Types.Extensions.I
  * AcademicSetting updateMany
  */
 export type AcademicSettingUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The data used to update AcademicSettings.
+   */
+  data: Prisma.XOR<Prisma.AcademicSettingUpdateManyMutationInput, Prisma.AcademicSettingUncheckedUpdateManyInput>
+  /**
+   * Filter which AcademicSettings to update
+   */
+  where?: Prisma.AcademicSettingWhereInput
+  /**
+   * Limit how many AcademicSettings to update.
+   */
+  limit?: number
+}
+
+/**
+ * AcademicSetting updateManyAndReturn
+ */
+export type AcademicSettingUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AcademicSetting
+   */
+  select?: Prisma.AcademicSettingSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the AcademicSetting
+   */
+  omit?: Prisma.AcademicSettingOmit<ExtArgs> | null
   /**
    * The data used to update AcademicSettings.
    */

@@ -316,7 +316,6 @@ export type HomeActivityOrderByWithRelationInput = {
   group?: Prisma.GroupOrderByWithRelationInput
   juz?: Prisma.JuzOrderByWithRelationInput
   surah?: Prisma.SurahOrderByWithRelationInput
-  _relevance?: Prisma.HomeActivityOrderByRelevanceInput
 }
 
 export type HomeActivityWhereUniqueInput = Prisma.AtLeast<{
@@ -498,12 +497,6 @@ export type HomeActivityListRelationFilter = {
 
 export type HomeActivityOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type HomeActivityOrderByRelevanceInput = {
-  fields: Prisma.HomeActivityOrderByRelevanceFieldEnum | Prisma.HomeActivityOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type HomeActivityCountOrderByAggregateInput = {
@@ -1249,7 +1242,45 @@ export type HomeActivitySelect<ExtArgs extends runtime.Types.Extensions.Internal
   surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["homeActivity"]>
 
+export type HomeActivitySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  date?: boolean
+  activityType?: boolean
+  juzId?: boolean
+  surahId?: boolean
+  startVerse?: boolean
+  endVerse?: boolean
+  note?: boolean
+  status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["homeActivity"]>
 
+export type HomeActivitySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  date?: boolean
+  activityType?: boolean
+  juzId?: boolean
+  surahId?: boolean
+  startVerse?: boolean
+  endVerse?: boolean
+  note?: boolean
+  status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["homeActivity"]>
 
 export type HomeActivitySelectScalar = {
   id?: boolean
@@ -1269,6 +1300,18 @@ export type HomeActivitySelectScalar = {
 
 export type HomeActivityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "groupId" | "date" | "activityType" | "juzId" | "surahId" | "startVerse" | "endVerse" | "note" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["homeActivity"]>
 export type HomeActivityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}
+export type HomeActivityIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+}
+export type HomeActivityIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
   juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
@@ -1415,6 +1458,30 @@ export interface HomeActivityDelegate<ExtArgs extends runtime.Types.Extensions.I
   createMany<T extends HomeActivityCreateManyArgs>(args?: Prisma.SelectSubset<T, HomeActivityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many HomeActivities and returns the data saved in the database.
+   * @param {HomeActivityCreateManyAndReturnArgs} args - Arguments to create many HomeActivities.
+   * @example
+   * // Create many HomeActivities
+   * const homeActivity = await prisma.homeActivity.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many HomeActivities and only return the `id`
+   * const homeActivityWithIdOnly = await prisma.homeActivity.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends HomeActivityCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, HomeActivityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HomeActivityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a HomeActivity.
    * @param {HomeActivityDeleteArgs} args - Arguments to delete one HomeActivity.
    * @example
@@ -1477,6 +1544,36 @@ export interface HomeActivityDelegate<ExtArgs extends runtime.Types.Extensions.I
    * 
    */
   updateMany<T extends HomeActivityUpdateManyArgs>(args: Prisma.SelectSubset<T, HomeActivityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more HomeActivities and returns the data updated in the database.
+   * @param {HomeActivityUpdateManyAndReturnArgs} args - Arguments to update many HomeActivities.
+   * @example
+   * // Update many HomeActivities
+   * const homeActivity = await prisma.homeActivity.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more HomeActivities and only return the `id`
+   * const homeActivityWithIdOnly = await prisma.homeActivity.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends HomeActivityUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, HomeActivityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HomeActivityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one HomeActivity.
@@ -1921,6 +2018,29 @@ export type HomeActivityCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
+ * HomeActivity createManyAndReturn
+ */
+export type HomeActivityCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HomeActivity
+   */
+  select?: Prisma.HomeActivitySelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the HomeActivity
+   */
+  omit?: Prisma.HomeActivityOmit<ExtArgs> | null
+  /**
+   * The data used to create many HomeActivities.
+   */
+  data: Prisma.HomeActivityCreateManyInput | Prisma.HomeActivityCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HomeActivityIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * HomeActivity update
  */
 export type HomeActivityUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1962,6 +2082,36 @@ export type HomeActivityUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many HomeActivities to update.
    */
   limit?: number
+}
+
+/**
+ * HomeActivity updateManyAndReturn
+ */
+export type HomeActivityUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HomeActivity
+   */
+  select?: Prisma.HomeActivitySelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the HomeActivity
+   */
+  omit?: Prisma.HomeActivityOmit<ExtArgs> | null
+  /**
+   * The data used to update HomeActivities.
+   */
+  data: Prisma.XOR<Prisma.HomeActivityUpdateManyMutationInput, Prisma.HomeActivityUncheckedUpdateManyInput>
+  /**
+   * Filter which HomeActivities to update
+   */
+  where?: Prisma.HomeActivityWhereInput
+  /**
+   * Limit how many HomeActivities to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HomeActivityIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

@@ -213,7 +213,6 @@ export type JuzOrderByWithRelationInput = {
   munaqasyahFinalResults?: Prisma.MunaqasyahFinalResultOrderByRelationAggregateInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetOrderByRelationAggregateInput
   weeklyTargetsAsEnd?: Prisma.WeeklyTargetOrderByRelationAggregateInput
-  _relevance?: Prisma.JuzOrderByRelevanceInput
 }
 
 export type JuzWhereUniqueInput = Prisma.AtLeast<{
@@ -315,12 +314,6 @@ export type JuzUpdateManyMutationInput = {
 export type JuzUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type JuzOrderByRelevanceInput = {
-  fields: Prisma.JuzOrderByRelevanceFieldEnum | Prisma.JuzOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type JuzCountOrderByAggregateInput = {
@@ -1096,7 +1089,15 @@ export type JuzSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   _count?: boolean | Prisma.JuzCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["juz"]>
 
+export type JuzSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+}, ExtArgs["result"]["juz"]>
 
+export type JuzSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+}, ExtArgs["result"]["juz"]>
 
 export type JuzSelectScalar = {
   id?: boolean
@@ -1115,6 +1116,8 @@ export type JuzInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   weeklyTargetsAsEnd?: boolean | Prisma.Juz$weeklyTargetsAsEndArgs<ExtArgs>
   _count?: boolean | Prisma.JuzCountOutputTypeDefaultArgs<ExtArgs>
 }
+export type JuzIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type JuzIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $JuzPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Juz"
@@ -1249,6 +1252,30 @@ export interface JuzDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
   createMany<T extends JuzCreateManyArgs>(args?: Prisma.SelectSubset<T, JuzCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many Juzs and returns the data saved in the database.
+   * @param {JuzCreateManyAndReturnArgs} args - Arguments to create many Juzs.
+   * @example
+   * // Create many Juzs
+   * const juz = await prisma.juz.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many Juzs and only return the `id`
+   * const juzWithIdOnly = await prisma.juz.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends JuzCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, JuzCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JuzPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a Juz.
    * @param {JuzDeleteArgs} args - Arguments to delete one Juz.
    * @example
@@ -1311,6 +1338,36 @@ export interface JuzDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * 
    */
   updateMany<T extends JuzUpdateManyArgs>(args: Prisma.SelectSubset<T, JuzUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more Juzs and returns the data updated in the database.
+   * @param {JuzUpdateManyAndReturnArgs} args - Arguments to update many Juzs.
+   * @example
+   * // Update many Juzs
+   * const juz = await prisma.juz.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more Juzs and only return the `id`
+   * const juzWithIdOnly = await prisma.juz.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends JuzUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, JuzUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JuzPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Juz.
@@ -1748,6 +1805,25 @@ export type JuzCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
+ * Juz createManyAndReturn
+ */
+export type JuzCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Juz
+   */
+  select?: Prisma.JuzSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Juz
+   */
+  omit?: Prisma.JuzOmit<ExtArgs> | null
+  /**
+   * The data used to create many Juzs.
+   */
+  data: Prisma.JuzCreateManyInput | Prisma.JuzCreateManyInput[]
+  skipDuplicates?: boolean
+}
+
+/**
  * Juz update
  */
 export type JuzUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1777,6 +1853,32 @@ export type JuzUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
  * Juz updateMany
  */
 export type JuzUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The data used to update Juzs.
+   */
+  data: Prisma.XOR<Prisma.JuzUpdateManyMutationInput, Prisma.JuzUncheckedUpdateManyInput>
+  /**
+   * Filter which Juzs to update
+   */
+  where?: Prisma.JuzWhereInput
+  /**
+   * Limit how many Juzs to update.
+   */
+  limit?: number
+}
+
+/**
+ * Juz updateManyAndReturn
+ */
+export type JuzUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Juz
+   */
+  select?: Prisma.JuzSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Juz
+   */
+  omit?: Prisma.JuzOmit<ExtArgs> | null
   /**
    * The data used to update Juzs.
    */

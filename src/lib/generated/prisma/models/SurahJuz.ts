@@ -630,7 +630,25 @@ export type SurahJuzSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["surahJuz"]>
 
+export type SurahJuzSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  surahId?: boolean
+  juzId?: boolean
+  startVerse?: boolean
+  endVerse?: boolean
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["surahJuz"]>
 
+export type SurahJuzSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  surahId?: boolean
+  juzId?: boolean
+  startVerse?: boolean
+  endVerse?: boolean
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["surahJuz"]>
 
 export type SurahJuzSelectScalar = {
   id?: boolean
@@ -642,6 +660,14 @@ export type SurahJuzSelectScalar = {
 
 export type SurahJuzOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "surahId" | "juzId" | "startVerse" | "endVerse", ExtArgs["result"]["surahJuz"]>
 export type SurahJuzInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+}
+export type SurahJuzIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
+  juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
+}
+export type SurahJuzIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   surah?: boolean | Prisma.SurahDefaultArgs<ExtArgs>
   juz?: boolean | Prisma.JuzDefaultArgs<ExtArgs>
 }
@@ -776,6 +802,30 @@ export interface SurahJuzDelegate<ExtArgs extends runtime.Types.Extensions.Inter
   createMany<T extends SurahJuzCreateManyArgs>(args?: Prisma.SelectSubset<T, SurahJuzCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many SurahJuzs and returns the data saved in the database.
+   * @param {SurahJuzCreateManyAndReturnArgs} args - Arguments to create many SurahJuzs.
+   * @example
+   * // Create many SurahJuzs
+   * const surahJuz = await prisma.surahJuz.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many SurahJuzs and only return the `id`
+   * const surahJuzWithIdOnly = await prisma.surahJuz.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends SurahJuzCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, SurahJuzCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SurahJuzPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a SurahJuz.
    * @param {SurahJuzDeleteArgs} args - Arguments to delete one SurahJuz.
    * @example
@@ -838,6 +888,36 @@ export interface SurahJuzDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * 
    */
   updateMany<T extends SurahJuzUpdateManyArgs>(args: Prisma.SelectSubset<T, SurahJuzUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more SurahJuzs and returns the data updated in the database.
+   * @param {SurahJuzUpdateManyAndReturnArgs} args - Arguments to update many SurahJuzs.
+   * @example
+   * // Update many SurahJuzs
+   * const surahJuz = await prisma.surahJuz.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more SurahJuzs and only return the `id`
+   * const surahJuzWithIdOnly = await prisma.surahJuz.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends SurahJuzUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, SurahJuzUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SurahJuzPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one SurahJuz.
@@ -1272,6 +1352,29 @@ export type SurahJuzCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * SurahJuz createManyAndReturn
+ */
+export type SurahJuzCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SurahJuz
+   */
+  select?: Prisma.SurahJuzSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the SurahJuz
+   */
+  omit?: Prisma.SurahJuzOmit<ExtArgs> | null
+  /**
+   * The data used to create many SurahJuzs.
+   */
+  data: Prisma.SurahJuzCreateManyInput | Prisma.SurahJuzCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SurahJuzIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * SurahJuz update
  */
 export type SurahJuzUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1313,6 +1416,36 @@ export type SurahJuzUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many SurahJuzs to update.
    */
   limit?: number
+}
+
+/**
+ * SurahJuz updateManyAndReturn
+ */
+export type SurahJuzUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SurahJuz
+   */
+  select?: Prisma.SurahJuzSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the SurahJuz
+   */
+  omit?: Prisma.SurahJuzOmit<ExtArgs> | null
+  /**
+   * The data used to update SurahJuzs.
+   */
+  data: Prisma.XOR<Prisma.SurahJuzUpdateManyMutationInput, Prisma.SurahJuzUncheckedUpdateManyInput>
+  /**
+   * Filter which SurahJuzs to update
+   */
+  where?: Prisma.SurahJuzWhereInput
+  /**
+   * Limit how many SurahJuzs to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SurahJuzIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

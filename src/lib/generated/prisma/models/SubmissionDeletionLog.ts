@@ -244,7 +244,6 @@ export type SubmissionDeletionLogOrderByWithRelationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedByName?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  _relevance?: Prisma.SubmissionDeletionLogOrderByRelevanceInput
 }
 
 export type SubmissionDeletionLogWhereUniqueInput = Prisma.AtLeast<{
@@ -396,12 +395,6 @@ export type SubmissionDeletionLogUncheckedUpdateManyInput = {
   deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type SubmissionDeletionLogOrderByRelevanceInput = {
-  fields: Prisma.SubmissionDeletionLogOrderByRelevanceFieldEnum | Prisma.SubmissionDeletionLogOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
-}
-
 export type SubmissionDeletionLogCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   studentName?: Prisma.SortOrder
@@ -460,7 +453,33 @@ export type SubmissionDeletionLogSelect<ExtArgs extends runtime.Types.Extensions
   deletedAt?: boolean
 }, ExtArgs["result"]["submissionDeletionLog"]>
 
+export type SubmissionDeletionLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentName?: boolean
+  teacherName?: boolean
+  groupName?: boolean
+  classroomName?: boolean
+  submissionDate?: boolean
+  submissionType?: boolean
+  detail?: boolean
+  note?: boolean
+  deletedByName?: boolean
+  deletedAt?: boolean
+}, ExtArgs["result"]["submissionDeletionLog"]>
 
+export type SubmissionDeletionLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentName?: boolean
+  teacherName?: boolean
+  groupName?: boolean
+  classroomName?: boolean
+  submissionDate?: boolean
+  submissionType?: boolean
+  detail?: boolean
+  note?: boolean
+  deletedByName?: boolean
+  deletedAt?: boolean
+}, ExtArgs["result"]["submissionDeletionLog"]>
 
 export type SubmissionDeletionLogSelectScalar = {
   id?: boolean
@@ -611,6 +630,30 @@ export interface SubmissionDeletionLogDelegate<ExtArgs extends runtime.Types.Ext
   createMany<T extends SubmissionDeletionLogCreateManyArgs>(args?: Prisma.SelectSubset<T, SubmissionDeletionLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many SubmissionDeletionLogs and returns the data saved in the database.
+   * @param {SubmissionDeletionLogCreateManyAndReturnArgs} args - Arguments to create many SubmissionDeletionLogs.
+   * @example
+   * // Create many SubmissionDeletionLogs
+   * const submissionDeletionLog = await prisma.submissionDeletionLog.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many SubmissionDeletionLogs and only return the `id`
+   * const submissionDeletionLogWithIdOnly = await prisma.submissionDeletionLog.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends SubmissionDeletionLogCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, SubmissionDeletionLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubmissionDeletionLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a SubmissionDeletionLog.
    * @param {SubmissionDeletionLogDeleteArgs} args - Arguments to delete one SubmissionDeletionLog.
    * @example
@@ -673,6 +716,36 @@ export interface SubmissionDeletionLogDelegate<ExtArgs extends runtime.Types.Ext
    * 
    */
   updateMany<T extends SubmissionDeletionLogUpdateManyArgs>(args: Prisma.SelectSubset<T, SubmissionDeletionLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more SubmissionDeletionLogs and returns the data updated in the database.
+   * @param {SubmissionDeletionLogUpdateManyAndReturnArgs} args - Arguments to update many SubmissionDeletionLogs.
+   * @example
+   * // Update many SubmissionDeletionLogs
+   * const submissionDeletionLog = await prisma.submissionDeletionLog.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more SubmissionDeletionLogs and only return the `id`
+   * const submissionDeletionLogWithIdOnly = await prisma.submissionDeletionLog.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends SubmissionDeletionLogUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, SubmissionDeletionLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubmissionDeletionLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one SubmissionDeletionLog.
@@ -1087,6 +1160,25 @@ export type SubmissionDeletionLogCreateManyArgs<ExtArgs extends runtime.Types.Ex
 }
 
 /**
+ * SubmissionDeletionLog createManyAndReturn
+ */
+export type SubmissionDeletionLogCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubmissionDeletionLog
+   */
+  select?: Prisma.SubmissionDeletionLogSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubmissionDeletionLog
+   */
+  omit?: Prisma.SubmissionDeletionLogOmit<ExtArgs> | null
+  /**
+   * The data used to create many SubmissionDeletionLogs.
+   */
+  data: Prisma.SubmissionDeletionLogCreateManyInput | Prisma.SubmissionDeletionLogCreateManyInput[]
+  skipDuplicates?: boolean
+}
+
+/**
  * SubmissionDeletionLog update
  */
 export type SubmissionDeletionLogUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1112,6 +1204,32 @@ export type SubmissionDeletionLogUpdateArgs<ExtArgs extends runtime.Types.Extens
  * SubmissionDeletionLog updateMany
  */
 export type SubmissionDeletionLogUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The data used to update SubmissionDeletionLogs.
+   */
+  data: Prisma.XOR<Prisma.SubmissionDeletionLogUpdateManyMutationInput, Prisma.SubmissionDeletionLogUncheckedUpdateManyInput>
+  /**
+   * Filter which SubmissionDeletionLogs to update
+   */
+  where?: Prisma.SubmissionDeletionLogWhereInput
+  /**
+   * Limit how many SubmissionDeletionLogs to update.
+   */
+  limit?: number
+}
+
+/**
+ * SubmissionDeletionLog updateManyAndReturn
+ */
+export type SubmissionDeletionLogUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubmissionDeletionLog
+   */
+  select?: Prisma.SubmissionDeletionLogSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubmissionDeletionLog
+   */
+  omit?: Prisma.SubmissionDeletionLogOmit<ExtArgs> | null
   /**
    * The data used to update SubmissionDeletionLogs.
    */

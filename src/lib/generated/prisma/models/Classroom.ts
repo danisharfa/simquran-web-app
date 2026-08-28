@@ -257,7 +257,6 @@ export type ClassroomOrderByWithRelationInput = {
   classroomHistories?: Prisma.ClassroomHistoryOrderByRelationAggregateInput
   students?: Prisma.StudentProfileOrderByRelationAggregateInput
   groups?: Prisma.GroupOrderByRelationAggregateInput
-  _relevance?: Prisma.ClassroomOrderByRelevanceInput
 }
 
 export type ClassroomWhereUniqueInput = Prisma.AtLeast<{
@@ -400,12 +399,6 @@ export type ClassroomUncheckedUpdateManyInput = {
 export type ClassroomNullableScalarRelationFilter = {
   is?: Prisma.ClassroomWhereInput | null
   isNot?: Prisma.ClassroomWhereInput | null
-}
-
-export type ClassroomOrderByRelevanceInput = {
-  fields: Prisma.ClassroomOrderByRelevanceFieldEnum | Prisma.ClassroomOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type ClassroomNameAcademicYearSemesterCompoundUniqueInput = {
@@ -780,7 +773,27 @@ export type ClassroomSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   _count?: boolean | Prisma.ClassroomCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["classroom"]>
 
+export type ClassroomSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  level?: boolean
+  name?: boolean
+  academicYear?: boolean
+  semester?: boolean
+  isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+}, ExtArgs["result"]["classroom"]>
 
+export type ClassroomSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  level?: boolean
+  name?: boolean
+  academicYear?: boolean
+  semester?: boolean
+  isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+}, ExtArgs["result"]["classroom"]>
 
 export type ClassroomSelectScalar = {
   id?: boolean
@@ -800,6 +813,8 @@ export type ClassroomInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   groups?: boolean | Prisma.Classroom$groupsArgs<ExtArgs>
   _count?: boolean | Prisma.ClassroomCountOutputTypeDefaultArgs<ExtArgs>
 }
+export type ClassroomIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ClassroomIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $ClassroomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Classroom"
@@ -935,6 +950,30 @@ export interface ClassroomDelegate<ExtArgs extends runtime.Types.Extensions.Inte
   createMany<T extends ClassroomCreateManyArgs>(args?: Prisma.SelectSubset<T, ClassroomCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many Classrooms and returns the data saved in the database.
+   * @param {ClassroomCreateManyAndReturnArgs} args - Arguments to create many Classrooms.
+   * @example
+   * // Create many Classrooms
+   * const classroom = await prisma.classroom.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many Classrooms and only return the `id`
+   * const classroomWithIdOnly = await prisma.classroom.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends ClassroomCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, ClassroomCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassroomPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a Classroom.
    * @param {ClassroomDeleteArgs} args - Arguments to delete one Classroom.
    * @example
@@ -997,6 +1036,36 @@ export interface ClassroomDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * 
    */
   updateMany<T extends ClassroomUpdateManyArgs>(args: Prisma.SelectSubset<T, ClassroomUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more Classrooms and returns the data updated in the database.
+   * @param {ClassroomUpdateManyAndReturnArgs} args - Arguments to update many Classrooms.
+   * @example
+   * // Update many Classrooms
+   * const classroom = await prisma.classroom.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more Classrooms and only return the `id`
+   * const classroomWithIdOnly = await prisma.classroom.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends ClassroomUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, ClassroomUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassroomPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Classroom.
@@ -1435,6 +1504,25 @@ export type ClassroomCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * Classroom createManyAndReturn
+ */
+export type ClassroomCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Classroom
+   */
+  select?: Prisma.ClassroomSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Classroom
+   */
+  omit?: Prisma.ClassroomOmit<ExtArgs> | null
+  /**
+   * The data used to create many Classrooms.
+   */
+  data: Prisma.ClassroomCreateManyInput | Prisma.ClassroomCreateManyInput[]
+  skipDuplicates?: boolean
+}
+
+/**
  * Classroom update
  */
 export type ClassroomUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1464,6 +1552,32 @@ export type ClassroomUpdateArgs<ExtArgs extends runtime.Types.Extensions.Interna
  * Classroom updateMany
  */
 export type ClassroomUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The data used to update Classrooms.
+   */
+  data: Prisma.XOR<Prisma.ClassroomUpdateManyMutationInput, Prisma.ClassroomUncheckedUpdateManyInput>
+  /**
+   * Filter which Classrooms to update
+   */
+  where?: Prisma.ClassroomWhereInput
+  /**
+   * Limit how many Classrooms to update.
+   */
+  limit?: number
+}
+
+/**
+ * Classroom updateManyAndReturn
+ */
+export type ClassroomUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Classroom
+   */
+  select?: Prisma.ClassroomSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Classroom
+   */
+  omit?: Prisma.ClassroomOmit<ExtArgs> | null
   /**
    * The data used to update Classrooms.
    */

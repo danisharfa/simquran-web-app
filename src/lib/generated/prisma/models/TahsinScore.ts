@@ -273,7 +273,6 @@ export type TahsinScoreOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   student?: Prisma.StudentProfileOrderByWithRelationInput
   group?: Prisma.GroupOrderByWithRelationInput
-  _relevance?: Prisma.TahsinScoreOrderByRelevanceInput
 }
 
 export type TahsinScoreWhereUniqueInput = Prisma.AtLeast<{
@@ -426,12 +425,6 @@ export type TahsinScoreListRelationFilter = {
 
 export type TahsinScoreOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type TahsinScoreOrderByRelevanceInput = {
-  fields: Prisma.TahsinScoreOrderByRelevanceFieldEnum | Prisma.TahsinScoreOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type TahsinScoreStudentIdGroupIdTahsinTypeTopicCompoundUniqueInput = {
@@ -805,7 +798,35 @@ export type TahsinScoreSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tahsinScore"]>
 
+export type TahsinScoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  tahsinType?: boolean
+  topic?: boolean
+  score?: boolean
+  grade?: boolean
+  description?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["tahsinScore"]>
 
+export type TahsinScoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  groupId?: boolean
+  tahsinType?: boolean
+  topic?: boolean
+  score?: boolean
+  grade?: boolean
+  description?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["tahsinScore"]>
 
 export type TahsinScoreSelectScalar = {
   id?: boolean
@@ -822,6 +843,14 @@ export type TahsinScoreSelectScalar = {
 
 export type TahsinScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "groupId" | "tahsinType" | "topic" | "score" | "grade" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["tahsinScore"]>
 export type TahsinScoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+}
+export type TahsinScoreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
+}
+export type TahsinScoreIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
 }
@@ -961,6 +990,30 @@ export interface TahsinScoreDelegate<ExtArgs extends runtime.Types.Extensions.In
   createMany<T extends TahsinScoreCreateManyArgs>(args?: Prisma.SelectSubset<T, TahsinScoreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many TahsinScores and returns the data saved in the database.
+   * @param {TahsinScoreCreateManyAndReturnArgs} args - Arguments to create many TahsinScores.
+   * @example
+   * // Create many TahsinScores
+   * const tahsinScore = await prisma.tahsinScore.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many TahsinScores and only return the `id`
+   * const tahsinScoreWithIdOnly = await prisma.tahsinScore.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends TahsinScoreCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, TahsinScoreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahsinScorePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a TahsinScore.
    * @param {TahsinScoreDeleteArgs} args - Arguments to delete one TahsinScore.
    * @example
@@ -1023,6 +1076,36 @@ export interface TahsinScoreDelegate<ExtArgs extends runtime.Types.Extensions.In
    * 
    */
   updateMany<T extends TahsinScoreUpdateManyArgs>(args: Prisma.SelectSubset<T, TahsinScoreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more TahsinScores and returns the data updated in the database.
+   * @param {TahsinScoreUpdateManyAndReturnArgs} args - Arguments to update many TahsinScores.
+   * @example
+   * // Update many TahsinScores
+   * const tahsinScore = await prisma.tahsinScore.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more TahsinScores and only return the `id`
+   * const tahsinScoreWithIdOnly = await prisma.tahsinScore.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends TahsinScoreUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, TahsinScoreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahsinScorePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one TahsinScore.
@@ -1462,6 +1545,29 @@ export type TahsinScoreCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * TahsinScore createManyAndReturn
+ */
+export type TahsinScoreCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TahsinScore
+   */
+  select?: Prisma.TahsinScoreSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TahsinScore
+   */
+  omit?: Prisma.TahsinScoreOmit<ExtArgs> | null
+  /**
+   * The data used to create many TahsinScores.
+   */
+  data: Prisma.TahsinScoreCreateManyInput | Prisma.TahsinScoreCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TahsinScoreIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * TahsinScore update
  */
 export type TahsinScoreUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1503,6 +1609,36 @@ export type TahsinScoreUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many TahsinScores to update.
    */
   limit?: number
+}
+
+/**
+ * TahsinScore updateManyAndReturn
+ */
+export type TahsinScoreUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TahsinScore
+   */
+  select?: Prisma.TahsinScoreSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the TahsinScore
+   */
+  omit?: Prisma.TahsinScoreOmit<ExtArgs> | null
+  /**
+   * The data used to update TahsinScores.
+   */
+  data: Prisma.XOR<Prisma.TahsinScoreUpdateManyMutationInput, Prisma.TahsinScoreUncheckedUpdateManyInput>
+  /**
+   * Filter which TahsinScores to update
+   */
+  where?: Prisma.TahsinScoreWhereInput
+  /**
+   * Limit how many TahsinScores to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TahsinScoreIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

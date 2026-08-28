@@ -167,7 +167,6 @@ export type MunaqasyahScheduleRequestOrderByWithRelationInput = {
   requestId?: Prisma.SortOrder
   schedule?: Prisma.MunaqasyahScheduleOrderByWithRelationInput
   request?: Prisma.MunaqasyahRequestOrderByWithRelationInput
-  _relevance?: Prisma.MunaqasyahScheduleRequestOrderByRelevanceInput
 }
 
 export type MunaqasyahScheduleRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -239,12 +238,6 @@ export type MunaqasyahScheduleRequestListRelationFilter = {
 
 export type MunaqasyahScheduleRequestOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type MunaqasyahScheduleRequestOrderByRelevanceInput = {
-  fields: Prisma.MunaqasyahScheduleRequestOrderByRelevanceFieldEnum | Prisma.MunaqasyahScheduleRequestOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type MunaqasyahScheduleRequestScheduleIdRequestIdCompoundUniqueInput = {
@@ -468,7 +461,19 @@ export type MunaqasyahScheduleRequestSelect<ExtArgs extends runtime.Types.Extens
   request?: boolean | Prisma.MunaqasyahRequestDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["munaqasyahScheduleRequest"]>
 
+export type MunaqasyahScheduleRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  scheduleId?: boolean
+  requestId?: boolean
+  schedule?: boolean | Prisma.MunaqasyahScheduleDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.MunaqasyahRequestDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["munaqasyahScheduleRequest"]>
 
+export type MunaqasyahScheduleRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  scheduleId?: boolean
+  requestId?: boolean
+  schedule?: boolean | Prisma.MunaqasyahScheduleDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.MunaqasyahRequestDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["munaqasyahScheduleRequest"]>
 
 export type MunaqasyahScheduleRequestSelectScalar = {
   scheduleId?: boolean
@@ -477,6 +482,14 @@ export type MunaqasyahScheduleRequestSelectScalar = {
 
 export type MunaqasyahScheduleRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"scheduleId" | "requestId", ExtArgs["result"]["munaqasyahScheduleRequest"]>
 export type MunaqasyahScheduleRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  schedule?: boolean | Prisma.MunaqasyahScheduleDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.MunaqasyahRequestDefaultArgs<ExtArgs>
+}
+export type MunaqasyahScheduleRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  schedule?: boolean | Prisma.MunaqasyahScheduleDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.MunaqasyahRequestDefaultArgs<ExtArgs>
+}
+export type MunaqasyahScheduleRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   schedule?: boolean | Prisma.MunaqasyahScheduleDefaultArgs<ExtArgs>
   request?: boolean | Prisma.MunaqasyahRequestDefaultArgs<ExtArgs>
 }
@@ -608,6 +621,30 @@ export interface MunaqasyahScheduleRequestDelegate<ExtArgs extends runtime.Types
   createMany<T extends MunaqasyahScheduleRequestCreateManyArgs>(args?: Prisma.SelectSubset<T, MunaqasyahScheduleRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many MunaqasyahScheduleRequests and returns the data saved in the database.
+   * @param {MunaqasyahScheduleRequestCreateManyAndReturnArgs} args - Arguments to create many MunaqasyahScheduleRequests.
+   * @example
+   * // Create many MunaqasyahScheduleRequests
+   * const munaqasyahScheduleRequest = await prisma.munaqasyahScheduleRequest.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many MunaqasyahScheduleRequests and only return the `scheduleId`
+   * const munaqasyahScheduleRequestWithScheduleIdOnly = await prisma.munaqasyahScheduleRequest.createManyAndReturn({
+   *   select: { scheduleId: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends MunaqasyahScheduleRequestCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, MunaqasyahScheduleRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahScheduleRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a MunaqasyahScheduleRequest.
    * @param {MunaqasyahScheduleRequestDeleteArgs} args - Arguments to delete one MunaqasyahScheduleRequest.
    * @example
@@ -670,6 +707,36 @@ export interface MunaqasyahScheduleRequestDelegate<ExtArgs extends runtime.Types
    * 
    */
   updateMany<T extends MunaqasyahScheduleRequestUpdateManyArgs>(args: Prisma.SelectSubset<T, MunaqasyahScheduleRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more MunaqasyahScheduleRequests and returns the data updated in the database.
+   * @param {MunaqasyahScheduleRequestUpdateManyAndReturnArgs} args - Arguments to update many MunaqasyahScheduleRequests.
+   * @example
+   * // Update many MunaqasyahScheduleRequests
+   * const munaqasyahScheduleRequest = await prisma.munaqasyahScheduleRequest.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more MunaqasyahScheduleRequests and only return the `scheduleId`
+   * const munaqasyahScheduleRequestWithScheduleIdOnly = await prisma.munaqasyahScheduleRequest.updateManyAndReturn({
+   *   select: { scheduleId: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends MunaqasyahScheduleRequestUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, MunaqasyahScheduleRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunaqasyahScheduleRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one MunaqasyahScheduleRequest.
@@ -1101,6 +1168,29 @@ export type MunaqasyahScheduleRequestCreateManyArgs<ExtArgs extends runtime.Type
 }
 
 /**
+ * MunaqasyahScheduleRequest createManyAndReturn
+ */
+export type MunaqasyahScheduleRequestCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahScheduleRequest
+   */
+  select?: Prisma.MunaqasyahScheduleRequestSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahScheduleRequest
+   */
+  omit?: Prisma.MunaqasyahScheduleRequestOmit<ExtArgs> | null
+  /**
+   * The data used to create many MunaqasyahScheduleRequests.
+   */
+  data: Prisma.MunaqasyahScheduleRequestCreateManyInput | Prisma.MunaqasyahScheduleRequestCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahScheduleRequestIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * MunaqasyahScheduleRequest update
  */
 export type MunaqasyahScheduleRequestUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1142,6 +1232,36 @@ export type MunaqasyahScheduleRequestUpdateManyArgs<ExtArgs extends runtime.Type
    * Limit how many MunaqasyahScheduleRequests to update.
    */
   limit?: number
+}
+
+/**
+ * MunaqasyahScheduleRequest updateManyAndReturn
+ */
+export type MunaqasyahScheduleRequestUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunaqasyahScheduleRequest
+   */
+  select?: Prisma.MunaqasyahScheduleRequestSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the MunaqasyahScheduleRequest
+   */
+  omit?: Prisma.MunaqasyahScheduleRequestOmit<ExtArgs> | null
+  /**
+   * The data used to update MunaqasyahScheduleRequests.
+   */
+  data: Prisma.XOR<Prisma.MunaqasyahScheduleRequestUpdateManyMutationInput, Prisma.MunaqasyahScheduleRequestUncheckedUpdateManyInput>
+  /**
+   * Filter which MunaqasyahScheduleRequests to update
+   */
+  where?: Prisma.MunaqasyahScheduleRequestWhereInput
+  /**
+   * Limit how many MunaqasyahScheduleRequests to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MunaqasyahScheduleRequestIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

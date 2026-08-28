@@ -6,7 +6,7 @@ import { ac, SUPERADMIN, ADMIN, COORDINATOR, TEACHER, STUDENT } from '@/lib/perm
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
-    provider: 'mysql',
+    provider: 'postgresql',
   }),
   emailAndPassword: {
     enabled: true,
@@ -34,6 +34,9 @@ export const auth = betterAuth({
       // Key di atas (SUPERADMIN, ADMIN, dst) HARUS persis sama dengan
       // nilai string yang tersimpan di kolom `role` database (case-sensitive).
       adminRoles: ['SUPERADMIN', 'ADMIN'],
+      // Tanpa ini, plugin admin default ke role "user" saat signup, yang
+      // tidak ada di enum Role dan bikin validasi Prisma gagal.
+      defaultRole: 'STUDENT',
     }),
   ],
 });

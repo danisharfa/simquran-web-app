@@ -212,7 +212,6 @@ export type ClassroomHistoryOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   classroom?: Prisma.ClassroomOrderByWithRelationInput
   student?: Prisma.StudentProfileOrderByWithRelationInput
-  _relevance?: Prisma.ClassroomHistoryOrderByRelevanceInput
 }
 
 export type ClassroomHistoryWhereUniqueInput = Prisma.AtLeast<{
@@ -333,12 +332,6 @@ export type ClassroomHistoryListRelationFilter = {
 
 export type ClassroomHistoryOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type ClassroomHistoryOrderByRelevanceInput = {
-  fields: Prisma.ClassroomHistoryOrderByRelevanceFieldEnum | Prisma.ClassroomHistoryOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type ClassroomHistoryStudentIdClassroomIdAcademicYearSemesterCompoundUniqueInput = {
@@ -649,7 +642,29 @@ export type ClassroomHistorySelect<ExtArgs extends runtime.Types.Extensions.Inte
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["classroomHistory"]>
 
+export type ClassroomHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  classroomId?: boolean
+  academicYear?: boolean
+  semester?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  classroom?: boolean | Prisma.ClassroomDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["classroomHistory"]>
 
+export type ClassroomHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  studentId?: boolean
+  classroomId?: boolean
+  academicYear?: boolean
+  semester?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  classroom?: boolean | Prisma.ClassroomDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["classroomHistory"]>
 
 export type ClassroomHistorySelectScalar = {
   id?: boolean
@@ -663,6 +678,14 @@ export type ClassroomHistorySelectScalar = {
 
 export type ClassroomHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "classroomId" | "academicYear" | "semester" | "createdAt" | "updatedAt", ExtArgs["result"]["classroomHistory"]>
 export type ClassroomHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  classroom?: boolean | Prisma.ClassroomDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+}
+export type ClassroomHistoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  classroom?: boolean | Prisma.ClassroomDefaultArgs<ExtArgs>
+  student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
+}
+export type ClassroomHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classroom?: boolean | Prisma.ClassroomDefaultArgs<ExtArgs>
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
 }
@@ -799,6 +822,30 @@ export interface ClassroomHistoryDelegate<ExtArgs extends runtime.Types.Extensio
   createMany<T extends ClassroomHistoryCreateManyArgs>(args?: Prisma.SelectSubset<T, ClassroomHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many ClassroomHistories and returns the data saved in the database.
+   * @param {ClassroomHistoryCreateManyAndReturnArgs} args - Arguments to create many ClassroomHistories.
+   * @example
+   * // Create many ClassroomHistories
+   * const classroomHistory = await prisma.classroomHistory.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many ClassroomHistories and only return the `id`
+   * const classroomHistoryWithIdOnly = await prisma.classroomHistory.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends ClassroomHistoryCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, ClassroomHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassroomHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a ClassroomHistory.
    * @param {ClassroomHistoryDeleteArgs} args - Arguments to delete one ClassroomHistory.
    * @example
@@ -861,6 +908,36 @@ export interface ClassroomHistoryDelegate<ExtArgs extends runtime.Types.Extensio
    * 
    */
   updateMany<T extends ClassroomHistoryUpdateManyArgs>(args: Prisma.SelectSubset<T, ClassroomHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more ClassroomHistories and returns the data updated in the database.
+   * @param {ClassroomHistoryUpdateManyAndReturnArgs} args - Arguments to update many ClassroomHistories.
+   * @example
+   * // Update many ClassroomHistories
+   * const classroomHistory = await prisma.classroomHistory.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more ClassroomHistories and only return the `id`
+   * const classroomHistoryWithIdOnly = await prisma.classroomHistory.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends ClassroomHistoryUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, ClassroomHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassroomHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one ClassroomHistory.
@@ -1297,6 +1374,29 @@ export type ClassroomHistoryCreateManyArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 /**
+ * ClassroomHistory createManyAndReturn
+ */
+export type ClassroomHistoryCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClassroomHistory
+   */
+  select?: Prisma.ClassroomHistorySelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClassroomHistory
+   */
+  omit?: Prisma.ClassroomHistoryOmit<ExtArgs> | null
+  /**
+   * The data used to create many ClassroomHistories.
+   */
+  data: Prisma.ClassroomHistoryCreateManyInput | Prisma.ClassroomHistoryCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClassroomHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * ClassroomHistory update
  */
 export type ClassroomHistoryUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1338,6 +1438,36 @@ export type ClassroomHistoryUpdateManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many ClassroomHistories to update.
    */
   limit?: number
+}
+
+/**
+ * ClassroomHistory updateManyAndReturn
+ */
+export type ClassroomHistoryUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClassroomHistory
+   */
+  select?: Prisma.ClassroomHistorySelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClassroomHistory
+   */
+  omit?: Prisma.ClassroomHistoryOmit<ExtArgs> | null
+  /**
+   * The data used to update ClassroomHistories.
+   */
+  data: Prisma.XOR<Prisma.ClassroomHistoryUpdateManyMutationInput, Prisma.ClassroomHistoryUncheckedUpdateManyInput>
+  /**
+   * Filter which ClassroomHistories to update
+   */
+  where?: Prisma.ClassroomHistoryWhereInput
+  /**
+   * Limit how many ClassroomHistories to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClassroomHistoryIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
