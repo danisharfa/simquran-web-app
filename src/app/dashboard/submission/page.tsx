@@ -8,6 +8,7 @@ import { listMySubmissions } from '@/features/submissions/queries/list-my-submis
 import { listOwnSubmissions } from '@/features/submissions/queries/list-own-submissions';
 import { listSubmissionDeletionLog } from '@/features/submissions/queries/list-submission-deletion-log';
 import { listMyGroupsWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
+import { getAcademicSetting } from '@/features/academic-settings/queries/get-academic-setting';
 import {
   listSurahOptions,
   listJuzOptions,
@@ -18,6 +19,12 @@ import {
 export default async function SubmissionPage() {
   const session = await requireRole(['teacher', 'coordinator', 'student']);
   const role = session.user.role.toLowerCase();
+  const academicSetting = await getAcademicSetting();
+  const currentPeriod = academicSetting ? `${academicSetting.currentYear}|${academicSetting.currentSemester}` : undefined;
+  const schoolInfo = academicSetting
+    ? { schoolName: academicSetting.schoolName, schoolAddress: academicSetting.schoolAddress }
+    : { schoolName: '-', schoolAddress: null };
+  const exportedBy = { name: session.user.name, role: session.user.role };
 
   if (role === 'teacher') {
     const [submissions, groups, surahOptions, juzOptions, surahJuzMap, wafaOptions] = await Promise.all([
@@ -53,6 +60,9 @@ export default async function SubmissionPage() {
           juzOptions={juzOptions}
           surahJuzMap={surahJuzMap}
           wafaOptions={wafaOptions}
+          currentPeriod={currentPeriod}
+          schoolInfo={schoolInfo}
+          exportedBy={exportedBy}
         />
       </div>
     );
@@ -65,7 +75,13 @@ export default async function SubmissionPage() {
       <div className="space-y-6">
         <PageHeader title="Monitoring Setoran" description="Pantau setoran tahfidz/tahsin seluruh siswa" />
 
-        <SubmissionTable data={submissions} showClassroom />
+        <SubmissionTable
+          data={submissions}
+          showClassroom
+          currentPeriod={currentPeriod}
+          schoolInfo={schoolInfo}
+          exportedBy={exportedBy}
+        />
 
         {deletionLog.length > 0 && <SubmissionDeletionLogTable data={deletionLog} />}
       </div>
@@ -78,7 +94,13 @@ export default async function SubmissionPage() {
     <div className="space-y-6">
       <PageHeader title="Riwayat Setoran" description="Riwayat setoran tahfidz/tahsin Anda" />
 
-      <SubmissionTable data={submissions} own />
+      <SubmissionTable
+        data={submissions}
+        own
+        currentPeriod={currentPeriod}
+        schoolInfo={schoolInfo}
+        exportedBy={exportedBy}
+      />
     </div>
   );
 }

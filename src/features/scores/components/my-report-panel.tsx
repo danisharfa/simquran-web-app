@@ -94,6 +94,7 @@ export function MyReportPanel() {
           report={data.report}
           tahfidzScores={data.tahfidzScores}
           tahsinScores={data.tahsinScores}
+          gradeDescriptionMap={data.gradeDescriptionMap}
         />
       )}
     </div>

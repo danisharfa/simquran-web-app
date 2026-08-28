@@ -5,6 +5,7 @@ export interface HomeActivityTableData {
   id: string;
   date: Date;
   studentId: string;
+  nis: string;
   studentName: string;
   groupId: string;
   groupName: string;
@@ -31,6 +32,7 @@ export async function listOwnHomeActivities(): Promise<HomeActivityTableData[]> 
     id: a.id,
     date: a.date,
     studentId: a.studentId,
+    nis: a.student.nis,
     studentName: a.student.user.name,
     groupId: a.groupId,
     groupName: a.group.name,

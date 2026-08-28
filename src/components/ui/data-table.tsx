@@ -25,6 +25,7 @@ import { DataTablePagination } from './table-pagination';
 
 interface Props<T> {
   title?: string;
+  titleAction?: ReactNode;
   table: TanStackTable<T>;
   filterColumn?: string;
   showColumnFilter?: boolean;
@@ -34,6 +35,7 @@ interface Props<T> {
 
 export function DataTable<T>({
   title,
+  titleAction,
   table,
   filterColumn,
   showColumnFilter = true,
@@ -43,8 +45,9 @@ export function DataTable<T>({
   return (
     <Card>
       {title && (
-        <CardHeader>
+        <CardHeader className="flex-row items-center justify-between gap-2">
           <h2 className="text-xl font-semibold">{title}</h2>
+          {titleAction}
         </CardHeader>
       )}
       <CardContent className="min-w-0">

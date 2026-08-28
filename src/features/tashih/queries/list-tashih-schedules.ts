@@ -4,6 +4,7 @@ import { formatTashihDetail } from '../format-tashih-detail';
 
 export interface TashihScheduleParticipant {
   requestId: string;
+  nis: string;
   studentName: string;
   detail: string;
   groupId: string;
@@ -55,6 +56,7 @@ export async function listTashihSchedules(): Promise<TashihScheduleTableData[]> 
     location: s.location,
     participants: s.scheduleRequests.map((sr) => ({
       requestId: sr.request.id,
+      nis: sr.request.student.nis,
       studentName: sr.request.student.user.name,
       detail: formatTashihDetail(sr.request),
       groupId: sr.request.groupId,

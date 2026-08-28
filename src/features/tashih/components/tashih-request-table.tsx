@@ -33,7 +33,7 @@ import {
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
-import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
+import { FILTER_ALL, TableFilters, isDateInRange, buildPeriodOptions } from '@/components/layouts/filters/table-filters';
 import { TASHIH_TYPE_OPTIONS, TASHIH_STATUS_LABEL } from '../tashih.schema';
 import { respondTashihRequest } from '../actions/respond-tashih-request';
 import { cancelTashihRequest } from '../actions/cancel-tashih-request';
@@ -67,6 +67,7 @@ interface Props {
   juzOptions?: ReferenceOption[];
   surahJuzMap?: SurahJuzMapping[];
   wafaOptions?: ReferenceOption[];
+  currentPeriod?: string;
 }
 
 interface EditDeleteActionsProps {
@@ -228,6 +229,7 @@ export function TashihRequestTable({
   juzOptions = [],
   surahJuzMap = [],
   wafaOptions = [],
+  currentPeriod,
 }: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -236,20 +238,19 @@ export function TashihRequestTable({
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const [period, setPeriod] = useState(FILTER_ALL);
+  const [period, setPeriod] = useState(currentPeriod ?? FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
   const [tashihType, setTashihType] = useState(FILTER_ALL);
+  const [juz, setJuz] = useState(FILTER_ALL);
+  const [surah, setSurah] = useState(FILTER_ALL);
   const [status, setStatus] = useState(FILTER_ALL);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
-  const periodOptions = useMemo(() => {
-    const map = new Map<string, string>();
-    data.forEach((d) =>
-      map.set(`${d.academicYear}|${d.semester}`, `${d.academicYear} ${SEMESTER_LABEL[d.semester] ?? d.semester}`),
-    );
-    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
-  }, [data]);
+  const periodOptions = useMemo(
+    () => buildPeriodOptions(data, (d) => d.academicYear, (d) => d.semester, SEMESTER_LABEL, currentPeriod),
+    [data, currentPeriod],
+  );
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
     data
@@ -289,6 +290,20 @@ export function TashihRequestTable({
     data.forEach((d) => map.set(d.status, TASHIH_STATUS_LABEL[d.status] ?? d.status));
     return Array.from(map, ([value, label]) => ({ value, label }));
   }, [data]);
+  const juzFilterOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    data.forEach((d) => {
+      if (d.juzId != null) map.set(String(d.juzId), d.juzName ?? String(d.juzId));
+    });
+    return Array.from(map, ([value, label]) => ({ value, label }));
+  }, [data]);
+  const surahFilterOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    data.forEach((d) => {
+      if (d.surahId != null) map.set(String(d.surahId), d.surahName ?? String(d.surahId));
+    });
+    return Array.from(map, ([value, label]) => ({ value, label }));
+  }, [data]);
 
   const filteredData = useMemo(
     () =>
@@ -298,10 +313,12 @@ export function TashihRequestTable({
           (classroomId === FILTER_ALL || d.classroomId === classroomId) &&
           (groupId === FILTER_ALL || d.groupId === groupId) &&
           (tashihType === FILTER_ALL || d.tashihType === tashihType) &&
+          (juz === FILTER_ALL || String(d.juzId) === juz) &&
+          (surah === FILTER_ALL || String(d.surahId) === surah) &&
           (status === FILTER_ALL || d.status === status) &&
           isDateInRange(d.createdAt, dateRange),
       ),
-    [data, period, classroomId, groupId, tashihType, status, dateRange],
+    [data, period, classroomId, groupId, tashihType, juz, surah, status, dateRange],
   );
 
   const handleRespond = useCallback(
@@ -364,19 +381,24 @@ export function TashihRequestTable({
   const columns = useMemo<ColumnDef<TashihRequestTableData>[]>(() => {
     const base: ColumnDef<TashihRequestTableData>[] = [
       {
+        accessorKey: 'nis',
+        id: 'NIS',
+        header: 'NIS',
+      },
+      {
         accessorKey: 'studentName',
         id: 'Nama Siswa',
         header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
       },
       {
-        accessorKey: 'groupName',
-        id: 'Kelompok',
-        header: 'Kelompok',
-      },
-      {
         accessorKey: 'classroomName',
         id: 'Kelas',
         header: 'Kelas',
+      },
+      {
+        accessorKey: 'groupName',
+        id: 'Kelompok',
+        header: 'Kelompok',
       },
       {
         accessorKey: 'tashihType',
@@ -389,9 +411,15 @@ export function TashihRequestTable({
         ),
       },
       {
-        accessorKey: 'detail',
-        id: 'Detail',
-        header: 'Detail',
+        accessorKey: 'juzName',
+        id: 'Juz',
+        header: 'Juz',
+        cell: ({ row }) => row.original.juzName ?? '-',
+      },
+      {
+        id: 'Surah',
+        header: 'Surah',
+        cell: ({ row }) => (row.original.tashihType === 'WAFA' ? row.original.detail : (row.original.surahName ?? '-')),
       },
       {
         accessorKey: 'status',
@@ -495,6 +523,22 @@ export function TashihRequestTable({
                 value: tashihType,
                 onChange: setTashihType,
                 options: typeOptions,
+              },
+              {
+                key: 'juz',
+                label: 'Juz',
+                allLabel: 'Semua Juz',
+                value: juz,
+                onChange: setJuz,
+                options: juzFilterOptions,
+              },
+              {
+                key: 'surah',
+                label: 'Surah',
+                allLabel: 'Semua Surah',
+                value: surah,
+                onChange: setSurah,
+                options: surahFilterOptions,
               },
               {
                 key: 'status',

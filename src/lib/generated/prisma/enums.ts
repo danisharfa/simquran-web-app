@@ -89,6 +89,14 @@ export const GradeLetter = {
 export type GradeLetter = (typeof GradeLetter)[keyof typeof GradeLetter]
 
 
+export const ReportTemplateType = {
+  TAHFIDZ: 'TAHFIDZ',
+  TAHSIN: 'TAHSIN'
+} as const
+
+export type ReportTemplateType = (typeof ReportTemplateType)[keyof typeof ReportTemplateType]
+
+
 export const TahsinType = {
   WAFA: 'WAFA',
   ALQURAN: 'ALQURAN'

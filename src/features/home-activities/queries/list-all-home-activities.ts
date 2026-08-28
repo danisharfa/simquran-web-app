@@ -14,6 +14,7 @@ export async function listAllHomeActivities(): Promise<HomeActivityTableData[]> 
     id: a.id,
     date: a.date,
     studentId: a.studentId,
+    nis: a.student.nis,
     studentName: a.student.user.name,
     groupId: a.groupId,
     groupName: a.group.name,

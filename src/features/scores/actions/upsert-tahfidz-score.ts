@@ -5,8 +5,10 @@ import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { tahfidzScoreSchema, type TahfidzScoreSchema } from '../score.schema';
-import { computeGrade, generateTahfidzDescription } from '../grade';
+import { computeGrade, generateTahfidzDescription, buildGradeDescriptionMap } from '../grade';
 import { recalculateReport } from '../recalculate-report';
+import { getGradeLetterSettings } from '../queries/get-grade-letter-settings';
+import { getReportTemplates } from '../queries/get-report-templates';
 
 export async function upsertTahfidzScore(input: TahfidzScoreSchema) {
   const session = await requireRoleOrThrow(['teacher']);
@@ -33,8 +35,14 @@ export async function upsertTahfidzScore(input: TahfidzScoreSchema) {
     return { success: false, message: 'Surah tidak valid' };
   }
 
-  const grade = computeGrade(score);
-  const description = generateTahfidzDescription(grade, surah.name);
+  const [gradeSettings, templates] = await Promise.all([getGradeLetterSettings(), getReportTemplates()]);
+  const grade = computeGrade(score, gradeSettings);
+  const description = generateTahfidzDescription(
+    grade,
+    surah.name,
+    templates.TAHFIDZ,
+    buildGradeDescriptionMap(gradeSettings),
+  );
 
   await prisma.tahfidzScore.upsert({
     where: { studentId_groupId_surahId: { studentId, groupId, surahId } },

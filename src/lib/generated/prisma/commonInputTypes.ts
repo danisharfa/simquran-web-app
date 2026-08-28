@@ -497,6 +497,23 @@ export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
 }
 
+export type EnumReportTemplateTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReportTemplateType | Prisma.EnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReportTemplateType[] | Prisma.ListEnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReportTemplateType[] | Prisma.ListEnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReportTemplateTypeFilter<$PrismaModel> | $Enums.ReportTemplateType
+}
+
+export type EnumReportTemplateTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReportTemplateType | Prisma.EnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReportTemplateType[] | Prisma.ListEnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReportTemplateType[] | Prisma.ListEnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReportTemplateTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReportTemplateType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReportTemplateTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReportTemplateTypeFilter<$PrismaModel>
+}
+
 export type EnumMunaqasyahTahapFilter<$PrismaModel = never> = {
   equals?: $Enums.MunaqasyahTahap | Prisma.EnumMunaqasyahTahapFieldRefInput<$PrismaModel>
   in?: $Enums.MunaqasyahTahap[] | Prisma.ListEnumMunaqasyahTahapFieldRefInput<$PrismaModel>
@@ -1075,6 +1092,23 @@ export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumReportTemplateTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReportTemplateType | Prisma.EnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReportTemplateType[] | Prisma.ListEnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReportTemplateType[] | Prisma.ListEnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReportTemplateTypeFilter<$PrismaModel> | $Enums.ReportTemplateType
+}
+
+export type NestedEnumReportTemplateTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReportTemplateType | Prisma.EnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ReportTemplateType[] | Prisma.ListEnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReportTemplateType[] | Prisma.ListEnumReportTemplateTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReportTemplateTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReportTemplateType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReportTemplateTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReportTemplateTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumMunaqasyahTahapFilter<$PrismaModel = never> = {

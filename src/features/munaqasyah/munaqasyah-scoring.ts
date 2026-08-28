@@ -2,6 +2,14 @@ import type { MunaqasyahGrade } from '@/lib/generated/prisma/enums';
 
 const round1 = (n: number) => parseFloat(n.toFixed(1));
 
+export interface ScoringWeights {
+  khofiAwalAyatWeight: number;
+  khofiMakhrojWeight: number;
+  khofiTajwidMadWeight: number;
+  jaliBarisWeight: number;
+  jaliLebihSatuKalimatWeight: number;
+}
+
 export interface TasmiDetailInput {
   surahId: number;
   initialScore: number;
@@ -25,28 +33,62 @@ export interface MunaqasyahDetailInput {
 
 export const clamp100 = (value: number): number => Math.max(0, Math.min(100, value));
 
-export function scoreToGrade(score: number): MunaqasyahGrade {
-  if (score >= 91) return 'MUMTAZ';
-  if (score >= 85) return 'JAYYID_JIDDAN';
-  if (score >= 80) return 'JAYYID';
-  return 'TIDAK_LULUS';
+export interface MunaqasyahGradeSettingData {
+  grade: MunaqasyahGrade;
+  minScore: number;
+  label: string;
 }
 
-export function calculateTasmiRawTotal(row: TasmiDetailInput): number {
-  const totalKhofi = row.khofiAwalAyat + row.khofiMakhroj + row.khofiTajwidMad;
-  const totalJali = row.jaliBaris + row.jaliLebihSatuKalimat;
-  const rawScore = row.initialScore - 2 * totalKhofi - 5 * totalJali;
+export function scoreToGrade(score: number, settings: MunaqasyahGradeSettingData[]): MunaqasyahGrade {
+  const sorted = [...settings].sort((a, b) => b.minScore - a.minScore);
+  const match = sorted.find((s) => score >= s.minScore);
+  return (match ?? sorted[sorted.length - 1])?.grade ?? 'TIDAK_LULUS';
+}
+
+export function buildGradeLabelMap(settings: MunaqasyahGradeSettingData[]): Record<MunaqasyahGrade, string> {
+  return Object.fromEntries(settings.map((s) => [s.grade, s.label])) as Record<MunaqasyahGrade, string>;
+}
+
+export function isPassing(grade: MunaqasyahGrade): boolean {
+  return grade !== 'TIDAK_LULUS';
+}
+
+export function getKkm(settings: MunaqasyahGradeSettingData[]): number {
+  return settings.find((s) => s.grade === 'JAYYID')?.minScore ?? 0;
+}
+
+function calculateDeduction(
+  row: {
+    khofiAwalAyat: number;
+    khofiMakhroj: number;
+    khofiTajwidMad: number;
+    jaliBaris: number;
+    jaliLebihSatuKalimat: number;
+  },
+  weights: ScoringWeights,
+): number {
+  return (
+    row.khofiAwalAyat * weights.khofiAwalAyatWeight +
+    row.khofiMakhroj * weights.khofiMakhrojWeight +
+    row.khofiTajwidMad * weights.khofiTajwidMadWeight +
+    row.jaliBaris * weights.jaliBarisWeight +
+    row.jaliLebihSatuKalimat * weights.jaliLebihSatuKalimatWeight
+  );
+}
+
+export function calculateTasmiRawTotal(row: TasmiDetailInput, weights: ScoringWeights): number {
+  const rawScore = row.initialScore - calculateDeduction(row, weights);
   return Math.max(0, rawScore);
 }
 
-export function calculateTasmiPercentage(row: TasmiDetailInput): number {
-  const rawTotal = calculateTasmiRawTotal(row);
+export function calculateTasmiPercentage(row: TasmiDetailInput, weights: ScoringWeights): number {
+  const rawTotal = calculateTasmiRawTotal(row, weights);
   return row.initialScore > 0 ? (rawTotal / row.initialScore) * 100 : 0;
 }
 
-export function calculateTasmiTotalScore(tasmiDetails: TasmiDetailInput[]) {
+export function calculateTasmiTotalScore(tasmiDetails: TasmiDetailInput[], weights: ScoringWeights) {
   const detailsToSave = tasmiDetails.map((detail) => {
-    const percentageRounded = round1(calculateTasmiPercentage(detail));
+    const percentageRounded = round1(calculateTasmiPercentage(detail, weights));
     return { ...detail, totalScore: percentageRounded };
   });
 
@@ -57,36 +99,43 @@ export function calculateTasmiTotalScore(tasmiDetails: TasmiDetailInput[]) {
   return { totalScore, detailsToSave };
 }
 
-export function calculateMunaqasyahRawTotal(row: MunaqasyahDetailInput): number {
-  const totalKhofi = row.khofiAwalAyat + row.khofiMakhroj + row.khofiTajwidMad;
-  const totalJali = row.jaliBaris + row.jaliLebihSatuKalimat;
-  const rawScore = 50 - 2 * totalKhofi - 3 * totalJali;
+const MUNAQASYAH_BASE_SCORE = 50;
+
+export function calculateMunaqasyahRawTotal(row: MunaqasyahDetailInput, weights: ScoringWeights): number {
+  const rawScore = MUNAQASYAH_BASE_SCORE - calculateDeduction(row, weights);
   return Math.max(0, rawScore);
 }
 
-export function calculateMunaqasyahPercentage(row: MunaqasyahDetailInput): number {
-  return (calculateMunaqasyahRawTotal(row) / 50) * 100;
+export function calculateMunaqasyahPercentage(row: MunaqasyahDetailInput, weights: ScoringWeights): number {
+  return (calculateMunaqasyahRawTotal(row, weights) / MUNAQASYAH_BASE_SCORE) * 100;
 }
 
-export function calculateMunaqasyahTotalScore(munaqasyahDetails: MunaqasyahDetailInput[]) {
+export function calculateMunaqasyahTotalScore(munaqasyahDetails: MunaqasyahDetailInput[], weights: ScoringWeights) {
   if (munaqasyahDetails.length !== 5) {
     throw new Error('Munaqasyah harus terdiri dari 5 soal');
   }
 
   const detailsToSave = munaqasyahDetails.map((detail) => {
-    const rawTotal = calculateMunaqasyahRawTotal(detail);
-    return { ...detail, initialScore: 50, totalScore: rawTotal };
+    const rawTotal = calculateMunaqasyahRawTotal(detail, weights);
+    return { ...detail, initialScore: MUNAQASYAH_BASE_SCORE, totalScore: rawTotal };
   });
 
-  const questionScores = munaqasyahDetails.map((detail) => calculateMunaqasyahPercentage(detail));
+  const questionScores = munaqasyahDetails.map((detail) => calculateMunaqasyahPercentage(detail, weights));
   const avgPercent = questionScores.reduce((a, b) => a + b, 0) / questionScores.length;
   const totalScore = round1(clamp100(avgPercent));
 
   return { totalScore, detailsToSave };
 }
 
-export function calculateFinalScore(tasmiScore: number, munaqasyahScore: number): number {
-  return round1(clamp100(tasmiScore * 0.7 + munaqasyahScore * 0.3));
+export interface FinalScoreWeights {
+  tasmiWeight: number;
+  munaqasyahWeight: number;
+}
+
+export function calculateFinalScore(tasmiScore: number, munaqasyahScore: number, weights: FinalScoreWeights): number {
+  return round1(
+    clamp100(tasmiScore * (weights.tasmiWeight / 100) + munaqasyahScore * (weights.munaqasyahWeight / 100)),
+  );
 }
 
 export function validateTasmiDetails(tasmiDetails: TasmiDetailInput[]): string | null {

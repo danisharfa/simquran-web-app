@@ -34,6 +34,7 @@ import type { TeacherOption } from '@/features/groups/queries/list-teachers';
 
 const TAHAP_LABEL = Object.fromEntries(TAHAP_OPTIONS.map((o) => [o.value, o.label]));
 const JENIS_UJIAN_LABEL = Object.fromEntries(JENIS_UJIAN_OPTIONS.map((o) => [o.value, o.label]));
+const NO_EXAMINER = '__NONE__';
 
 interface Props {
   schedulableRequests: SchedulableMunaqasyahRequest[];
@@ -156,11 +157,15 @@ export function MunaqasyahScheduleCreateDialog({ schedulableRequests, teachers }
 
             <Field>
               <FieldLabel>Penguji (opsional)</FieldLabel>
-              <Select value={examinerId} onValueChange={(v) => setExaminerId(v ?? '')}>
+              <Select
+                value={examinerId || NO_EXAMINER}
+                onValueChange={(v) => setExaminerId(v === NO_EXAMINER ? '' : (v ?? ''))}
+              >
                 <SelectTrigger>
-                  <SelectValue>{teachers.find((t) => t.userId === examinerId)?.name ?? 'Pilih penguji'}</SelectValue>
+                  <SelectValue>{teachers.find((t) => t.userId === examinerId)?.name ?? 'Tanpa penguji'}</SelectValue>
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value={NO_EXAMINER}>Tanpa penguji</SelectItem>
                   {teachers.map((teacher) => (
                     <SelectItem key={teacher.userId} value={teacher.userId}>
                       {teacher.name}

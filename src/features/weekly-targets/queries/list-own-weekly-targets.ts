@@ -23,6 +23,7 @@ export async function listOwnWeeklyTargets(): Promise<WeeklyTargetTableData[]> {
   return targets.map((t) => ({
     id: t.id,
     studentId: t.studentId,
+    nis: t.student.nis,
     studentName: t.student.user.name,
     groupId: t.groupId,
     groupName: t.group.name,

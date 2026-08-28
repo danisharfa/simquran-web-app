@@ -7,6 +7,7 @@ import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { tashihRequestSchema, type TashihRequestSchema } from '../tashih.schema';
 import { validateTashihCoverage } from '../validate-tashih-coverage';
+import { findDuplicateTashihRequest } from '../check-duplicate-tashih-request';
 
 export async function createTashihRequest(input: TashihRequestSchema) {
   const session = await requireRoleOrThrow(['teacher']);
@@ -31,6 +32,17 @@ export async function createTashihRequest(input: TashihRequestSchema) {
   const coverage = await validateTashihCoverage(studentId, rest);
   if (!coverage.valid) {
     return { success: false, message: coverage.message };
+  }
+
+  const duplicate = await findDuplicateTashihRequest(studentId, rest);
+  if (duplicate) {
+    return {
+      success: false,
+      message:
+        duplicate.status === 'SELESAI'
+          ? 'Siswa sudah lulus tashih untuk bacaan ini, tidak perlu diajukan lagi'
+          : 'Siswa sudah memiliki permintaan tashih yang sama dan masih diproses',
+    };
   }
 
   await prisma.tashihRequest.create({

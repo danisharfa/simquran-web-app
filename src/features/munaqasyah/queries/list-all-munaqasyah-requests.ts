@@ -12,6 +12,7 @@ export async function listAllMunaqasyahRequests(): Promise<MunaqasyahRequestTabl
 
   return requests.map((r) => ({
     id: r.id,
+    nis: r.student.nis,
     studentName: r.student.user.name,
     groupId: r.groupId,
     groupName: r.group.name,

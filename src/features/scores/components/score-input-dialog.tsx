@@ -19,6 +19,7 @@ import { LastTahsinMaterialCard } from './last-tahsin-material-card';
 import type { TahfidzScoreData } from '../queries/list-tahfidz-scores';
 import type { TahsinScoreData } from '../queries/list-tahsin-scores';
 import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { GradeLetter } from '@/lib/generated/prisma/enums';
 
 interface Props {
   studentId: string;
@@ -27,6 +28,7 @@ interface Props {
   tahsinScores: TahsinScoreData[];
   surahOptions: ReferenceOption[];
   lastTahsinMaterial: string | null;
+  gradeDescriptionMap: Record<GradeLetter, string>;
 }
 
 export function ScoreInputDialog({
@@ -36,6 +38,7 @@ export function ScoreInputDialog({
   tahsinScores,
   surahOptions,
   lastTahsinMaterial,
+  gradeDescriptionMap,
 }: Props) {
   const [open, setOpen] = useState(false);
 
@@ -72,11 +75,17 @@ export function ScoreInputDialog({
               groupId={groupId}
               scores={tahfidzScores}
               surahOptions={surahOptions}
+              gradeDescriptionMap={gradeDescriptionMap}
             />
           </TabsContent>
 
           <TabsContent value="tahsin">
-            <TahsinScorePanel studentId={studentId} groupId={groupId} scores={tahsinScores} />
+            <TahsinScorePanel
+              studentId={studentId}
+              groupId={groupId}
+              scores={tahsinScores}
+              gradeDescriptionMap={gradeDescriptionMap}
+            />
           </TabsContent>
 
           <TabsContent value="materi">

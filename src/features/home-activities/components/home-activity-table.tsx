@@ -23,11 +23,13 @@ import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
-import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
+import { FILTER_ALL, TableFilters, isDateInRange, buildPeriodOptions } from '@/components/layouts/filters/table-filters';
 import { HOME_ACTIVITY_TYPE_OPTIONS, HOME_ACTIVITY_STATUS_OPTIONS } from '../home-activity.schema';
 import { deleteHomeActivity } from '../actions/delete-home-activity';
 import { updateHomeActivityStatus } from '../actions/update-home-activity-status';
 import { HomeActivityEditDialog } from './home-activity-edit-dialog';
+import { ExportHomeActivityPdfButton } from './export-home-activity-pdf-button';
+import { formatDateID } from '@/lib/pdf/format';
 import type { HomeActivityTableData } from '../queries/list-own-home-activities';
 import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
@@ -49,6 +51,9 @@ interface Props {
   surahOptions?: ReferenceOption[];
   juzOptions?: ReferenceOption[];
   surahJuzMap?: SurahJuzMapping[];
+  currentPeriod?: string;
+  schoolInfo?: { schoolName: string; schoolAddress: string | null };
+  exportedBy?: { name: string; role: string };
 }
 
 export function HomeActivityTable({
@@ -60,6 +65,9 @@ export function HomeActivityTable({
   surahOptions = [],
   juzOptions = [],
   surahJuzMap = [],
+  currentPeriod,
+  schoolInfo,
+  exportedBy,
 }: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -68,20 +76,17 @@ export function HomeActivityTable({
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
 
-  const [period, setPeriod] = useState(FILTER_ALL);
+  const [period, setPeriod] = useState(currentPeriod ?? FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
   const [studentId, setStudentId] = useState(FILTER_ALL);
   const [status, setStatus] = useState(FILTER_ALL);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
-  const periodOptions = useMemo(() => {
-    const map = new Map<string, string>();
-    data.forEach((d) =>
-      map.set(`${d.academicYear}|${d.semester}`, `${d.academicYear} ${SEMESTER_LABEL[d.semester] ?? d.semester}`),
-    );
-    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
-  }, [data]);
+  const periodOptions = useMemo(
+    () => buildPeriodOptions(data, (d) => d.academicYear, (d) => d.semester, SEMESTER_LABEL, currentPeriod),
+    [data, currentPeriod],
+  );
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
     data
@@ -192,14 +197,14 @@ export function HomeActivityTable({
         ? []
         : [
             {
+              accessorKey: 'nis',
+              id: 'NIS',
+              header: 'NIS',
+            } satisfies ColumnDef<HomeActivityTableData>,
+            {
               accessorKey: 'studentName',
               id: 'Nama Siswa',
               header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
-            } satisfies ColumnDef<HomeActivityTableData>,
-            {
-              accessorKey: 'groupName',
-              id: 'Kelompok',
-              header: 'Kelompok',
             } satisfies ColumnDef<HomeActivityTableData>,
           ]),
       ...(showClassroom
@@ -211,6 +216,15 @@ export function HomeActivityTable({
             } satisfies ColumnDef<HomeActivityTableData>,
           ]
         : []),
+      ...(own
+        ? []
+        : [
+            {
+              accessorKey: 'groupName',
+              id: 'Kelompok',
+              header: 'Kelompok',
+            } satisfies ColumnDef<HomeActivityTableData>,
+          ]),
       {
         accessorKey: 'activityType',
         id: 'Jenis',
@@ -334,9 +348,49 @@ export function HomeActivityTable({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const periodLabel = useMemo(() => {
+    if (period === FILTER_ALL) return undefined;
+    const label = periodOptions.find((o) => o.value === period)?.label;
+    return label ? `Tahun Akademik ${label}` : undefined;
+  }, [period, periodOptions]);
+
+  const filterSummary = useMemo(() => {
+    const parts: string[] = [];
+    if (!own) {
+      const classroomLabel = classroomOptions.find((o) => o.value === classroomId)?.label;
+      if (classroomId !== FILTER_ALL && classroomLabel) parts.push(`Kelas: ${classroomLabel}`);
+      const groupLabel = groupOptions.find((o) => o.value === groupId)?.label;
+      if (groupId !== FILTER_ALL && groupLabel) parts.push(`Kelompok: ${groupLabel}`);
+      const studentLabel = studentOptions.find((o) => o.value === studentId)?.label;
+      if (studentId !== FILTER_ALL && studentLabel) parts.push(`Siswa: ${studentLabel}`);
+    }
+    if (status !== FILTER_ALL) {
+      parts.push(`Status: ${STATUS_LABEL[status] ?? status}`);
+    }
+    if (dateRange?.from || dateRange?.to) {
+      parts.push(
+        `Tanggal Aktivitas: ${dateRange.from ? formatDateID(dateRange.from) : '...'} - ${dateRange.to ? formatDateID(dateRange.to) : '...'}`,
+      );
+    }
+    return parts.length > 0 ? parts.join(' • ') : undefined;
+  }, [own, classroomId, classroomOptions, groupId, groupOptions, studentId, studentOptions, status, dateRange]);
+
   return (
     <DataTable
       title="Aktivitas Rumah"
+      titleAction={
+        data.length > 0 && schoolInfo && exportedBy ? (
+          <ExportHomeActivityPdfButton
+            table={table}
+            schoolInfo={schoolInfo}
+            exportedBy={exportedBy}
+            periodLabel={periodLabel}
+            filterSummary={filterSummary}
+            own={own}
+            showClassroom={showClassroom}
+          />
+        ) : undefined
+      }
       table={table}
       filterColumn={own ? undefined : 'Nama Siswa'}
       toolbar={

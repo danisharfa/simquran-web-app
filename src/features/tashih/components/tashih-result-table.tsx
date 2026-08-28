@@ -22,9 +22,11 @@ import { Badge } from '@/components/ui/badge';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
-import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
+import { FILTER_ALL, TableFilters, isDateInRange, buildPeriodOptions } from '@/components/layouts/filters/table-filters';
 import { deleteTashihResult } from '../actions/delete-tashih-result';
 import { TashihResultEditDialog } from './tashih-result-edit-dialog';
+import { ExportTashihResultPdfButton } from './export-tashih-result-pdf-button';
+import { formatDateID } from '@/lib/pdf/format';
 import type { TashihResultTableData } from '../queries/list-all-tashih-results';
 
 const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
@@ -38,28 +40,37 @@ interface Props {
   data: TashihResultTableData[];
   editable?: boolean;
   own?: boolean;
+  currentPeriod?: string;
+  schoolInfo?: { schoolName: string; schoolAddress: string | null };
+  exportedBy?: { name: string; role: string };
 }
 
-export function TashihResultTable({ data, editable = false, own = false }: Props) {
+export function TashihResultTable({
+  data,
+  editable = false,
+  own = false,
+  currentPeriod,
+  schoolInfo,
+  exportedBy,
+}: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const [period, setPeriod] = useState(FILTER_ALL);
+  const [period, setPeriod] = useState(currentPeriod ?? FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
+  const [juz, setJuz] = useState(FILTER_ALL);
+  const [surah, setSurah] = useState(FILTER_ALL);
   const [status, setStatus] = useState(FILTER_ALL);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
-  const periodOptions = useMemo(() => {
-    const map = new Map<string, string>();
-    data.forEach((d) =>
-      map.set(`${d.academicYear}|${d.semester}`, `${d.academicYear} ${SEMESTER_LABEL[d.semester] ?? d.semester}`),
-    );
-    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
-  }, [data]);
+  const periodOptions = useMemo(
+    () => buildPeriodOptions(data, (d) => d.academicYear, (d) => d.semester, SEMESTER_LABEL, currentPeriod),
+    [data, currentPeriod],
+  );
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
     data
@@ -96,6 +107,20 @@ export function TashihResultTable({ data, editable = false, own = false }: Props
     ],
     [],
   );
+  const juzFilterOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    data.forEach((d) => {
+      if (d.juzId != null) map.set(String(d.juzId), d.juzName ?? String(d.juzId));
+    });
+    return Array.from(map, ([value, label]) => ({ value, label }));
+  }, [data]);
+  const surahFilterOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    data.forEach((d) => {
+      if (d.surahId != null) map.set(String(d.surahId), d.surahName ?? String(d.surahId));
+    });
+    return Array.from(map, ([value, label]) => ({ value, label }));
+  }, [data]);
 
   const filteredData = useMemo(
     () =>
@@ -104,10 +129,12 @@ export function TashihResultTable({ data, editable = false, own = false }: Props
           (period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period) &&
           (classroomId === FILTER_ALL || d.classroomId === classroomId) &&
           (groupId === FILTER_ALL || d.groupId === groupId) &&
+          (juz === FILTER_ALL || String(d.juzId) === juz) &&
+          (surah === FILTER_ALL || String(d.surahId) === surah) &&
           (status === FILTER_ALL || String(d.passed) === status) &&
           isDateInRange(d.scheduleDate, dateRange),
       ),
-    [data, period, classroomId, groupId, status, dateRange],
+    [data, period, classroomId, groupId, juz, surah, status, dateRange],
   );
 
   const handleDelete = useCallback(
@@ -135,22 +162,37 @@ export function TashihResultTable({ data, editable = false, own = false }: Props
         ? []
         : [
             {
+              accessorKey: 'nis',
+              id: 'NIS',
+              header: 'NIS',
+            } satisfies ColumnDef<TashihResultTableData>,
+            {
               accessorKey: 'studentName',
               id: 'Nama Siswa',
               header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
-            } satisfies ColumnDef<TashihResultTableData>,
-            {
-              accessorKey: 'groupName',
-              id: 'Kelompok',
-              header: 'Kelompok',
             } satisfies ColumnDef<TashihResultTableData>,
             {
               accessorKey: 'classroomName',
               id: 'Kelas',
               header: 'Kelas',
             } satisfies ColumnDef<TashihResultTableData>,
+            {
+              accessorKey: 'groupName',
+              id: 'Kelompok',
+              header: 'Kelompok',
+            } satisfies ColumnDef<TashihResultTableData>,
           ]),
-      { accessorKey: 'detail', id: 'Detail', header: 'Detail' },
+      {
+        accessorKey: 'juzName',
+        id: 'Juz',
+        header: 'Juz',
+        cell: ({ row }) => row.original.juzName ?? '-',
+      },
+      {
+        id: 'Surah',
+        header: 'Surah',
+        cell: ({ row }) => (row.original.tashihType === 'WAFA' ? row.original.detail : (row.original.surahName ?? '-')),
+      },
       {
         accessorFn: (row) => row.scheduleDate,
         id: 'Tanggal',
@@ -220,9 +262,62 @@ export function TashihResultTable({ data, editable = false, own = false }: Props
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const periodLabel = useMemo(() => {
+    if (period === FILTER_ALL) return undefined;
+    const label = periodOptions.find((o) => o.value === period)?.label;
+    return label ? `Tahun Akademik ${label}` : undefined;
+  }, [period, periodOptions]);
+
+  const filterSummary = useMemo(() => {
+    const parts: string[] = [];
+    if (!own) {
+      const classroomLabel = classroomOptions.find((o) => o.value === classroomId)?.label;
+      if (classroomId !== FILTER_ALL && classroomLabel) parts.push(`Kelas: ${classroomLabel}`);
+      const groupLabel = groupOptions.find((o) => o.value === groupId)?.label;
+      if (groupId !== FILTER_ALL && groupLabel) parts.push(`Kelompok: ${groupLabel}`);
+    }
+    const juzLabel = juzFilterOptions.find((o) => o.value === juz)?.label;
+    if (juz !== FILTER_ALL && juzLabel) parts.push(`Juz: ${juzLabel}`);
+    const surahLabel = surahFilterOptions.find((o) => o.value === surah)?.label;
+    if (surah !== FILTER_ALL && surahLabel) parts.push(`Surah: ${surahLabel}`);
+    const statusLabel = statusOptions.find((o) => o.value === status)?.label;
+    if (status !== FILTER_ALL && statusLabel) parts.push(`Status: ${statusLabel}`);
+    if (dateRange?.from || dateRange?.to) {
+      parts.push(
+        `Tanggal Tashih: ${dateRange.from ? formatDateID(dateRange.from) : '...'} - ${dateRange.to ? formatDateID(dateRange.to) : '...'}`,
+      );
+    }
+    return parts.length > 0 ? parts.join(' • ') : undefined;
+  }, [
+    own,
+    classroomId,
+    classroomOptions,
+    groupId,
+    groupOptions,
+    juz,
+    juzFilterOptions,
+    surah,
+    surahFilterOptions,
+    status,
+    statusOptions,
+    dateRange,
+  ]);
+
   return (
     <DataTable
       title="Hasil Tashih"
+      titleAction={
+        data.length > 0 && schoolInfo && exportedBy ? (
+          <ExportTashihResultPdfButton
+            table={table}
+            schoolInfo={schoolInfo}
+            exportedBy={exportedBy}
+            periodLabel={periodLabel}
+            filterSummary={filterSummary}
+            own={own}
+          />
+        ) : undefined
+      }
       table={table}
       filterColumn={own ? undefined : 'Nama Siswa'}
       toolbar={
@@ -232,6 +327,22 @@ export function TashihResultTable({ data, editable = false, own = false }: Props
             classroom={own ? undefined : { value: classroomId, onChange: handleClassroomChange, options: classroomOptions }}
             group={own ? undefined : { value: groupId, onChange: setGroupId, options: groupOptions }}
             extraFilters={[
+              {
+                key: 'juz',
+                label: 'Juz',
+                allLabel: 'Semua Juz',
+                value: juz,
+                onChange: setJuz,
+                options: juzFilterOptions,
+              },
+              {
+                key: 'surah',
+                label: 'Surah',
+                allLabel: 'Semua Surah',
+                value: surah,
+                onChange: setSurah,
+                options: surahFilterOptions,
+              },
               {
                 key: 'status',
                 label: 'Status',

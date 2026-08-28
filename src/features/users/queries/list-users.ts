@@ -2,7 +2,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { headers } from 'next/headers';
-import type { Role } from '@/lib/generated/prisma/enums';
+import type { Role, StudentStatus } from '@/lib/generated/prisma/enums';
 
 export interface UserTableData {
   id: string;
@@ -10,6 +10,9 @@ export interface UserTableData {
   name: string;
   createdAt: Date;
   updatedAt: Date;
+  status?: StudentStatus;
+  graduatedAt?: Date | null;
+  exitedAt?: Date | null;
 }
 
 type UserWithUsername = {
@@ -36,14 +39,23 @@ export async function listUsersByRole(role: Role): Promise<UserTableData[]> {
 
   let users = result.users as UserWithUsername[];
 
-  // siswa yang pindah/keluar sekolah punya tab tersendiri (Siswa Nonaktif)
+  let studentProfiles: Map<
+    string,
+    { status: StudentStatus; graduatedAt: Date | null; exitedAt: Date | null }
+  > | null = null;
+
   if (role === 'STUDENT') {
-    const exited = await prisma.studentProfile.findMany({
-      where: { status: { in: ['PINDAH', 'KELUAR'] } },
-      select: { userId: true },
+    const profiles = await prisma.studentProfile.findMany({
+      select: { userId: true, status: true, graduatedAt: true, exitedAt: true },
     });
-    const exitedIds = new Set(exited.map((s) => s.userId));
+
+    // siswa yang pindah/keluar sekolah punya tab tersendiri (Siswa Nonaktif)
+    const exitedIds = new Set(
+      profiles.filter((p) => p.status === 'PINDAH' || p.status === 'KELUAR').map((p) => p.userId),
+    );
     users = users.filter((user) => !exitedIds.has(user.id));
+
+    studentProfiles = new Map(profiles.map((p) => [p.userId, p]));
   }
 
   return users.map((user) => ({
@@ -52,5 +64,8 @@ export async function listUsersByRole(role: Role): Promise<UserTableData[]> {
     name: user.name,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
+    status: studentProfiles?.get(user.id)?.status,
+    graduatedAt: studentProfiles?.get(user.id)?.graduatedAt,
+    exitedAt: studentProfiles?.get(user.id)?.exitedAt,
   }));
 }

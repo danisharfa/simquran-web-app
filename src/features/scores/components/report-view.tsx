@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { GRADE_DESCRIPTION } from '../grade';
 import { TAHSIN_TYPE_OPTIONS } from '../score.schema';
 import type { ReportData } from '../queries/get-report';
 import type { TahfidzScoreData } from '../queries/list-tahfidz-scores';
 import type { TahsinScoreData } from '../queries/list-tahsin-scores';
+import type { GradeLetter } from '@/lib/generated/prisma/enums';
 
 const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
 
@@ -15,9 +15,18 @@ interface Props {
   report: ReportData;
   tahfidzScores: TahfidzScoreData[];
   tahsinScores: TahsinScoreData[];
+  gradeDescriptionMap: Record<GradeLetter, string>;
 }
 
-export function ReportView({ studentName, nis, groupName, report, tahfidzScores, tahsinScores }: Props) {
+export function ReportView({
+  studentName,
+  nis,
+  groupName,
+  report,
+  tahfidzScores,
+  tahsinScores,
+  gradeDescriptionMap,
+}: Props) {
   return (
     <div className="space-y-6">
       <Card>
@@ -84,7 +93,7 @@ export function ReportView({ studentName, nis, groupName, report, tahfidzScores,
                     <TableCell>{s.surahName}</TableCell>
                     <TableCell>{s.score}</TableCell>
                     <TableCell>
-                      {s.grade} ({GRADE_DESCRIPTION[s.grade as 'A' | 'B' | 'C' | 'D']})
+                      {s.grade} ({gradeDescriptionMap[s.grade as 'A' | 'B' | 'C' | 'D']})
                     </TableCell>
                     <TableCell>{s.description ?? '-'}</TableCell>
                   </TableRow>
@@ -124,7 +133,7 @@ export function ReportView({ studentName, nis, groupName, report, tahfidzScores,
                     <TableCell>{s.topic}</TableCell>
                     <TableCell>{s.score}</TableCell>
                     <TableCell>
-                      {s.grade} ({GRADE_DESCRIPTION[s.grade as 'A' | 'B' | 'C' | 'D']})
+                      {s.grade} ({gradeDescriptionMap[s.grade as 'A' | 'B' | 'C' | 'D']})
                     </TableCell>
                     <TableCell>{s.description ?? '-'}</TableCell>
                   </TableRow>

@@ -64,6 +64,8 @@ export function StudentReportPdf({ data }: { data: ReportPdfData }) {
     tahsin,
     tahfidz,
     report,
+    gradeLegend,
+    kkm,
   } = data;
 
   const leftLogo = '/logo-sekolah.png';
@@ -218,22 +220,17 @@ export function StudentReportPdf({ data }: { data: ReportPdfData }) {
               <Text>Keterangan Nilai</Text>
             </View>
           </View>
-          {[
-            ['92-100', 'A', 'Sangat Baik'],
-            ['83-91', 'B', 'Baik'],
-            ['75-82', 'C', 'Cukup'],
-            ['< 75', 'D', 'Kurang'],
-          ].map(([range, grade, desc], i) => (
-            <View style={styles.kkmRow} key={i}>
-              <View style={[styles.kkmCell, { width: '25%' }]}>{i === 0 ? <Text>75</Text> : null}</View>
+          {gradeLegend.map((row, i) => (
+            <View style={styles.kkmRow} key={row.grade}>
+              <View style={[styles.kkmCell, { width: '25%' }]}>{i === 0 ? <Text>{kkm}</Text> : null}</View>
               <View style={[styles.kkmCell, { width: '20%' }]}>
-                <Text>{range}</Text>
+                <Text>{row.range}</Text>
               </View>
               <View style={[styles.kkmCell, { width: '10%' }]}>
-                <Text>{grade}</Text>
+                <Text>{row.grade}</Text>
               </View>
               <View style={[styles.kkmCell, { width: '45%', borderRight: 'none' }]}>
-                <Text>{desc}</Text>
+                <Text>{row.description}</Text>
               </View>
             </View>
           ))}

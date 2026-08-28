@@ -21,6 +21,7 @@ export async function listOwnSubmissions(): Promise<SubmissionTableData[]> {
     id: s.id,
     date: s.date,
     studentId: s.studentId,
+    nis: s.student.nis,
     studentName: s.student.user.name,
     groupId: s.groupId,
     groupName: s.group.name,

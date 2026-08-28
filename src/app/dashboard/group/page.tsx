@@ -8,6 +8,7 @@ import { listMyGroups } from '@/features/groups/queries/list-my-groups';
 import { listMyGroupHistory } from '@/features/groups/queries/list-my-group-history';
 import { listActiveClassrooms } from '@/features/groups/queries/list-active-classrooms';
 import { listTeachers } from '@/features/groups/queries/list-teachers';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default async function GroupPage() {
   const session = await requireRole(['coordinator', 'teacher']);
@@ -23,8 +24,18 @@ export default async function GroupPage() {
           description="Kelompok tahfidz/tahsin yang Anda bimbing"
         />
 
-        <GroupTable data={groups} title="Daftar Kelompok" />
-        <GroupTable data={groupHistory} title="Riwayat Kelompok" />
+        <Tabs defaultValue="daftar">
+          <TabsList>
+            <TabsTrigger value="daftar">Daftar Kelompok</TabsTrigger>
+            <TabsTrigger value="riwayat">Riwayat Kelompok</TabsTrigger>
+          </TabsList>
+          <TabsContent value="daftar">
+            <GroupTable data={groups} title="Daftar Kelompok" />
+          </TabsContent>
+          <TabsContent value="riwayat">
+            <GroupTable data={groupHistory} title="Riwayat Kelompok" />
+          </TabsContent>
+        </Tabs>
       </div>
     );
   }
@@ -44,8 +55,18 @@ export default async function GroupPage() {
         action={<AddGroupForm classrooms={classrooms} teachers={teachers} />}
       />
 
-      <GroupTable data={groups} title="Daftar Kelompok" editable />
-      <GroupTable data={groupHistory} title="Riwayat Kelompok" />
+      <Tabs defaultValue="daftar">
+        <TabsList>
+          <TabsTrigger value="daftar">Daftar Kelompok</TabsTrigger>
+          <TabsTrigger value="riwayat">Riwayat Kelompok</TabsTrigger>
+        </TabsList>
+        <TabsContent value="daftar">
+          <GroupTable data={groups} title="Daftar Kelompok" editable />
+        </TabsContent>
+        <TabsContent value="riwayat">
+          <GroupTable data={groupHistory} title="Riwayat Kelompok" />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

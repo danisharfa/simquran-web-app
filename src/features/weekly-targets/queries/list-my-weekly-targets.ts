@@ -5,6 +5,7 @@ import { formatWeeklyTargetDetail } from '../format-weekly-target-detail';
 export interface WeeklyTargetTableData {
   id: string;
   studentId: string;
+  nis: string;
   studentName: string;
   groupId: string;
   groupName: string;
@@ -41,6 +42,7 @@ export async function listMyWeeklyTargets(): Promise<WeeklyTargetTableData[]> {
   return targets.map((t) => ({
     id: t.id,
     studentId: t.studentId,
+    nis: t.student.nis,
     studentName: t.student.user.name,
     groupId: t.groupId,
     groupName: t.group.name,

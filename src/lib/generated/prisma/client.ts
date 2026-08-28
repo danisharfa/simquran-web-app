@@ -177,6 +177,16 @@ export type TahsinScore = Prisma.TahsinScoreModel
  */
 export type Report = Prisma.ReportModel
 /**
+ * Model GradeLetterSetting
+ * 
+ */
+export type GradeLetterSetting = Prisma.GradeLetterSettingModel
+/**
+ * Model ReportDescriptionTemplate
+ * 
+ */
+export type ReportDescriptionTemplate = Prisma.ReportDescriptionTemplateModel
+/**
  * Model MunaqasyahRequest
  * 
  */
@@ -211,3 +221,18 @@ export type MunaqasyahDetail = Prisma.MunaqasyahDetailModel
  * 
  */
 export type MunaqasyahFinalResult = Prisma.MunaqasyahFinalResultModel
+/**
+ * Model MunaqasyahScoringSetting
+ * 
+ */
+export type MunaqasyahScoringSetting = Prisma.MunaqasyahScoringSettingModel
+/**
+ * Model MunaqasyahGradeSetting
+ * 
+ */
+export type MunaqasyahGradeSetting = Prisma.MunaqasyahGradeSettingModel
+/**
+ * Model MunaqasyahFinalScoreWeightSetting
+ * 
+ */
+export type MunaqasyahFinalScoreWeightSetting = Prisma.MunaqasyahFinalScoreWeightSettingModel

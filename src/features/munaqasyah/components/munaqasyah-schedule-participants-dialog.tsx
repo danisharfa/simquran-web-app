@@ -20,6 +20,7 @@ const JENIS_UJIAN_LABEL = Object.fromEntries(JENIS_UJIAN_OPTIONS.map((o) => [o.v
 
 interface Participant {
   requestId: string;
+  nis: string;
   studentName: string;
   tahap: string;
   jenis: string;
@@ -71,7 +72,9 @@ export function MunaqasyahScheduleParticipantsDialog({
             {participants.map((p) => (
               <div key={p.requestId} className="flex flex-col gap-2 py-3 first:pt-0 last:pb-0">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-medium">{p.studentName}</span>
+                  <span className="font-medium">
+                    {p.studentName} <span className="text-muted-foreground">({p.nis})</span>
+                  </span>
                   <div className="flex items-center gap-1">
                     <Badge className={TAHAP_BADGE_CLASS[p.tahap]}>{TAHAP_LABEL[p.tahap] ?? p.tahap}</Badge>
                     <Badge className={JENIS_UJIAN_BADGE_CLASS[p.jenis]}>{JENIS_UJIAN_LABEL[p.jenis] ?? p.jenis}</Badge>

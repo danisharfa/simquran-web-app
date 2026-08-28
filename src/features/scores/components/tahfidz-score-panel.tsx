@@ -27,20 +27,21 @@ import {
 } from '@/components/ui/select';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
-import { GRADE_DESCRIPTION } from '../grade';
 import { upsertTahfidzScore } from '../actions/upsert-tahfidz-score';
 import { deleteTahfidzScore } from '../actions/delete-tahfidz-score';
 import type { TahfidzScoreData } from '../queries/list-tahfidz-scores';
 import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
+import type { GradeLetter } from '@/lib/generated/prisma/enums';
 
 interface Props {
   studentId: string;
   groupId: string;
   scores: TahfidzScoreData[];
   surahOptions: ReferenceOption[];
+  gradeDescriptionMap: Record<GradeLetter, string>;
 }
 
-export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: Props) {
+export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions, gradeDescriptionMap }: Props) {
   const router = useRouter();
   const [surahId, setSurahId] = useState<number | null>(null);
   const [score, setScore] = useState('');
@@ -116,7 +117,7 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
         id: 'Grade',
         header: 'Grade',
         cell: ({ row }) =>
-          `${row.original.grade} (${GRADE_DESCRIPTION[row.original.grade as 'A' | 'B' | 'C' | 'D']})`,
+          `${row.original.grade} (${gradeDescriptionMap[row.original.grade as 'A' | 'B' | 'C' | 'D']})`,
       },
       { accessorKey: 'description', id: 'Deskripsi', header: 'Deskripsi' },
       {
@@ -147,7 +148,7 @@ export function TahfidzScorePanel({ studentId, groupId, scores, surahOptions }: 
         ),
       },
     ],
-    [deletingId, handleDelete, handleEditRow],
+    [deletingId, handleDelete, handleEditRow, gradeDescriptionMap],
   );
 
   const table = useReactTable({

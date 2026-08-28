@@ -4,6 +4,7 @@ import { formatTashihDetail } from '../format-tashih-detail';
 
 export interface TashihRequestTableData {
   id: string;
+  nis: string;
   studentName: string;
   groupId: string;
   groupName: string;
@@ -12,6 +13,10 @@ export interface TashihRequestTableData {
   academicYear: string;
   semester: string;
   tashihType: string;
+  juzId: number | null;
+  juzName: string | null;
+  surahId: number | null;
+  surahName: string | null;
   detail: string;
   status: string;
   notes: string | null;
@@ -35,6 +40,7 @@ export async function listMyTashihRequests(): Promise<TashihRequestTableData[]> 
 
   return requests.map((r) => ({
     id: r.id,
+    nis: r.student.nis,
     studentName: r.student.user.name,
     groupId: r.groupId,
     groupName: r.group.name,
@@ -43,6 +49,10 @@ export async function listMyTashihRequests(): Promise<TashihRequestTableData[]> 
     academicYear: r.group.classroom.academicYear,
     semester: r.group.classroom.semester,
     tashihType: r.tashihType,
+    juzId: r.juzId,
+    juzName: r.juz?.name ?? null,
+    surahId: r.surahId,
+    surahName: r.surah?.name ?? null,
     detail: formatTashihDetail(r),
     status: r.status,
     notes: r.notes,

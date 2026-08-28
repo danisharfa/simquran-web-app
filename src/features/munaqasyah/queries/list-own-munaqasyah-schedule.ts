@@ -18,6 +18,7 @@ export async function listOwnMunaqasyahSchedule(): Promise<MyMunaqasyahScheduleD
   for (const e of entries) {
     const participant: MyMunaqasyahScheduleParticipant = {
       requestId: e.requestId,
+      nis: e.request.student.nis,
       studentName: e.request.student.user.name,
       tahap: e.request.tahap,
       jenis: e.request.jenis,

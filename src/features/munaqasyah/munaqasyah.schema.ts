@@ -19,13 +19,6 @@ export const STATUS_LABEL: Record<string, string> = {
   SELESAI: 'Selesai',
 };
 
-export const GRADE_LABEL: Record<string, string> = {
-  MUMTAZ: 'Mumtaz',
-  JAYYID_JIDDAN: 'Jayyid Jiddan',
-  JAYYID: 'Jayyid',
-  TIDAK_LULUS: 'Tidak Lulus',
-};
-
 export const munaqasyahRequestSchema = z.object({
   groupId: z.string().min(1, 'Kelompok wajib dipilih'),
   studentId: z.string().min(1, 'Siswa wajib dipilih'),
@@ -47,3 +40,53 @@ export const munaqasyahScheduleSchema = z.object({
 });
 
 export type MunaqasyahScheduleSchema = z.infer<typeof munaqasyahScheduleSchema>;
+
+export const scoringWeightsSchema = z.object({
+  khofiAwalAyatWeight: z.number().min(0, 'Bobot tidak boleh negatif'),
+  khofiMakhrojWeight: z.number().min(0, 'Bobot tidak boleh negatif'),
+  khofiTajwidMadWeight: z.number().min(0, 'Bobot tidak boleh negatif'),
+  jaliBarisWeight: z.number().min(0, 'Bobot tidak boleh negatif'),
+  jaliLebihSatuKalimatWeight: z.number().min(0, 'Bobot tidak boleh negatif'),
+});
+
+export type ScoringWeightsSchema = z.infer<typeof scoringWeightsSchema>;
+
+export const surahInitialScoreSchema = z.object({
+  surahId: z.number(),
+  initialScore: z.number().min(1, 'Nilai awal harus minimal 1'),
+});
+
+export const updateSurahInitialScoresSchema = z.object({
+  scores: z.array(surahInitialScoreSchema).min(1),
+});
+
+export type UpdateSurahInitialScoresSchema = z.infer<typeof updateSurahInitialScoresSchema>;
+
+export const munaqasyahGradeSettingSchema = z.object({
+  grade: z.enum(['MUMTAZ', 'JAYYID_JIDDAN', 'JAYYID', 'TIDAK_LULUS']),
+  minScore: z.number().min(0, 'Nilai minimal tidak boleh negatif').max(100, 'Nilai minimal maksimal 100'),
+  label: z.string().min(1, 'Label wajib diisi').max(50, 'Label maksimal 50 karakter'),
+});
+
+export const updateMunaqasyahGradeSettingsSchema = z
+  .object({ settings: z.array(munaqasyahGradeSettingSchema).length(4) })
+  .refine(
+    (data) => {
+      const byGrade = Object.fromEntries(data.settings.map((s) => [s.grade, s.minScore]));
+      return byGrade.MUMTAZ > byGrade.JAYYID_JIDDAN && byGrade.JAYYID_JIDDAN > byGrade.JAYYID && byGrade.JAYYID > byGrade.TIDAK_LULUS;
+    },
+    { message: 'Nilai minimal harus menurun berurutan: Mumtaz > Jayyid Jiddan > Jayyid > Tidak Lulus' },
+  );
+
+export type UpdateMunaqasyahGradeSettingsSchema = z.infer<typeof updateMunaqasyahGradeSettingsSchema>;
+
+export const finalScoreWeightsSchema = z
+  .object({
+    tasmiWeight: z.number().min(0, 'Bobot tidak boleh negatif').max(100, 'Bobot maksimal 100'),
+    munaqasyahWeight: z.number().min(0, 'Bobot tidak boleh negatif').max(100, 'Bobot maksimal 100'),
+  })
+  .refine((data) => data.tasmiWeight + data.munaqasyahWeight === 100, {
+    message: 'Total bobot Tasmi dan Munaqasyah harus 100%',
+  });
+
+export type FinalScoreWeightsSchema = z.infer<typeof finalScoreWeightsSchema>;

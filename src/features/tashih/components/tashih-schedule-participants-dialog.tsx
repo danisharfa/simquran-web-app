@@ -43,7 +43,9 @@ export function TashihScheduleParticipantsDialog({ schedule }: Props) {
             {schedule.participants.map((p) => (
               <div key={p.requestId} className="flex flex-col gap-1 py-2 text-sm">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-medium">{p.studentName}</span>
+                  <span className="font-medium">
+                    {p.studentName} <span className="text-muted-foreground">({p.nis})</span>
+                  </span>
                   <span className="text-muted-foreground">{p.detail}</span>
                 </div>
                 <div className="text-xs text-muted-foreground">

@@ -10,18 +10,21 @@ import {
   listSurahJuzMap,
   listWafaOptions,
 } from '@/features/quran-reference/queries/list-reference-options';
+import { getAcademicSetting } from '@/features/academic-settings/queries/get-academic-setting';
 
 export default async function TashihRequestPage() {
   await requireRole(['teacher']);
 
-  const [requests, groups, surahOptions, juzOptions, surahJuzMap, wafaOptions] = await Promise.all([
+  const [requests, groups, surahOptions, juzOptions, surahJuzMap, wafaOptions, academicSetting] = await Promise.all([
     listMyTashihRequests(),
     listMyGroupsWithStudents(),
     listSurahOptions(),
     listJuzOptions(),
     listSurahJuzMap(),
     listWafaOptions(),
+    getAcademicSetting(),
   ]);
+  const currentPeriod = academicSetting ? `${academicSetting.currentYear}|${academicSetting.currentSemester}` : undefined;
 
   return (
     <div className="space-y-6">
@@ -47,6 +50,7 @@ export default async function TashihRequestPage() {
         juzOptions={juzOptions}
         surahJuzMap={surahJuzMap}
         wafaOptions={wafaOptions}
+        currentPeriod={currentPeriod}
       />
     </div>
   );

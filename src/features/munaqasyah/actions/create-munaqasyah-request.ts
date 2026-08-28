@@ -6,6 +6,8 @@ import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import { munaqasyahRequestSchema, type MunaqasyahRequestSchema } from '../munaqasyah.schema';
+import { findDuplicateMunaqasyahRequest } from '../check-duplicate-munaqasyah-request';
+import { hasPassedTasmi } from '../munaqasyah-follow-up';
 
 export async function createMunaqasyahRequest(input: MunaqasyahRequestSchema) {
   const session = await requireRoleOrThrow(['teacher']);
@@ -25,6 +27,24 @@ export async function createMunaqasyahRequest(input: MunaqasyahRequestSchema) {
   const student = await prisma.studentProfile.findUnique({ where: { userId: studentId } });
   if (!student || student.groupId !== groupId) {
     return { success: false, message: 'Siswa bukan anggota kelompok ini' };
+  }
+
+  const duplicate = await findDuplicateMunaqasyahRequest(studentId, { juzId, jenis });
+  if (duplicate) {
+    return {
+      success: false,
+      message:
+        duplicate.status === 'SELESAI'
+          ? 'Siswa sudah lulus untuk juz dan jenis ujian ini (di tahap manapun), tidak perlu diajukan lagi'
+          : 'Siswa sudah memiliki permintaan munaqasyah yang sama dan masih diproses (di tahap manapun)',
+    };
+  }
+
+  if (jenis === 'MUNAQASYAH' && !(await hasPassedTasmi(studentId, juzId))) {
+    return {
+      success: false,
+      message: 'Siswa belum lulus Tasmi untuk juz ini, tidak bisa didaftarkan langsung ke Munaqasyah',
+    };
   }
 
   await prisma.munaqasyahRequest.create({

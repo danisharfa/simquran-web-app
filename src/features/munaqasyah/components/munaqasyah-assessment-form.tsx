@@ -12,9 +12,12 @@ import {
   calculateMunaqasyahPercentage,
   calculateMunaqasyahTotalScore,
   scoreToGrade,
+  buildGradeLabelMap,
+  type ScoringWeights,
+  type MunaqasyahGradeSettingData,
 } from '../munaqasyah-scoring';
 import { submitMunaqasyahResult } from '../actions/submit-munaqasyah-result';
-import { GRADE_LABEL } from '../munaqasyah.schema';
+import { updateMunaqasyahResult } from '../actions/update-munaqasyah-result';
 
 interface Row {
   questionNo: number;
@@ -39,27 +42,33 @@ function buildInitialRows(): Row[] {
 }
 
 interface Props {
-  requestId: string;
+  requestId?: string;
+  weights: ScoringWeights;
+  gradeSettings: MunaqasyahGradeSettingData[];
+  resultId?: string;
+  initialRows?: Row[];
+  onSaved?: () => void;
 }
 
-export function MunaqasyahAssessmentForm({ requestId }: Props) {
+export function MunaqasyahAssessmentForm({ requestId, weights, gradeSettings, resultId, initialRows, onSaved }: Props) {
   const router = useRouter();
-  const [rows, setRows] = useState<Row[]>(buildInitialRows);
+  const [rows, setRows] = useState<Row[]>(() => initialRows ?? buildInitialRows());
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function updateRow(index: number, field: keyof Row, value: number | string) {
     setRows((prev) => prev.map((row, i) => (i === index ? { ...row, [field]: value } : row)));
   }
 
-  const { totalScore } = useMemo(() => calculateMunaqasyahTotalScore(rows), [rows]);
+  const { totalScore } = useMemo(() => calculateMunaqasyahTotalScore(rows, weights), [rows, weights]);
+  const gradeLabelMap = useMemo(() => buildGradeLabelMap(gradeSettings), [gradeSettings]);
 
   async function handleSubmit() {
     setIsSubmitting(true);
     try {
-      const result = await submitMunaqasyahResult(
-        requestId,
-        rows.map((r) => ({ ...r, note: r.note || null })),
-      );
+      const payload = rows.map((r) => ({ ...r, note: r.note || null }));
+      const result = resultId
+        ? await updateMunaqasyahResult(resultId, payload)
+        : await submitMunaqasyahResult(requestId!, payload);
 
       if (!result.success) {
         toast.error(result.message);
@@ -68,6 +77,7 @@ export function MunaqasyahAssessmentForm({ requestId }: Props) {
 
       toast.success(result.message);
       router.refresh();
+      onSaved?.();
     } finally {
       setIsSubmitting(false);
     }
@@ -138,7 +148,7 @@ export function MunaqasyahAssessmentForm({ requestId }: Props) {
                     onChange={(e) => updateRow(i, 'jaliLebihSatuKalimat', Number(e.target.value))}
                   />
                 </TableCell>
-                <TableCell className="font-medium">{calculateMunaqasyahPercentage(row).toFixed(1)}</TableCell>
+                <TableCell className="font-medium">{calculateMunaqasyahPercentage(row, weights).toFixed(1)}</TableCell>
                 <TableCell>
                   <Input
                     className="w-32"
@@ -156,7 +166,7 @@ export function MunaqasyahAssessmentForm({ requestId }: Props) {
         <div>
           <p className="text-muted-foreground text-sm">Total Skor Munaqasyah</p>
           <p className="text-lg font-bold">
-            {totalScore.toFixed(1)} — {GRADE_LABEL[scoreToGrade(totalScore)]}
+            {totalScore.toFixed(1)} — {gradeLabelMap[scoreToGrade(totalScore, gradeSettings)]}
           </p>
         </div>
         <Button onClick={handleSubmit} disabled={isSubmitting}>
@@ -165,6 +175,8 @@ export function MunaqasyahAssessmentForm({ requestId }: Props) {
               <Spinner />
               Menyimpan...
             </>
+          ) : resultId ? (
+            'Simpan Perubahan'
           ) : (
             'Simpan Hasil Munaqasyah'
           )}

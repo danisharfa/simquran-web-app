@@ -33,7 +33,7 @@ import {
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
-import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
+import { FILTER_ALL, TableFilters, isDateInRange, buildPeriodOptions } from '@/components/layouts/filters/table-filters';
 import { TAHAP_OPTIONS, JENIS_UJIAN_OPTIONS, STATUS_LABEL } from '../munaqasyah.schema';
 import { respondMunaqasyahRequest } from '../actions/respond-munaqasyah-request';
 import { cancelMunaqasyahRequest } from '../actions/cancel-munaqasyah-request';
@@ -66,12 +66,20 @@ export const JENIS_UJIAN_BADGE_CLASS: Record<string, string> = {
   MUNAQASYAH: 'border-transparent bg-[var(--chart-4)]/15 text-[var(--chart-4)]',
 };
 
+export const GRADE_BADGE_CLASS: Record<string, string> = {
+  MUMTAZ: 'border-transparent bg-[var(--chart-1)]/15 text-[var(--chart-1)]',
+  JAYYID_JIDDAN: 'border-transparent bg-[var(--chart-2)]/15 text-[var(--chart-2)]',
+  JAYYID: 'border-transparent bg-[var(--chart-3)]/15 text-[var(--chart-3)]',
+  TIDAK_LULUS: 'border-transparent bg-destructive/15 text-destructive',
+};
+
 interface Props {
   data: MunaqasyahRequestTableData[];
   showActions?: boolean;
   editable?: boolean;
   groups?: GroupWithStudents[];
   juzOptions?: ReferenceOption[];
+  currentPeriod?: string;
 }
 
 interface EditDeleteActionsProps {
@@ -211,6 +219,7 @@ export function MunaqasyahRequestTable({
   editable = false,
   groups = [],
   juzOptions = [],
+  currentPeriod,
 }: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -219,21 +228,19 @@ export function MunaqasyahRequestTable({
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const [period, setPeriod] = useState(FILTER_ALL);
+  const [period, setPeriod] = useState(currentPeriod ?? FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
   const [tahap, setTahap] = useState(FILTER_ALL);
   const [jenis, setJenis] = useState(FILTER_ALL);
+  const [juz, setJuz] = useState(FILTER_ALL);
   const [status, setStatus] = useState(FILTER_ALL);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
-  const periodOptions = useMemo(() => {
-    const map = new Map<string, string>();
-    data.forEach((d) =>
-      map.set(`${d.academicYear}|${d.semester}`, `${d.academicYear} ${SEMESTER_LABEL[d.semester] ?? d.semester}`),
-    );
-    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
-  }, [data]);
+  const periodOptions = useMemo(
+    () => buildPeriodOptions(data, (d) => d.academicYear, (d) => d.semester, SEMESTER_LABEL, currentPeriod),
+    [data, currentPeriod],
+  );
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
     data
@@ -278,6 +285,11 @@ export function MunaqasyahRequestTable({
     data.forEach((d) => map.set(d.status, STATUS_LABEL[d.status] ?? d.status));
     return Array.from(map, ([value, label]) => ({ value, label }));
   }, [data]);
+  const juzFilterOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    data.forEach((d) => map.set(d.juzName, d.juzName));
+    return Array.from(map, ([value, label]) => ({ value, label }));
+  }, [data]);
 
   const filteredData = useMemo(
     () =>
@@ -288,10 +300,11 @@ export function MunaqasyahRequestTable({
           (groupId === FILTER_ALL || d.groupId === groupId) &&
           (tahap === FILTER_ALL || d.tahap === tahap) &&
           (jenis === FILTER_ALL || d.jenis === jenis) &&
+          (juz === FILTER_ALL || d.juzName === juz) &&
           (status === FILTER_ALL || d.status === status) &&
           isDateInRange(d.createdAt, dateRange),
       ),
-    [data, period, classroomId, groupId, tahap, jenis, status, dateRange],
+    [data, period, classroomId, groupId, tahap, jenis, juz, status, dateRange],
   );
 
   const handleRespond = useCallback(
@@ -353,13 +366,14 @@ export function MunaqasyahRequestTable({
 
   const columns = useMemo<ColumnDef<MunaqasyahRequestTableData>[]>(() => {
     const base: ColumnDef<MunaqasyahRequestTableData>[] = [
+      { accessorKey: 'nis', id: 'NIS', header: 'NIS' },
       {
         accessorKey: 'studentName',
         id: 'Nama Siswa',
         header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
       },
-      { accessorKey: 'groupName', id: 'Kelompok', header: 'Kelompok' },
       { accessorKey: 'classroomName', id: 'Kelas', header: 'Kelas' },
+      { accessorKey: 'groupName', id: 'Kelompok', header: 'Kelompok' },
       {
         accessorKey: 'tahap',
         id: 'Tahap',
@@ -457,6 +471,7 @@ export function MunaqasyahRequestTable({
             extraFilters={[
               { key: 'tahap', label: 'Tahap', allLabel: 'Semua Tahap', value: tahap, onChange: setTahap, options: tahapOptions },
               { key: 'jenis', label: 'Jenis Ujian', allLabel: 'Semua Jenis Ujian', value: jenis, onChange: setJenis, options: jenisOptions },
+              { key: 'juz', label: 'Juz', allLabel: 'Semua Juz', value: juz, onChange: setJuz, options: juzFilterOptions },
               {
                 key: 'status',
                 label: 'Status',

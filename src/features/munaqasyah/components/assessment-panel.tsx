@@ -16,15 +16,19 @@ import { TasmiAssessmentForm } from './tasmi-assessment-form';
 import { MunaqasyahAssessmentForm } from './munaqasyah-assessment-form';
 import type { PendingAssessment } from '../queries/list-my-pending-assessments';
 import type { SurahInJuz } from '../queries/list-surahs-in-juz';
+import type { ScoringWeights, MunaqasyahGradeSettingData } from '../munaqasyah-scoring';
+import type { MunaqasyahJenisUjian } from '@/lib/generated/prisma/enums';
 
 const JENIS_UJIAN_LABEL = Object.fromEntries(JENIS_UJIAN_OPTIONS.map((o) => [o.value, o.label]));
 
 interface Props {
   pendingAssessments: PendingAssessment[];
   surahsByJuz: Record<number, SurahInJuz[]>;
+  scoringWeights: Record<MunaqasyahJenisUjian, ScoringWeights>;
+  gradeSettings: MunaqasyahGradeSettingData[];
 }
 
-export function AssessmentPanel({ pendingAssessments, surahsByJuz }: Props) {
+export function AssessmentPanel({ pendingAssessments, surahsByJuz, scoringWeights, gradeSettings }: Props) {
   const [requestId, setRequestId] = useState('');
 
   const selected = pendingAssessments.find((a) => a.requestId === requestId);
@@ -59,11 +63,20 @@ export function AssessmentPanel({ pendingAssessments, surahsByJuz }: Props) {
         </Field>
 
         {selected && selected.jenis === 'TASMI' && (
-          <TasmiAssessmentForm requestId={selected.requestId} surahs={surahsByJuz[selected.juzId] ?? []} />
+          <TasmiAssessmentForm
+            requestId={selected.requestId}
+            surahs={surahsByJuz[selected.juzId] ?? []}
+            weights={scoringWeights.TASMI}
+            gradeSettings={gradeSettings}
+          />
         )}
 
         {selected && selected.jenis === 'MUNAQASYAH' && (
-          <MunaqasyahAssessmentForm requestId={selected.requestId} />
+          <MunaqasyahAssessmentForm
+            requestId={selected.requestId}
+            weights={scoringWeights.MUNAQASYAH}
+            gradeSettings={gradeSettings}
+          />
         )}
       </CardContent>
     </Card>

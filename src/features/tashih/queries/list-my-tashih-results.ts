@@ -25,6 +25,7 @@ export async function listMyTashihResults(): Promise<TashihResultTableData[]> {
 
   return results.map((r) => ({
     id: r.id,
+    nis: r.request.student.nis,
     studentName: r.request.student.user.name,
     groupId: r.request.groupId,
     groupName: r.request.group.name,
@@ -32,6 +33,11 @@ export async function listMyTashihResults(): Promise<TashihResultTableData[]> {
     classroomName: `${r.request.group.classroom.level} ${r.request.group.classroom.name}`,
     academicYear: r.request.group.classroom.academicYear,
     semester: r.request.group.classroom.semester,
+    tashihType: r.request.tashihType,
+    juzId: r.request.juzId,
+    juzName: r.request.juz?.name ?? null,
+    surahId: r.request.surahId,
+    surahName: r.request.surah?.name ?? null,
     detail: formatTashihDetail(r.request),
     scheduleDate: r.schedule.date,
     passed: r.passed,

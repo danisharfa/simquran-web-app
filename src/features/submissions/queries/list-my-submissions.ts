@@ -7,6 +7,7 @@ export interface SubmissionTableData {
   id: string;
   date: Date;
   studentId: string;
+  nis: string;
   studentName: string;
   groupId: string;
   groupName: string;
@@ -45,6 +46,7 @@ export async function listMySubmissions(): Promise<SubmissionTableData[]> {
     id: s.id,
     date: s.date,
     studentId: s.studentId,
+    nis: s.student.nis,
     studentName: s.student.user.name,
     groupId: s.groupId,
     groupName: s.group.name,

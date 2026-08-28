@@ -27,19 +27,19 @@ export interface WafaTableData {
 }
 
 export async function listSurah(): Promise<SurahTableData[]> {
-  await requireRoleOrThrow(['superadmin']);
+  await requireRoleOrThrow(['superadmin', 'admin']);
 
   return prisma.surah.findMany({ orderBy: { id: 'asc' } });
 }
 
 export async function listJuz(): Promise<JuzTableData[]> {
-  await requireRoleOrThrow(['superadmin']);
+  await requireRoleOrThrow(['superadmin', 'admin']);
 
   return prisma.juz.findMany({ orderBy: { id: 'asc' } });
 }
 
 export async function listSurahJuz(): Promise<SurahJuzTableData[]> {
-  await requireRoleOrThrow(['superadmin']);
+  await requireRoleOrThrow(['superadmin', 'admin']);
 
   const surahJuz = await prisma.surahJuz.findMany({
     include: { surah: true, juz: true },
@@ -56,7 +56,7 @@ export async function listSurahJuz(): Promise<SurahJuzTableData[]> {
 }
 
 export async function listWafa(): Promise<WafaTableData[]> {
-  await requireRoleOrThrow(['superadmin']);
+  await requireRoleOrThrow(['superadmin', 'admin']);
 
   return prisma.wafa.findMany({ orderBy: { id: 'asc' } });
 }

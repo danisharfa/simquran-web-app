@@ -8,10 +8,13 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 import {
   calculateMunaqasyahTotalScore,
   scoreToGrade,
+  isPassing,
   validateMunaqasyahDetails,
   type MunaqasyahDetailInput,
 } from '../munaqasyah-scoring';
 import { tryFinalizeMunaqasyah } from '../try-finalize-munaqasyah';
+import { getScoringWeights } from '../queries/get-scoring-weights';
+import { getMunaqasyahGradeSettings } from '../queries/get-munaqasyah-grade-settings';
 
 export async function submitMunaqasyahResult(requestId: string, rows: MunaqasyahDetailInput[]) {
   const session = await requireRoleOrThrow(['teacher', 'coordinator']);
@@ -39,7 +42,12 @@ export async function submitMunaqasyahResult(requestId: string, rows: Munaqasyah
     return { success: false, message: 'Anda bukan penguji untuk jadwal ini' };
   }
 
-  const { totalScore, detailsToSave } = calculateMunaqasyahTotalScore(rows);
+  const [weights, gradeSettings] = await Promise.all([
+    getScoringWeights('MUNAQASYAH'),
+    getMunaqasyahGradeSettings(),
+  ]);
+  const { totalScore, detailsToSave } = calculateMunaqasyahTotalScore(rows, weights);
+  const grade = scoreToGrade(totalScore, gradeSettings);
   const resultId = randomUUID();
 
   await prisma.$transaction([
@@ -49,8 +57,8 @@ export async function submitMunaqasyahResult(requestId: string, rows: Munaqasyah
         requestId,
         scheduleId: scheduleRequest.scheduleId,
         totalScore,
-        grade: scoreToGrade(totalScore),
-        passed: totalScore >= 80,
+        grade,
+        passed: isPassing(grade),
       },
     }),
     prisma.munaqasyahDetail.createMany({

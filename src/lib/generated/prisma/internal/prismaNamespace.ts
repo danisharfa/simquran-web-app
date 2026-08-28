@@ -411,13 +411,18 @@ export const ModelName = {
   TahfidzScore: 'TahfidzScore',
   TahsinScore: 'TahsinScore',
   Report: 'Report',
+  GradeLetterSetting: 'GradeLetterSetting',
+  ReportDescriptionTemplate: 'ReportDescriptionTemplate',
   MunaqasyahRequest: 'MunaqasyahRequest',
   MunaqasyahSchedule: 'MunaqasyahSchedule',
   MunaqasyahScheduleRequest: 'MunaqasyahScheduleRequest',
   MunaqasyahResult: 'MunaqasyahResult',
   TasmiDetail: 'TasmiDetail',
   MunaqasyahDetail: 'MunaqasyahDetail',
-  MunaqasyahFinalResult: 'MunaqasyahFinalResult'
+  MunaqasyahFinalResult: 'MunaqasyahFinalResult',
+  MunaqasyahScoringSetting: 'MunaqasyahScoringSetting',
+  MunaqasyahGradeSetting: 'MunaqasyahGradeSetting',
+  MunaqasyahFinalScoreWeightSetting: 'MunaqasyahFinalScoreWeightSetting'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -433,7 +438,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory" | "group" | "groupHistory" | "surah" | "juz" | "surahJuz" | "wafa" | "submission" | "submissionDeletionLog" | "homeActivity" | "weeklyTarget" | "tashihRequest" | "tashihSchedule" | "tashihScheduleRequest" | "tashihResult" | "tahfidzScore" | "tahsinScore" | "report" | "munaqasyahRequest" | "munaqasyahSchedule" | "munaqasyahScheduleRequest" | "munaqasyahResult" | "tasmiDetail" | "munaqasyahDetail" | "munaqasyahFinalResult"
+    modelProps: "academicSetting" | "user" | "session" | "account" | "verification" | "coordinatorProfile" | "teacherProfile" | "studentProfile" | "classroom" | "classroomHistory" | "group" | "groupHistory" | "surah" | "juz" | "surahJuz" | "wafa" | "submission" | "submissionDeletionLog" | "homeActivity" | "weeklyTarget" | "tashihRequest" | "tashihSchedule" | "tashihScheduleRequest" | "tashihResult" | "tahfidzScore" | "tahsinScore" | "report" | "gradeLetterSetting" | "reportDescriptionTemplate" | "munaqasyahRequest" | "munaqasyahSchedule" | "munaqasyahScheduleRequest" | "munaqasyahResult" | "tasmiDetail" | "munaqasyahDetail" | "munaqasyahFinalResult" | "munaqasyahScoringSetting" | "munaqasyahGradeSetting" | "munaqasyahFinalScoreWeightSetting"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2435,6 +2440,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    GradeLetterSetting: {
+      payload: Prisma.$GradeLetterSettingPayload<ExtArgs>
+      fields: Prisma.GradeLetterSettingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GradeLetterSettingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GradeLetterSettingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload>
+        }
+        findFirst: {
+          args: Prisma.GradeLetterSettingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GradeLetterSettingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload>
+        }
+        findMany: {
+          args: Prisma.GradeLetterSettingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload>[]
+        }
+        create: {
+          args: Prisma.GradeLetterSettingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload>
+        }
+        createMany: {
+          args: Prisma.GradeLetterSettingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GradeLetterSettingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload>[]
+        }
+        delete: {
+          args: Prisma.GradeLetterSettingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload>
+        }
+        update: {
+          args: Prisma.GradeLetterSettingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload>
+        }
+        deleteMany: {
+          args: Prisma.GradeLetterSettingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GradeLetterSettingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GradeLetterSettingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload>[]
+        }
+        upsert: {
+          args: Prisma.GradeLetterSettingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradeLetterSettingPayload>
+        }
+        aggregate: {
+          args: Prisma.GradeLetterSettingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGradeLetterSetting>
+        }
+        groupBy: {
+          args: Prisma.GradeLetterSettingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GradeLetterSettingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GradeLetterSettingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GradeLetterSettingCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReportDescriptionTemplate: {
+      payload: Prisma.$ReportDescriptionTemplatePayload<ExtArgs>
+      fields: Prisma.ReportDescriptionTemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReportDescriptionTemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReportDescriptionTemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.ReportDescriptionTemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReportDescriptionTemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload>
+        }
+        findMany: {
+          args: Prisma.ReportDescriptionTemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload>[]
+        }
+        create: {
+          args: Prisma.ReportDescriptionTemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload>
+        }
+        createMany: {
+          args: Prisma.ReportDescriptionTemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReportDescriptionTemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.ReportDescriptionTemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload>
+        }
+        update: {
+          args: Prisma.ReportDescriptionTemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.ReportDescriptionTemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReportDescriptionTemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReportDescriptionTemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.ReportDescriptionTemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportDescriptionTemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.ReportDescriptionTemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReportDescriptionTemplate>
+        }
+        groupBy: {
+          args: Prisma.ReportDescriptionTemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportDescriptionTemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReportDescriptionTemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportDescriptionTemplateCountAggregateOutputType> | number
+        }
+      }
+    }
     MunaqasyahRequest: {
       payload: Prisma.$MunaqasyahRequestPayload<ExtArgs>
       fields: Prisma.MunaqasyahRequestFieldRefs
@@ -2953,6 +3106,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MunaqasyahScoringSetting: {
+      payload: Prisma.$MunaqasyahScoringSettingPayload<ExtArgs>
+      fields: Prisma.MunaqasyahScoringSettingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunaqasyahScoringSettingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunaqasyahScoringSettingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload>
+        }
+        findFirst: {
+          args: Prisma.MunaqasyahScoringSettingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunaqasyahScoringSettingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload>
+        }
+        findMany: {
+          args: Prisma.MunaqasyahScoringSettingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload>[]
+        }
+        create: {
+          args: Prisma.MunaqasyahScoringSettingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload>
+        }
+        createMany: {
+          args: Prisma.MunaqasyahScoringSettingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MunaqasyahScoringSettingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload>[]
+        }
+        delete: {
+          args: Prisma.MunaqasyahScoringSettingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload>
+        }
+        update: {
+          args: Prisma.MunaqasyahScoringSettingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunaqasyahScoringSettingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunaqasyahScoringSettingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MunaqasyahScoringSettingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload>[]
+        }
+        upsert: {
+          args: Prisma.MunaqasyahScoringSettingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahScoringSettingPayload>
+        }
+        aggregate: {
+          args: Prisma.MunaqasyahScoringSettingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunaqasyahScoringSetting>
+        }
+        groupBy: {
+          args: Prisma.MunaqasyahScoringSettingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahScoringSettingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunaqasyahScoringSettingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahScoringSettingCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunaqasyahGradeSetting: {
+      payload: Prisma.$MunaqasyahGradeSettingPayload<ExtArgs>
+      fields: Prisma.MunaqasyahGradeSettingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunaqasyahGradeSettingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunaqasyahGradeSettingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload>
+        }
+        findFirst: {
+          args: Prisma.MunaqasyahGradeSettingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunaqasyahGradeSettingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload>
+        }
+        findMany: {
+          args: Prisma.MunaqasyahGradeSettingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload>[]
+        }
+        create: {
+          args: Prisma.MunaqasyahGradeSettingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload>
+        }
+        createMany: {
+          args: Prisma.MunaqasyahGradeSettingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MunaqasyahGradeSettingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload>[]
+        }
+        delete: {
+          args: Prisma.MunaqasyahGradeSettingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload>
+        }
+        update: {
+          args: Prisma.MunaqasyahGradeSettingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunaqasyahGradeSettingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunaqasyahGradeSettingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MunaqasyahGradeSettingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload>[]
+        }
+        upsert: {
+          args: Prisma.MunaqasyahGradeSettingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahGradeSettingPayload>
+        }
+        aggregate: {
+          args: Prisma.MunaqasyahGradeSettingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunaqasyahGradeSetting>
+        }
+        groupBy: {
+          args: Prisma.MunaqasyahGradeSettingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahGradeSettingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunaqasyahGradeSettingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahGradeSettingCountAggregateOutputType> | number
+        }
+      }
+    }
+    MunaqasyahFinalScoreWeightSetting: {
+      payload: Prisma.$MunaqasyahFinalScoreWeightSettingPayload<ExtArgs>
+      fields: Prisma.MunaqasyahFinalScoreWeightSettingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload>
+        }
+        findFirst: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload>
+        }
+        findMany: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload>[]
+        }
+        create: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload>
+        }
+        createMany: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload>[]
+        }
+        delete: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload>
+        }
+        update: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload>
+        }
+        deleteMany: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload>[]
+        }
+        upsert: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MunaqasyahFinalScoreWeightSettingPayload>
+        }
+        aggregate: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMunaqasyahFinalScoreWeightSetting>
+        }
+        groupBy: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahFinalScoreWeightSettingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MunaqasyahFinalScoreWeightSettingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MunaqasyahFinalScoreWeightSettingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3168,7 +3543,8 @@ export type GroupHistoryScalarFieldEnum = (typeof GroupHistoryScalarFieldEnum)[k
 export const SurahScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  verseCount: 'verseCount'
+  verseCount: 'verseCount',
+  initialScore: 'initialScore'
 } as const
 
 export type SurahScalarFieldEnum = (typeof SurahScalarFieldEnum)[keyof typeof SurahScalarFieldEnum]
@@ -3394,6 +3770,27 @@ export const ReportScalarFieldEnum = {
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
 
 
+export const GradeLetterSettingScalarFieldEnum = {
+  grade: 'grade',
+  minScore: 'minScore',
+  description: 'description',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type GradeLetterSettingScalarFieldEnum = (typeof GradeLetterSettingScalarFieldEnum)[keyof typeof GradeLetterSettingScalarFieldEnum]
+
+
+export const ReportDescriptionTemplateScalarFieldEnum = {
+  type: 'type',
+  template: 'template',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type ReportDescriptionTemplateScalarFieldEnum = (typeof ReportDescriptionTemplateScalarFieldEnum)[keyof typeof ReportDescriptionTemplateScalarFieldEnum]
+
+
 export const MunaqasyahRequestScalarFieldEnum = {
   id: 'id',
   coordinatorId: 'coordinatorId',
@@ -3503,6 +3900,42 @@ export const MunaqasyahFinalResultScalarFieldEnum = {
 } as const
 
 export type MunaqasyahFinalResultScalarFieldEnum = (typeof MunaqasyahFinalResultScalarFieldEnum)[keyof typeof MunaqasyahFinalResultScalarFieldEnum]
+
+
+export const MunaqasyahScoringSettingScalarFieldEnum = {
+  jenis: 'jenis',
+  khofiAwalAyatWeight: 'khofiAwalAyatWeight',
+  khofiMakhrojWeight: 'khofiMakhrojWeight',
+  khofiTajwidMadWeight: 'khofiTajwidMadWeight',
+  jaliBarisWeight: 'jaliBarisWeight',
+  jaliLebihSatuKalimatWeight: 'jaliLebihSatuKalimatWeight',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type MunaqasyahScoringSettingScalarFieldEnum = (typeof MunaqasyahScoringSettingScalarFieldEnum)[keyof typeof MunaqasyahScoringSettingScalarFieldEnum]
+
+
+export const MunaqasyahGradeSettingScalarFieldEnum = {
+  grade: 'grade',
+  minScore: 'minScore',
+  label: 'label',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type MunaqasyahGradeSettingScalarFieldEnum = (typeof MunaqasyahGradeSettingScalarFieldEnum)[keyof typeof MunaqasyahGradeSettingScalarFieldEnum]
+
+
+export const MunaqasyahFinalScoreWeightSettingScalarFieldEnum = {
+  id: 'id',
+  tasmiWeight: 'tasmiWeight',
+  munaqasyahWeight: 'munaqasyahWeight',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type MunaqasyahFinalScoreWeightSettingScalarFieldEnum = (typeof MunaqasyahFinalScoreWeightSettingScalarFieldEnum)[keyof typeof MunaqasyahFinalScoreWeightSettingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -3809,6 +4242,20 @@ export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMode
 
 
 /**
+ * Reference to a field of type 'ReportTemplateType'
+ */
+export type EnumReportTemplateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReportTemplateType'>
+    
+
+
+/**
+ * Reference to a field of type 'ReportTemplateType[]'
+ */
+export type ListEnumReportTemplateTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReportTemplateType[]'>
+    
+
+
+/**
  * Reference to a field of type 'MunaqasyahTahap'
  */
 export type EnumMunaqasyahTahapFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunaqasyahTahap'>
@@ -4000,6 +4447,8 @@ export type GlobalOmitConfig = {
   tahfidzScore?: Prisma.TahfidzScoreOmit
   tahsinScore?: Prisma.TahsinScoreOmit
   report?: Prisma.ReportOmit
+  gradeLetterSetting?: Prisma.GradeLetterSettingOmit
+  reportDescriptionTemplate?: Prisma.ReportDescriptionTemplateOmit
   munaqasyahRequest?: Prisma.MunaqasyahRequestOmit
   munaqasyahSchedule?: Prisma.MunaqasyahScheduleOmit
   munaqasyahScheduleRequest?: Prisma.MunaqasyahScheduleRequestOmit
@@ -4007,6 +4456,9 @@ export type GlobalOmitConfig = {
   tasmiDetail?: Prisma.TasmiDetailOmit
   munaqasyahDetail?: Prisma.MunaqasyahDetailOmit
   munaqasyahFinalResult?: Prisma.MunaqasyahFinalResultOmit
+  munaqasyahScoringSetting?: Prisma.MunaqasyahScoringSettingOmit
+  munaqasyahGradeSetting?: Prisma.MunaqasyahGradeSettingOmit
+  munaqasyahFinalScoreWeightSetting?: Prisma.MunaqasyahFinalScoreWeightSettingOmit
 }
 
 /* Types for Logging */

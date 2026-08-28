@@ -6,6 +6,7 @@ import { listAllHomeActivities } from '@/features/home-activities/queries/list-a
 import { listGroupHomeActivities } from '@/features/home-activities/queries/list-group-home-activities';
 import { listOwnHomeActivities } from '@/features/home-activities/queries/list-own-home-activities';
 import { getMyGroup } from '@/features/home-activities/queries/get-my-group';
+import { getAcademicSetting } from '@/features/academic-settings/queries/get-academic-setting';
 import {
   listSurahOptions,
   listJuzOptions,
@@ -15,6 +16,12 @@ import {
 export default async function HomeActivityPage() {
   const session = await requireRole(['teacher', 'coordinator', 'student']);
   const role = session.user.role.toLowerCase();
+  const academicSetting = await getAcademicSetting();
+  const currentPeriod = academicSetting ? `${academicSetting.currentYear}|${academicSetting.currentSemester}` : undefined;
+  const schoolInfo = academicSetting
+    ? { schoolName: academicSetting.schoolName, schoolAddress: academicSetting.schoolAddress }
+    : { schoolName: '-', schoolAddress: null };
+  const exportedBy = { name: session.user.name, role: session.user.role };
 
   if (role === 'student') {
     const [myGroup, activities, surahOptions, juzOptions, surahJuzMap] = await Promise.all([
@@ -55,6 +62,9 @@ export default async function HomeActivityPage() {
           surahOptions={surahOptions}
           juzOptions={juzOptions}
           surahJuzMap={surahJuzMap}
+          currentPeriod={currentPeriod}
+          schoolInfo={schoolInfo}
+          exportedBy={exportedBy}
         />
       </div>
     );
@@ -70,6 +80,9 @@ export default async function HomeActivityPage() {
         data={activities}
         canReview={role === 'teacher'}
         showClassroom={role === 'coordinator'}
+        currentPeriod={currentPeriod}
+        schoolInfo={schoolInfo}
+        exportedBy={exportedBy}
       />
     </div>
   );

@@ -264,9 +264,10 @@ model GroupHistory {
 }
 
 model Surah {
-  id         Int    @id
-  name       String
-  verseCount Int
+  id           Int @id
+  name         String
+  verseCount   Int
+  initialScore Int @default(100)
 
   surahJuz             SurahJuz[]
   submissions          Submission[]
@@ -645,6 +646,32 @@ enum GradeLetter {
   D
 }
 
+model GradeLetterSetting {
+  grade       GradeLetter @id
+  minScore    Int
+  description String      @db.VarChar(50)
+
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+
+  @@map("grade_letter_setting")
+}
+
+enum ReportTemplateType {
+  TAHFIDZ
+  TAHSIN
+}
+
+model ReportDescriptionTemplate {
+  type     ReportTemplateType @id
+  template String             @db.VarChar(191)
+
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+
+  @@map("report_description_template")
+}
+
 enum TahsinType {
   WAFA
   ALQURAN
@@ -807,6 +834,21 @@ model MunaqasyahFinalResult {
   @@map("munaqasyah_final_result")
 }
 
+model MunaqasyahScoringSetting {
+  jenis MunaqasyahJenisUjian @id
+
+  khofiAwalAyatWeight        Int
+  khofiMakhrojWeight         Int
+  khofiTajwidMadWeight       Int
+  jaliBarisWeight            Int
+  jaliLebihSatuKalimatWeight Int
+
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+
+  @@map("munaqasyah_scoring_setting")
+}
+
 enum MunaqasyahTahap {
   TAHAP_1
   TAHAP_2
@@ -831,6 +873,29 @@ enum MunaqasyahGrade {
   JAYYID_JIDDAN
   JAYYID
   TIDAK_LULUS
+}
+
+model MunaqasyahGradeSetting {
+  grade    MunaqasyahGrade @id
+  minScore Int
+  label    String          @db.VarChar(50)
+
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+
+  @@map("munaqasyah_grade_setting")
+}
+
+model MunaqasyahFinalScoreWeightSetting {
+  id String @id @default("singleton")
+
+  tasmiWeight      Int
+  munaqasyahWeight Int
+
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+
+  @@map("munaqasyah_final_score_weight_setting")
 }
 
 enum Semester {

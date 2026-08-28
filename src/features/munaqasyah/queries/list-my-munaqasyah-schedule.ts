@@ -3,6 +3,7 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 
 export interface MyMunaqasyahScheduleParticipant {
   requestId: string;
+  nis: string;
   studentName: string;
   tahap: string;
   jenis: string;
@@ -43,6 +44,7 @@ export async function listMyMunaqasyahSchedule(): Promise<MyMunaqasyahScheduleDa
   for (const e of entries) {
     const participant: MyMunaqasyahScheduleParticipant = {
       requestId: e.requestId,
+      nis: e.request.student.nis,
       studentName: e.request.student.user.name,
       tahap: e.request.tahap,
       jenis: e.request.jenis,

@@ -16,6 +16,31 @@ export interface FilterOption {
   label: string;
 }
 
+/**
+ * Builds "Tahun Akademik" options from records' academicYear/semester, always including
+ * the school's current academic period (from AcademicSetting) even if no record uses it yet,
+ * so the dropdown stays in sync when the setting changes.
+ */
+export function buildPeriodOptions<T>(
+  entries: T[],
+  getYear: (entry: T) => string,
+  getSemester: (entry: T) => string,
+  semesterLabel: Record<string, string>,
+  currentPeriod?: string,
+): FilterOption[] {
+  const map = new Map<string, string>();
+  entries.forEach((entry) => {
+    const year = getYear(entry);
+    const semester = getSemester(entry);
+    map.set(`${year}|${semester}`, `${year} ${semesterLabel[semester] ?? semester}`);
+  });
+  if (currentPeriod && !map.has(currentPeriod)) {
+    const [year, semester] = currentPeriod.split('|');
+    map.set(currentPeriod, `${year} ${semesterLabel[semester] ?? semester}`);
+  }
+  return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
+}
+
 export function isDateInRange(date: Date, range?: DateRange): boolean {
   if (!range?.from && !range?.to) return true;
 
@@ -136,7 +161,7 @@ export function TableFilters({ period, classroom, group, student, extraFilters, 
 
   return (
     <div className="flex flex-wrap items-end gap-2">
-      <SelectFilter label="Tahun Ajaran" allLabel="Semua Tahun Ajaran" className="w-44" {...period} />
+      <SelectFilter label="Tahun Akademik" allLabel="Semua Tahun Akademik" className="w-44" {...period} />
 
       {hasAdvanced && (
         <Popover>

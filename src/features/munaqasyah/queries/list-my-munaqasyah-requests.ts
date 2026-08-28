@@ -3,6 +3,7 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 
 export interface MunaqasyahRequestTableData {
   id: string;
+  nis: string;
   studentName: string;
   groupId: string;
   groupName: string;
@@ -28,6 +29,7 @@ export async function listMyMunaqasyahRequests(): Promise<MunaqasyahRequestTable
 
   return requests.map((r) => ({
     id: r.id,
+    nis: r.student.nis,
     studentName: r.student.user.name,
     groupId: r.groupId,
     groupName: r.group.name,

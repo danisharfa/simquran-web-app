@@ -62,6 +62,11 @@ export const menuData: Record<RoleKey, NavItem[]> = {
       url: '/dashboard/quran-reference',
       icon: BookMarked,
     },
+    {
+      title: 'Pengaturan Penilaian',
+      url: '/dashboard/scoring-settings',
+      icon: ClipboardCheck,
+    },
   ],
   admin: [
     {
@@ -84,6 +89,16 @@ export const menuData: Record<RoleKey, NavItem[]> = {
       title: 'Akademik',
       url: '/dashboard/academic-settings',
       icon: GraduationCap,
+    },
+    {
+      title: "Data Referensi Qur'an",
+      url: '/dashboard/quran-reference',
+      icon: BookMarked,
+    },
+    {
+      title: 'Pengaturan Penilaian',
+      url: '/dashboard/scoring-settings',
+      icon: ClipboardCheck,
     },
   ],
   coordinator: [

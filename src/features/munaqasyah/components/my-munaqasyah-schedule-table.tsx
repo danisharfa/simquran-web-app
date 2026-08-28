@@ -17,10 +17,12 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
-import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
+import { FILTER_ALL, TableFilters, isDateInRange, buildPeriodOptions } from '@/components/layouts/filters/table-filters';
 import { TAHAP_OPTIONS, JENIS_UJIAN_OPTIONS } from '../munaqasyah.schema';
 import { TAHAP_BADGE_CLASS, JENIS_UJIAN_BADGE_CLASS } from './munaqasyah-request-table';
 import { MunaqasyahScheduleParticipantsDialog } from './munaqasyah-schedule-participants-dialog';
+import { ExportMyMunaqasyahSchedulePdfButton } from './export-my-munaqasyah-schedule-pdf-button';
+import { formatDateID } from '@/lib/pdf/format';
 import type { MyMunaqasyahScheduleData } from '../queries/list-my-munaqasyah-schedule';
 
 const TAHAP_LABEL = Object.fromEntries(TAHAP_OPTIONS.map((o) => [o.value, o.label]));
@@ -30,14 +32,17 @@ const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap
 interface Props {
   data: MyMunaqasyahScheduleData[];
   own?: boolean;
+  currentPeriod?: string;
+  schoolInfo?: { schoolName: string; schoolAddress: string | null };
+  exportedBy?: { name: string; role: string };
 }
 
-export function MyMunaqasyahScheduleTable({ data, own = false }: Props) {
+export function MyMunaqasyahScheduleTable({ data, own = false, currentPeriod, schoolInfo, exportedBy }: Props) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
-  const [period, setPeriod] = useState(FILTER_ALL);
+  const [period, setPeriod] = useState(currentPeriod ?? FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
   const [tahap, setTahap] = useState(FILTER_ALL);
@@ -46,13 +51,10 @@ export function MyMunaqasyahScheduleTable({ data, own = false }: Props) {
 
   const participants = useMemo(() => data.flatMap((d) => d.participants), [data]);
 
-  const periodOptions = useMemo(() => {
-    const map = new Map<string, string>();
-    participants.forEach((p) =>
-      map.set(`${p.academicYear}|${p.semester}`, `${p.academicYear} ${SEMESTER_LABEL[p.semester] ?? p.semester}`),
-    );
-    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
-  }, [participants]);
+  const periodOptions = useMemo(
+    () => buildPeriodOptions(participants, (p) => p.academicYear, (p) => p.semester, SEMESTER_LABEL, currentPeriod),
+    [participants, currentPeriod],
+  );
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
     participants
@@ -184,9 +186,47 @@ export function MyMunaqasyahScheduleTable({ data, own = false }: Props) {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const periodLabel = useMemo(() => {
+    if (period === FILTER_ALL) return undefined;
+    const label = periodOptions.find((o) => o.value === period)?.label;
+    return label ? `Tahun Akademik ${label}` : undefined;
+  }, [period, periodOptions]);
+
+  const filterSummary = useMemo(() => {
+    const parts: string[] = [];
+    if (!own) {
+      const classroomLabel = classroomOptions.find((o) => o.value === classroomId)?.label;
+      if (classroomId !== FILTER_ALL && classroomLabel) parts.push(`Kelas: ${classroomLabel}`);
+      const groupLabel = groupOptions.find((o) => o.value === groupId)?.label;
+      if (groupId !== FILTER_ALL && groupLabel) parts.push(`Kelompok: ${groupLabel}`);
+    }
+    const tahapLabel = tahapOptions.find((o) => o.value === tahap)?.label;
+    if (tahap !== FILTER_ALL && tahapLabel) parts.push(`Tahap: ${tahapLabel}`);
+    const jenisLabel = jenisOptions.find((o) => o.value === jenis)?.label;
+    if (jenis !== FILTER_ALL && jenisLabel) parts.push(`Jenis Ujian: ${jenisLabel}`);
+    if (dateRange?.from || dateRange?.to) {
+      parts.push(
+        `Tanggal Jadwal: ${dateRange.from ? formatDateID(dateRange.from) : '...'} - ${dateRange.to ? formatDateID(dateRange.to) : '...'}`,
+      );
+    }
+    return parts.length > 0 ? parts.join(' • ') : undefined;
+  }, [own, classroomId, classroomOptions, groupId, groupOptions, tahap, tahapOptions, jenis, jenisOptions, dateRange]);
+
   return (
     <DataTable
       title="Jadwal Munaqasyah"
+      titleAction={
+        data.length > 0 && schoolInfo && exportedBy ? (
+          <ExportMyMunaqasyahSchedulePdfButton
+            table={table}
+            own={own}
+            schoolInfo={schoolInfo}
+            exportedBy={exportedBy}
+            periodLabel={periodLabel}
+            filterSummary={filterSummary}
+          />
+        ) : undefined
+      }
       table={table}
       toolbar={
         data.length > 0 ? (

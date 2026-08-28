@@ -15,6 +15,8 @@ export async function getTeacherDashboardData(): Promise<TeacherDashboardData> {
   startOfMonth.setDate(1);
   startOfMonth.setHours(0, 0, 0, 0);
 
+  const setting = await prisma.academicSetting.findFirst();
+
   const [groupCount, studentCount, submissionsThisMonth, reports] = await Promise.all([
     prisma.group.count({ where: { isActive: true, teacherId: session.user.id } }),
     prisma.studentProfile.count({
@@ -24,7 +26,10 @@ export async function getTeacherDashboardData(): Promise<TeacherDashboardData> {
       where: { teacherId: session.user.id, date: { gte: startOfMonth } },
     }),
     prisma.report.findMany({
-      where: { group: { teacherId: session.user.id } },
+      where: {
+        group: { teacherId: session.user.id },
+        ...(setting ? { academicYear: setting.currentYear, semester: setting.currentSemester } : {}),
+      },
       include: { student: { include: { user: true } } },
       orderBy: { updatedAt: 'desc' },
       take: 8,

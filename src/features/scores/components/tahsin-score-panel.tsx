@@ -27,19 +27,20 @@ import {
 } from '@/components/ui/select';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
-import { GRADE_DESCRIPTION } from '../grade';
 import { TAHSIN_TYPE_OPTIONS } from '../score.schema';
 import { upsertTahsinScore } from '../actions/upsert-tahsin-score';
 import { deleteTahsinScore } from '../actions/delete-tahsin-score';
 import type { TahsinScoreData } from '../queries/list-tahsin-scores';
+import type { GradeLetter } from '@/lib/generated/prisma/enums';
 
 interface Props {
   studentId: string;
   groupId: string;
   scores: TahsinScoreData[];
+  gradeDescriptionMap: Record<GradeLetter, string>;
 }
 
-export function TahsinScorePanel({ studentId, groupId, scores }: Props) {
+export function TahsinScorePanel({ studentId, groupId, scores, gradeDescriptionMap }: Props) {
   const router = useRouter();
   const [tahsinType, setTahsinType] = useState<'WAFA' | 'ALQURAN'>('WAFA');
   const [topic, setTopic] = useState('');
@@ -117,7 +118,7 @@ export function TahsinScorePanel({ studentId, groupId, scores }: Props) {
         accessorKey: 'grade',
         id: 'Grade',
         header: 'Grade',
-        cell: ({ row }) => `${row.original.grade} (${GRADE_DESCRIPTION[row.original.grade as 'A' | 'B' | 'C' | 'D']})`,
+        cell: ({ row }) => `${row.original.grade} (${gradeDescriptionMap[row.original.grade as 'A' | 'B' | 'C' | 'D']})`,
       },
       { accessorKey: 'description', id: 'Deskripsi', header: 'Deskripsi' },
       {
@@ -148,7 +149,7 @@ export function TahsinScorePanel({ studentId, groupId, scores }: Props) {
         ),
       },
     ],
-    [deletingId, handleDelete, handleEditRow],
+    [deletingId, handleDelete, handleEditRow, gradeDescriptionMap],
   );
 
   const table = useReactTable({

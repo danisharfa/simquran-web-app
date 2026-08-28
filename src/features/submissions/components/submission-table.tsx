@@ -22,10 +22,12 @@ import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
+import { FILTER_ALL, TableFilters, isDateInRange, buildPeriodOptions } from '@/components/layouts/filters/table-filters';
 import { SUBMISSION_TYPE_OPTIONS, ADAB_OPTIONS, SUBMISSION_STATUS_OPTIONS } from '../submission.schema';
 import { deleteSubmission } from '../actions/delete-submission';
 import { SubmissionEditDialog } from './submission-edit-dialog';
+import { ExportSubmissionPdfButton } from './export-submission-pdf-button';
+import { formatDateID } from '@/lib/pdf/format';
 import type { SubmissionTableData } from '../queries/list-my-submissions';
 import type { GroupWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
 import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
@@ -45,6 +47,9 @@ interface Props {
   juzOptions?: ReferenceOption[];
   surahJuzMap?: SurahJuzMapping[];
   wafaOptions?: ReferenceOption[];
+  currentPeriod?: string;
+  schoolInfo?: { schoolName: string; schoolAddress: string | null };
+  exportedBy?: { name: string; role: string };
 }
 
 export function SubmissionTable({
@@ -57,6 +62,9 @@ export function SubmissionTable({
   juzOptions = [],
   surahJuzMap = [],
   wafaOptions = [],
+  currentPeriod,
+  schoolInfo,
+  exportedBy,
 }: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -64,19 +72,16 @@ export function SubmissionTable({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const [period, setPeriod] = useState(FILTER_ALL);
+  const [period, setPeriod] = useState(currentPeriod ?? FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
   const [studentId, setStudentId] = useState(FILTER_ALL);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
-  const periodOptions = useMemo(() => {
-    const map = new Map<string, string>();
-    data.forEach((d) =>
-      map.set(`${d.academicYear}|${d.semester}`, `${d.academicYear} ${SEMESTER_LABEL[d.semester] ?? d.semester}`),
-    );
-    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
-  }, [data]);
+  const periodOptions = useMemo(
+    () => buildPeriodOptions(data, (d) => d.academicYear, (d) => d.semester, SEMESTER_LABEL, currentPeriod),
+    [data, currentPeriod],
+  );
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
     data
@@ -168,14 +173,14 @@ export function SubmissionTable({
         ? []
         : [
             {
+              accessorKey: 'nis',
+              id: 'NIS',
+              header: 'NIS',
+            } satisfies ColumnDef<SubmissionTableData>,
+            {
               accessorKey: 'studentName',
               id: 'Nama Siswa',
               header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
-            } satisfies ColumnDef<SubmissionTableData>,
-            {
-              accessorKey: 'groupName',
-              id: 'Kelompok',
-              header: 'Kelompok',
             } satisfies ColumnDef<SubmissionTableData>,
           ]),
       ...(showClassroom
@@ -187,6 +192,15 @@ export function SubmissionTable({
             } satisfies ColumnDef<SubmissionTableData>,
           ]
         : []),
+      ...(own
+        ? []
+        : [
+            {
+              accessorKey: 'groupName',
+              id: 'Kelompok',
+              header: 'Kelompok',
+            } satisfies ColumnDef<SubmissionTableData>,
+          ]),
       {
         accessorKey: 'submissionType',
         id: 'Jenis',
@@ -287,9 +301,46 @@ export function SubmissionTable({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const periodLabel = useMemo(() => {
+    if (period === FILTER_ALL) return undefined;
+    const label = periodOptions.find((o) => o.value === period)?.label;
+    return label ? `Tahun Akademik ${label}` : undefined;
+  }, [period, periodOptions]);
+
+  const filterSummary = useMemo(() => {
+    const parts: string[] = [];
+    if (!own) {
+      const classroomLabel = classroomOptions.find((o) => o.value === classroomId)?.label;
+      if (classroomId !== FILTER_ALL && classroomLabel) parts.push(`Kelas: ${classroomLabel}`);
+      const groupLabel = groupOptions.find((o) => o.value === groupId)?.label;
+      if (groupId !== FILTER_ALL && groupLabel) parts.push(`Kelompok: ${groupLabel}`);
+      const studentLabel = studentOptions.find((o) => o.value === studentId)?.label;
+      if (studentId !== FILTER_ALL && studentLabel) parts.push(`Siswa: ${studentLabel}`);
+    }
+    if (dateRange?.from || dateRange?.to) {
+      parts.push(
+        `Tanggal Setoran: ${dateRange.from ? formatDateID(dateRange.from) : '...'} - ${dateRange.to ? formatDateID(dateRange.to) : '...'}`,
+      );
+    }
+    return parts.length > 0 ? parts.join(' • ') : undefined;
+  }, [own, classroomId, classroomOptions, groupId, groupOptions, studentId, studentOptions, dateRange]);
+
   return (
     <DataTable
       title="Riwayat Setoran"
+      titleAction={
+        data.length > 0 && schoolInfo && exportedBy ? (
+          <ExportSubmissionPdfButton
+            table={table}
+            schoolInfo={schoolInfo}
+            exportedBy={exportedBy}
+            periodLabel={periodLabel}
+            filterSummary={filterSummary}
+            own={own}
+            showClassroom={showClassroom}
+          />
+        ) : undefined
+      }
       table={table}
       filterColumn={own ? undefined : 'Nama Siswa'}
       toolbar={

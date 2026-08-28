@@ -8,10 +8,14 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 import {
   calculateTasmiTotalScore,
   scoreToGrade,
+  isPassing,
   validateTasmiDetails,
   type TasmiDetailInput,
 } from '../munaqasyah-scoring';
 import { tryFinalizeMunaqasyah } from '../try-finalize-munaqasyah';
+import { getScoringWeights } from '../queries/get-scoring-weights';
+import { getMunaqasyahGradeSettings } from '../queries/get-munaqasyah-grade-settings';
+import { syncMunaqasyahFollowUpAfterTasmiChange } from '../munaqasyah-follow-up';
 
 export async function submitTasmiResult(requestId: string, rows: TasmiDetailInput[]) {
   const session = await requireRoleOrThrow(['teacher', 'coordinator']);
@@ -39,7 +43,9 @@ export async function submitTasmiResult(requestId: string, rows: TasmiDetailInpu
     return { success: false, message: 'Anda bukan penguji untuk jadwal ini' };
   }
 
-  const { totalScore, detailsToSave } = calculateTasmiTotalScore(rows);
+  const [weights, gradeSettings] = await Promise.all([getScoringWeights('TASMI'), getMunaqasyahGradeSettings()]);
+  const { totalScore, detailsToSave } = calculateTasmiTotalScore(rows, weights);
+  const grade = scoreToGrade(totalScore, gradeSettings);
   const resultId = randomUUID();
 
   await prisma.$transaction([
@@ -49,8 +55,8 @@ export async function submitTasmiResult(requestId: string, rows: TasmiDetailInpu
         requestId,
         scheduleId: scheduleRequest.scheduleId,
         totalScore,
-        grade: scoreToGrade(totalScore),
-        passed: totalScore >= 80,
+        grade,
+        passed: isPassing(grade),
       },
     }),
     prisma.tasmiDetail.createMany({
@@ -72,6 +78,7 @@ export async function submitTasmiResult(requestId: string, rows: TasmiDetailInpu
   ]);
 
   await tryFinalizeMunaqasyah(request.studentId, request.groupId, request.juzId, request.tahap);
+  await syncMunaqasyahFollowUpAfterTasmiChange(request, isPassing(grade));
 
   revalidatePath('/dashboard/munaqasyah/assessment');
   revalidatePath('/dashboard/munaqasyah/results');

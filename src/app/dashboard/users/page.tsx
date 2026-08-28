@@ -38,7 +38,7 @@ export default async function UsersPage() {
             { value: 'admin', label: 'Admin', data: admins },
             { value: 'coordinator', label: 'Koordinator', data: coordinators },
             { value: 'teacher', label: 'Guru', data: teachers },
-            { value: 'student', label: 'Siswa', data: students },
+            { value: 'student', label: 'Siswa', data: students, showStudentColumns: true },
             {
               value: 'exited-student',
               label: 'Siswa Nonaktif',
@@ -77,7 +77,7 @@ export default async function UsersPage() {
           tabs={[
             { value: 'coordinator', label: 'Koordinator', data: coordinators },
             { value: 'teacher', label: 'Guru', data: teachers },
-            { value: 'student', label: 'Siswa', data: students },
+            { value: 'student', label: 'Siswa', data: students, showStudentColumns: true },
             {
               value: 'exited-student',
               label: 'Siswa Nonaktif',

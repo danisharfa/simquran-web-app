@@ -1,5 +1,6 @@
 import { requireRole } from '@/lib/require-role';
 import { PageHeader } from '@/components/layouts/page-header';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   listSurah,
   listJuz,
@@ -14,7 +15,7 @@ import {
 } from '@/features/quran-reference/components/quran-reference-table';
 
 export default async function QuranReferencePage() {
-  await requireRole(['superadmin']);
+  await requireRole(['superadmin', 'admin']);
 
   const [surah, juz, surahJuz, wafa] = await Promise.all([
     listSurah(),
@@ -30,10 +31,26 @@ export default async function QuranReferencePage() {
         description="Data surah, juz, pemetaan surah-juz, dan Wafa (hanya lihat)"
       />
 
-      <SurahTable data={surah} />
-      <JuzTable data={juz} />
-      <SurahJuzTable data={surahJuz} />
-      <WafaTable data={wafa} />
+      <Tabs defaultValue="surah">
+        <TabsList>
+          <TabsTrigger value="surah">Surah</TabsTrigger>
+          <TabsTrigger value="juz">Juz</TabsTrigger>
+          <TabsTrigger value="surah-juz">Surah-Juz</TabsTrigger>
+          <TabsTrigger value="wafa">Wafa</TabsTrigger>
+        </TabsList>
+        <TabsContent value="surah">
+          <SurahTable data={surah} />
+        </TabsContent>
+        <TabsContent value="juz">
+          <JuzTable data={juz} />
+        </TabsContent>
+        <TabsContent value="surah-juz">
+          <SurahJuzTable data={surahJuz} />
+        </TabsContent>
+        <TabsContent value="wafa">
+          <WafaTable data={wafa} />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

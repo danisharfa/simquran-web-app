@@ -14,6 +14,8 @@ interface UserTableTab {
   content?: ReactNode;
   /** Override jumlah di label tab, untuk tab dengan `content` kustom (data bukan UserTableData[]). */
   count?: number;
+  /** Tampilkan kolom Status, Tanggal Lulus, dan Tanggal Keluar (khusus tabel siswa). */
+  showStudentColumns?: boolean;
 }
 
 interface Props {
@@ -33,7 +35,9 @@ export function UserTableTabs({ tabs }: Props) {
 
       {tabs.map((tab) => (
         <TabsContent key={tab.value} value={tab.value}>
-          {tab.content ?? <UserTable data={tab.data} />}
+          {tab.content ?? (
+            <UserTable data={tab.data} showStudentColumns={tab.showStudentColumns} />
+          )}
         </TabsContent>
       ))}
     </Tabs>

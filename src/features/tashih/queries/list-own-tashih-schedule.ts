@@ -27,6 +27,7 @@ export async function listOwnTashihSchedule(): Promise<MyTashihScheduleData[]> {
   for (const e of entries) {
     const participant: MyTashihScheduleParticipant = {
       requestId: e.requestId,
+      nis: e.request.student.nis,
       studentName: e.request.student.user.name,
       detail: formatTashihDetail(e.request),
       groupId: e.request.groupId,

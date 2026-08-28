@@ -78,13 +78,18 @@ export const ModelName = {
   TahfidzScore: 'TahfidzScore',
   TahsinScore: 'TahsinScore',
   Report: 'Report',
+  GradeLetterSetting: 'GradeLetterSetting',
+  ReportDescriptionTemplate: 'ReportDescriptionTemplate',
   MunaqasyahRequest: 'MunaqasyahRequest',
   MunaqasyahSchedule: 'MunaqasyahSchedule',
   MunaqasyahScheduleRequest: 'MunaqasyahScheduleRequest',
   MunaqasyahResult: 'MunaqasyahResult',
   TasmiDetail: 'TasmiDetail',
   MunaqasyahDetail: 'MunaqasyahDetail',
-  MunaqasyahFinalResult: 'MunaqasyahFinalResult'
+  MunaqasyahFinalResult: 'MunaqasyahFinalResult',
+  MunaqasyahScoringSetting: 'MunaqasyahScoringSetting',
+  MunaqasyahGradeSetting: 'MunaqasyahGradeSetting',
+  MunaqasyahFinalScoreWeightSetting: 'MunaqasyahFinalScoreWeightSetting'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -279,7 +284,8 @@ export type GroupHistoryScalarFieldEnum = (typeof GroupHistoryScalarFieldEnum)[k
 export const SurahScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  verseCount: 'verseCount'
+  verseCount: 'verseCount',
+  initialScore: 'initialScore'
 } as const
 
 export type SurahScalarFieldEnum = (typeof SurahScalarFieldEnum)[keyof typeof SurahScalarFieldEnum]
@@ -505,6 +511,27 @@ export const ReportScalarFieldEnum = {
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
 
 
+export const GradeLetterSettingScalarFieldEnum = {
+  grade: 'grade',
+  minScore: 'minScore',
+  description: 'description',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type GradeLetterSettingScalarFieldEnum = (typeof GradeLetterSettingScalarFieldEnum)[keyof typeof GradeLetterSettingScalarFieldEnum]
+
+
+export const ReportDescriptionTemplateScalarFieldEnum = {
+  type: 'type',
+  template: 'template',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type ReportDescriptionTemplateScalarFieldEnum = (typeof ReportDescriptionTemplateScalarFieldEnum)[keyof typeof ReportDescriptionTemplateScalarFieldEnum]
+
+
 export const MunaqasyahRequestScalarFieldEnum = {
   id: 'id',
   coordinatorId: 'coordinatorId',
@@ -614,6 +641,42 @@ export const MunaqasyahFinalResultScalarFieldEnum = {
 } as const
 
 export type MunaqasyahFinalResultScalarFieldEnum = (typeof MunaqasyahFinalResultScalarFieldEnum)[keyof typeof MunaqasyahFinalResultScalarFieldEnum]
+
+
+export const MunaqasyahScoringSettingScalarFieldEnum = {
+  jenis: 'jenis',
+  khofiAwalAyatWeight: 'khofiAwalAyatWeight',
+  khofiMakhrojWeight: 'khofiMakhrojWeight',
+  khofiTajwidMadWeight: 'khofiTajwidMadWeight',
+  jaliBarisWeight: 'jaliBarisWeight',
+  jaliLebihSatuKalimatWeight: 'jaliLebihSatuKalimatWeight',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type MunaqasyahScoringSettingScalarFieldEnum = (typeof MunaqasyahScoringSettingScalarFieldEnum)[keyof typeof MunaqasyahScoringSettingScalarFieldEnum]
+
+
+export const MunaqasyahGradeSettingScalarFieldEnum = {
+  grade: 'grade',
+  minScore: 'minScore',
+  label: 'label',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type MunaqasyahGradeSettingScalarFieldEnum = (typeof MunaqasyahGradeSettingScalarFieldEnum)[keyof typeof MunaqasyahGradeSettingScalarFieldEnum]
+
+
+export const MunaqasyahFinalScoreWeightSettingScalarFieldEnum = {
+  id: 'id',
+  tasmiWeight: 'tasmiWeight',
+  munaqasyahWeight: 'munaqasyahWeight',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type MunaqasyahFinalScoreWeightSettingScalarFieldEnum = (typeof MunaqasyahFinalScoreWeightSettingScalarFieldEnum)[keyof typeof MunaqasyahFinalScoreWeightSettingScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -21,26 +21,31 @@ import { Button } from '@/components/ui/button';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
-import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
+import { FILTER_ALL, TableFilters, isDateInRange, buildPeriodOptions } from '@/components/layouts/filters/table-filters';
 import { deleteTashihSchedule } from '../actions/delete-tashih-schedule';
 import { TashihScheduleParticipantsDialog } from './tashih-schedule-participants-dialog';
 import { TashihScheduleEditDialog } from './tashih-schedule-edit-dialog';
+import { ExportTashihSchedulePdfButton } from './export-tashih-schedule-pdf-button';
+import { formatDateID } from '@/lib/pdf/format';
 import type { TashihScheduleTableData } from '../queries/list-tashih-schedules';
 
 const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
 
 interface Props {
   data: TashihScheduleTableData[];
+  currentPeriod?: string;
+  schoolInfo?: { schoolName: string; schoolAddress: string | null };
+  exportedBy?: { name: string; role: string };
 }
 
-export function TashihScheduleTable({ data }: Props) {
+export function TashihScheduleTable({ data, currentPeriod, schoolInfo, exportedBy }: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const [period, setPeriod] = useState(FILTER_ALL);
+  const [period, setPeriod] = useState(currentPeriod ?? FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
   const [studentId, setStudentId] = useState(FILTER_ALL);
@@ -51,13 +56,10 @@ export function TashihScheduleTable({ data }: Props) {
 
   const participants = useMemo(() => data.flatMap((d) => d.participants), [data]);
 
-  const periodOptions = useMemo(() => {
-    const map = new Map<string, string>();
-    participants.forEach((p) =>
-      map.set(`${p.academicYear}|${p.semester}`, `${p.academicYear} ${SEMESTER_LABEL[p.semester] ?? p.semester}`),
-    );
-    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
-  }, [participants]);
+  const periodOptions = useMemo(
+    () => buildPeriodOptions(participants, (p) => p.academicYear, (p) => p.semester, SEMESTER_LABEL, currentPeriod),
+    [participants, currentPeriod],
+  );
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
     participants
@@ -226,9 +228,45 @@ export function TashihScheduleTable({ data }: Props) {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const periodLabel = useMemo(() => {
+    if (period === FILTER_ALL) return undefined;
+    const label = periodOptions.find((o) => o.value === period)?.label;
+    return label ? `Tahun Akademik ${label}` : undefined;
+  }, [period, periodOptions]);
+
+  const filterSummary = useMemo(() => {
+    const parts: string[] = [];
+    const classroomLabel = classroomOptions.find((o) => o.value === classroomId)?.label;
+    if (classroomId !== FILTER_ALL && classroomLabel) parts.push(`Kelas: ${classroomLabel}`);
+    const groupLabel = groupOptions.find((o) => o.value === groupId)?.label;
+    if (groupId !== FILTER_ALL && groupLabel) parts.push(`Kelompok: ${groupLabel}`);
+    const studentLabel = studentOptions.find((o) => o.value === studentId)?.label;
+    if (studentId !== FILTER_ALL && studentLabel) parts.push(`Siswa: ${studentLabel}`);
+    if (sesi !== FILTER_ALL) parts.push(`Sesi: ${sesi}`);
+    if (waktu !== FILTER_ALL) parts.push(`Waktu: ${waktu}`);
+    if (lokasi !== FILTER_ALL) parts.push(`Lokasi: ${lokasi}`);
+    if (dateRange?.from || dateRange?.to) {
+      parts.push(
+        `Tanggal Jadwal: ${dateRange.from ? formatDateID(dateRange.from) : '...'} - ${dateRange.to ? formatDateID(dateRange.to) : '...'}`,
+      );
+    }
+    return parts.length > 0 ? parts.join(' • ') : undefined;
+  }, [classroomId, classroomOptions, groupId, groupOptions, studentId, studentOptions, sesi, waktu, lokasi, dateRange]);
+
   return (
     <DataTable
       title="Jadwal Tashih"
+      titleAction={
+        data.length > 0 && schoolInfo && exportedBy ? (
+          <ExportTashihSchedulePdfButton
+            table={table}
+            schoolInfo={schoolInfo}
+            exportedBy={exportedBy}
+            periodLabel={periodLabel}
+            filterSummary={filterSummary}
+          />
+        ) : undefined
+      }
       table={table}
       filterColumn="Sesi"
       toolbar={

@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { assertReportAccess } from '../assert-report-access';
 import { getPeriodGroupIds } from './get-period-group-ids';
+import { getGradeLetterSettings } from './get-grade-letter-settings';
+import { buildGradeLegend, type GradeLegendRow } from '../grade';
 import type { Semester } from '@/lib/generated/prisma/enums';
 
 export interface ReportPdfData {
@@ -24,6 +26,8 @@ export interface ReportPdfData {
     tahsinScore: number | null;
     lastTahsinMaterial: string | null;
   };
+  gradeLegend: GradeLegendRow[];
+  kkm: number;
 }
 
 export async function getReportPdfData(studentId: string, groupId: string): Promise<ReportPdfData> {
@@ -40,30 +44,36 @@ export async function getReportPdfData(studentId: string, groupId: string): Prom
 
   const displayGroupId = currentGroupId ?? groupId;
 
-  const [student, displayGroup, coordinator, schoolInfo, report, tahfidzScores, tahsinScores] = await Promise.all([
-    prisma.studentProfile.findUniqueOrThrow({
-      where: { userId: studentId },
-      include: { user: true, classroom: true },
-    }),
-    prisma.group.findUniqueOrThrow({
-      where: { id: displayGroupId },
-      include: { teacher: { include: { user: true } }, classroom: true },
-    }),
-    prisma.coordinatorProfile.findFirst({ include: { user: true } }),
-    prisma.academicSetting.findFirst(),
-    prisma.report.findUnique({
-      where: { studentId_academicYear_semester: { studentId, academicYear, semester } },
-    }),
-    prisma.tahfidzScore.findMany({
-      where: { studentId, groupId: { in: groupIds } },
-      include: { surah: true },
-      orderBy: { surah: { id: 'asc' } },
-    }),
-    prisma.tahsinScore.findMany({
-      where: { studentId, groupId: { in: groupIds } },
-      orderBy: { createdAt: 'asc' },
-    }),
-  ]);
+  const [student, displayGroup, coordinator, schoolInfo, report, tahfidzScores, tahsinScores, gradeSettings] =
+    await Promise.all([
+      prisma.studentProfile.findUniqueOrThrow({
+        where: { userId: studentId },
+        include: { user: true, classroom: true },
+      }),
+      prisma.group.findUniqueOrThrow({
+        where: { id: displayGroupId },
+        include: { teacher: { include: { user: true } }, classroom: true },
+      }),
+      prisma.coordinatorProfile.findFirst({ include: { user: true } }),
+      prisma.academicSetting.findFirst(),
+      prisma.report.findUnique({
+        where: { studentId_academicYear_semester: { studentId, academicYear, semester } },
+      }),
+      prisma.tahfidzScore.findMany({
+        where: { studentId, groupId: { in: groupIds } },
+        include: { surah: true },
+        orderBy: { surah: { id: 'asc' } },
+      }),
+      prisma.tahsinScore.findMany({
+        where: { studentId, groupId: { in: groupIds } },
+        orderBy: { createdAt: 'asc' },
+      }),
+      getGradeLetterSettings(),
+    ]);
+
+  const gradeLegend = buildGradeLegend(gradeSettings);
+  const sortedByMinScoreDesc = [...gradeSettings].sort((a, b) => b.minScore - a.minScore);
+  const kkm = sortedByMinScoreDesc[sortedByMinScoreDesc.length - 2]?.minScore ?? 0;
 
   return {
     fullName: student.user.name,
@@ -96,5 +106,7 @@ export async function getReportPdfData(studentId: string, groupId: string): Prom
       tahsinScore: report?.tahsinScore ?? null,
       lastTahsinMaterial: report?.lastTahsinMaterial ?? null,
     },
+    gradeLegend,
+    kkm,
   };
 }

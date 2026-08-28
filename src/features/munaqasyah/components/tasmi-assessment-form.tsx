@@ -8,9 +8,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { calculateTasmiPercentage, calculateTasmiTotalScore, scoreToGrade } from '../munaqasyah-scoring';
+import {
+  calculateTasmiPercentage,
+  calculateTasmiTotalScore,
+  scoreToGrade,
+  buildGradeLabelMap,
+  type ScoringWeights,
+  type MunaqasyahGradeSettingData,
+} from '../munaqasyah-scoring';
 import { submitTasmiResult } from '../actions/submit-tasmi-result';
-import { GRADE_LABEL } from '../munaqasyah.schema';
+import { updateTasmiResult } from '../actions/update-tasmi-result';
 import type { SurahInJuz } from '../queries/list-surahs-in-juz';
 
 interface Row {
@@ -26,15 +33,20 @@ interface Row {
 }
 
 interface Props {
-  requestId: string;
+  requestId?: string;
   surahs: SurahInJuz[];
+  weights: ScoringWeights;
+  gradeSettings: MunaqasyahGradeSettingData[];
+  resultId?: string;
+  initialRows?: Row[];
+  onSaved?: () => void;
 }
 
 function buildInitialRows(surahs: SurahInJuz[]): Row[] {
   return surahs.map((s) => ({
     surahId: s.surahId,
     surahName: s.surahName,
-    initialScore: 100,
+    initialScore: s.initialScore,
     khofiAwalAyat: 0,
     khofiMakhroj: 0,
     khofiTajwidMad: 0,
@@ -44,24 +56,25 @@ function buildInitialRows(surahs: SurahInJuz[]): Row[] {
   }));
 }
 
-export function TasmiAssessmentForm({ requestId, surahs }: Props) {
+export function TasmiAssessmentForm({ requestId, surahs, weights, gradeSettings, resultId, initialRows, onSaved }: Props) {
   const router = useRouter();
-  const [rows, setRows] = useState<Row[]>(() => buildInitialRows(surahs));
+  const [rows, setRows] = useState<Row[]>(() => initialRows ?? buildInitialRows(surahs));
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function updateRow(index: number, field: keyof Row, value: number | string) {
     setRows((prev) => prev.map((row, i) => (i === index ? { ...row, [field]: value } : row)));
   }
 
-  const { totalScore } = useMemo(() => calculateTasmiTotalScore(rows), [rows]);
+  const { totalScore } = useMemo(() => calculateTasmiTotalScore(rows, weights), [rows, weights]);
+  const gradeLabelMap = useMemo(() => buildGradeLabelMap(gradeSettings), [gradeSettings]);
 
   async function handleSubmit() {
     setIsSubmitting(true);
     try {
-      const result = await submitTasmiResult(
-        requestId,
-        rows.map((r) => ({ ...r, note: r.note || null })),
-      );
+      const payload = rows.map((r) => ({ ...r, note: r.note || null }));
+      const result = resultId
+        ? await updateTasmiResult(resultId, payload)
+        : await submitTasmiResult(requestId!, payload);
 
       if (!result.success) {
         toast.error(result.message);
@@ -70,6 +83,7 @@ export function TasmiAssessmentForm({ requestId, surahs }: Props) {
 
       toast.success(result.message);
       router.refresh();
+      onSaved?.();
     } finally {
       setIsSubmitting(false);
     }
@@ -77,9 +91,9 @@ export function TasmiAssessmentForm({ requestId, surahs }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="overflow-x-auto">
+      <div className="max-h-104 overflow-y-auto overflow-x-auto rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-background sticky top-0 z-10">
             <TableRow>
               <TableHead>Surah</TableHead>
               <TableHead>Nilai Awal</TableHead>
@@ -149,7 +163,7 @@ export function TasmiAssessmentForm({ requestId, surahs }: Props) {
                     onChange={(e) => updateRow(i, 'jaliLebihSatuKalimat', Number(e.target.value))}
                   />
                 </TableCell>
-                <TableCell className="font-medium">{calculateTasmiPercentage(row).toFixed(1)}</TableCell>
+                <TableCell className="font-medium">{calculateTasmiPercentage(row, weights).toFixed(1)}</TableCell>
                 <TableCell>
                   <Input
                     className="w-32"
@@ -167,7 +181,7 @@ export function TasmiAssessmentForm({ requestId, surahs }: Props) {
         <div>
           <p className="text-muted-foreground text-sm">Total Skor Tasmi</p>
           <p className="text-lg font-bold">
-            {totalScore.toFixed(1)} — {GRADE_LABEL[scoreToGrade(totalScore)]}
+            {totalScore.toFixed(1)} — {gradeLabelMap[scoreToGrade(totalScore, gradeSettings)]}
           </p>
         </div>
         <Button onClick={handleSubmit} disabled={isSubmitting}>
@@ -176,6 +190,8 @@ export function TasmiAssessmentForm({ requestId, surahs }: Props) {
               <Spinner />
               Menyimpan...
             </>
+          ) : resultId ? (
+            'Simpan Perubahan'
           ) : (
             'Simpan Hasil Tasmi'
           )}

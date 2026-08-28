@@ -10,6 +10,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from '@tanstack/react-table';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Eye, KeyRound, Trash2 } from 'lucide-react';
 import { UserTableData } from '../queries/list-users';
@@ -19,12 +20,21 @@ import { DataTable } from '@/components/ui/data-table';
 import { UserAlertDialog } from './user-alert-dialog';
 import { UserDetailDialog } from './user-detail-dialog';
 
+const STUDENT_STATUS_LABEL: Record<string, string> = {
+  AKTIF: 'Aktif',
+  LULUS: 'Lulus',
+  PINDAH: 'Pindah Sekolah',
+  KELUAR: 'Keluar Sekolah',
+};
+
 interface Props {
   data: UserTableData[];
   title?: string;
+  /** Tampilkan kolom Status, Tanggal Lulus, dan Tanggal Keluar (khusus tabel siswa). */
+  showStudentColumns?: boolean;
 }
 
-export function UserTable({ data, title }: Props) {
+export function UserTable({ data, title, showStudentColumns }: Props) {
   const router = useRouter();
 
   const {
@@ -75,6 +85,46 @@ export function UserTable({ data, title }: Props) {
         id: 'Nama Lengkap',
         header: 'Nama Lengkap',
       },
+      ...(showStudentColumns
+        ? ([
+            {
+              id: 'Status',
+              header: 'Status',
+              cell: ({ row }) => {
+                const status = row.original.status;
+                return status ? (
+                  <Badge variant="outline">{STUDENT_STATUS_LABEL[status] ?? status}</Badge>
+                ) : (
+                  '-'
+                );
+              },
+            },
+            {
+              id: 'Tanggal Lulus',
+              header: ({ column }) => (
+                <DataTableColumnHeader column={column} title="Tanggal Lulus" />
+              ),
+              cell: ({ row }) =>
+                row.original.graduatedAt ? (
+                  <span>{new Date(row.original.graduatedAt).toLocaleDateString('id-ID')}</span>
+                ) : (
+                  '-'
+                ),
+            },
+            {
+              id: 'Tanggal Keluar',
+              header: ({ column }) => (
+                <DataTableColumnHeader column={column} title="Tanggal Keluar" />
+              ),
+              cell: ({ row }) =>
+                row.original.exitedAt ? (
+                  <span>{new Date(row.original.exitedAt).toLocaleDateString('id-ID')}</span>
+                ) : (
+                  '-'
+                ),
+            },
+          ] satisfies ColumnDef<UserTableData>[])
+        : []),
       {
         accessorKey: 'createdAt',
         id: 'Created At',
@@ -121,7 +171,7 @@ export function UserTable({ data, title }: Props) {
         },
       },
     ],
-    [handleOpenDetailDialog, handleOpenResetDialog, handleOpenDeleteDialog],
+    [handleOpenDetailDialog, handleOpenResetDialog, handleOpenDeleteDialog, showStudentColumns],
   );
 
   const table = useReactTable({

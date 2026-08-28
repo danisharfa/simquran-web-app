@@ -4,6 +4,7 @@ import { requireSession } from '@/lib/require-role';
 export interface SurahInJuz {
   surahId: number;
   surahName: string;
+  initialScore: number;
 }
 
 export async function listSurahsInJuz(juzId: number): Promise<SurahInJuz[]> {
@@ -15,5 +16,5 @@ export async function listSurahsInJuz(juzId: number): Promise<SurahInJuz[]> {
     orderBy: { id: 'asc' },
   });
 
-  return entries.map((e) => ({ surahId: e.surahId, surahName: e.surah.name }));
+  return entries.map((e) => ({ surahId: e.surahId, surahName: e.surah.name, initialScore: e.surah.initialScore }));
 }

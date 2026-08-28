@@ -25,11 +25,13 @@ import { ProgressTrack, ProgressIndicator } from '@/components/ui/progress';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
-import { FILTER_ALL, TableFilters, doesRangeOverlap } from '@/components/layouts/filters/table-filters';
+import { FILTER_ALL, TableFilters, doesRangeOverlap, buildPeriodOptions } from '@/components/layouts/filters/table-filters';
 import { TARGET_TYPE_OPTIONS, TARGET_STATUS_OPTIONS } from '../weekly-target.schema';
 import { deleteWeeklyTarget } from '../actions/delete-weekly-target';
 import { WeeklyTargetEditDialog } from './weekly-target-edit-dialog';
+import { ExportWeeklyTargetPdfButton } from './export-weekly-target-pdf-button';
 import { cn } from '@/lib/utils';
+import { formatDateID } from '@/lib/pdf/format';
 import type { WeeklyTargetTableData } from '../queries/list-my-weekly-targets';
 import type { ReferenceOption, SurahJuzMapping } from '@/features/quran-reference/queries/list-reference-options';
 
@@ -58,6 +60,9 @@ interface Props {
   juzOptions?: ReferenceOption[];
   surahJuzMap?: SurahJuzMapping[];
   wafaOptions?: ReferenceOption[];
+  currentPeriod?: string;
+  schoolInfo?: { schoolName: string; schoolAddress: string | null };
+  exportedBy?: { name: string; role: string };
 }
 
 export function WeeklyTargetTable({
@@ -68,6 +73,9 @@ export function WeeklyTargetTable({
   juzOptions = [],
   surahJuzMap = [],
   wafaOptions = [],
+  currentPeriod,
+  schoolInfo,
+  exportedBy,
 }: Props) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -75,7 +83,7 @@ export function WeeklyTargetTable({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const [period, setPeriod] = useState(FILTER_ALL);
+  const [period, setPeriod] = useState(currentPeriod ?? FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
   const [studentId, setStudentId] = useState(FILTER_ALL);
@@ -83,13 +91,10 @@ export function WeeklyTargetTable({
   const [status, setStatus] = useState(FILTER_ALL);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
-  const periodOptions = useMemo(() => {
-    const map = new Map<string, string>();
-    data.forEach((d) =>
-      map.set(`${d.academicYear}|${d.semester}`, `${d.academicYear} ${SEMESTER_LABEL[d.semester] ?? d.semester}`),
-    );
-    return Array.from(map, ([value, label]) => ({ value, label })).sort((a, b) => b.value.localeCompare(a.value));
-  }, [data]);
+  const periodOptions = useMemo(
+    () => buildPeriodOptions(data, (d) => d.academicYear, (d) => d.semester, SEMESTER_LABEL, currentPeriod),
+    [data, currentPeriod],
+  );
   const classroomOptions = useMemo(() => {
     const map = new Map<string, string>();
     data
@@ -187,19 +192,24 @@ export function WeeklyTargetTable({
         ? []
         : [
             {
+              accessorKey: 'nis',
+              id: 'NIS',
+              header: 'NIS',
+            } satisfies ColumnDef<WeeklyTargetTableData>,
+            {
               accessorKey: 'studentName',
               id: 'Nama Siswa',
               header: ({ column }) => <DataTableColumnHeader column={column} title="Nama Siswa" />,
             } satisfies ColumnDef<WeeklyTargetTableData>,
             {
-              accessorKey: 'groupName',
-              id: 'Kelompok',
-              header: 'Kelompok',
-            } satisfies ColumnDef<WeeklyTargetTableData>,
-            {
               accessorKey: 'classroomName',
               id: 'Kelas',
               header: 'Kelas',
+            } satisfies ColumnDef<WeeklyTargetTableData>,
+            {
+              accessorKey: 'groupName',
+              id: 'Kelompok',
+              header: 'Kelompok',
             } satisfies ColumnDef<WeeklyTargetTableData>,
           ]),
       {
@@ -313,9 +323,62 @@ export function WeeklyTargetTable({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const periodLabel = useMemo(() => {
+    if (period === FILTER_ALL) return undefined;
+    const label = periodOptions.find((o) => o.value === period)?.label;
+    return label ? `Tahun Akademik ${label}` : undefined;
+  }, [period, periodOptions]);
+
+  const filterSummary = useMemo(() => {
+    const parts: string[] = [];
+    if (!own) {
+      const classroomLabel = classroomOptions.find((o) => o.value === classroomId)?.label;
+      if (classroomId !== FILTER_ALL && classroomLabel) parts.push(`Kelas: ${classroomLabel}`);
+      const groupLabel = groupOptions.find((o) => o.value === groupId)?.label;
+      if (groupId !== FILTER_ALL && groupLabel) parts.push(`Kelompok: ${groupLabel}`);
+      const studentLabel = studentOptions.find((o) => o.value === studentId)?.label;
+      if (studentId !== FILTER_ALL && studentLabel) parts.push(`Siswa: ${studentLabel}`);
+    }
+    const typeLabel = typeOptions.find((o) => o.value === type)?.label;
+    if (type !== FILTER_ALL && typeLabel) parts.push(`Jenis: ${typeLabel}`);
+    const statusLabel = statusOptions.find((o) => o.value === status)?.label;
+    if (status !== FILTER_ALL && statusLabel) parts.push(`Status: ${statusLabel}`);
+    if (dateRange?.from || dateRange?.to) {
+      parts.push(
+        `Periode Target: ${dateRange.from ? formatDateID(dateRange.from) : '...'} - ${dateRange.to ? formatDateID(dateRange.to) : '...'}`,
+      );
+    }
+    return parts.length > 0 ? parts.join(' • ') : undefined;
+  }, [
+    own,
+    classroomId,
+    classroomOptions,
+    groupId,
+    groupOptions,
+    studentId,
+    studentOptions,
+    type,
+    typeOptions,
+    status,
+    statusOptions,
+    dateRange,
+  ]);
+
   return (
     <DataTable
       title="Target Setoran"
+      titleAction={
+        data.length > 0 && schoolInfo && exportedBy ? (
+          <ExportWeeklyTargetPdfButton
+            table={table}
+            schoolInfo={schoolInfo}
+            exportedBy={exportedBy}
+            periodLabel={periodLabel}
+            filterSummary={filterSummary}
+            own={own}
+          />
+        ) : undefined
+      }
       table={table}
       filterColumn={own ? undefined : 'Nama Siswa'}
       toolbar={

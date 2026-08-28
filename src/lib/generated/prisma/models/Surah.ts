@@ -29,29 +29,34 @@ export type AggregateSurah = {
 export type SurahAvgAggregateOutputType = {
   id: number | null
   verseCount: number | null
+  initialScore: number | null
 }
 
 export type SurahSumAggregateOutputType = {
   id: number | null
   verseCount: number | null
+  initialScore: number | null
 }
 
 export type SurahMinAggregateOutputType = {
   id: number | null
   name: string | null
   verseCount: number | null
+  initialScore: number | null
 }
 
 export type SurahMaxAggregateOutputType = {
   id: number | null
   name: string | null
   verseCount: number | null
+  initialScore: number | null
 }
 
 export type SurahCountAggregateOutputType = {
   id: number
   name: number
   verseCount: number
+  initialScore: number
   _all: number
 }
 
@@ -59,29 +64,34 @@ export type SurahCountAggregateOutputType = {
 export type SurahAvgAggregateInputType = {
   id?: true
   verseCount?: true
+  initialScore?: true
 }
 
 export type SurahSumAggregateInputType = {
   id?: true
   verseCount?: true
+  initialScore?: true
 }
 
 export type SurahMinAggregateInputType = {
   id?: true
   name?: true
   verseCount?: true
+  initialScore?: true
 }
 
 export type SurahMaxAggregateInputType = {
   id?: true
   name?: true
   verseCount?: true
+  initialScore?: true
 }
 
 export type SurahCountAggregateInputType = {
   id?: true
   name?: true
   verseCount?: true
+  initialScore?: true
   _all?: true
 }
 
@@ -175,6 +185,7 @@ export type SurahGroupByOutputType = {
   id: number
   name: string
   verseCount: number
+  initialScore: number
   _count: SurahCountAggregateOutputType | null
   _avg: SurahAvgAggregateOutputType | null
   _sum: SurahSumAggregateOutputType | null
@@ -204,6 +215,7 @@ export type SurahWhereInput = {
   id?: Prisma.IntFilter<"Surah"> | number
   name?: Prisma.StringFilter<"Surah"> | string
   verseCount?: Prisma.IntFilter<"Surah"> | number
+  initialScore?: Prisma.IntFilter<"Surah"> | number
   surahJuz?: Prisma.SurahJuzListRelationFilter
   submissions?: Prisma.SubmissionListRelationFilter
   homeActivities?: Prisma.HomeActivityListRelationFilter
@@ -218,6 +230,7 @@ export type SurahOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   verseCount?: Prisma.SortOrder
+  initialScore?: Prisma.SortOrder
   surahJuz?: Prisma.SurahJuzOrderByRelationAggregateInput
   submissions?: Prisma.SubmissionOrderByRelationAggregateInput
   homeActivities?: Prisma.HomeActivityOrderByRelationAggregateInput
@@ -235,6 +248,7 @@ export type SurahWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SurahWhereInput | Prisma.SurahWhereInput[]
   name?: Prisma.StringFilter<"Surah"> | string
   verseCount?: Prisma.IntFilter<"Surah"> | number
+  initialScore?: Prisma.IntFilter<"Surah"> | number
   surahJuz?: Prisma.SurahJuzListRelationFilter
   submissions?: Prisma.SubmissionListRelationFilter
   homeActivities?: Prisma.HomeActivityListRelationFilter
@@ -249,6 +263,7 @@ export type SurahOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   verseCount?: Prisma.SortOrder
+  initialScore?: Prisma.SortOrder
   _count?: Prisma.SurahCountOrderByAggregateInput
   _avg?: Prisma.SurahAvgOrderByAggregateInput
   _max?: Prisma.SurahMaxOrderByAggregateInput
@@ -263,12 +278,14 @@ export type SurahScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Surah"> | number
   name?: Prisma.StringWithAggregatesFilter<"Surah"> | string
   verseCount?: Prisma.IntWithAggregatesFilter<"Surah"> | number
+  initialScore?: Prisma.IntWithAggregatesFilter<"Surah"> | number
 }
 
 export type SurahCreateInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
@@ -283,6 +300,7 @@ export type SurahUncheckedCreateInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
@@ -297,6 +315,7 @@ export type SurahUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
@@ -311,6 +330,7 @@ export type SurahUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
@@ -325,46 +345,54 @@ export type SurahCreateManyInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
 }
 
 export type SurahUpdateManyMutationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SurahUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SurahCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   verseCount?: Prisma.SortOrder
+  initialScore?: Prisma.SortOrder
 }
 
 export type SurahAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   verseCount?: Prisma.SortOrder
+  initialScore?: Prisma.SortOrder
 }
 
 export type SurahMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   verseCount?: Prisma.SortOrder
+  initialScore?: Prisma.SortOrder
 }
 
 export type SurahMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   verseCount?: Prisma.SortOrder
+  initialScore?: Prisma.SortOrder
 }
 
 export type SurahSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   verseCount?: Prisma.SortOrder
+  initialScore?: Prisma.SortOrder
 }
 
 export type SurahScalarRelationFilter = {
@@ -501,6 +529,7 @@ export type SurahCreateWithoutSurahJuzInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
@@ -514,6 +543,7 @@ export type SurahUncheckedCreateWithoutSurahJuzInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
@@ -543,6 +573,7 @@ export type SurahUpdateWithoutSurahJuzInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   submissions?: Prisma.SubmissionUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
@@ -556,6 +587,7 @@ export type SurahUncheckedUpdateWithoutSurahJuzInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
@@ -569,6 +601,7 @@ export type SurahCreateWithoutSubmissionsInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
@@ -582,6 +615,7 @@ export type SurahUncheckedCreateWithoutSubmissionsInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
@@ -611,6 +645,7 @@ export type SurahUpdateWithoutSubmissionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
@@ -624,6 +659,7 @@ export type SurahUncheckedUpdateWithoutSubmissionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
@@ -637,6 +673,7 @@ export type SurahCreateWithoutHomeActivitiesInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetCreateNestedManyWithoutSurahStartInput
@@ -650,6 +687,7 @@ export type SurahUncheckedCreateWithoutHomeActivitiesInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSurahInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedCreateNestedManyWithoutSurahStartInput
@@ -679,6 +717,7 @@ export type SurahUpdateWithoutHomeActivitiesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUpdateManyWithoutSurahStartNestedInput
@@ -692,6 +731,7 @@ export type SurahUncheckedUpdateWithoutHomeActivitiesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSurahNestedInput
   weeklyTargetsAsStart?: Prisma.WeeklyTargetUncheckedUpdateManyWithoutSurahStartNestedInput
@@ -705,6 +745,7 @@ export type SurahCreateWithoutWeeklyTargetsAsStartInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
@@ -718,6 +759,7 @@ export type SurahUncheckedCreateWithoutWeeklyTargetsAsStartInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
@@ -736,6 +778,7 @@ export type SurahCreateWithoutWeeklyTargetsAsEndInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
@@ -749,6 +792,7 @@ export type SurahUncheckedCreateWithoutWeeklyTargetsAsEndInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
@@ -778,6 +822,7 @@ export type SurahUpdateWithoutWeeklyTargetsAsStartInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
@@ -791,6 +836,7 @@ export type SurahUncheckedUpdateWithoutWeeklyTargetsAsStartInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
@@ -815,6 +861,7 @@ export type SurahUpdateWithoutWeeklyTargetsAsEndInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
@@ -828,6 +875,7 @@ export type SurahUncheckedUpdateWithoutWeeklyTargetsAsEndInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
@@ -841,6 +889,7 @@ export type SurahCreateWithoutTashihRequestsInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
@@ -854,6 +903,7 @@ export type SurahUncheckedCreateWithoutTashihRequestsInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
@@ -883,6 +933,7 @@ export type SurahUpdateWithoutTashihRequestsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
@@ -896,6 +947,7 @@ export type SurahUncheckedUpdateWithoutTashihRequestsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
@@ -909,6 +961,7 @@ export type SurahCreateWithoutTahfidzScoresInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
@@ -922,6 +975,7 @@ export type SurahUncheckedCreateWithoutTahfidzScoresInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
@@ -951,6 +1005,7 @@ export type SurahUpdateWithoutTahfidzScoresInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
@@ -964,6 +1019,7 @@ export type SurahUncheckedUpdateWithoutTahfidzScoresInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
@@ -977,6 +1033,7 @@ export type SurahCreateWithoutTasmiDetailsInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityCreateNestedManyWithoutSurahInput
@@ -990,6 +1047,7 @@ export type SurahUncheckedCreateWithoutTasmiDetailsInput = {
   id: number
   name: string
   verseCount: number
+  initialScore?: number
   surahJuz?: Prisma.SurahJuzUncheckedCreateNestedManyWithoutSurahInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSurahInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutSurahInput
@@ -1019,6 +1077,7 @@ export type SurahUpdateWithoutTasmiDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUpdateManyWithoutSurahNestedInput
@@ -1032,6 +1091,7 @@ export type SurahUncheckedUpdateWithoutTasmiDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   verseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  initialScore?: Prisma.IntFieldUpdateOperationsInput | number
   surahJuz?: Prisma.SurahJuzUncheckedUpdateManyWithoutSurahNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSurahNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutSurahNestedInput
@@ -1139,6 +1199,7 @@ export type SurahSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   name?: boolean
   verseCount?: boolean
+  initialScore?: boolean
   surahJuz?: boolean | Prisma.Surah$surahJuzArgs<ExtArgs>
   submissions?: boolean | Prisma.Surah$submissionsArgs<ExtArgs>
   homeActivities?: boolean | Prisma.Surah$homeActivitiesArgs<ExtArgs>
@@ -1154,21 +1215,24 @@ export type SurahSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   verseCount?: boolean
+  initialScore?: boolean
 }, ExtArgs["result"]["surah"]>
 
 export type SurahSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   verseCount?: boolean
+  initialScore?: boolean
 }, ExtArgs["result"]["surah"]>
 
 export type SurahSelectScalar = {
   id?: boolean
   name?: boolean
   verseCount?: boolean
+  initialScore?: boolean
 }
 
-export type SurahOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "verseCount", ExtArgs["result"]["surah"]>
+export type SurahOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "verseCount" | "initialScore", ExtArgs["result"]["surah"]>
 export type SurahInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   surahJuz?: boolean | Prisma.Surah$surahJuzArgs<ExtArgs>
   submissions?: boolean | Prisma.Surah$submissionsArgs<ExtArgs>
@@ -1199,6 +1263,7 @@ export type $SurahPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: number
     name: string
     verseCount: number
+    initialScore: number
   }, ExtArgs["result"]["surah"]>
   composites: {}
 }
@@ -1633,6 +1698,7 @@ export interface SurahFieldRefs {
   readonly id: Prisma.FieldRef<"Surah", 'Int'>
   readonly name: Prisma.FieldRef<"Surah", 'String'>
   readonly verseCount: Prisma.FieldRef<"Surah", 'Int'>
+  readonly initialScore: Prisma.FieldRef<"Surah", 'Int'>
 }
     
 

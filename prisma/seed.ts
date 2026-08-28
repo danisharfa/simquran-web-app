@@ -1,10 +1,11 @@
 import { prisma } from '../src/lib/prisma';
 import { auth } from '../src/lib/auth';
-import { Role } from '@/lib/generated/prisma/enums';
+import { Role, Semester } from '@/lib/generated/prisma/enums';
 import surahData from './data/surah.json';
 import juzData from './data/juz.json';
 import surahJuzData from './data/surah_juz.json';
 import wafaData from './data/wafa.json';
+import academicSettingData from './data/academic_setting.json';
 
 async function seedQuranReferenceData() {
   await prisma.surah.createMany({ data: surahData, skipDuplicates: true });
@@ -15,8 +16,30 @@ async function seedQuranReferenceData() {
   console.log('Quran reference data seeded');
 }
 
+async function seedAcademicSetting() {
+  // Table is a singleton — app actions always read/write id "singleton", so seeding
+  // must target the same id regardless of what id the source data export used.
+  const [{ currentYear, currentSemester, currentPrincipalName, schoolName, schoolAddress }] = academicSettingData;
+
+  await prisma.academicSetting.upsert({
+    where: { id: 'singleton' },
+    update: {},
+    create: {
+      id: 'singleton',
+      currentYear,
+      currentSemester: currentSemester as Semester,
+      currentPrincipalName,
+      schoolName,
+      schoolAddress,
+    },
+  });
+
+  console.log('Academic setting seeded');
+}
+
 async function main() {
   await seedQuranReferenceData();
+  await seedAcademicSetting();
 
   const username = 'superadmin';
 
