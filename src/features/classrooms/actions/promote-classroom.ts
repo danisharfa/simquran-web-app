@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { requireRoleOrThrow } from '@/lib/require-role';
 import type { Semester } from '@/lib/generated/prisma/enums';
+import { recordClassroomHistory, recordGroupHistory } from '../lib/record-classroom-exit-history';
 
 export async function promoteClassroom(
   classroomId: string,
@@ -59,44 +60,24 @@ export async function promoteClassroom(
   const affectedGroupIds = new Set<string>();
 
   for (const student of students) {
-    await prisma.classroomHistory.upsert({
-      where: {
-        studentId_academicYear_semester: {
-          studentId: student.userId,
-          academicYear: classroom.academicYear,
-          semester: classroom.semester,
-        },
-      },
-      create: {
-        id: randomUUID(),
-        studentId: student.userId,
-        classroomId,
-        academicYear: classroom.academicYear,
-        semester: classroom.semester,
-      },
-      update: {},
+    await recordClassroomHistory({
+      tx: prisma,
+      studentId: student.userId,
+      classroomId,
+      academicYear: classroom.academicYear,
+      semester: classroom.semester,
     });
 
     // naik kelas melepaskan siswa dari kelompok lama; kelompok lama otomatis jadi riwayat
     if (student.groupId) {
       affectedGroupIds.add(student.groupId);
 
-      await prisma.groupHistory.upsert({
-        where: {
-          studentId_academicYear_semester: {
-            studentId: student.userId,
-            academicYear: classroom.academicYear,
-            semester: classroom.semester,
-          },
-        },
-        create: {
-          id: randomUUID(),
-          studentId: student.userId,
-          groupId: student.groupId,
-          academicYear: classroom.academicYear,
-          semester: classroom.semester,
-        },
-        update: {},
+      await recordGroupHistory({
+        tx: prisma,
+        studentId: student.userId,
+        groupId: student.groupId,
+        academicYear: classroom.academicYear,
+        semester: classroom.semester,
       });
     }
 

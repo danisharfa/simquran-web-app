@@ -4,8 +4,8 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 export interface SchedulableMunaqasyahRequest {
   id: string;
   studentName: string;
-  batch: string;
-  stage: string;
+  tahap: string;
+  jenis: string;
   juzName: string;
 }
 
@@ -21,8 +21,8 @@ export async function listSchedulableMunaqasyahRequests(): Promise<SchedulableMu
   return requests.map((r) => ({
     id: r.id,
     studentName: r.student.user.name,
-    batch: r.batch,
-    stage: r.stage,
+    tahap: r.tahap,
+    jenis: r.jenis,
     juzName: r.juz.name,
   }));
 }
@@ -44,8 +44,8 @@ export async function listSchedulableMunaqasyahRequestsForEdit(
   return requests.map((r) => ({
     id: r.id,
     studentName: r.student.user.name,
-    batch: r.batch,
-    stage: r.stage,
+    tahap: r.tahap,
+    jenis: r.jenis,
     juzName: r.juz.name,
   }));
 }

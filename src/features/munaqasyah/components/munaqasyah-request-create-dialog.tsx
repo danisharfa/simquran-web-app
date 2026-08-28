@@ -24,8 +24,8 @@ import type { ReferenceOption } from '@/features/quran-reference/queries/list-re
 const INITIAL_VALUES: MunaqasyahRequestFieldValues = {
   groupId: '',
   studentId: '',
-  batch: 'TAHAP_1',
-  stage: 'TASMI',
+  tahap: 'TAHAP_1',
+  jenis: 'TASMI',
   juzId: null,
 };
 

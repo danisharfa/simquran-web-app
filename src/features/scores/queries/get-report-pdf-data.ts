@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { assertReportAccess } from '../assert-report-access';
+import { getPeriodGroupIds } from './get-period-group-ids';
 import type { Semester } from '@/lib/generated/prisma/enums';
 
 export interface ReportPdfData {
@@ -28,20 +29,40 @@ export interface ReportPdfData {
 export async function getReportPdfData(studentId: string, groupId: string): Promise<ReportPdfData> {
   await assertReportAccess(studentId, groupId);
 
-  const [student, group, coordinator, schoolInfo, report, tahfidzScores, tahsinScores] = await Promise.all([
+  const entryGroup = await prisma.group.findUniqueOrThrow({
+    where: { id: groupId },
+    include: { classroom: true },
+  });
+  const { academicYear, semester } = entryGroup.classroom;
+
+  const { allGroupIds, currentGroupId } = await getPeriodGroupIds(studentId, academicYear, semester);
+  const groupIds = Array.from(new Set([...allGroupIds, groupId]));
+
+  const displayGroupId = currentGroupId ?? groupId;
+
+  const [student, displayGroup, coordinator, schoolInfo, report, tahfidzScores, tahsinScores] = await Promise.all([
     prisma.studentProfile.findUniqueOrThrow({
       where: { userId: studentId },
       include: { user: true, classroom: true },
     }),
     prisma.group.findUniqueOrThrow({
-      where: { id: groupId },
+      where: { id: displayGroupId },
       include: { teacher: { include: { user: true } }, classroom: true },
     }),
     prisma.coordinatorProfile.findFirst({ include: { user: true } }),
     prisma.academicSetting.findFirst(),
-    prisma.report.findFirst({ where: { studentId, groupId }, orderBy: { updatedAt: 'desc' } }),
-    prisma.tahfidzScore.findMany({ where: { studentId, groupId }, include: { surah: true }, orderBy: { surah: { id: 'asc' } } }),
-    prisma.tahsinScore.findMany({ where: { studentId, groupId }, orderBy: { createdAt: 'asc' } }),
+    prisma.report.findUnique({
+      where: { studentId_academicYear_semester: { studentId, academicYear, semester } },
+    }),
+    prisma.tahfidzScore.findMany({
+      where: { studentId, groupId: { in: groupIds } },
+      include: { surah: true },
+      orderBy: { surah: { id: 'asc' } },
+    }),
+    prisma.tahsinScore.findMany({
+      where: { studentId, groupId: { in: groupIds } },
+      orderBy: { createdAt: 'asc' },
+    }),
   ]);
 
   return {
@@ -50,9 +71,9 @@ export async function getReportPdfData(studentId: string, groupId: string): Prom
     nisn: student.nisn,
     address: student.user.address,
     className: student.classroom ? `${student.classroom.level} ${student.classroom.name}` : '-',
-    academicYear: report?.academicYear ?? group.classroom.academicYear,
-    semester: report?.semester ?? group.classroom.semester,
-    teacherName: group.teacher.user.name,
+    academicYear: report?.academicYear ?? academicYear,
+    semester: report?.semester ?? semester,
+    teacherName: displayGroup.teacher.user.name,
     coordinatorName: coordinator?.user.name ?? '-',
     schoolInfo: {
       schoolName: schoolInfo?.schoolName ?? '-',

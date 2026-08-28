@@ -18,13 +18,13 @@ import { Badge } from '@/components/ui/badge';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
-import { BATCH_OPTIONS, STAGE_OPTIONS } from '../munaqasyah.schema';
-import { BATCH_BADGE_CLASS, STAGE_BADGE_CLASS } from './munaqasyah-request-table';
+import { TAHAP_OPTIONS, JENIS_UJIAN_OPTIONS } from '../munaqasyah.schema';
+import { TAHAP_BADGE_CLASS, JENIS_UJIAN_BADGE_CLASS } from './munaqasyah-request-table';
 import { MunaqasyahScheduleParticipantsDialog } from './munaqasyah-schedule-participants-dialog';
 import type { MyMunaqasyahScheduleData } from '../queries/list-my-munaqasyah-schedule';
 
-const BATCH_LABEL = Object.fromEntries(BATCH_OPTIONS.map((o) => [o.value, o.label]));
-const STAGE_LABEL = Object.fromEntries(STAGE_OPTIONS.map((o) => [o.value, o.label]));
+const TAHAP_LABEL = Object.fromEntries(TAHAP_OPTIONS.map((o) => [o.value, o.label]));
+const JENIS_UJIAN_LABEL = Object.fromEntries(JENIS_UJIAN_OPTIONS.map((o) => [o.value, o.label]));
 const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
 
 interface Props {
@@ -40,8 +40,8 @@ export function MyMunaqasyahScheduleTable({ data, own = false }: Props) {
   const [period, setPeriod] = useState(FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
-  const [batch, setBatch] = useState(FILTER_ALL);
-  const [stage, setStage] = useState(FILTER_ALL);
+  const [tahap, setTahap] = useState(FILTER_ALL);
+  const [jenis, setJenis] = useState(FILTER_ALL);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
   const participants = useMemo(() => data.flatMap((d) => d.participants), [data]);
@@ -82,14 +82,14 @@ export function MyMunaqasyahScheduleTable({ data, own = false }: Props) {
     setGroupId(FILTER_ALL);
   }
 
-  const batchOptions = useMemo(() => {
+  const tahapOptions = useMemo(() => {
     const map = new Map<string, string>();
-    participants.forEach((p) => map.set(p.batch, BATCH_LABEL[p.batch] ?? p.batch));
+    participants.forEach((p) => map.set(p.tahap, TAHAP_LABEL[p.tahap] ?? p.tahap));
     return Array.from(map, ([value, label]) => ({ value, label }));
   }, [participants]);
-  const stageOptions = useMemo(() => {
+  const jenisOptions = useMemo(() => {
     const map = new Map<string, string>();
-    participants.forEach((p) => map.set(p.stage, STAGE_LABEL[p.stage] ?? p.stage));
+    participants.forEach((p) => map.set(p.jenis, JENIS_UJIAN_LABEL[p.jenis] ?? p.jenis));
     return Array.from(map, ([value, label]) => ({ value, label }));
   }, [participants]);
 
@@ -100,11 +100,11 @@ export function MyMunaqasyahScheduleTable({ data, own = false }: Props) {
           (period === FILTER_ALL || d.participants.some((p) => `${p.academicYear}|${p.semester}` === period)) &&
           (own || classroomId === FILTER_ALL || d.participants.some((p) => p.classroomId === classroomId)) &&
           (own || groupId === FILTER_ALL || d.participants.some((p) => p.groupId === groupId)) &&
-          (batch === FILTER_ALL || d.participants.some((p) => p.batch === batch)) &&
-          (stage === FILTER_ALL || d.participants.some((p) => p.stage === stage)) &&
+          (tahap === FILTER_ALL || d.participants.some((p) => p.tahap === tahap)) &&
+          (jenis === FILTER_ALL || d.participants.some((p) => p.jenis === jenis)) &&
           isDateInRange(d.date, dateRange),
       ),
-    [data, period, classroomId, groupId, batch, stage, dateRange, own],
+    [data, period, classroomId, groupId, tahap, jenis, dateRange, own],
   );
 
   const columns = useMemo<ColumnDef<MyMunaqasyahScheduleData>[]>(
@@ -125,20 +125,20 @@ export function MyMunaqasyahScheduleTable({ data, own = false }: Props) {
       ...(own
         ? [
             {
-              id: 'Batch',
-              header: 'Batch',
+              id: 'Tahap',
+              header: 'Tahap',
               cell: ({ row }) => (
-                <Badge className={BATCH_BADGE_CLASS[row.original.participants[0].batch]}>
-                  {BATCH_LABEL[row.original.participants[0].batch] ?? row.original.participants[0].batch}
+                <Badge className={TAHAP_BADGE_CLASS[row.original.participants[0].tahap]}>
+                  {TAHAP_LABEL[row.original.participants[0].tahap] ?? row.original.participants[0].tahap}
                 </Badge>
               ),
             } satisfies ColumnDef<MyMunaqasyahScheduleData>,
             {
-              id: 'Tahap',
-              header: 'Tahap',
+              id: 'Jenis Ujian',
+              header: 'Jenis Ujian',
               cell: ({ row }) => (
-                <Badge className={STAGE_BADGE_CLASS[row.original.participants[0].stage]}>
-                  {STAGE_LABEL[row.original.participants[0].stage] ?? row.original.participants[0].stage}
+                <Badge className={JENIS_UJIAN_BADGE_CLASS[row.original.participants[0].jenis]}>
+                  {JENIS_UJIAN_LABEL[row.original.participants[0].jenis] ?? row.original.participants[0].jenis}
                 </Badge>
               ),
             } satisfies ColumnDef<MyMunaqasyahScheduleData>,
@@ -195,8 +195,8 @@ export function MyMunaqasyahScheduleTable({ data, own = false }: Props) {
             classroom={own ? undefined : { value: classroomId, onChange: handleClassroomChange, options: classroomOptions }}
             group={own ? undefined : { value: groupId, onChange: setGroupId, options: groupOptions }}
             extraFilters={[
-              { key: 'batch', label: 'Batch', allLabel: 'Semua Batch', value: batch, onChange: setBatch, options: batchOptions },
-              { key: 'stage', label: 'Tahap', allLabel: 'Semua Tahap', value: stage, onChange: setStage, options: stageOptions },
+              { key: 'tahap', label: 'Tahap', allLabel: 'Semua Tahap', value: tahap, onChange: setTahap, options: tahapOptions },
+              { key: 'jenis', label: 'Jenis Ujian', allLabel: 'Semua Jenis Ujian', value: jenis, onChange: setJenis, options: jenisOptions },
             ]}
             dateRange={{ value: dateRange, onChange: setDateRange, label: 'Tanggal Jadwal' }}
           />

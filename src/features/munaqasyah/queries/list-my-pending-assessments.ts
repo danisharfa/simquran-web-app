@@ -4,7 +4,7 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 export interface PendingAssessment {
   requestId: string;
   studentName: string;
-  stage: 'TASMI' | 'MUNAQASYAH';
+  jenis: 'TASMI' | 'MUNAQASYAH';
   juzId: number;
   juzName: string;
   scheduleLabel: string;
@@ -28,7 +28,7 @@ export async function listMyPendingAssessments(): Promise<PendingAssessment[]> {
   return entries.map((e) => ({
     requestId: e.requestId,
     studentName: e.request.student.user.name,
-    stage: e.request.stage,
+    jenis: e.request.jenis,
     juzId: e.request.juzId,
     juzName: e.request.juz.name,
     scheduleLabel: `${e.schedule.date.toLocaleDateString('id-ID')} - ${e.schedule.sessionName} (${e.schedule.location})`,

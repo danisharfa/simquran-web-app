@@ -97,22 +97,22 @@ export const TahsinType = {
 export type TahsinType = (typeof TahsinType)[keyof typeof TahsinType]
 
 
-export const MunaqasyahBatch = {
+export const MunaqasyahTahap = {
   TAHAP_1: 'TAHAP_1',
   TAHAP_2: 'TAHAP_2',
   TAHAP_3: 'TAHAP_3',
   TAHAP_4: 'TAHAP_4'
 } as const
 
-export type MunaqasyahBatch = (typeof MunaqasyahBatch)[keyof typeof MunaqasyahBatch]
+export type MunaqasyahTahap = (typeof MunaqasyahTahap)[keyof typeof MunaqasyahTahap]
 
 
-export const MunaqasyahStage = {
+export const MunaqasyahJenisUjian = {
   TASMI: 'TASMI',
   MUNAQASYAH: 'MUNAQASYAH'
 } as const
 
-export type MunaqasyahStage = (typeof MunaqasyahStage)[keyof typeof MunaqasyahStage]
+export type MunaqasyahJenisUjian = (typeof MunaqasyahJenisUjian)[keyof typeof MunaqasyahJenisUjian]
 
 
 export const MunaqasyahRequestStatus = {

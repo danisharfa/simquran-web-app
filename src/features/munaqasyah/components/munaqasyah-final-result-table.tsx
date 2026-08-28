@@ -17,12 +17,12 @@ import { Badge } from '@/components/ui/badge';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { FILTER_ALL, TableFilters } from '@/components/layouts/filters/table-filters';
-import { BATCH_OPTIONS, GRADE_LABEL } from '../munaqasyah.schema';
-import { BATCH_BADGE_CLASS } from './munaqasyah-request-table';
+import { TAHAP_OPTIONS, GRADE_LABEL } from '../munaqasyah.schema';
+import { TAHAP_BADGE_CLASS } from './munaqasyah-request-table';
 import { GRADE_BADGE_CLASS } from './munaqasyah-result-table';
 import type { MunaqasyahFinalResultTableData } from '../queries/list-all-munaqasyah-final-results';
 
-const BATCH_LABEL = Object.fromEntries(BATCH_OPTIONS.map((o) => [o.value, o.label]));
+const TAHAP_LABEL = Object.fromEntries(TAHAP_OPTIONS.map((o) => [o.value, o.label]));
 const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
 
 const PASSED_BADGE_CLASS = 'border-transparent bg-[var(--chart-1)]/15 text-[var(--chart-1)]';
@@ -41,7 +41,7 @@ export function MunaqasyahFinalResultTable({ data, own = false }: Props) {
   const [period, setPeriod] = useState(FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
-  const [batch, setBatch] = useState(FILTER_ALL);
+  const [tahap, setTahap] = useState(FILTER_ALL);
   const [grade, setGrade] = useState(FILTER_ALL);
   const [status, setStatus] = useState(FILTER_ALL);
 
@@ -80,9 +80,9 @@ export function MunaqasyahFinalResultTable({ data, own = false }: Props) {
     setClassroomId(value);
     setGroupId(FILTER_ALL);
   }
-  const batchOptions = useMemo(() => {
+  const tahapOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.batch, BATCH_LABEL[d.batch] ?? d.batch));
+    data.forEach((d) => map.set(d.tahap, TAHAP_LABEL[d.tahap] ?? d.tahap));
     return Array.from(map, ([value, label]) => ({ value, label }));
   }, [data]);
   const gradeOptions = useMemo(() => {
@@ -105,11 +105,11 @@ export function MunaqasyahFinalResultTable({ data, own = false }: Props) {
           (period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period) &&
           (own || classroomId === FILTER_ALL || d.classroomId === classroomId) &&
           (own || groupId === FILTER_ALL || d.groupId === groupId) &&
-          (batch === FILTER_ALL || d.batch === batch) &&
+          (tahap === FILTER_ALL || d.tahap === tahap) &&
           (grade === FILTER_ALL || d.finalGrade === grade) &&
           (status === FILTER_ALL || (status === 'LULUS' ? d.passed : !d.passed)),
       ),
-    [data, period, classroomId, groupId, batch, grade, status, own],
+    [data, period, classroomId, groupId, tahap, grade, status, own],
   );
 
   const columns = useMemo<ColumnDef<MunaqasyahFinalResultTableData>[]>(
@@ -135,12 +135,12 @@ export function MunaqasyahFinalResultTable({ data, own = false }: Props) {
           ]),
       { accessorKey: 'juzName', id: 'Juz', header: 'Juz' },
       {
-        accessorKey: 'batch',
-        id: 'Batch',
-        header: 'Batch',
+        accessorKey: 'tahap',
+        id: 'Tahap',
+        header: 'Tahap',
         cell: ({ row }) => (
-          <Badge className={BATCH_BADGE_CLASS[row.original.batch]}>
-            {BATCH_LABEL[row.original.batch] ?? row.original.batch}
+          <Badge className={TAHAP_BADGE_CLASS[row.original.tahap]}>
+            {TAHAP_LABEL[row.original.tahap] ?? row.original.tahap}
           </Badge>
         ),
       },
@@ -194,7 +194,7 @@ export function MunaqasyahFinalResultTable({ data, own = false }: Props) {
             classroom={own ? undefined : { value: classroomId, onChange: handleClassroomChange, options: classroomOptions }}
             group={own ? undefined : { value: groupId, onChange: setGroupId, options: groupOptions }}
             extraFilters={[
-              { key: 'batch', label: 'Batch', allLabel: 'Semua Batch', value: batch, onChange: setBatch, options: batchOptions },
+              { key: 'tahap', label: 'Tahap', allLabel: 'Semua Tahap', value: tahap, onChange: setTahap, options: tahapOptions },
               {
                 key: 'status',
                 label: 'Status',

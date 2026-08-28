@@ -1,13 +1,13 @@
 import { z } from 'zod';
 
-export const BATCH_OPTIONS = [
+export const TAHAP_OPTIONS = [
   { value: 'TAHAP_1', label: 'Tahap 1' },
   { value: 'TAHAP_2', label: 'Tahap 2' },
   { value: 'TAHAP_3', label: 'Tahap 3' },
   { value: 'TAHAP_4', label: 'Tahap 4' },
 ] as const;
 
-export const STAGE_OPTIONS = [
+export const JENIS_UJIAN_OPTIONS = [
   { value: 'TASMI', label: 'Tasmi' },
   { value: 'MUNAQASYAH', label: 'Munaqasyah' },
 ] as const;
@@ -29,8 +29,8 @@ export const GRADE_LABEL: Record<string, string> = {
 export const munaqasyahRequestSchema = z.object({
   groupId: z.string().min(1, 'Kelompok wajib dipilih'),
   studentId: z.string().min(1, 'Siswa wajib dipilih'),
-  batch: z.enum(['TAHAP_1', 'TAHAP_2', 'TAHAP_3', 'TAHAP_4']),
-  stage: z.enum(['TASMI', 'MUNAQASYAH']),
+  tahap: z.enum(['TAHAP_1', 'TAHAP_2', 'TAHAP_3', 'TAHAP_4']),
+  jenis: z.enum(['TASMI', 'MUNAQASYAH']),
   juzId: z.number({ message: 'Juz wajib dipilih' }),
 });
 

@@ -34,6 +34,7 @@ export type StudentProfileMinAggregateOutputType = {
   updatedAt: Date | null
   status: $Enums.StudentStatus | null
   graduatedAt: Date | null
+  exitedAt: Date | null
 }
 
 export type StudentProfileMaxAggregateOutputType = {
@@ -46,6 +47,7 @@ export type StudentProfileMaxAggregateOutputType = {
   updatedAt: Date | null
   status: $Enums.StudentStatus | null
   graduatedAt: Date | null
+  exitedAt: Date | null
 }
 
 export type StudentProfileCountAggregateOutputType = {
@@ -58,6 +60,7 @@ export type StudentProfileCountAggregateOutputType = {
   updatedAt: number
   status: number
   graduatedAt: number
+  exitedAt: number
   _all: number
 }
 
@@ -72,6 +75,7 @@ export type StudentProfileMinAggregateInputType = {
   updatedAt?: true
   status?: true
   graduatedAt?: true
+  exitedAt?: true
 }
 
 export type StudentProfileMaxAggregateInputType = {
@@ -84,6 +88,7 @@ export type StudentProfileMaxAggregateInputType = {
   updatedAt?: true
   status?: true
   graduatedAt?: true
+  exitedAt?: true
 }
 
 export type StudentProfileCountAggregateInputType = {
@@ -96,6 +101,7 @@ export type StudentProfileCountAggregateInputType = {
   updatedAt?: true
   status?: true
   graduatedAt?: true
+  exitedAt?: true
   _all?: true
 }
 
@@ -181,6 +187,7 @@ export type StudentProfileGroupByOutputType = {
   updatedAt: Date
   status: $Enums.StudentStatus
   graduatedAt: Date | null
+  exitedAt: Date | null
   _count: StudentProfileCountAggregateOutputType | null
   _min: StudentProfileMinAggregateOutputType | null
   _max: StudentProfileMaxAggregateOutputType | null
@@ -214,6 +221,7 @@ export type StudentProfileWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"StudentProfile"> | Date | string
   status?: Prisma.EnumStudentStatusFilter<"StudentProfile"> | $Enums.StudentStatus
   graduatedAt?: Prisma.DateTimeNullableFilter<"StudentProfile"> | Date | string | null
+  exitedAt?: Prisma.DateTimeNullableFilter<"StudentProfile"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   classroom?: Prisma.XOR<Prisma.ClassroomNullableScalarRelationFilter, Prisma.ClassroomWhereInput> | null
   classroomHistories?: Prisma.ClassroomHistoryListRelationFilter
@@ -240,6 +248,7 @@ export type StudentProfileOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   graduatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  exitedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   classroom?: Prisma.ClassroomOrderByWithRelationInput
   classroomHistories?: Prisma.ClassroomHistoryOrderByRelationAggregateInput
@@ -270,6 +279,7 @@ export type StudentProfileWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"StudentProfile"> | Date | string
   status?: Prisma.EnumStudentStatusFilter<"StudentProfile"> | $Enums.StudentStatus
   graduatedAt?: Prisma.DateTimeNullableFilter<"StudentProfile"> | Date | string | null
+  exitedAt?: Prisma.DateTimeNullableFilter<"StudentProfile"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   classroom?: Prisma.XOR<Prisma.ClassroomNullableScalarRelationFilter, Prisma.ClassroomWhereInput> | null
   classroomHistories?: Prisma.ClassroomHistoryListRelationFilter
@@ -296,6 +306,7 @@ export type StudentProfileOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   graduatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  exitedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.StudentProfileCountOrderByAggregateInput
   _max?: Prisma.StudentProfileMaxOrderByAggregateInput
   _min?: Prisma.StudentProfileMinOrderByAggregateInput
@@ -314,6 +325,7 @@ export type StudentProfileScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"StudentProfile"> | Date | string
   status?: Prisma.EnumStudentStatusWithAggregatesFilter<"StudentProfile"> | $Enums.StudentStatus
   graduatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"StudentProfile"> | Date | string | null
+  exitedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"StudentProfile"> | Date | string | null
 }
 
 export type StudentProfileCreateInput = {
@@ -323,6 +335,7 @@ export type StudentProfileCreateInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -349,6 +362,7 @@ export type StudentProfileUncheckedCreateInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -369,6 +383,7 @@ export type StudentProfileUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -395,6 +410,7 @@ export type StudentProfileUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -418,6 +434,7 @@ export type StudentProfileCreateManyInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
 }
 
 export type StudentProfileUpdateManyMutationInput = {
@@ -427,6 +444,7 @@ export type StudentProfileUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentProfileUncheckedUpdateManyInput = {
@@ -439,6 +457,7 @@ export type StudentProfileUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentProfileListRelationFilter = {
@@ -467,6 +486,7 @@ export type StudentProfileCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   graduatedAt?: Prisma.SortOrder
+  exitedAt?: Prisma.SortOrder
 }
 
 export type StudentProfileMaxOrderByAggregateInput = {
@@ -479,6 +499,7 @@ export type StudentProfileMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   graduatedAt?: Prisma.SortOrder
+  exitedAt?: Prisma.SortOrder
 }
 
 export type StudentProfileMinOrderByAggregateInput = {
@@ -491,6 +512,7 @@ export type StudentProfileMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   graduatedAt?: Prisma.SortOrder
+  exitedAt?: Prisma.SortOrder
 }
 
 export type StudentProfileScalarRelationFilter = {
@@ -789,6 +811,7 @@ export type StudentProfileCreateWithoutUserInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
   group?: Prisma.GroupCreateNestedOneWithoutStudentsInput
@@ -813,6 +836,7 @@ export type StudentProfileUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -865,6 +889,7 @@ export type StudentProfileScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"StudentProfile"> | Date | string
   status?: Prisma.EnumStudentStatusFilter<"StudentProfile"> | $Enums.StudentStatus
   graduatedAt?: Prisma.DateTimeNullableFilter<"StudentProfile"> | Date | string | null
+  exitedAt?: Prisma.DateTimeNullableFilter<"StudentProfile"> | Date | string | null
 }
 
 export type StudentProfileCreateWithoutClassroomInput = {
@@ -874,6 +899,7 @@ export type StudentProfileCreateWithoutClassroomInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
   group?: Prisma.GroupCreateNestedOneWithoutStudentsInput
@@ -898,6 +924,7 @@ export type StudentProfileUncheckedCreateWithoutClassroomInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -944,6 +971,7 @@ export type StudentProfileCreateWithoutClassroomHistoriesInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   group?: Prisma.GroupCreateNestedOneWithoutStudentsInput
@@ -969,6 +997,7 @@ export type StudentProfileUncheckedCreateWithoutClassroomHistoriesInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutStudentInput
@@ -1004,6 +1033,7 @@ export type StudentProfileUpdateWithoutClassroomHistoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   group?: Prisma.GroupUpdateOneWithoutStudentsNestedInput
@@ -1029,6 +1059,7 @@ export type StudentProfileUncheckedUpdateWithoutClassroomHistoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutStudentNestedInput
@@ -1048,6 +1079,7 @@ export type StudentProfileCreateWithoutGroupInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1072,6 +1104,7 @@ export type StudentProfileUncheckedCreateWithoutGroupInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -1118,6 +1151,7 @@ export type StudentProfileCreateWithoutGroupHistoriesInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1143,6 +1177,7 @@ export type StudentProfileUncheckedCreateWithoutGroupHistoriesInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutStudentInput
@@ -1178,6 +1213,7 @@ export type StudentProfileUpdateWithoutGroupHistoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -1203,6 +1239,7 @@ export type StudentProfileUncheckedUpdateWithoutGroupHistoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutStudentNestedInput
@@ -1222,6 +1259,7 @@ export type StudentProfileCreateWithoutSubmissionsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1247,6 +1285,7 @@ export type StudentProfileUncheckedCreateWithoutSubmissionsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   homeActivities?: Prisma.HomeActivityUncheckedCreateNestedManyWithoutStudentInput
@@ -1282,6 +1321,7 @@ export type StudentProfileUpdateWithoutSubmissionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -1307,6 +1347,7 @@ export type StudentProfileUncheckedUpdateWithoutSubmissionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   homeActivities?: Prisma.HomeActivityUncheckedUpdateManyWithoutStudentNestedInput
@@ -1326,6 +1367,7 @@ export type StudentProfileCreateWithoutHomeActivitiesInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1351,6 +1393,7 @@ export type StudentProfileUncheckedCreateWithoutHomeActivitiesInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -1386,6 +1429,7 @@ export type StudentProfileUpdateWithoutHomeActivitiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -1411,6 +1455,7 @@ export type StudentProfileUncheckedUpdateWithoutHomeActivitiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -1430,6 +1475,7 @@ export type StudentProfileCreateWithoutWeeklyTargetsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1455,6 +1501,7 @@ export type StudentProfileUncheckedCreateWithoutWeeklyTargetsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -1490,6 +1537,7 @@ export type StudentProfileUpdateWithoutWeeklyTargetsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -1515,6 +1563,7 @@ export type StudentProfileUncheckedUpdateWithoutWeeklyTargetsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -1534,6 +1583,7 @@ export type StudentProfileCreateWithoutTashihRequestsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1559,6 +1609,7 @@ export type StudentProfileUncheckedCreateWithoutTashihRequestsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -1594,6 +1645,7 @@ export type StudentProfileUpdateWithoutTashihRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -1619,6 +1671,7 @@ export type StudentProfileUncheckedUpdateWithoutTashihRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -1638,6 +1691,7 @@ export type StudentProfileCreateWithoutTahfidzScoresInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1663,6 +1717,7 @@ export type StudentProfileUncheckedCreateWithoutTahfidzScoresInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -1698,6 +1753,7 @@ export type StudentProfileUpdateWithoutTahfidzScoresInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -1723,6 +1779,7 @@ export type StudentProfileUncheckedUpdateWithoutTahfidzScoresInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -1742,6 +1799,7 @@ export type StudentProfileCreateWithoutTahsinScoresInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1767,6 +1825,7 @@ export type StudentProfileUncheckedCreateWithoutTahsinScoresInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -1802,6 +1861,7 @@ export type StudentProfileUpdateWithoutTahsinScoresInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -1827,6 +1887,7 @@ export type StudentProfileUncheckedUpdateWithoutTahsinScoresInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -1846,6 +1907,7 @@ export type StudentProfileCreateWithoutReportsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1871,6 +1933,7 @@ export type StudentProfileUncheckedCreateWithoutReportsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -1906,6 +1969,7 @@ export type StudentProfileUpdateWithoutReportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -1931,6 +1995,7 @@ export type StudentProfileUncheckedUpdateWithoutReportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -1950,6 +2015,7 @@ export type StudentProfileCreateWithoutMunaqasyahRequestsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -1975,6 +2041,7 @@ export type StudentProfileUncheckedCreateWithoutMunaqasyahRequestsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -2010,6 +2077,7 @@ export type StudentProfileUpdateWithoutMunaqasyahRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -2035,6 +2103,7 @@ export type StudentProfileUncheckedUpdateWithoutMunaqasyahRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -2054,6 +2123,7 @@ export type StudentProfileCreateWithoutMunaqasyahFinalResultsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutStudentProfilesInput
   classroom?: Prisma.ClassroomCreateNestedOneWithoutStudentsInput
   classroomHistories?: Prisma.ClassroomHistoryCreateNestedManyWithoutStudentInput
@@ -2079,6 +2149,7 @@ export type StudentProfileUncheckedCreateWithoutMunaqasyahFinalResultsInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedCreateNestedManyWithoutStudentInput
   groupHistories?: Prisma.GroupHistoryUncheckedCreateNestedManyWithoutStudentInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
@@ -2114,6 +2185,7 @@ export type StudentProfileUpdateWithoutMunaqasyahFinalResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -2139,6 +2211,7 @@ export type StudentProfileUncheckedUpdateWithoutMunaqasyahFinalResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -2160,6 +2233,7 @@ export type StudentProfileCreateManyUserInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
 }
 
 export type StudentProfileUpdateWithoutUserInput = {
@@ -2169,6 +2243,7 @@ export type StudentProfileUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
   group?: Prisma.GroupUpdateOneWithoutStudentsNestedInput
@@ -2193,6 +2268,7 @@ export type StudentProfileUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -2215,6 +2291,7 @@ export type StudentProfileUncheckedUpdateManyWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentProfileCreateManyClassroomInput = {
@@ -2226,6 +2303,7 @@ export type StudentProfileCreateManyClassroomInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
 }
 
 export type StudentProfileUpdateWithoutClassroomInput = {
@@ -2235,6 +2313,7 @@ export type StudentProfileUpdateWithoutClassroomInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
   group?: Prisma.GroupUpdateOneWithoutStudentsNestedInput
@@ -2259,6 +2338,7 @@ export type StudentProfileUncheckedUpdateWithoutClassroomInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -2281,6 +2361,7 @@ export type StudentProfileUncheckedUpdateManyWithoutClassroomInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentProfileCreateManyGroupInput = {
@@ -2292,6 +2373,7 @@ export type StudentProfileCreateManyGroupInput = {
   updatedAt?: Date | string
   status?: $Enums.StudentStatus
   graduatedAt?: Date | string | null
+  exitedAt?: Date | string | null
 }
 
 export type StudentProfileUpdateWithoutGroupInput = {
@@ -2301,6 +2383,7 @@ export type StudentProfileUpdateWithoutGroupInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutStudentProfilesNestedInput
   classroom?: Prisma.ClassroomUpdateOneWithoutStudentsNestedInput
   classroomHistories?: Prisma.ClassroomHistoryUpdateManyWithoutStudentNestedInput
@@ -2325,6 +2408,7 @@ export type StudentProfileUncheckedUpdateWithoutGroupInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   classroomHistories?: Prisma.ClassroomHistoryUncheckedUpdateManyWithoutStudentNestedInput
   groupHistories?: Prisma.GroupHistoryUncheckedUpdateManyWithoutStudentNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
@@ -2347,6 +2431,7 @@ export type StudentProfileUncheckedUpdateManyWithoutGroupInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   graduatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -2480,6 +2565,7 @@ export type StudentProfileSelect<ExtArgs extends runtime.Types.Extensions.Intern
   updatedAt?: boolean
   status?: boolean
   graduatedAt?: boolean
+  exitedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   classroom?: boolean | Prisma.StudentProfile$classroomArgs<ExtArgs>
   classroomHistories?: boolean | Prisma.StudentProfile$classroomHistoriesArgs<ExtArgs>
@@ -2509,9 +2595,10 @@ export type StudentProfileSelectScalar = {
   updatedAt?: boolean
   status?: boolean
   graduatedAt?: boolean
+  exitedAt?: boolean
 }
 
-export type StudentProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "nis" | "nisn" | "classroomId" | "groupId" | "createdAt" | "updatedAt" | "status" | "graduatedAt", ExtArgs["result"]["studentProfile"]>
+export type StudentProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "nis" | "nisn" | "classroomId" | "groupId" | "createdAt" | "updatedAt" | "status" | "graduatedAt" | "exitedAt", ExtArgs["result"]["studentProfile"]>
 export type StudentProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   classroom?: boolean | Prisma.StudentProfile$classroomArgs<ExtArgs>
@@ -2558,6 +2645,7 @@ export type $StudentProfilePayload<ExtArgs extends runtime.Types.Extensions.Inte
     updatedAt: Date
     status: $Enums.StudentStatus
     graduatedAt: Date | null
+    exitedAt: Date | null
   }, ExtArgs["result"]["studentProfile"]>
   composites: {}
 }
@@ -2950,6 +3038,7 @@ export interface StudentProfileFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"StudentProfile", 'DateTime'>
   readonly status: Prisma.FieldRef<"StudentProfile", 'StudentStatus'>
   readonly graduatedAt: Prisma.FieldRef<"StudentProfile", 'DateTime'>
+  readonly exitedAt: Prisma.FieldRef<"StudentProfile", 'DateTime'>
 }
     
 

@@ -10,8 +10,8 @@ export interface MunaqasyahResultTableData {
   classroomName: string;
   academicYear: string;
   semester: string;
-  batch: string;
-  stage: string;
+  tahap: string;
+  jenis: string;
   juzName: string;
   totalScore: number;
   grade: string;
@@ -39,8 +39,8 @@ export async function listAllMunaqasyahResults(): Promise<MunaqasyahResultTableD
     classroomName: `${r.request.group.classroom.level} ${r.request.group.classroom.name}`,
     academicYear: r.request.group.classroom.academicYear,
     semester: r.request.group.classroom.semester,
-    batch: r.request.batch,
-    stage: r.request.stage,
+    tahap: r.request.tahap,
+    jenis: r.request.jenis,
     juzName: r.request.juz.name,
     totalScore: r.totalScore,
     grade: r.grade,

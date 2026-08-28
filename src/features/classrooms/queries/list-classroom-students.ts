@@ -5,6 +5,7 @@ export interface StudentOption {
   userId: string;
   nis: string;
   name: string;
+  groupName: string | null;
 }
 
 export async function listClassroomStudents(classroomId: string): Promise<StudentOption[]> {
@@ -12,13 +13,14 @@ export async function listClassroomStudents(classroomId: string): Promise<Studen
 
   const students = await prisma.studentProfile.findMany({
     where: { classroomId },
-    include: { user: true },
-    orderBy: { user: { name: 'asc' } },
+    include: { user: true, group: true },
+    orderBy: { nis: 'asc' },
   });
 
   return students.map((student) => ({
     userId: student.userId,
     nis: student.nis,
     name: student.user.name,
+    groupName: student.group?.name ?? null,
   }));
 }

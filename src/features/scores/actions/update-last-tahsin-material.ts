@@ -15,9 +15,8 @@ export async function updateLastTahsinMaterial(studentId: string, groupId: strin
 
   await prisma.report.upsert({
     where: {
-      studentId_groupId_academicYear_semester: {
+      studentId_academicYear_semester: {
         studentId,
-        groupId,
         academicYear: group.classroom.academicYear,
         semester: group.classroom.semester,
       },
@@ -29,7 +28,7 @@ export async function updateLastTahsinMaterial(studentId: string, groupId: strin
       semester: group.classroom.semester,
       lastTahsinMaterial: material,
     },
-    update: { lastTahsinMaterial: material },
+    update: { groupId, lastTahsinMaterial: material },
   });
 
   revalidatePath(`/dashboard/group/${groupId}/student/${studentId}/report`);

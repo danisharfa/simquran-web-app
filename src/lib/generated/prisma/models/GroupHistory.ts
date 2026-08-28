@@ -217,7 +217,7 @@ export type GroupHistoryOrderByWithRelationInput = {
 
 export type GroupHistoryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  studentId_academicYear_semester?: Prisma.GroupHistoryStudentIdAcademicYearSemesterCompoundUniqueInput
+  studentId_groupId_academicYear_semester?: Prisma.GroupHistoryStudentIdGroupIdAcademicYearSemesterCompoundUniqueInput
   AND?: Prisma.GroupHistoryWhereInput | Prisma.GroupHistoryWhereInput[]
   OR?: Prisma.GroupHistoryWhereInput[]
   NOT?: Prisma.GroupHistoryWhereInput | Prisma.GroupHistoryWhereInput[]
@@ -229,7 +229,7 @@ export type GroupHistoryWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"GroupHistory"> | Date | string
   group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
   student?: Prisma.XOR<Prisma.StudentProfileScalarRelationFilter, Prisma.StudentProfileWhereInput>
-}, "id" | "studentId_academicYear_semester">
+}, "id" | "studentId_groupId_academicYear_semester">
 
 export type GroupHistoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -341,8 +341,9 @@ export type GroupHistoryOrderByRelevanceInput = {
   search: string
 }
 
-export type GroupHistoryStudentIdAcademicYearSemesterCompoundUniqueInput = {
+export type GroupHistoryStudentIdGroupIdAcademicYearSemesterCompoundUniqueInput = {
   studentId: string
+  groupId: string
   academicYear: string
   semester: $Enums.Semester
 }

@@ -11,7 +11,7 @@ export interface MunaqasyahFinalResultTableData {
   academicYear: string;
   semester: string;
   juzName: string;
-  batch: string;
+  tahap: string;
   finalScore: number;
   finalGrade: string;
   passed: boolean;
@@ -35,7 +35,7 @@ export async function listAllMunaqasyahFinalResults(): Promise<MunaqasyahFinalRe
     academicYear: r.group.classroom.academicYear,
     semester: r.group.classroom.semester,
     juzName: r.juz.name,
-    batch: r.batch,
+    tahap: r.tahap,
     finalScore: r.finalScore,
     finalGrade: r.finalGrade,
     passed: r.passed,

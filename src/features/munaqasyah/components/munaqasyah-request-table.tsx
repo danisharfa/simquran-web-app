@@ -34,7 +34,7 @@ import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
 import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
-import { BATCH_OPTIONS, STAGE_OPTIONS, STATUS_LABEL } from '../munaqasyah.schema';
+import { TAHAP_OPTIONS, JENIS_UJIAN_OPTIONS, STATUS_LABEL } from '../munaqasyah.schema';
 import { respondMunaqasyahRequest } from '../actions/respond-munaqasyah-request';
 import { cancelMunaqasyahRequest } from '../actions/cancel-munaqasyah-request';
 import { deleteMunaqasyahRequest } from '../actions/delete-munaqasyah-request';
@@ -43,8 +43,8 @@ import type { MunaqasyahRequestTableData } from '../queries/list-my-munaqasyah-r
 import type { GroupWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
 import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
 
-const BATCH_LABEL = Object.fromEntries(BATCH_OPTIONS.map((o) => [o.value, o.label]));
-const STAGE_LABEL = Object.fromEntries(STAGE_OPTIONS.map((o) => [o.value, o.label]));
+const TAHAP_LABEL = Object.fromEntries(TAHAP_OPTIONS.map((o) => [o.value, o.label]));
+const JENIS_UJIAN_LABEL = Object.fromEntries(JENIS_UJIAN_OPTIONS.map((o) => [o.value, o.label]));
 const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
 
 export const STATUS_BADGE_CLASS: Record<string, string> = {
@@ -54,14 +54,14 @@ export const STATUS_BADGE_CLASS: Record<string, string> = {
   SELESAI: 'border-transparent bg-[var(--chart-2)]/15 text-[var(--chart-2)]',
 };
 
-export const BATCH_BADGE_CLASS: Record<string, string> = {
+export const TAHAP_BADGE_CLASS: Record<string, string> = {
   TAHAP_1: 'border-transparent bg-[var(--chart-1)]/15 text-[var(--chart-1)]',
   TAHAP_2: 'border-transparent bg-[var(--chart-2)]/15 text-[var(--chart-2)]',
   TAHAP_3: 'border-transparent bg-[var(--chart-3)]/15 text-[var(--chart-3)]',
   TAHAP_4: 'border-transparent bg-[var(--chart-4)]/15 text-[var(--chart-4)]',
 };
 
-export const STAGE_BADGE_CLASS: Record<string, string> = {
+export const JENIS_UJIAN_BADGE_CLASS: Record<string, string> = {
   TASMI: 'border-transparent bg-slate-500/15 text-slate-600 dark:text-slate-400',
   MUNAQASYAH: 'border-transparent bg-[var(--chart-4)]/15 text-[var(--chart-4)]',
 };
@@ -222,8 +222,8 @@ export function MunaqasyahRequestTable({
   const [period, setPeriod] = useState(FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
-  const [batch, setBatch] = useState(FILTER_ALL);
-  const [stage, setStage] = useState(FILTER_ALL);
+  const [tahap, setTahap] = useState(FILTER_ALL);
+  const [jenis, setJenis] = useState(FILTER_ALL);
   const [status, setStatus] = useState(FILTER_ALL);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
@@ -263,14 +263,14 @@ export function MunaqasyahRequestTable({
     setGroupId(FILTER_ALL);
   }
 
-  const batchOptions = useMemo(() => {
+  const tahapOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.batch, BATCH_LABEL[d.batch] ?? d.batch));
+    data.forEach((d) => map.set(d.tahap, TAHAP_LABEL[d.tahap] ?? d.tahap));
     return Array.from(map, ([value, label]) => ({ value, label }));
   }, [data]);
-  const stageOptions = useMemo(() => {
+  const jenisOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.stage, STAGE_LABEL[d.stage] ?? d.stage));
+    data.forEach((d) => map.set(d.jenis, JENIS_UJIAN_LABEL[d.jenis] ?? d.jenis));
     return Array.from(map, ([value, label]) => ({ value, label }));
   }, [data]);
   const statusOptions = useMemo(() => {
@@ -286,12 +286,12 @@ export function MunaqasyahRequestTable({
           (period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period) &&
           (classroomId === FILTER_ALL || d.classroomId === classroomId) &&
           (groupId === FILTER_ALL || d.groupId === groupId) &&
-          (batch === FILTER_ALL || d.batch === batch) &&
-          (stage === FILTER_ALL || d.stage === stage) &&
+          (tahap === FILTER_ALL || d.tahap === tahap) &&
+          (jenis === FILTER_ALL || d.jenis === jenis) &&
           (status === FILTER_ALL || d.status === status) &&
           isDateInRange(d.createdAt, dateRange),
       ),
-    [data, period, classroomId, groupId, batch, stage, status, dateRange],
+    [data, period, classroomId, groupId, tahap, jenis, status, dateRange],
   );
 
   const handleRespond = useCallback(
@@ -361,22 +361,22 @@ export function MunaqasyahRequestTable({
       { accessorKey: 'groupName', id: 'Kelompok', header: 'Kelompok' },
       { accessorKey: 'classroomName', id: 'Kelas', header: 'Kelas' },
       {
-        accessorKey: 'batch',
-        id: 'Batch',
-        header: 'Batch',
+        accessorKey: 'tahap',
+        id: 'Tahap',
+        header: 'Tahap',
         cell: ({ row }) => (
-          <Badge className={BATCH_BADGE_CLASS[row.original.batch]}>
-            {BATCH_LABEL[row.original.batch] ?? row.original.batch}
+          <Badge className={TAHAP_BADGE_CLASS[row.original.tahap]}>
+            {TAHAP_LABEL[row.original.tahap] ?? row.original.tahap}
           </Badge>
         ),
       },
       {
-        accessorKey: 'stage',
-        id: 'Tahap',
-        header: 'Tahap',
+        accessorKey: 'jenis',
+        id: 'Jenis Ujian',
+        header: 'Jenis Ujian',
         cell: ({ row }) => (
-          <Badge className={STAGE_BADGE_CLASS[row.original.stage]}>
-            {STAGE_LABEL[row.original.stage] ?? row.original.stage}
+          <Badge className={JENIS_UJIAN_BADGE_CLASS[row.original.jenis]}>
+            {JENIS_UJIAN_LABEL[row.original.jenis] ?? row.original.jenis}
           </Badge>
         ),
       },
@@ -455,8 +455,8 @@ export function MunaqasyahRequestTable({
             classroom={{ value: classroomId, onChange: handleClassroomChange, options: classroomOptions }}
             group={{ value: groupId, onChange: setGroupId, options: groupOptions }}
             extraFilters={[
-              { key: 'batch', label: 'Batch', allLabel: 'Semua Batch', value: batch, onChange: setBatch, options: batchOptions },
-              { key: 'stage', label: 'Tahap', allLabel: 'Semua Tahap', value: stage, onChange: setStage, options: stageOptions },
+              { key: 'tahap', label: 'Tahap', allLabel: 'Semua Tahap', value: tahap, onChange: setTahap, options: tahapOptions },
+              { key: 'jenis', label: 'Jenis Ujian', allLabel: 'Semua Jenis Ujian', value: jenis, onChange: setJenis, options: jenisOptions },
               {
                 key: 'status',
                 label: 'Status',

@@ -21,6 +21,7 @@ import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { DeleteConfirmDialog } from '@/components/ui/delete-confirm-dialog';
 import { removeStudentFromClassroom } from '../actions/remove-student-from-classroom';
+import { ExitStudentDialog } from './exit-student-dialog';
 import type { StudentOption } from '../queries/list-classroom-students';
 
 interface Props {
@@ -76,22 +77,34 @@ export function ClassroomStudentTable({ classroomId, data }: Props) {
         cell: ({ row }) => {
           const student = row.original;
           return (
-            <DeleteConfirmDialog
-              title="Keluarkan Siswa"
-              description={`Apakah Anda yakin ingin mengeluarkan ${student.name} dari kelas ini?`}
-              onConfirm={() => handleRemove(student.userId)}
-              trigger={
-                <Button variant="destructive" size="sm" disabled={removingId === student.userId}>
-                  <Trash2 />
-                  Hapus
-                </Button>
-              }
-            />
+            <div className="flex items-center gap-1">
+              <ExitStudentDialog
+                classroomId={classroomId}
+                studentId={student.userId}
+                studentName={student.name}
+                groupName={student.groupName}
+              />
+              <DeleteConfirmDialog
+                title="Keluarkan Siswa"
+                description={
+                  student.groupName
+                    ? `Apakah Anda yakin ingin mengeluarkan ${student.name} dari kelas ini? Siswa juga akan otomatis dikeluarkan dari kelompok "${student.groupName}".`
+                    : `Apakah Anda yakin ingin mengeluarkan ${student.name} dari kelas ini?`
+                }
+                onConfirm={() => handleRemove(student.userId)}
+                trigger={
+                  <Button variant="destructive" size="sm" disabled={removingId === student.userId}>
+                    <Trash2 />
+                    Hapus
+                  </Button>
+                }
+              />
+            </div>
           );
         },
       },
     ],
-    [removingId, handleRemove],
+    [removingId, handleRemove, classroomId],
   );
 
   const table = useReactTable({

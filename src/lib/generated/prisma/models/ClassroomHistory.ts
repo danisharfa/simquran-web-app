@@ -217,7 +217,7 @@ export type ClassroomHistoryOrderByWithRelationInput = {
 
 export type ClassroomHistoryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  studentId_academicYear_semester?: Prisma.ClassroomHistoryStudentIdAcademicYearSemesterCompoundUniqueInput
+  studentId_classroomId_academicYear_semester?: Prisma.ClassroomHistoryStudentIdClassroomIdAcademicYearSemesterCompoundUniqueInput
   AND?: Prisma.ClassroomHistoryWhereInput | Prisma.ClassroomHistoryWhereInput[]
   OR?: Prisma.ClassroomHistoryWhereInput[]
   NOT?: Prisma.ClassroomHistoryWhereInput | Prisma.ClassroomHistoryWhereInput[]
@@ -229,7 +229,7 @@ export type ClassroomHistoryWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"ClassroomHistory"> | Date | string
   classroom?: Prisma.XOR<Prisma.ClassroomScalarRelationFilter, Prisma.ClassroomWhereInput>
   student?: Prisma.XOR<Prisma.StudentProfileScalarRelationFilter, Prisma.StudentProfileWhereInput>
-}, "id" | "studentId_academicYear_semester">
+}, "id" | "studentId_classroomId_academicYear_semester">
 
 export type ClassroomHistoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -341,8 +341,9 @@ export type ClassroomHistoryOrderByRelevanceInput = {
   search: string
 }
 
-export type ClassroomHistoryStudentIdAcademicYearSemesterCompoundUniqueInput = {
+export type ClassroomHistoryStudentIdClassroomIdAcademicYearSemesterCompoundUniqueInput = {
   studentId: string
+  classroomId: string
   academicYear: string
   semester: $Enums.Semester
 }

@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { assertReportAccess } from '../assert-report-access';
+import { getPeriodGroupIds } from './get-period-group-ids';
 
 export interface TahsinScoreData {
   id: string;
@@ -13,8 +14,16 @@ export interface TahsinScoreData {
 export async function listTahsinScores(studentId: string, groupId: string): Promise<TahsinScoreData[]> {
   await assertReportAccess(studentId, groupId);
 
+  const group = await prisma.group.findUniqueOrThrow({ where: { id: groupId }, include: { classroom: true } });
+  const { allGroupIds } = await getPeriodGroupIds(
+    studentId,
+    group.classroom.academicYear,
+    group.classroom.semester,
+  );
+  const groupIds = Array.from(new Set([...allGroupIds, groupId]));
+
   const scores = await prisma.tahsinScore.findMany({
-    where: { studentId, groupId },
+    where: { studentId, groupId: { in: groupIds } },
     orderBy: { createdAt: 'asc' },
   });
 

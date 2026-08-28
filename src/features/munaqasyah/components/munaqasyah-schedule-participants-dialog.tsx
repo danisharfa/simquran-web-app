@@ -12,17 +12,17 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { BATCH_OPTIONS, STAGE_OPTIONS } from '../munaqasyah.schema';
-import { BATCH_BADGE_CLASS, STAGE_BADGE_CLASS } from './munaqasyah-request-table';
+import { TAHAP_OPTIONS, JENIS_UJIAN_OPTIONS } from '../munaqasyah.schema';
+import { TAHAP_BADGE_CLASS, JENIS_UJIAN_BADGE_CLASS } from './munaqasyah-request-table';
 
-const BATCH_LABEL = Object.fromEntries(BATCH_OPTIONS.map((o) => [o.value, o.label]));
-const STAGE_LABEL = Object.fromEntries(STAGE_OPTIONS.map((o) => [o.value, o.label]));
+const TAHAP_LABEL = Object.fromEntries(TAHAP_OPTIONS.map((o) => [o.value, o.label]));
+const JENIS_UJIAN_LABEL = Object.fromEntries(JENIS_UJIAN_OPTIONS.map((o) => [o.value, o.label]));
 
 interface Participant {
   requestId: string;
   studentName: string;
-  batch: string;
-  stage: string;
+  tahap: string;
+  jenis: string;
   juzName: string;
   groupName: string;
   classroomName: string;
@@ -73,8 +73,8 @@ export function MunaqasyahScheduleParticipantsDialog({
                 <div className="flex items-center justify-between gap-2">
                   <span className="font-medium">{p.studentName}</span>
                   <div className="flex items-center gap-1">
-                    <Badge className={BATCH_BADGE_CLASS[p.batch]}>{BATCH_LABEL[p.batch] ?? p.batch}</Badge>
-                    <Badge className={STAGE_BADGE_CLASS[p.stage]}>{STAGE_LABEL[p.stage] ?? p.stage}</Badge>
+                    <Badge className={TAHAP_BADGE_CLASS[p.tahap]}>{TAHAP_LABEL[p.tahap] ?? p.tahap}</Badge>
+                    <Badge className={JENIS_UJIAN_BADGE_CLASS[p.jenis]}>{JENIS_UJIAN_LABEL[p.jenis] ?? p.jenis}</Badge>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">

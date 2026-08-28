@@ -2833,7 +2833,8 @@ export const StudentProfileScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   status: 'status',
-  graduatedAt: 'graduatedAt'
+  graduatedAt: 'graduatedAt',
+  exitedAt: 'exitedAt'
 } as const
 
 export type StudentProfileScalarFieldEnum = (typeof StudentProfileScalarFieldEnum)[keyof typeof StudentProfileScalarFieldEnum]
@@ -3127,8 +3128,8 @@ export const MunaqasyahRequestScalarFieldEnum = {
   teacherId: 'teacherId',
   studentId: 'studentId',
   groupId: 'groupId',
-  batch: 'batch',
-  stage: 'stage',
+  tahap: 'tahap',
+  jenis: 'jenis',
   juzId: 'juzId',
   status: 'status',
   createdAt: 'createdAt',
@@ -3219,7 +3220,7 @@ export const MunaqasyahFinalResultScalarFieldEnum = {
   studentId: 'studentId',
   groupId: 'groupId',
   juzId: 'juzId',
-  batch: 'batch',
+  tahap: 'tahap',
   tasmiResultId: 'tasmiResultId',
   munaqasyahResultId: 'munaqasyahResultId',
   finalScore: 'finalScore',
@@ -3736,16 +3737,16 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
 
 
 /**
- * Reference to a field of type 'MunaqasyahBatch'
+ * Reference to a field of type 'MunaqasyahTahap'
  */
-export type EnumMunaqasyahBatchFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunaqasyahBatch'>
+export type EnumMunaqasyahTahapFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunaqasyahTahap'>
     
 
 
 /**
- * Reference to a field of type 'MunaqasyahStage'
+ * Reference to a field of type 'MunaqasyahJenisUjian'
  */
-export type EnumMunaqasyahStageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunaqasyahStage'>
+export type EnumMunaqasyahJenisUjianFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunaqasyahJenisUjian'>
     
 
 

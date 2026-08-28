@@ -161,6 +161,7 @@ model StudentProfile {
 
   status      StudentStatus @default(AKTIF)
   graduatedAt DateTime?
+  exitedAt    DateTime?
 
   user                   User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
   classroom              Classroom?              @relation(fields: [classroomId], references: [id])
@@ -213,7 +214,7 @@ model ClassroomHistory {
   classroom Classroom      @relation(fields: [classroomId], references: [id], onDelete: Restrict)
   student   StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
 
-  @@unique([studentId, academicYear, semester])
+  @@unique([studentId, classroomId, academicYear, semester])
   @@map("classroom_history")
 }
 
@@ -258,7 +259,7 @@ model GroupHistory {
   group   Group          @relation(fields: [groupId], references: [id], onDelete: Restrict)
   student StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
 
-  @@unique([studentId, academicYear, semester])
+  @@unique([studentId, groupId, academicYear, semester])
   @@map("group_history")
 }
 
@@ -398,7 +399,7 @@ model HomeActivity {
   updatedAt DateTime @updatedAt
 
   student StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
-  group   Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group   Group          @relation(fields: [groupId], references: [id], onDelete: Restrict)
   juz     Juz            @relation(fields: [juzId], references: [id])
   surah   Surah          @relation(fields: [surahId], references: [id])
 
@@ -590,7 +591,7 @@ model TahfidzScore {
   updatedAt DateTime @updatedAt
 
   student StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
-  group   Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group   Group          @relation(fields: [groupId], references: [id], onDelete: Restrict)
   surah   Surah          @relation(fields: [surahId], references: [id])
 
   @@unique([studentId, groupId, surahId])
@@ -611,7 +612,7 @@ model TahsinScore {
   updatedAt DateTime @updatedAt
 
   student StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
-  group   Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group   Group          @relation(fields: [groupId], references: [id], onDelete: Restrict)
 
   @@unique([studentId, groupId, tahsinType, topic])
   @@map("tahsin_score")
@@ -631,9 +632,9 @@ model Report {
   updatedAt DateTime @updatedAt
 
   student StudentProfile @relation(fields: [studentId], references: [userId], onDelete: Cascade)
-  group   Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group   Group          @relation(fields: [groupId], references: [id], onDelete: Restrict)
 
-  @@unique([studentId, groupId, academicYear, semester])
+  @@unique([studentId, academicYear, semester])
   @@map("report")
 }
 
@@ -656,8 +657,8 @@ model MunaqasyahRequest {
   studentId     String
   groupId       String
 
-  batch  MunaqasyahBatch
-  stage  MunaqasyahStage
+  tahap  MunaqasyahTahap
+  jenis  MunaqasyahJenisUjian
   juzId  Int
   status MunaqasyahRequestStatus @default(MENUNGGU)
 
@@ -784,7 +785,7 @@ model MunaqasyahFinalResult {
   studentId String
   groupId   String
   juzId     Int
-  batch     MunaqasyahBatch
+  tahap     MunaqasyahTahap
 
   tasmiResultId      String @unique
   munaqasyahResultId String @unique
@@ -802,18 +803,18 @@ model MunaqasyahFinalResult {
   tasmiResult      MunaqasyahResult @relation("TasmiResult", fields: [tasmiResultId], references: [id])
   munaqasyahResult MunaqasyahResult @relation("MunaqasyahResult", fields: [munaqasyahResultId], references: [id])
 
-  @@unique([studentId, juzId, batch])
+  @@unique([studentId, juzId, tahap])
   @@map("munaqasyah_final_result")
 }
 
-enum MunaqasyahBatch {
+enum MunaqasyahTahap {
   TAHAP_1
   TAHAP_2
   TAHAP_3
   TAHAP_4
 }
 
-enum MunaqasyahStage {
+enum MunaqasyahJenisUjian {
   TASMI
   MUNAQASYAH
 }

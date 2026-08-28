@@ -21,7 +21,7 @@ export async function listGroupStudents(groupId: string): Promise<GroupStudentOp
   const students = await prisma.studentProfile.findMany({
     where: { groupId },
     include: { user: true },
-    orderBy: { user: { name: 'asc' } },
+    orderBy: { nis: 'asc' },
   });
 
   return students.map((student) => ({

@@ -19,8 +19,8 @@ export async function getMunaqasyahRequest(requestId: string): Promise<Munaqasya
   return {
     groupId: request.groupId,
     studentId: request.studentId,
-    batch: request.batch,
-    stage: request.stage,
+    tahap: request.tahap,
+    jenis: request.jenis,
     juzId: request.juzId,
   };
 }

@@ -4,8 +4,8 @@ import { requireRoleOrThrow } from '@/lib/require-role';
 export interface MunaqasyahScheduleParticipant {
   requestId: string;
   studentName: string;
-  batch: string;
-  stage: string;
+  tahap: string;
+  jenis: string;
   juzName: string;
   groupId: string;
   groupName: string;
@@ -60,8 +60,8 @@ export async function listMunaqasyahSchedules(): Promise<MunaqasyahScheduleTable
     participants: s.scheduleRequests.map((sr) => ({
       requestId: sr.request.id,
       studentName: sr.request.student.user.name,
-      batch: sr.request.batch,
-      stage: sr.request.stage,
+      tahap: sr.request.tahap,
+      jenis: sr.request.jenis,
       juzName: sr.request.juz.name,
       groupId: sr.request.groupId,
       groupName: sr.request.group.name,

@@ -12,9 +12,16 @@ export interface ReportData {
 export async function getReport(studentId: string, groupId: string): Promise<ReportData> {
   await assertReportAccess(studentId, groupId);
 
-  const report = await prisma.report.findFirst({
-    where: { studentId, groupId },
-    orderBy: { updatedAt: 'desc' },
+  const group = await prisma.group.findUniqueOrThrow({ where: { id: groupId }, include: { classroom: true } });
+
+  const report = await prisma.report.findUnique({
+    where: {
+      studentId_academicYear_semester: {
+        studentId,
+        academicYear: group.classroom.academicYear,
+        semester: group.classroom.semester,
+      },
+    },
   });
 
   return {

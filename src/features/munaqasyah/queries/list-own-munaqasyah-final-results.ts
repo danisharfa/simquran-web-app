@@ -21,7 +21,7 @@ export async function listOwnMunaqasyahFinalResults(): Promise<MunaqasyahFinalRe
     academicYear: r.group.classroom.academicYear,
     semester: r.group.classroom.semester,
     juzName: r.juz.name,
-    batch: r.batch,
+    tahap: r.tahap,
     finalScore: r.finalScore,
     finalGrade: r.finalGrade,
     passed: r.passed,

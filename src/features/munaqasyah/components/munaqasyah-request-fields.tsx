@@ -8,15 +8,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { BATCH_OPTIONS, STAGE_OPTIONS } from '../munaqasyah.schema';
+import { TAHAP_OPTIONS, JENIS_UJIAN_OPTIONS } from '../munaqasyah.schema';
 import type { GroupWithStudents } from '@/features/groups/queries/list-my-groups-with-students';
 import type { ReferenceOption } from '@/features/quran-reference/queries/list-reference-options';
 
 export interface MunaqasyahRequestFieldValues {
   groupId: string;
   studentId: string;
-  batch: 'TAHAP_1' | 'TAHAP_2' | 'TAHAP_3' | 'TAHAP_4';
-  stage: 'TASMI' | 'MUNAQASYAH';
+  tahap: 'TAHAP_1' | 'TAHAP_2' | 'TAHAP_3' | 'TAHAP_4';
+  jenis: 'TASMI' | 'MUNAQASYAH';
   juzId: number | null;
 }
 
@@ -78,13 +78,13 @@ export function MunaqasyahRequestFields({ groups, juzOptions, values, onChange }
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Field>
-          <FieldLabel>Batch</FieldLabel>
-          <Select value={values.batch} onValueChange={(v) => onChange('batch', v as MunaqasyahRequestFieldValues['batch'])}>
+          <FieldLabel>Tahap</FieldLabel>
+          <Select value={values.tahap} onValueChange={(v) => onChange('tahap', v as MunaqasyahRequestFieldValues['tahap'])}>
             <SelectTrigger>
-              <SelectValue>{BATCH_OPTIONS.find((o) => o.value === values.batch)?.label}</SelectValue>
+              <SelectValue>{TAHAP_OPTIONS.find((o) => o.value === values.tahap)?.label}</SelectValue>
             </SelectTrigger>
             <SelectContent>
-              {BATCH_OPTIONS.map((opt) => (
+              {TAHAP_OPTIONS.map((opt) => (
                 <SelectItem key={opt.value} value={opt.value}>
                   {opt.label}
                 </SelectItem>
@@ -94,13 +94,13 @@ export function MunaqasyahRequestFields({ groups, juzOptions, values, onChange }
         </Field>
 
         <Field>
-          <FieldLabel>Tahap</FieldLabel>
-          <Select value={values.stage} onValueChange={(v) => onChange('stage', v as MunaqasyahRequestFieldValues['stage'])}>
+          <FieldLabel>Jenis Ujian</FieldLabel>
+          <Select value={values.jenis} onValueChange={(v) => onChange('jenis', v as MunaqasyahRequestFieldValues['jenis'])}>
             <SelectTrigger>
-              <SelectValue>{STAGE_OPTIONS.find((o) => o.value === values.stage)?.label}</SelectValue>
+              <SelectValue>{JENIS_UJIAN_OPTIONS.find((o) => o.value === values.jenis)?.label}</SelectValue>
             </SelectTrigger>
             <SelectContent>
-              {STAGE_OPTIONS.map((opt) => (
+              {JENIS_UJIAN_OPTIONS.map((opt) => (
                 <SelectItem key={opt.value} value={opt.value}>
                   {opt.label}
                 </SelectItem>

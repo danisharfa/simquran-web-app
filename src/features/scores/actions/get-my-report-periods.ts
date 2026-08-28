@@ -27,12 +27,25 @@ export async function getMyReportPeriods(): Promise<ReportPeriodData> {
       where: { userId: studentId },
       include: { group: { include: { classroom: true } } },
     }),
-    prisma.groupHistory.findMany({ where: { studentId } }),
+    // urutan kronologis: entri terakhir per periode = kelompok paling baru disinggahi
+    prisma.groupHistory.findMany({ where: { studentId }, orderBy: { createdAt: 'asc' } }),
     prisma.academicSetting.findFirst(),
   ]);
 
   const periodsMap = new Map<string, ReportPeriodOption>();
 
+  for (const gh of groupHistories) {
+    const key = `${gh.academicYear}|${gh.semester}`;
+    periodsMap.set(key, {
+      value: key,
+      label: `${gh.academicYear} ${SEMESTER_LABEL[gh.semester]}`,
+      academicYear: gh.academicYear,
+      semester: gh.semester,
+      groupId: gh.groupId,
+    });
+  }
+
+  // kelompok aktif saat ini selalu jadi representasi terbaru untuk periode itu
   if (student?.group) {
     const key = `${student.group.classroom.academicYear}|${student.group.classroom.semester}`;
     periodsMap.set(key, {
@@ -42,19 +55,6 @@ export async function getMyReportPeriods(): Promise<ReportPeriodData> {
       semester: student.group.classroom.semester,
       groupId: student.group.id,
     });
-  }
-
-  for (const gh of groupHistories) {
-    const key = `${gh.academicYear}|${gh.semester}`;
-    if (!periodsMap.has(key)) {
-      periodsMap.set(key, {
-        value: key,
-        label: `${gh.academicYear} ${SEMESTER_LABEL[gh.semester]}`,
-        academicYear: gh.academicYear,
-        semester: gh.semester,
-        groupId: gh.groupId,
-      });
-    }
   }
 
   const periods = Array.from(periodsMap.values()).sort((a, b) => {

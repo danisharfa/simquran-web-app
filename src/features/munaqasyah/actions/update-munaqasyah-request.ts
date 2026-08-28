@@ -22,7 +22,7 @@ export async function updateMunaqasyahRequest(requestId: string, input: Munaqasy
     return { success: false, message: parsed.error.issues[0]?.message ?? 'Data tidak valid' };
   }
 
-  const { groupId, studentId, batch, stage, juzId } = parsed.data;
+  const { groupId, studentId, tahap, jenis, juzId } = parsed.data;
 
   const group = await prisma.group.findUnique({ where: { id: groupId } });
   if (!group || group.teacherId !== session.user.id) {
@@ -36,7 +36,7 @@ export async function updateMunaqasyahRequest(requestId: string, input: Munaqasy
 
   await prisma.munaqasyahRequest.update({
     where: { id: requestId },
-    data: { studentId, groupId, batch, stage, juzId },
+    data: { studentId, groupId, tahap, jenis, juzId },
   });
 
   revalidatePath('/dashboard/munaqasyah/request');

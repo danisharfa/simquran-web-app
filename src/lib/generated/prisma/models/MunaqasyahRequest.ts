@@ -40,8 +40,8 @@ export type MunaqasyahRequestMinAggregateOutputType = {
   teacherId: string | null
   studentId: string | null
   groupId: string | null
-  batch: $Enums.MunaqasyahBatch | null
-  stage: $Enums.MunaqasyahStage | null
+  tahap: $Enums.MunaqasyahTahap | null
+  jenis: $Enums.MunaqasyahJenisUjian | null
   juzId: number | null
   status: $Enums.MunaqasyahRequestStatus | null
   createdAt: Date | null
@@ -54,8 +54,8 @@ export type MunaqasyahRequestMaxAggregateOutputType = {
   teacherId: string | null
   studentId: string | null
   groupId: string | null
-  batch: $Enums.MunaqasyahBatch | null
-  stage: $Enums.MunaqasyahStage | null
+  tahap: $Enums.MunaqasyahTahap | null
+  jenis: $Enums.MunaqasyahJenisUjian | null
   juzId: number | null
   status: $Enums.MunaqasyahRequestStatus | null
   createdAt: Date | null
@@ -68,8 +68,8 @@ export type MunaqasyahRequestCountAggregateOutputType = {
   teacherId: number
   studentId: number
   groupId: number
-  batch: number
-  stage: number
+  tahap: number
+  jenis: number
   juzId: number
   status: number
   createdAt: number
@@ -92,8 +92,8 @@ export type MunaqasyahRequestMinAggregateInputType = {
   teacherId?: true
   studentId?: true
   groupId?: true
-  batch?: true
-  stage?: true
+  tahap?: true
+  jenis?: true
   juzId?: true
   status?: true
   createdAt?: true
@@ -106,8 +106,8 @@ export type MunaqasyahRequestMaxAggregateInputType = {
   teacherId?: true
   studentId?: true
   groupId?: true
-  batch?: true
-  stage?: true
+  tahap?: true
+  jenis?: true
   juzId?: true
   status?: true
   createdAt?: true
@@ -120,8 +120,8 @@ export type MunaqasyahRequestCountAggregateInputType = {
   teacherId?: true
   studentId?: true
   groupId?: true
-  batch?: true
-  stage?: true
+  tahap?: true
+  jenis?: true
   juzId?: true
   status?: true
   createdAt?: true
@@ -221,8 +221,8 @@ export type MunaqasyahRequestGroupByOutputType = {
   teacherId: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status: $Enums.MunaqasyahRequestStatus
   createdAt: Date
@@ -258,8 +258,8 @@ export type MunaqasyahRequestWhereInput = {
   teacherId?: Prisma.StringFilter<"MunaqasyahRequest"> | string
   studentId?: Prisma.StringFilter<"MunaqasyahRequest"> | string
   groupId?: Prisma.StringFilter<"MunaqasyahRequest"> | string
-  batch?: Prisma.EnumMunaqasyahBatchFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFilter<"MunaqasyahRequest"> | number
   status?: Prisma.EnumMunaqasyahRequestStatusFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFilter<"MunaqasyahRequest"> | Date | string
@@ -279,8 +279,8 @@ export type MunaqasyahRequestOrderByWithRelationInput = {
   teacherId?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
-  stage?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
+  jenis?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -304,8 +304,8 @@ export type MunaqasyahRequestWhereUniqueInput = Prisma.AtLeast<{
   teacherId?: Prisma.StringFilter<"MunaqasyahRequest"> | string
   studentId?: Prisma.StringFilter<"MunaqasyahRequest"> | string
   groupId?: Prisma.StringFilter<"MunaqasyahRequest"> | string
-  batch?: Prisma.EnumMunaqasyahBatchFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFilter<"MunaqasyahRequest"> | number
   status?: Prisma.EnumMunaqasyahRequestStatusFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFilter<"MunaqasyahRequest"> | Date | string
@@ -325,8 +325,8 @@ export type MunaqasyahRequestOrderByWithAggregationInput = {
   teacherId?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
-  stage?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
+  jenis?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -347,8 +347,8 @@ export type MunaqasyahRequestScalarWhereWithAggregatesInput = {
   teacherId?: Prisma.StringWithAggregatesFilter<"MunaqasyahRequest"> | string
   studentId?: Prisma.StringWithAggregatesFilter<"MunaqasyahRequest"> | string
   groupId?: Prisma.StringWithAggregatesFilter<"MunaqasyahRequest"> | string
-  batch?: Prisma.EnumMunaqasyahBatchWithAggregatesFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageWithAggregatesFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapWithAggregatesFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianWithAggregatesFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntWithAggregatesFilter<"MunaqasyahRequest"> | number
   status?: Prisma.EnumMunaqasyahRequestStatusWithAggregatesFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MunaqasyahRequest"> | Date | string
@@ -357,8 +357,8 @@ export type MunaqasyahRequestScalarWhereWithAggregatesInput = {
 
 export type MunaqasyahRequestCreateInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -377,8 +377,8 @@ export type MunaqasyahRequestUncheckedCreateInput = {
   teacherId: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -389,8 +389,8 @@ export type MunaqasyahRequestUncheckedCreateInput = {
 
 export type MunaqasyahRequestUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -409,8 +409,8 @@ export type MunaqasyahRequestUncheckedUpdateInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -425,8 +425,8 @@ export type MunaqasyahRequestCreateManyInput = {
   teacherId: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -435,8 +435,8 @@ export type MunaqasyahRequestCreateManyInput = {
 
 export type MunaqasyahRequestUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -448,8 +448,8 @@ export type MunaqasyahRequestUncheckedUpdateManyInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -478,8 +478,8 @@ export type MunaqasyahRequestCountOrderByAggregateInput = {
   teacherId?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
-  stage?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
+  jenis?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -496,8 +496,8 @@ export type MunaqasyahRequestMaxOrderByAggregateInput = {
   teacherId?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
-  stage?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
+  jenis?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -510,8 +510,8 @@ export type MunaqasyahRequestMinOrderByAggregateInput = {
   teacherId?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
-  stage?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
+  jenis?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -737,12 +737,12 @@ export type MunaqasyahRequestUncheckedUpdateManyWithoutJuzNestedInput = {
   deleteMany?: Prisma.MunaqasyahRequestScalarWhereInput | Prisma.MunaqasyahRequestScalarWhereInput[]
 }
 
-export type EnumMunaqasyahBatchFieldUpdateOperationsInput = {
-  set?: $Enums.MunaqasyahBatch
+export type EnumMunaqasyahTahapFieldUpdateOperationsInput = {
+  set?: $Enums.MunaqasyahTahap
 }
 
-export type EnumMunaqasyahStageFieldUpdateOperationsInput = {
-  set?: $Enums.MunaqasyahStage
+export type EnumMunaqasyahJenisUjianFieldUpdateOperationsInput = {
+  set?: $Enums.MunaqasyahJenisUjian
 }
 
 export type EnumMunaqasyahRequestStatusFieldUpdateOperationsInput = {
@@ -779,8 +779,8 @@ export type MunaqasyahRequestUpdateOneRequiredWithoutResultNestedInput = {
 
 export type MunaqasyahRequestCreateWithoutCoordinatorInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -797,8 +797,8 @@ export type MunaqasyahRequestUncheckedCreateWithoutCoordinatorInput = {
   teacherId: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -842,8 +842,8 @@ export type MunaqasyahRequestScalarWhereInput = {
   teacherId?: Prisma.StringFilter<"MunaqasyahRequest"> | string
   studentId?: Prisma.StringFilter<"MunaqasyahRequest"> | string
   groupId?: Prisma.StringFilter<"MunaqasyahRequest"> | string
-  batch?: Prisma.EnumMunaqasyahBatchFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFilter<"MunaqasyahRequest"> | number
   status?: Prisma.EnumMunaqasyahRequestStatusFilter<"MunaqasyahRequest"> | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFilter<"MunaqasyahRequest"> | Date | string
@@ -852,8 +852,8 @@ export type MunaqasyahRequestScalarWhereInput = {
 
 export type MunaqasyahRequestCreateWithoutTeacherInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -870,8 +870,8 @@ export type MunaqasyahRequestUncheckedCreateWithoutTeacherInput = {
   coordinatorId?: string | null
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -908,8 +908,8 @@ export type MunaqasyahRequestUpdateManyWithWhereWithoutTeacherInput = {
 
 export type MunaqasyahRequestCreateWithoutStudentInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -926,8 +926,8 @@ export type MunaqasyahRequestUncheckedCreateWithoutStudentInput = {
   coordinatorId?: string | null
   teacherId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -964,8 +964,8 @@ export type MunaqasyahRequestUpdateManyWithWhereWithoutStudentInput = {
 
 export type MunaqasyahRequestCreateWithoutGroupInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -982,8 +982,8 @@ export type MunaqasyahRequestUncheckedCreateWithoutGroupInput = {
   coordinatorId?: string | null
   teacherId: string
   studentId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -1020,8 +1020,8 @@ export type MunaqasyahRequestUpdateManyWithWhereWithoutGroupInput = {
 
 export type MunaqasyahRequestCreateWithoutJuzInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1039,8 +1039,8 @@ export type MunaqasyahRequestUncheckedCreateWithoutJuzInput = {
   teacherId: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1076,8 +1076,8 @@ export type MunaqasyahRequestUpdateManyWithWhereWithoutJuzInput = {
 
 export type MunaqasyahRequestCreateWithoutScheduleRequestsInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1095,8 +1095,8 @@ export type MunaqasyahRequestUncheckedCreateWithoutScheduleRequestsInput = {
   teacherId: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -1122,8 +1122,8 @@ export type MunaqasyahRequestUpdateToOneWithWhereWithoutScheduleRequestsInput = 
 
 export type MunaqasyahRequestUpdateWithoutScheduleRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1141,8 +1141,8 @@ export type MunaqasyahRequestUncheckedUpdateWithoutScheduleRequestsInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1152,8 +1152,8 @@ export type MunaqasyahRequestUncheckedUpdateWithoutScheduleRequestsInput = {
 
 export type MunaqasyahRequestCreateWithoutResultInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1171,8 +1171,8 @@ export type MunaqasyahRequestUncheckedCreateWithoutResultInput = {
   teacherId: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -1198,8 +1198,8 @@ export type MunaqasyahRequestUpdateToOneWithWhereWithoutResultInput = {
 
 export type MunaqasyahRequestUpdateWithoutResultInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1217,8 +1217,8 @@ export type MunaqasyahRequestUncheckedUpdateWithoutResultInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1231,8 +1231,8 @@ export type MunaqasyahRequestCreateManyCoordinatorInput = {
   teacherId: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -1241,8 +1241,8 @@ export type MunaqasyahRequestCreateManyCoordinatorInput = {
 
 export type MunaqasyahRequestUpdateWithoutCoordinatorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1259,8 +1259,8 @@ export type MunaqasyahRequestUncheckedUpdateWithoutCoordinatorInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1274,8 +1274,8 @@ export type MunaqasyahRequestUncheckedUpdateManyWithoutCoordinatorInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1287,8 +1287,8 @@ export type MunaqasyahRequestCreateManyTeacherInput = {
   coordinatorId?: string | null
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -1297,8 +1297,8 @@ export type MunaqasyahRequestCreateManyTeacherInput = {
 
 export type MunaqasyahRequestUpdateWithoutTeacherInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1315,8 +1315,8 @@ export type MunaqasyahRequestUncheckedUpdateWithoutTeacherInput = {
   coordinatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1330,8 +1330,8 @@ export type MunaqasyahRequestUncheckedUpdateManyWithoutTeacherInput = {
   coordinatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1343,8 +1343,8 @@ export type MunaqasyahRequestCreateManyStudentInput = {
   coordinatorId?: string | null
   teacherId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -1353,8 +1353,8 @@ export type MunaqasyahRequestCreateManyStudentInput = {
 
 export type MunaqasyahRequestUpdateWithoutStudentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1371,8 +1371,8 @@ export type MunaqasyahRequestUncheckedUpdateWithoutStudentInput = {
   coordinatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1386,8 +1386,8 @@ export type MunaqasyahRequestUncheckedUpdateManyWithoutStudentInput = {
   coordinatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1399,8 +1399,8 @@ export type MunaqasyahRequestCreateManyGroupInput = {
   coordinatorId?: string | null
   teacherId: string
   studentId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   juzId: number
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
@@ -1409,8 +1409,8 @@ export type MunaqasyahRequestCreateManyGroupInput = {
 
 export type MunaqasyahRequestUpdateWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1427,8 +1427,8 @@ export type MunaqasyahRequestUncheckedUpdateWithoutGroupInput = {
   coordinatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1442,8 +1442,8 @@ export type MunaqasyahRequestUncheckedUpdateManyWithoutGroupInput = {
   coordinatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1456,8 +1456,8 @@ export type MunaqasyahRequestCreateManyJuzInput = {
   teacherId: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
-  stage: $Enums.MunaqasyahStage
+  tahap: $Enums.MunaqasyahTahap
+  jenis: $Enums.MunaqasyahJenisUjian
   status?: $Enums.MunaqasyahRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1465,8 +1465,8 @@ export type MunaqasyahRequestCreateManyJuzInput = {
 
 export type MunaqasyahRequestUpdateWithoutJuzInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1484,8 +1484,8 @@ export type MunaqasyahRequestUncheckedUpdateWithoutJuzInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1499,8 +1499,8 @@ export type MunaqasyahRequestUncheckedUpdateManyWithoutJuzInput = {
   teacherId?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
-  stage?: Prisma.EnumMunaqasyahStageFieldUpdateOperationsInput | $Enums.MunaqasyahStage
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
+  jenis?: Prisma.EnumMunaqasyahJenisUjianFieldUpdateOperationsInput | $Enums.MunaqasyahJenisUjian
   status?: Prisma.EnumMunaqasyahRequestStatusFieldUpdateOperationsInput | $Enums.MunaqasyahRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1543,8 +1543,8 @@ export type MunaqasyahRequestSelect<ExtArgs extends runtime.Types.Extensions.Int
   teacherId?: boolean
   studentId?: boolean
   groupId?: boolean
-  batch?: boolean
-  stage?: boolean
+  tahap?: boolean
+  jenis?: boolean
   juzId?: boolean
   status?: boolean
   createdAt?: boolean
@@ -1567,15 +1567,15 @@ export type MunaqasyahRequestSelectScalar = {
   teacherId?: boolean
   studentId?: boolean
   groupId?: boolean
-  batch?: boolean
-  stage?: boolean
+  tahap?: boolean
+  jenis?: boolean
   juzId?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MunaqasyahRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "coordinatorId" | "teacherId" | "studentId" | "groupId" | "batch" | "stage" | "juzId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["munaqasyahRequest"]>
+export type MunaqasyahRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "coordinatorId" | "teacherId" | "studentId" | "groupId" | "tahap" | "jenis" | "juzId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["munaqasyahRequest"]>
 export type MunaqasyahRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   coordinator?: boolean | Prisma.MunaqasyahRequest$coordinatorArgs<ExtArgs>
   teacher?: boolean | Prisma.TeacherProfileDefaultArgs<ExtArgs>
@@ -1604,8 +1604,8 @@ export type $MunaqasyahRequestPayload<ExtArgs extends runtime.Types.Extensions.I
     teacherId: string
     studentId: string
     groupId: string
-    batch: $Enums.MunaqasyahBatch
-    stage: $Enums.MunaqasyahStage
+    tahap: $Enums.MunaqasyahTahap
+    jenis: $Enums.MunaqasyahJenisUjian
     juzId: number
     status: $Enums.MunaqasyahRequestStatus
     createdAt: Date
@@ -1991,8 +1991,8 @@ export interface MunaqasyahRequestFieldRefs {
   readonly teacherId: Prisma.FieldRef<"MunaqasyahRequest", 'String'>
   readonly studentId: Prisma.FieldRef<"MunaqasyahRequest", 'String'>
   readonly groupId: Prisma.FieldRef<"MunaqasyahRequest", 'String'>
-  readonly batch: Prisma.FieldRef<"MunaqasyahRequest", 'MunaqasyahBatch'>
-  readonly stage: Prisma.FieldRef<"MunaqasyahRequest", 'MunaqasyahStage'>
+  readonly tahap: Prisma.FieldRef<"MunaqasyahRequest", 'MunaqasyahTahap'>
+  readonly jenis: Prisma.FieldRef<"MunaqasyahRequest", 'MunaqasyahJenisUjian'>
   readonly juzId: Prisma.FieldRef<"MunaqasyahRequest", 'Int'>
   readonly status: Prisma.FieldRef<"MunaqasyahRequest", 'MunaqasyahRequestStatus'>
   readonly createdAt: Prisma.FieldRef<"MunaqasyahRequest", 'DateTime'>

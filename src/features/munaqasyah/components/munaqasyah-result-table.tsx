@@ -18,12 +18,12 @@ import { Badge } from '@/components/ui/badge';
 import { DataTableColumnHeader } from '@/components/ui/table-column-header';
 import { DataTable } from '@/components/ui/data-table';
 import { FILTER_ALL, TableFilters, isDateInRange } from '@/components/layouts/filters/table-filters';
-import { BATCH_OPTIONS, STAGE_OPTIONS, GRADE_LABEL } from '../munaqasyah.schema';
-import { BATCH_BADGE_CLASS, STAGE_BADGE_CLASS } from './munaqasyah-request-table';
+import { TAHAP_OPTIONS, JENIS_UJIAN_OPTIONS, GRADE_LABEL } from '../munaqasyah.schema';
+import { TAHAP_BADGE_CLASS, JENIS_UJIAN_BADGE_CLASS } from './munaqasyah-request-table';
 import type { MunaqasyahResultTableData } from '../queries/list-all-munaqasyah-results';
 
-const BATCH_LABEL = Object.fromEntries(BATCH_OPTIONS.map((o) => [o.value, o.label]));
-const STAGE_LABEL = Object.fromEntries(STAGE_OPTIONS.map((o) => [o.value, o.label]));
+const TAHAP_LABEL = Object.fromEntries(TAHAP_OPTIONS.map((o) => [o.value, o.label]));
+const JENIS_UJIAN_LABEL = Object.fromEntries(JENIS_UJIAN_OPTIONS.map((o) => [o.value, o.label]));
 const SEMESTER_LABEL: Record<string, string> = { GANJIL: 'Ganjil', GENAP: 'Genap' };
 
 export const GRADE_BADGE_CLASS: Record<string, string> = {
@@ -49,8 +49,8 @@ export function MunaqasyahResultTable({ data, own = false }: Props) {
   const [period, setPeriod] = useState(FILTER_ALL);
   const [classroomId, setClassroomId] = useState(FILTER_ALL);
   const [groupId, setGroupId] = useState(FILTER_ALL);
-  const [batch, setBatch] = useState(FILTER_ALL);
-  const [stage, setStage] = useState(FILTER_ALL);
+  const [tahap, setTahap] = useState(FILTER_ALL);
+  const [jenis, setJenis] = useState(FILTER_ALL);
   const [grade, setGrade] = useState(FILTER_ALL);
   const [status, setStatus] = useState(FILTER_ALL);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
@@ -91,14 +91,14 @@ export function MunaqasyahResultTable({ data, own = false }: Props) {
     setGroupId(FILTER_ALL);
   }
 
-  const batchOptions = useMemo(() => {
+  const tahapOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.batch, BATCH_LABEL[d.batch] ?? d.batch));
+    data.forEach((d) => map.set(d.tahap, TAHAP_LABEL[d.tahap] ?? d.tahap));
     return Array.from(map, ([value, label]) => ({ value, label }));
   }, [data]);
-  const stageOptions = useMemo(() => {
+  const jenisOptions = useMemo(() => {
     const map = new Map<string, string>();
-    data.forEach((d) => map.set(d.stage, STAGE_LABEL[d.stage] ?? d.stage));
+    data.forEach((d) => map.set(d.jenis, JENIS_UJIAN_LABEL[d.jenis] ?? d.jenis));
     return Array.from(map, ([value, label]) => ({ value, label }));
   }, [data]);
   const gradeOptions = useMemo(() => {
@@ -121,13 +121,13 @@ export function MunaqasyahResultTable({ data, own = false }: Props) {
           (period === FILTER_ALL || `${d.academicYear}|${d.semester}` === period) &&
           (own || classroomId === FILTER_ALL || d.classroomId === classroomId) &&
           (own || groupId === FILTER_ALL || d.groupId === groupId) &&
-          (batch === FILTER_ALL || d.batch === batch) &&
-          (stage === FILTER_ALL || d.stage === stage) &&
+          (tahap === FILTER_ALL || d.tahap === tahap) &&
+          (jenis === FILTER_ALL || d.jenis === jenis) &&
           (grade === FILTER_ALL || d.grade === grade) &&
           (status === FILTER_ALL || (status === 'LULUS' ? d.passed : !d.passed)) &&
           isDateInRange(d.scheduleDate, dateRange),
       ),
-    [data, period, classroomId, groupId, batch, stage, grade, status, dateRange, own],
+    [data, period, classroomId, groupId, tahap, jenis, grade, status, dateRange, own],
   );
 
   const columns = useMemo<ColumnDef<MunaqasyahResultTableData>[]>(
@@ -152,22 +152,22 @@ export function MunaqasyahResultTable({ data, own = false }: Props) {
             } satisfies ColumnDef<MunaqasyahResultTableData>,
           ]),
       {
-        accessorKey: 'batch',
-        id: 'Batch',
-        header: 'Batch',
+        accessorKey: 'tahap',
+        id: 'Tahap',
+        header: 'Tahap',
         cell: ({ row }) => (
-          <Badge className={BATCH_BADGE_CLASS[row.original.batch]}>
-            {BATCH_LABEL[row.original.batch] ?? row.original.batch}
+          <Badge className={TAHAP_BADGE_CLASS[row.original.tahap]}>
+            {TAHAP_LABEL[row.original.tahap] ?? row.original.tahap}
           </Badge>
         ),
       },
       {
-        accessorKey: 'stage',
-        id: 'Tahap',
-        header: 'Tahap',
+        accessorKey: 'jenis',
+        id: 'Jenis Ujian',
+        header: 'Jenis Ujian',
         cell: ({ row }) => (
-          <Badge className={STAGE_BADGE_CLASS[row.original.stage]}>
-            {STAGE_LABEL[row.original.stage] ?? row.original.stage}
+          <Badge className={JENIS_UJIAN_BADGE_CLASS[row.original.jenis]}>
+            {JENIS_UJIAN_LABEL[row.original.jenis] ?? row.original.jenis}
           </Badge>
         ),
       },
@@ -222,8 +222,8 @@ export function MunaqasyahResultTable({ data, own = false }: Props) {
             classroom={own ? undefined : { value: classroomId, onChange: handleClassroomChange, options: classroomOptions }}
             group={own ? undefined : { value: groupId, onChange: setGroupId, options: groupOptions }}
             extraFilters={[
-              { key: 'batch', label: 'Batch', allLabel: 'Semua Batch', value: batch, onChange: setBatch, options: batchOptions },
-              { key: 'stage', label: 'Tahap', allLabel: 'Semua Tahap', value: stage, onChange: setStage, options: stageOptions },
+              { key: 'tahap', label: 'Tahap', allLabel: 'Semua Tahap', value: tahap, onChange: setTahap, options: tahapOptions },
+              { key: 'jenis', label: 'Jenis Ujian', allLabel: 'Semua Jenis Ujian', value: jenis, onChange: setJenis, options: jenisOptions },
               {
                 key: 'status',
                 label: 'Status',

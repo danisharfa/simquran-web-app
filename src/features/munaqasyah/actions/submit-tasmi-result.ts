@@ -23,7 +23,7 @@ export async function submitTasmiResult(requestId: string, rows: TasmiDetailInpu
   }
 
   const request = await prisma.munaqasyahRequest.findUnique({ where: { id: requestId } });
-  if (!request || request.stage !== 'TASMI' || request.status !== 'DITERIMA') {
+  if (!request || request.jenis !== 'TASMI' || request.status !== 'DITERIMA') {
     return { success: false, message: 'Permintaan tidak valid untuk dinilai' };
   }
 
@@ -71,7 +71,7 @@ export async function submitTasmiResult(requestId: string, rows: TasmiDetailInpu
     prisma.munaqasyahRequest.update({ where: { id: requestId }, data: { status: 'SELESAI' } }),
   ]);
 
-  await tryFinalizeMunaqasyah(request.studentId, request.groupId, request.juzId, request.batch);
+  await tryFinalizeMunaqasyah(request.studentId, request.groupId, request.juzId, request.tahap);
 
   revalidatePath('/dashboard/munaqasyah/assessment');
   revalidatePath('/dashboard/munaqasyah/results');

@@ -15,7 +15,7 @@ export async function createMunaqasyahRequest(input: MunaqasyahRequestSchema) {
     return { success: false, message: parsed.error.issues[0]?.message ?? 'Data tidak valid' };
   }
 
-  const { groupId, studentId, batch, stage, juzId } = parsed.data;
+  const { groupId, studentId, tahap, jenis, juzId } = parsed.data;
 
   const group = await prisma.group.findUnique({ where: { id: groupId } });
   if (!group || group.teacherId !== session.user.id) {
@@ -33,8 +33,8 @@ export async function createMunaqasyahRequest(input: MunaqasyahRequestSchema) {
       studentId,
       groupId,
       teacherId: session.user.id,
-      batch,
-      stage,
+      tahap,
+      jenis,
       juzId,
     },
   });

@@ -41,7 +41,7 @@ export type MunaqasyahFinalResultMinAggregateOutputType = {
   studentId: string | null
   groupId: string | null
   juzId: number | null
-  batch: $Enums.MunaqasyahBatch | null
+  tahap: $Enums.MunaqasyahTahap | null
   tasmiResultId: string | null
   munaqasyahResultId: string | null
   finalScore: number | null
@@ -56,7 +56,7 @@ export type MunaqasyahFinalResultMaxAggregateOutputType = {
   studentId: string | null
   groupId: string | null
   juzId: number | null
-  batch: $Enums.MunaqasyahBatch | null
+  tahap: $Enums.MunaqasyahTahap | null
   tasmiResultId: string | null
   munaqasyahResultId: string | null
   finalScore: number | null
@@ -71,7 +71,7 @@ export type MunaqasyahFinalResultCountAggregateOutputType = {
   studentId: number
   groupId: number
   juzId: number
-  batch: number
+  tahap: number
   tasmiResultId: number
   munaqasyahResultId: number
   finalScore: number
@@ -98,7 +98,7 @@ export type MunaqasyahFinalResultMinAggregateInputType = {
   studentId?: true
   groupId?: true
   juzId?: true
-  batch?: true
+  tahap?: true
   tasmiResultId?: true
   munaqasyahResultId?: true
   finalScore?: true
@@ -113,7 +113,7 @@ export type MunaqasyahFinalResultMaxAggregateInputType = {
   studentId?: true
   groupId?: true
   juzId?: true
-  batch?: true
+  tahap?: true
   tasmiResultId?: true
   munaqasyahResultId?: true
   finalScore?: true
@@ -128,7 +128,7 @@ export type MunaqasyahFinalResultCountAggregateInputType = {
   studentId?: true
   groupId?: true
   juzId?: true
-  batch?: true
+  tahap?: true
   tasmiResultId?: true
   munaqasyahResultId?: true
   finalScore?: true
@@ -230,7 +230,7 @@ export type MunaqasyahFinalResultGroupByOutputType = {
   studentId: string
   groupId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   munaqasyahResultId: string
   finalScore: number
@@ -268,7 +268,7 @@ export type MunaqasyahFinalResultWhereInput = {
   studentId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   groupId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   juzId?: Prisma.IntFilter<"MunaqasyahFinalResult"> | number
-  batch?: Prisma.EnumMunaqasyahBatchFilter<"MunaqasyahFinalResult"> | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFilter<"MunaqasyahFinalResult"> | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   munaqasyahResultId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   finalScore?: Prisma.FloatFilter<"MunaqasyahFinalResult"> | number
@@ -288,7 +288,7 @@ export type MunaqasyahFinalResultOrderByWithRelationInput = {
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
   tasmiResultId?: Prisma.SortOrder
   munaqasyahResultId?: Prisma.SortOrder
   finalScore?: Prisma.SortOrder
@@ -308,14 +308,14 @@ export type MunaqasyahFinalResultWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   tasmiResultId?: string
   munaqasyahResultId?: string
-  studentId_juzId_batch?: Prisma.MunaqasyahFinalResultStudentIdJuzIdBatchCompoundUniqueInput
+  studentId_juzId_tahap?: Prisma.MunaqasyahFinalResultStudentIdJuzIdTahapCompoundUniqueInput
   AND?: Prisma.MunaqasyahFinalResultWhereInput | Prisma.MunaqasyahFinalResultWhereInput[]
   OR?: Prisma.MunaqasyahFinalResultWhereInput[]
   NOT?: Prisma.MunaqasyahFinalResultWhereInput | Prisma.MunaqasyahFinalResultWhereInput[]
   studentId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   groupId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   juzId?: Prisma.IntFilter<"MunaqasyahFinalResult"> | number
-  batch?: Prisma.EnumMunaqasyahBatchFilter<"MunaqasyahFinalResult"> | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFilter<"MunaqasyahFinalResult"> | $Enums.MunaqasyahTahap
   finalScore?: Prisma.FloatFilter<"MunaqasyahFinalResult"> | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFilter<"MunaqasyahFinalResult"> | $Enums.MunaqasyahGrade
   passed?: Prisma.BoolFilter<"MunaqasyahFinalResult"> | boolean
@@ -326,14 +326,14 @@ export type MunaqasyahFinalResultWhereUniqueInput = Prisma.AtLeast<{
   juz?: Prisma.XOR<Prisma.JuzScalarRelationFilter, Prisma.JuzWhereInput>
   tasmiResult?: Prisma.XOR<Prisma.MunaqasyahResultScalarRelationFilter, Prisma.MunaqasyahResultWhereInput>
   munaqasyahResult?: Prisma.XOR<Prisma.MunaqasyahResultScalarRelationFilter, Prisma.MunaqasyahResultWhereInput>
-}, "id" | "tasmiResultId" | "munaqasyahResultId" | "studentId_juzId_batch">
+}, "id" | "tasmiResultId" | "munaqasyahResultId" | "studentId_juzId_tahap">
 
 export type MunaqasyahFinalResultOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
   tasmiResultId?: Prisma.SortOrder
   munaqasyahResultId?: Prisma.SortOrder
   finalScore?: Prisma.SortOrder
@@ -356,7 +356,7 @@ export type MunaqasyahFinalResultScalarWhereWithAggregatesInput = {
   studentId?: Prisma.StringWithAggregatesFilter<"MunaqasyahFinalResult"> | string
   groupId?: Prisma.StringWithAggregatesFilter<"MunaqasyahFinalResult"> | string
   juzId?: Prisma.IntWithAggregatesFilter<"MunaqasyahFinalResult"> | number
-  batch?: Prisma.EnumMunaqasyahBatchWithAggregatesFilter<"MunaqasyahFinalResult"> | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapWithAggregatesFilter<"MunaqasyahFinalResult"> | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringWithAggregatesFilter<"MunaqasyahFinalResult"> | string
   munaqasyahResultId?: Prisma.StringWithAggregatesFilter<"MunaqasyahFinalResult"> | string
   finalScore?: Prisma.FloatWithAggregatesFilter<"MunaqasyahFinalResult"> | number
@@ -368,7 +368,7 @@ export type MunaqasyahFinalResultScalarWhereWithAggregatesInput = {
 
 export type MunaqasyahFinalResultCreateInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   finalScore: number
   finalGrade: $Enums.MunaqasyahGrade
   passed: boolean
@@ -386,7 +386,7 @@ export type MunaqasyahFinalResultUncheckedCreateInput = {
   studentId: string
   groupId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   munaqasyahResultId: string
   finalScore: number
@@ -398,7 +398,7 @@ export type MunaqasyahFinalResultUncheckedCreateInput = {
 
 export type MunaqasyahFinalResultUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFieldUpdateOperationsInput | $Enums.MunaqasyahGrade
   passed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -416,7 +416,7 @@ export type MunaqasyahFinalResultUncheckedUpdateInput = {
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFieldUpdateOperationsInput | string
   munaqasyahResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -431,7 +431,7 @@ export type MunaqasyahFinalResultCreateManyInput = {
   studentId: string
   groupId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   munaqasyahResultId: string
   finalScore: number
@@ -443,7 +443,7 @@ export type MunaqasyahFinalResultCreateManyInput = {
 
 export type MunaqasyahFinalResultUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFieldUpdateOperationsInput | $Enums.MunaqasyahGrade
   passed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -456,7 +456,7 @@ export type MunaqasyahFinalResultUncheckedUpdateManyInput = {
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFieldUpdateOperationsInput | string
   munaqasyahResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -487,10 +487,10 @@ export type MunaqasyahFinalResultOrderByRelevanceInput = {
   search: string
 }
 
-export type MunaqasyahFinalResultStudentIdJuzIdBatchCompoundUniqueInput = {
+export type MunaqasyahFinalResultStudentIdJuzIdTahapCompoundUniqueInput = {
   studentId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
 }
 
 export type MunaqasyahFinalResultCountOrderByAggregateInput = {
@@ -498,7 +498,7 @@ export type MunaqasyahFinalResultCountOrderByAggregateInput = {
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
   tasmiResultId?: Prisma.SortOrder
   munaqasyahResultId?: Prisma.SortOrder
   finalScore?: Prisma.SortOrder
@@ -518,7 +518,7 @@ export type MunaqasyahFinalResultMaxOrderByAggregateInput = {
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
   tasmiResultId?: Prisma.SortOrder
   munaqasyahResultId?: Prisma.SortOrder
   finalScore?: Prisma.SortOrder
@@ -533,7 +533,7 @@ export type MunaqasyahFinalResultMinOrderByAggregateInput = {
   studentId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
   juzId?: Prisma.SortOrder
-  batch?: Prisma.SortOrder
+  tahap?: Prisma.SortOrder
   tasmiResultId?: Prisma.SortOrder
   munaqasyahResultId?: Prisma.SortOrder
   finalScore?: Prisma.SortOrder
@@ -740,7 +740,7 @@ export type MunaqasyahFinalResultUncheckedUpdateOneWithoutMunaqasyahResultNested
 
 export type MunaqasyahFinalResultCreateWithoutStudentInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   finalScore: number
   finalGrade: $Enums.MunaqasyahGrade
   passed: boolean
@@ -756,7 +756,7 @@ export type MunaqasyahFinalResultUncheckedCreateWithoutStudentInput = {
   id?: string
   groupId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   munaqasyahResultId: string
   finalScore: number
@@ -800,7 +800,7 @@ export type MunaqasyahFinalResultScalarWhereInput = {
   studentId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   groupId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   juzId?: Prisma.IntFilter<"MunaqasyahFinalResult"> | number
-  batch?: Prisma.EnumMunaqasyahBatchFilter<"MunaqasyahFinalResult"> | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFilter<"MunaqasyahFinalResult"> | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   munaqasyahResultId?: Prisma.StringFilter<"MunaqasyahFinalResult"> | string
   finalScore?: Prisma.FloatFilter<"MunaqasyahFinalResult"> | number
@@ -812,7 +812,7 @@ export type MunaqasyahFinalResultScalarWhereInput = {
 
 export type MunaqasyahFinalResultCreateWithoutGroupInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   finalScore: number
   finalGrade: $Enums.MunaqasyahGrade
   passed: boolean
@@ -828,7 +828,7 @@ export type MunaqasyahFinalResultUncheckedCreateWithoutGroupInput = {
   id?: string
   studentId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   munaqasyahResultId: string
   finalScore: number
@@ -866,7 +866,7 @@ export type MunaqasyahFinalResultUpdateManyWithWhereWithoutGroupInput = {
 
 export type MunaqasyahFinalResultCreateWithoutJuzInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   finalScore: number
   finalGrade: $Enums.MunaqasyahGrade
   passed: boolean
@@ -882,7 +882,7 @@ export type MunaqasyahFinalResultUncheckedCreateWithoutJuzInput = {
   id?: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   munaqasyahResultId: string
   finalScore: number
@@ -920,7 +920,7 @@ export type MunaqasyahFinalResultUpdateManyWithWhereWithoutJuzInput = {
 
 export type MunaqasyahFinalResultCreateWithoutTasmiResultInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   finalScore: number
   finalGrade: $Enums.MunaqasyahGrade
   passed: boolean
@@ -937,7 +937,7 @@ export type MunaqasyahFinalResultUncheckedCreateWithoutTasmiResultInput = {
   studentId: string
   groupId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   munaqasyahResultId: string
   finalScore: number
   finalGrade: $Enums.MunaqasyahGrade
@@ -953,7 +953,7 @@ export type MunaqasyahFinalResultCreateOrConnectWithoutTasmiResultInput = {
 
 export type MunaqasyahFinalResultCreateWithoutMunaqasyahResultInput = {
   id?: string
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   finalScore: number
   finalGrade: $Enums.MunaqasyahGrade
   passed: boolean
@@ -970,7 +970,7 @@ export type MunaqasyahFinalResultUncheckedCreateWithoutMunaqasyahResultInput = {
   studentId: string
   groupId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   finalScore: number
   finalGrade: $Enums.MunaqasyahGrade
@@ -997,7 +997,7 @@ export type MunaqasyahFinalResultUpdateToOneWithWhereWithoutTasmiResultInput = {
 
 export type MunaqasyahFinalResultUpdateWithoutTasmiResultInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFieldUpdateOperationsInput | $Enums.MunaqasyahGrade
   passed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1014,7 +1014,7 @@ export type MunaqasyahFinalResultUncheckedUpdateWithoutTasmiResultInput = {
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   munaqasyahResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFieldUpdateOperationsInput | $Enums.MunaqasyahGrade
@@ -1036,7 +1036,7 @@ export type MunaqasyahFinalResultUpdateToOneWithWhereWithoutMunaqasyahResultInpu
 
 export type MunaqasyahFinalResultUpdateWithoutMunaqasyahResultInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFieldUpdateOperationsInput | $Enums.MunaqasyahGrade
   passed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1053,7 +1053,7 @@ export type MunaqasyahFinalResultUncheckedUpdateWithoutMunaqasyahResultInput = {
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFieldUpdateOperationsInput | $Enums.MunaqasyahGrade
@@ -1066,7 +1066,7 @@ export type MunaqasyahFinalResultCreateManyStudentInput = {
   id?: string
   groupId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   munaqasyahResultId: string
   finalScore: number
@@ -1078,7 +1078,7 @@ export type MunaqasyahFinalResultCreateManyStudentInput = {
 
 export type MunaqasyahFinalResultUpdateWithoutStudentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFieldUpdateOperationsInput | $Enums.MunaqasyahGrade
   passed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1094,7 +1094,7 @@ export type MunaqasyahFinalResultUncheckedUpdateWithoutStudentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFieldUpdateOperationsInput | string
   munaqasyahResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1108,7 +1108,7 @@ export type MunaqasyahFinalResultUncheckedUpdateManyWithoutStudentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFieldUpdateOperationsInput | string
   munaqasyahResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1122,7 +1122,7 @@ export type MunaqasyahFinalResultCreateManyGroupInput = {
   id?: string
   studentId: string
   juzId: number
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   munaqasyahResultId: string
   finalScore: number
@@ -1134,7 +1134,7 @@ export type MunaqasyahFinalResultCreateManyGroupInput = {
 
 export type MunaqasyahFinalResultUpdateWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFieldUpdateOperationsInput | $Enums.MunaqasyahGrade
   passed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1150,7 +1150,7 @@ export type MunaqasyahFinalResultUncheckedUpdateWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFieldUpdateOperationsInput | string
   munaqasyahResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1164,7 +1164,7 @@ export type MunaqasyahFinalResultUncheckedUpdateManyWithoutGroupInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   juzId?: Prisma.IntFieldUpdateOperationsInput | number
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFieldUpdateOperationsInput | string
   munaqasyahResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1178,7 +1178,7 @@ export type MunaqasyahFinalResultCreateManyJuzInput = {
   id?: string
   studentId: string
   groupId: string
-  batch: $Enums.MunaqasyahBatch
+  tahap: $Enums.MunaqasyahTahap
   tasmiResultId: string
   munaqasyahResultId: string
   finalScore: number
@@ -1190,7 +1190,7 @@ export type MunaqasyahFinalResultCreateManyJuzInput = {
 
 export type MunaqasyahFinalResultUpdateWithoutJuzInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
   finalGrade?: Prisma.EnumMunaqasyahGradeFieldUpdateOperationsInput | $Enums.MunaqasyahGrade
   passed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1206,7 +1206,7 @@ export type MunaqasyahFinalResultUncheckedUpdateWithoutJuzInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFieldUpdateOperationsInput | string
   munaqasyahResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1220,7 +1220,7 @@ export type MunaqasyahFinalResultUncheckedUpdateManyWithoutJuzInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.StringFieldUpdateOperationsInput | string
-  batch?: Prisma.EnumMunaqasyahBatchFieldUpdateOperationsInput | $Enums.MunaqasyahBatch
+  tahap?: Prisma.EnumMunaqasyahTahapFieldUpdateOperationsInput | $Enums.MunaqasyahTahap
   tasmiResultId?: Prisma.StringFieldUpdateOperationsInput | string
   munaqasyahResultId?: Prisma.StringFieldUpdateOperationsInput | string
   finalScore?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1237,7 +1237,7 @@ export type MunaqasyahFinalResultSelect<ExtArgs extends runtime.Types.Extensions
   studentId?: boolean
   groupId?: boolean
   juzId?: boolean
-  batch?: boolean
+  tahap?: boolean
   tasmiResultId?: boolean
   munaqasyahResultId?: boolean
   finalScore?: boolean
@@ -1259,7 +1259,7 @@ export type MunaqasyahFinalResultSelectScalar = {
   studentId?: boolean
   groupId?: boolean
   juzId?: boolean
-  batch?: boolean
+  tahap?: boolean
   tasmiResultId?: boolean
   munaqasyahResultId?: boolean
   finalScore?: boolean
@@ -1269,7 +1269,7 @@ export type MunaqasyahFinalResultSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MunaqasyahFinalResultOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "groupId" | "juzId" | "batch" | "tasmiResultId" | "munaqasyahResultId" | "finalScore" | "finalGrade" | "passed" | "createdAt" | "updatedAt", ExtArgs["result"]["munaqasyahFinalResult"]>
+export type MunaqasyahFinalResultOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "studentId" | "groupId" | "juzId" | "tahap" | "tasmiResultId" | "munaqasyahResultId" | "finalScore" | "finalGrade" | "passed" | "createdAt" | "updatedAt", ExtArgs["result"]["munaqasyahFinalResult"]>
 export type MunaqasyahFinalResultInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   student?: boolean | Prisma.StudentProfileDefaultArgs<ExtArgs>
   group?: boolean | Prisma.GroupDefaultArgs<ExtArgs>
@@ -1292,7 +1292,7 @@ export type $MunaqasyahFinalResultPayload<ExtArgs extends runtime.Types.Extensio
     studentId: string
     groupId: string
     juzId: number
-    batch: $Enums.MunaqasyahBatch
+    tahap: $Enums.MunaqasyahTahap
     tasmiResultId: string
     munaqasyahResultId: string
     finalScore: number
@@ -1678,7 +1678,7 @@ export interface MunaqasyahFinalResultFieldRefs {
   readonly studentId: Prisma.FieldRef<"MunaqasyahFinalResult", 'String'>
   readonly groupId: Prisma.FieldRef<"MunaqasyahFinalResult", 'String'>
   readonly juzId: Prisma.FieldRef<"MunaqasyahFinalResult", 'Int'>
-  readonly batch: Prisma.FieldRef<"MunaqasyahFinalResult", 'MunaqasyahBatch'>
+  readonly tahap: Prisma.FieldRef<"MunaqasyahFinalResult", 'MunaqasyahTahap'>
   readonly tasmiResultId: Prisma.FieldRef<"MunaqasyahFinalResult", 'String'>
   readonly munaqasyahResultId: Prisma.FieldRef<"MunaqasyahFinalResult", 'String'>
   readonly finalScore: Prisma.FieldRef<"MunaqasyahFinalResult", 'Float'>

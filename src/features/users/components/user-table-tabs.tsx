@@ -1,5 +1,7 @@
 'use client';
 
+import type { ReactNode } from 'react';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { UserTable } from './user-table';
 import { UserTableData } from '../queries/list-users';
@@ -8,6 +10,10 @@ interface UserTableTab {
   value: string;
   label: string;
   data: UserTableData[];
+  /** Render konten kustom (mis. tabel dengan kolom/aksi berbeda) alih-alih UserTable default. */
+  content?: ReactNode;
+  /** Override jumlah di label tab, untuk tab dengan `content` kustom (data bukan UserTableData[]). */
+  count?: number;
 }
 
 interface Props {
@@ -20,14 +26,14 @@ export function UserTableTabs({ tabs }: Props) {
       <TabsList>
         {tabs.map((tab) => (
           <TabsTrigger key={tab.value} value={tab.value}>
-            {tab.label} ({tab.data.length})
+            {tab.label} ({tab.count ?? tab.data.length})
           </TabsTrigger>
         ))}
       </TabsList>
 
       {tabs.map((tab) => (
         <TabsContent key={tab.value} value={tab.value}>
-          <UserTable data={tab.data} />
+          {tab.content ?? <UserTable data={tab.data} />}
         </TabsContent>
       ))}
     </Tabs>

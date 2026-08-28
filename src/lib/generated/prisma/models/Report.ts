@@ -282,7 +282,7 @@ export type ReportOrderByWithRelationInput = {
 
 export type ReportWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  studentId_groupId_academicYear_semester?: Prisma.ReportStudentIdGroupIdAcademicYearSemesterCompoundUniqueInput
+  studentId_academicYear_semester?: Prisma.ReportStudentIdAcademicYearSemesterCompoundUniqueInput
   AND?: Prisma.ReportWhereInput | Prisma.ReportWhereInput[]
   OR?: Prisma.ReportWhereInput[]
   NOT?: Prisma.ReportWhereInput | Prisma.ReportWhereInput[]
@@ -297,7 +297,7 @@ export type ReportWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   student?: Prisma.XOR<Prisma.StudentProfileScalarRelationFilter, Prisma.StudentProfileWhereInput>
   group?: Prisma.XOR<Prisma.GroupScalarRelationFilter, Prisma.GroupWhereInput>
-}, "id" | "studentId_groupId_academicYear_semester">
+}, "id" | "studentId_academicYear_semester">
 
 export type ReportOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -438,9 +438,8 @@ export type ReportOrderByRelevanceInput = {
   search: string
 }
 
-export type ReportStudentIdGroupIdAcademicYearSemesterCompoundUniqueInput = {
+export type ReportStudentIdAcademicYearSemesterCompoundUniqueInput = {
   studentId: string
-  groupId: string
   academicYear: string
   semester: $Enums.Semester
 }

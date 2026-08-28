@@ -14,7 +14,7 @@ export default async function MunaqasyahAssessmentPage() {
     listMyMunaqasyahResults(),
   ]);
 
-  const uniqueJuzIds = [...new Set(pendingAssessments.filter((a) => a.stage === 'TASMI').map((a) => a.juzId))];
+  const uniqueJuzIds = [...new Set(pendingAssessments.filter((a) => a.jenis === 'TASMI').map((a) => a.juzId))];
   const surahsByJuzEntries = await Promise.all(
     uniqueJuzIds.map(async (juzId): Promise<[number, SurahInJuz[]]> => [juzId, await listSurahsInJuz(juzId)]),
   );

@@ -10,8 +10,8 @@ export interface MunaqasyahRequestTableData {
   classroomName: string;
   academicYear: string;
   semester: string;
-  batch: string;
-  stage: string;
+  tahap: string;
+  jenis: string;
   juzName: string;
   status: string;
   createdAt: Date;
@@ -35,8 +35,8 @@ export async function listMyMunaqasyahRequests(): Promise<MunaqasyahRequestTable
     classroomName: `${r.group.classroom.level} ${r.group.classroom.name}`,
     academicYear: r.group.classroom.academicYear,
     semester: r.group.classroom.semester,
-    batch: r.batch,
-    stage: r.stage,
+    tahap: r.tahap,
+    jenis: r.jenis,
     juzName: r.juz.name,
     status: r.status,
     createdAt: r.createdAt,

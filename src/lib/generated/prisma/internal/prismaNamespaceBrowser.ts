@@ -216,7 +216,8 @@ export const StudentProfileScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   status: 'status',
-  graduatedAt: 'graduatedAt'
+  graduatedAt: 'graduatedAt',
+  exitedAt: 'exitedAt'
 } as const
 
 export type StudentProfileScalarFieldEnum = (typeof StudentProfileScalarFieldEnum)[keyof typeof StudentProfileScalarFieldEnum]
@@ -510,8 +511,8 @@ export const MunaqasyahRequestScalarFieldEnum = {
   teacherId: 'teacherId',
   studentId: 'studentId',
   groupId: 'groupId',
-  batch: 'batch',
-  stage: 'stage',
+  tahap: 'tahap',
+  jenis: 'jenis',
   juzId: 'juzId',
   status: 'status',
   createdAt: 'createdAt',
@@ -602,7 +603,7 @@ export const MunaqasyahFinalResultScalarFieldEnum = {
   studentId: 'studentId',
   groupId: 'groupId',
   juzId: 'juzId',
-  batch: 'batch',
+  tahap: 'tahap',
   tasmiResultId: 'tasmiResultId',
   munaqasyahResultId: 'munaqasyahResultId',
   finalScore: 'finalScore',

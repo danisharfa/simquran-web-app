@@ -10,7 +10,7 @@ export async function listClassroomStudentsWithoutGroup(
   const students = await prisma.studentProfile.findMany({
     where: { classroomId, groupId: null },
     include: { user: true },
-    orderBy: { user: { name: 'asc' } },
+    orderBy: { nis: 'asc' },
   });
 
   return students.map((student) => ({

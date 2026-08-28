@@ -27,13 +27,13 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { DatePicker } from '@/components/layouts/calendars/date-picker';
-import { BATCH_OPTIONS, STAGE_OPTIONS } from '../munaqasyah.schema';
+import { TAHAP_OPTIONS, JENIS_UJIAN_OPTIONS } from '../munaqasyah.schema';
 import { createMunaqasyahSchedule } from '../actions/create-munaqasyah-schedule';
 import type { SchedulableMunaqasyahRequest } from '../queries/list-schedulable-requests';
 import type { TeacherOption } from '@/features/groups/queries/list-teachers';
 
-const BATCH_LABEL = Object.fromEntries(BATCH_OPTIONS.map((o) => [o.value, o.label]));
-const STAGE_LABEL = Object.fromEntries(STAGE_OPTIONS.map((o) => [o.value, o.label]));
+const TAHAP_LABEL = Object.fromEntries(TAHAP_OPTIONS.map((o) => [o.value, o.label]));
+const JENIS_UJIAN_LABEL = Object.fromEntries(JENIS_UJIAN_OPTIONS.map((o) => [o.value, o.label]));
 
 interface Props {
   schedulableRequests: SchedulableMunaqasyahRequest[];
@@ -191,7 +191,7 @@ export function MunaqasyahScheduleCreateDialog({ schedulableRequests, teachers }
                     <span className="flex flex-1 items-center justify-between gap-2">
                       <span>{req.studentName}</span>
                       <span className="text-muted-foreground">
-                        {BATCH_LABEL[req.batch]} &middot; {STAGE_LABEL[req.stage]} &middot; {req.juzName}
+                        {TAHAP_LABEL[req.tahap]} &middot; {JENIS_UJIAN_LABEL[req.jenis]} &middot; {req.juzName}
                       </span>
                     </span>
                   </label>
